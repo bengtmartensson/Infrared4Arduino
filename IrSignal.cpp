@@ -6,7 +6,7 @@ IrSignal::IrSignal() {
 IrSignal::~IrSignal() {
 }
 
-IrSignal::IrSignal(frequency_t frequency_, uint16_t lengthIntro_, uint16_t lengthRepeat_, uint16_t lengthEnding_,
+IrSignal::IrSignal(frequency_t frequency_, unsigned int lengthIntro_, unsigned int lengthRepeat_, unsigned int lengthEnding_,
         const microseconds_t *intro_, const microseconds_t *repeat_, const microseconds_t *ending_) {
     frequency = frequency_;
     introLength = lengthIntro_;
@@ -25,12 +25,12 @@ void IrSignal::dump(Stream& stream) {
     dump(stream, endingLength, ending);
 }
 
-void IrSignal::dump(Stream& stream, uint16_t length, const microseconds_t *data) {
-    for (uint16_t i = 0U; i < length; i++) {
+void IrSignal::dump(Stream& stream, unsigned int length, const microseconds_t *data) {
+    for (unsigned int i = 0U; i < length; i++) {
         if (i > 0U)
             stream.print(' ');
         stream.print((i & 1) ? '-' : '+');
-        stream.print(data[i]);
+        stream.print(data[i], DEC);
     }
     stream.println();
 }

@@ -45,10 +45,9 @@ IrSenderPwm *IrSenderPwm::instance = NULL;
 IrSenderPwm::IrSenderPwm() : IrSender(IR_SEND_PWM_PIN) {
 }
 
-void IrSenderPwm::send(const microseconds_t buf[], uint16_t len, frequency_t frequency) {
-
+void IrSenderPwm::send(const microseconds_t buf[], unsigned int len, frequency_t frequency) {
     enable(frequency/1000);
-    for (uint16_t i = 0; i < len; i++) {
+    for (unsigned int i = 0; i < len; i++) {
         digitalWrite(outputPin, (i & 1) ? LOW : HIGH);
         if (i & 1) {
             IR_SEND_PWM_STOP;

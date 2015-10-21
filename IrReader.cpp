@@ -15,31 +15,15 @@ You should have received a copy of the GNU General Public License along with
 this program. If not, see http://www.gnu.org/licenses/.
 */
 
-#ifndef IRSENDER_H
-#define	IRSENDER_H
+#include "IrReader.h"
 
-#include <Arduino.h>
-#include "InfraredTypes.h"
-
-/**
- * Common base class for all sending classes.
- */
-class IrSender {
-protected:
-    void delayUSecs(microseconds_t T);
-
-public:
-    IrSender(pin_t pin);
-    virtual ~IrSender();
-
-    virtual void send(const microseconds_t buf[], unsigned int len, frequency_t frequency) = 0;
-
-    /** Force output pin inactive. */
-    virtual void mute();
-
-protected:
-    pin_t outputPin;
-};
-
-#endif	/* ! IRSENDER_H */
-
+void IrReader::dump(Stream &stream) const {
+    unsigned int count = getDataLength();
+    for (unsigned int i = 0U; i < count; i++) {
+        if (i > 0U)
+            stream.print(" ");
+        stream.write((i & 1U) ? '-' : '+');
+        stream.print(getDuration(i), DEC);
+    }
+    stream.println();
+}

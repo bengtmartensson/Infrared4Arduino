@@ -15,6 +15,8 @@
  */
 typedef uint16_t microseconds_t;
 #define MICROSECONDS_T_MAX 65535
+//typedef uint32_t microseconds_t;
+//#define MICROSECONDS_T_MAX 4294967295
 
 /**
  * Type for durations in milli seconds.

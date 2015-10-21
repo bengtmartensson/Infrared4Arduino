@@ -1,0 +1,66 @@
+#include <Arduino.h>
+#include "IrReceiverPoll.h"
+
+IrReceiverPoll::IrReceiverPoll(unsigned int captureLength,
+        pin_t pin_,
+        boolean pullup,
+        microseconds_t markExcess,
+        milliseconds_t beginningTimeout,
+        milliseconds_t endingTimeout) : IrReceiver(captureLength, pin_, pullup, markExcess) {
+    setBeginningTimeout(beginningTimeout);
+    setEndingTimeout(endingTimeout);
+    durationData = new microseconds_t[bufferSize];
+    dataLength = 0;
+}
+
+IrReceiverPoll::~IrReceiverPoll() {
+    delete [] durationData;
+    // let the pin stay input
+}
+
+void IrReceiverPoll::reset() {
+    dataLength = 0;
+}
+
+void IrReceiverPoll::enable() {
+    reset();
+    boolean status = searchForStart();
+    if (!status)
+        return; // timeout
+    collectData();
+}
+
+unsigned long timeSince(unsigned long then) {
+    return micros() - then;
+}
+
+boolean IrReceiverPoll::searchForStart() {
+    unsigned long start = micros();
+    unsigned long beginningTimeoutInMicros = 1000UL * beginningTimeout;
+    while (readIr() == IrReceiver::IR_SPACE)
+        if (timeSince(start) > beginningTimeoutInMicros)
+            return false;
+    return true;
+}
+
+void IrReceiverPoll::collectData() {
+    IrReceiver::irdata_t lastDataRead = IrReceiver::IR_MARK;
+    unsigned long endingTimeoutInMicros = 1000UL * endingTimeout;
+    unsigned long lastTime = micros();
+    while (dataLength < bufferSize) {
+        unsigned long now = micros();
+        IrReceiver::irdata_t data = readIr();
+        if (data != lastDataRead) {
+            recordDuration(now - lastTime);
+            lastDataRead = data;
+            lastTime = now;
+        } else if (data == HIGH && (now - lastTime > endingTimeoutInMicros)) {
+            recordDuration(now - lastTime);
+            return; // normal exit
+        }
+    }
+}
+
+void IrReceiverPoll::recordDuration(unsigned long t) {
+    durationData[dataLength++] = (microseconds_t) t;
+}

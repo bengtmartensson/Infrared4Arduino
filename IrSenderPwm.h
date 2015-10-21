@@ -51,7 +51,7 @@ public:
         delete instance;
         instance = NULL;
     }
-    void send(const microseconds_t buf[], uint16_t len, frequency_t frequency);
+    void send(const microseconds_t buf[], unsigned int len, frequency_t frequency);
 };
 
 #endif	/* IRSENDERPWM_H */

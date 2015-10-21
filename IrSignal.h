@@ -12,7 +12,7 @@ public:
     IrSignal();
     //IrSignal(const IrSignal& orig);
     virtual ~IrSignal();
-    IrSignal(frequency_t frequency, uint16_t lengthIntro, uint16_t lengthRepeat, uint16_t lengthEnding,
+    IrSignal(frequency_t frequency, unsigned int lengthIntro, unsigned int lengthRepeat, unsigned int lengthEnding,
             const microseconds_t *intro, const microseconds_t *repeat, const microseconds_t *ending);
 private:
     frequency_t frequency; // In Hz
@@ -41,15 +41,15 @@ public:
         return intro;
     }
 
-    uint16_t getEndingLength() const {
+    unsigned int getEndingLength() const {
         return endingLength;
     }
 
-    uint16_t getRepeaLength() const {
+    unsigned int getRepeaLength() const {
         return repeatLength;
     }
 
-    uint16_t getIntroLength() const {
+    unsigned int getIntroLength() const {
         return introLength;
     }
 
@@ -57,7 +57,7 @@ public:
     void dump(Stream& stream);
 
     /** Print a human readable representation of the IrSequence on the Stream supplied. */
-    static void dump(Stream& stream, uint16_t length, const microseconds_t *data);
+    static void dump(Stream& stream, unsigned int length, const microseconds_t *data);
 };
 
 #endif	/* IRSIGNAL_H */

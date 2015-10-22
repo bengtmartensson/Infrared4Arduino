@@ -39,17 +39,27 @@ http://arduino.cc/en/Hacking/PinMapping2560
 
 class IrWidget : public IrReader {
 protected:
-    uint32_t beginningTimeout; // unit milli seconds
-    Stream& stream;
-    uint32_t frequency;
+    frequency_t frequency;
 
-    IrWidget(unsigned int bufSize, Stream& stream);
+    IrWidget(unsigned int captureLength = defaultCaptureLength,
+            boolean pullup = false,
+            milliseconds_t beginningTimeout = defaultBeginningTimeout,
+            milliseconds_t endingTimeout = defaultEndingTimeout);
     virtual ~IrWidget();
 public:
+    static const boolean invertingSensor = true;
+
     virtual void capture() = 0;
 
-    uint16_t getDataLength() const { // was: getCaptureCount()
+    /** For compatibility with the receiver classes, receive is a synonym for capture. */
+    void receive() { capture(); }
+
+    unsigned int getDataLength() const { // was: getCaptureCount()
         return captureCount;
+    }
+
+    boolean isReady() const {
+        return timeouted || !isEmpty();
     }
 
     void reset() {
@@ -60,26 +70,22 @@ public:
         return timerValueToNanoSeconds(unpackTimeVal(captureData[i])) / 1000;
     }
 
-    void setBeginningTimeout(milliseconds_t timeOut) { beginningTimeout = timeOut; }
+    //void setBeginningTimeout(milliseconds_t timeOut) { beginningTimeout = timeOut; }
 
-    milliseconds_t getBeginningTimeout() const { return beginningTimeout; }
+    //milliseconds_t getBeginningTimeout() const { return beginningTimeout; }
 
     void setEndingTimeout(milliseconds_t timeout);
 
     milliseconds_t getEndingTimeout() const;
 
-    bool getSensorIsInverting() const {
-        return sensorIsInverting;
-    }
-
-    uint32_t getFrequency() const {
+    frequency_t getFrequency() const {
         return frequency;
     }
 
     void dump(Stream &stream) const;
 
 private:
-    void setup();
+    void setup(boolean setup);
 
     ////////////////////////////////////////////////////////////////////////////////
     // Internal defines, don't change
@@ -173,7 +179,7 @@ protected:
     uint16_t captureCount; // number of values stored in captureData
     uint16_t period/* = 0*/; // the time of one period in CPU clocks
     // Only inverting sensors are supported in this version
-    static const bool sensorIsInverting = true;///* = false*/; // true means the sensor signal is inverted (low = signal on)
+    //static const bool sensorIsInverting = true;///* = false*/; // true means the sensor signal is inverted (low = signal on)
     static const uint8_t sampleSize = 2;
 
     virtual uint32_t unpackTimeVal(uint32_t val) const = 0;

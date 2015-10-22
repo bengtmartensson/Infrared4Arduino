@@ -5,9 +5,6 @@
 
 class IrReceiverPoll : public IrReceiver {
 private:
-    milliseconds_t beginningTimeout;
-    milliseconds_t endingTimeout;
-
     /** Data buffer */
     microseconds_t *durationData;
 
@@ -25,7 +22,7 @@ public:
     ~IrReceiverPoll();
 
     boolean isReady() const {
-        return true;
+        return timeouted || !isEmpty();
     }
 
     void reset();

@@ -1,21 +1,4 @@
 #include "IrReceiverSampler.h"
-// Provides ISR
-#include <avr/interrupt.h>
-// defines for setting and clearing register bits
-#ifndef cbi
-#define cbi(sfr, bit) (_SFR_BYTE(sfr) &= ~_BV(bit))
-#endif
-#ifndef sbi
-#define sbi(sfr, bit) (_SFR_BYTE(sfr) |= _BV(bit))
-#endif
-#define CLKFUDGE 5      // fudge factor for clock interrupt overhead
-#ifdef F_CPU
-#define SYSCLOCK F_CPU     // main Arduino clock
-#else
-#define SYSCLOCK 16000000  // main Arduino clock
-#endif
-#define PRESCALE 8      // timer clock prescale
-#define CLKSPERUSEC (SYSCLOCK/PRESCALE/1000000)   // timer clocks per microsecond
 
 #include <IRLibTimer.h>
 
@@ -66,7 +49,6 @@ IrReceiverSampler::~IrReceiverSampler() {
 
 /*
  * The original IRrecv which uses 50us timer driven interrupts to sample input pin.
- * was: resume()
  */
 void IrReceiverSampler::reset() {
     receiverState = STATE_IDLE;
@@ -86,19 +68,19 @@ void IrReceiverSampler::disable() {
 }
 
 void IrReceiverSampler::setEndingTimeout(milliseconds_t timeOut) {
-    endingTimeoutInTicks = millisecs2ticks(timeOut);//(1000UL  * (uint32_t)timeOut) / USECPERTICK;
+    endingTimeoutInTicks = millisecs2ticks(timeOut);
 }
 
 void IrReceiverSampler::setBeginningTimeout(milliseconds_t timeOut) {
-    beginningTimeoutInTicks = millisecs2ticks(timeOut);//(1000UL * (uint32_t)timeOut) / USECPERTICK;
+    beginningTimeoutInTicks = millisecs2ticks(timeOut);
 }
 
 milliseconds_t IrReceiverSampler::getEndingTimeout() const {
-    return ticks2millisecs(endingTimeoutInTicks);//(milliseconds_t) (GAP_TICKS * USECPERTICK)/1000UL;
+    return ticks2millisecs(endingTimeoutInTicks);
 }
 
 milliseconds_t IrReceiverSampler::getBeginningTimeout() const {
-    return ticks2millisecs(beginningTimeoutInTicks);//(milliseconds_t) (TIMEOUT_TICKS * USECPERTICK)/1000U;
+    return ticks2millisecs(beginningTimeoutInTicks);
 }
 
 /** Interrupt routine. It collects data into the data buffer. */

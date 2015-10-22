@@ -27,14 +27,18 @@ http://arduino.cc/en/Hacking/PinMapping2560
 
 #include "IrWidget.h"
 
-IrWidget::IrWidget(uint16_t bufSize, Stream& stream_) : IrReader(bufSize),stream(stream_) {
-    //stream = stream_;
-    //bufSize = bufSize_;
-    captureData = new uint16_t[bufSize];
-    endingTimeout = _BV(RANGE_EXTENSION_BITS) - 1;
-    setup();
-    // make sure the whole capture buffer can be used. Your sketch will crash here if the buffer is too large.
-    for (uint16_t i = 0; i < bufSize; i++)
+IrWidget::IrWidget(unsigned int captureLength,
+        boolean pullup,
+        milliseconds_t beginningTimeout,
+        milliseconds_t endingTimeout) : IrReader(captureLength) {
+    setup(pullup);
+    captureData = new microseconds_t[bufferSize];
+    setBeginningTimeout(beginningTimeout);
+    //endingTimeout = _BV(RANGE_EXTENSION_BITS) - 1;
+    setEndingTimeout(endingTimeout);
+
+    // Test that allocated memory is indeed usable. Otherwise crash will occur.
+    for (unsigned int i = 0; i < bufferSize; i++)
         captureData[i] = 0;
 }
 
@@ -52,7 +56,7 @@ milliseconds_t IrWidget::getEndingTimeout() const {
 }
 
 void IrWidget::dump(Stream &stream) const {
-    if (getFrequency() > 0 && getFrequency() != (uint32_t) -1) {
+    if (getFrequency() > 0 && getFrequency() != (frequency_t) -1) {
         stream.print(F("f="));
         stream.print(getFrequency(), DEC);
         stream.write(' ');
@@ -64,13 +68,12 @@ void IrWidget::dump(Stream &stream) const {
 // Initialization
 ////////////////////////////////////////////////////////////////////////////////
 
-// initialize Timer and IO pins, needs to be called once before calling startCapture()
-void IrWidget::setup() {
+// initialize Timer and IO pins, needs to be called once
+void IrWidget::setup(boolean pullup) {
     // configure signal capture ICP pin as input
     cbi(CAT2(DDR, CAP_PORT), CAP_PIN);
-#ifdef ENABLE_PULL_UP
-    sbi(CAT2(PORT, CAP_PORT), CAP_PIN); // enable the internal 10k pull-up resistor
-#endif
+    if (pullup)
+        sbi(CAT2(PORT, CAP_PORT), CAP_PIN); // enable the internal 10k pull-up resistor
 
 #if defined(DEBUG_PIN) && defined(DEBUG_PORT)
     sbi(CAT2(DDR, DEBUG_PORT), DEBUG_PIN); // configure logic analyzer debug pin as output

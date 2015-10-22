@@ -5,12 +5,12 @@ IrWidgetAggregating *capturer;
 
 void setup() {
     Serial.begin(9600);
-    capturer = IrWidgetAggregating::newIrWidgetAggregating(200, Serial);
+    capturer = IrWidgetAggregating::newIrWidgetAggregating(200);
 }
 
 void loop() {
     capturer->reset();
-    capturer->capture();
+    capturer->receive();
     if (capturer->isReady())
         capturer->dump(Serial);
     else

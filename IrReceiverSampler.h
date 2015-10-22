@@ -14,6 +14,7 @@ public:
 
     /** microseconds per clock interrupt */
     static const unsigned long microsPerTick = 50; // was USECPERTICK
+    // Note doubled in IRLibTimer.h
 
     /** State space for the receiver state machine. */
     enum ReceiverState_t {
@@ -26,6 +27,8 @@ public:
     /** State of the state machine */
     volatile ReceiverState_t receiverState; // previously rcvstate;
 
+    // Note: use the following ones instead of beginningTimeout and endingTimeout
+    // inherited from IrReader.
     uint32_t endingTimeoutInTicks; // previously GAP_TICKS
 
     uint32_t beginningTimeoutInTicks; // previously TIMEOUT_TICKS;
@@ -68,13 +71,10 @@ public:
         return instance;
     }
 
-    /** Enable the receiver for reception. */
     void enable();
 
-    /** Disables IR reception. */
     void disable();
 
-    /** Initializes the state machine; does not enable. */
     void reset();
 
     void setEndingTimeout(milliseconds_t timeOut);

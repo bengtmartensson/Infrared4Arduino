@@ -5,12 +5,23 @@
 
 #include "IrWidgetAggregating.h"
 
+IrWidgetAggregating::IrWidgetAggregating(unsigned int captureLength,
+        boolean pullup,
+        milliseconds_t beginningTimeout,
+        milliseconds_t endingTimeout)
+: IrWidget(captureLength, pullup, beginningTimeout, endingTimeout) {
+}
+
 IrWidgetAggregating *IrWidgetAggregating::instance = NULL;
 
-IrWidgetAggregating *IrWidgetAggregating::newIrWidgetAggregating(uint16_t captureSize, Stream& stream) {
+IrWidgetAggregating *IrWidgetAggregating::newIrWidgetAggregating(unsigned int captureLength,
+            boolean pullup,
+            milliseconds_t beginningTimeout,
+            milliseconds_t endingTimeout) {
     if (instance != NULL)
         return NULL;
-    instance = new IrWidgetAggregating(captureSize, stream);
+    instance = new IrWidgetAggregating(captureLength, pullup,
+            beginningTimeout, endingTimeout);
     return instance;
 }
 
@@ -30,11 +41,11 @@ void IrWidgetAggregating::capture() {
     register uint16_t aggThreshold = period * 2;
     register uint8_t icesn_val = _BV(CAT2(ICES, CAP_TIM));
     register uint8_t tccrnb = CAT3(TCCR, CAP_TIM, B);
-    if (sensorIsInverting) {
+    if (invertingSensor)
         tccrnb &= ~icesn_val; // trigger on falling edge
-    } else {
+    else
         tccrnb |= icesn_val; // trigger on rising edge
-    }
+
     CAT3(TCCR, CAP_TIM, B) = tccrnb;
     OCR1A = CAT2(TCNT, CAP_TIM) - 1;
     CAT2(TIFR, CAP_TIM) = _BV(CAT2(ICF, CAP_TIM))
@@ -58,10 +69,12 @@ void IrWidgetAggregating::capture() {
     /////////////////////////////////////////
     // wait for first edge
     while (!(tifr = (CAT2(TIFR, CAP_TIM) & (_BV(CAT2(ICF, CAP_TIM)))))) {
-        if (millis() >= timeForBeginTimeout)
+        if (millis() >= timeForBeginTimeout) {
+            timeouted = true;
             goto endCapture;
-        if (stream.available()) // abort the capture when any character is received // FIXME
-            goto endCapture;
+        }
+        //if (stream.available()) // abort the capture when any character is received // FIXME
+        //    goto endCapture;
     }
     TCCR0B &= ~(_BV(CS02) | _BV(CS01) | _BV(CS00)); // stop timer0 (disables timer IRQs)
     debugPinToggle();
@@ -149,5 +162,5 @@ endCapture:
     period = aggThreshold >> 1;
 
     uint32_t mediumPeriod = timerValueToNanoSeconds(period);
-    frequency = (unsigned int) (1000000000L / mediumPeriod);
+    frequency = (frequency_t) (1000000000L / mediumPeriod);
 }

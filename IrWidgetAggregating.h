@@ -15,17 +15,23 @@ private:
 public:
     void capture();
     static void deleteInstance();
-    static IrWidgetAggregating *getInstance() { return instance; }
-    static IrWidgetAggregating *newIrWidgetAggregating(uint16_t captureSize, Stream& stream);
 
-protected:
-
-    IrWidgetAggregating(unsigned int captureSize, Stream& stream) : IrWidget(captureSize, stream) {
+    static IrWidgetAggregating *getInstance() {
+        return instance;
     }
 
+    static IrWidgetAggregating *newIrWidgetAggregating(unsigned int captureLength = defaultCaptureLength,
+            boolean pullup = false,
+            milliseconds_t beginningTimeout = defaultBeginningTimeout,
+            milliseconds_t endingTimeout = defaultEndingTimeout);
+
+protected:
+    IrWidgetAggregating(unsigned int captureLength = defaultCaptureLength,
+            boolean pullup = false,
+            milliseconds_t beginningTimeout = defaultBeginningTimeout,
+            milliseconds_t endingTimeout = defaultEndingTimeout);
 
 private:
-
     inline uint16_t packTimeVal/*Normal*/(uint32_t val) const {
         if (val >= 0x8000) {
             val = val >> (RANGE_EXTENSION_BITS + 1);

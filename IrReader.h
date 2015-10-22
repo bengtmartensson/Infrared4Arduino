@@ -34,13 +34,19 @@ public:
     static const unsigned int defaultCaptureLength = 100U;
 
 protected:
+    milliseconds_t beginningTimeout;
+    milliseconds_t endingTimeout;
+
     unsigned int bufferSize;
+
+    /** True if last receive ended with a timeout */
+    boolean timeouted;
 
     static unsigned int forceEven(unsigned int x) {
         return (x & 1) ? x + 1 : x;
     }
 
-    IrReader(unsigned int bufSize_) : bufferSize(forceEven(bufSize_)) {
+    IrReader(unsigned int bufSize_) : bufferSize(forceEven(bufSize_)),timeouted(false) {
     }
 
     IrReader() {
@@ -50,20 +56,43 @@ protected:
     };
 
 public:
-    virtual void reset() = 0;
+    virtual void reset() {
+        timeouted = false;
+    };
+
+    virtual void enable() {
+    };
+
+    virtual void disable() {
+    };
+
+    virtual void receive() = 0;
+
+    virtual boolean isReady() const = 0;
+
     virtual unsigned int getDataLength() const = 0; // was getCaptureCount())
     virtual microseconds_t getDuration(unsigned int index) const = 0;
     virtual void dump(Stream &stream) const;
 
-    virtual boolean isReady() const { // was hasContent())
-        return getDataLength() > 0;
+    virtual boolean isEmpty() const { // was hasContent())
+        return getDataLength() == 0;
     }
 
-    // These take and return values in milliseconds
-    virtual void setEndingTimeout(milliseconds_t timeOut) = 0;
-    virtual milliseconds_t getEndingTimeout() const = 0;
-    virtual void setBeginningTimeout(milliseconds_t timeOut) = 0; //{ beginningTimeout = timeOut/1000L; }
-    virtual milliseconds_t getBeginningTimeout() const = 0; //{ return 1000L * beginningTimeout; }
+    virtual void setEndingTimeout(milliseconds_t timeOut) {
+        endingTimeout = timeOut;
+    }
+
+    virtual milliseconds_t getEndingTimeout() const {
+        return endingTimeout;
+    }
+
+    virtual void setBeginningTimeout(milliseconds_t timeOut) {
+        beginningTimeout = timeOut;
+    }
+
+    virtual milliseconds_t getBeginningTimeout() const {
+        return beginningTimeout;
+    }
 
     unsigned int getBufferSize() const {
         return bufferSize;

@@ -48,9 +48,28 @@
 #include "WProgram.h"
 #endif
 
+// BM: Stuff moved from other places to here.
+#include <avr/interrupt.h>
+
 #ifndef USECPERTICK
 #define USECPERTICK 50
+// Note: doubled in IrReceiverSampler.h
 #endif
+// defines for setting and clearing register bits
+#ifndef cbi
+#define cbi(sfr, bit) (_SFR_BYTE(sfr) &= ~_BV(bit))
+#endif
+#ifndef sbi
+#define sbi(sfr, bit) (_SFR_BYTE(sfr) |= _BV(bit))
+#endif
+#define CLKFUDGE 5      // fudge factor for clock interrupt overhead
+#ifdef F_CPU
+#define SYSCLOCK F_CPU     // main Arduino clock
+#else
+#define SYSCLOCK 16000000  // main Arduino clock
+#endif
+#define PRESCALE 8      // timer clock prescale
+#define CLKSPERUSEC (SYSCLOCK/PRESCALE/1000000)   // timer clocks per microsecond
 
  /* In this section reattempt to detect your hardware type and give you the choice of
   * various hardware timers to change the PWM frequency for output. In each hardware

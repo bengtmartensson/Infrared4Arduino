@@ -10,13 +10,12 @@
  */
 class IrReceiver : public IrReader {
 private:
-    /** GPIO pin the receiver is using. */
+    /** GPIO pin the receiver is connected to. */
     pin_t pin;
+
 protected:
     /** Microseconds subtracted from pulses and added to gaps. */
     microseconds_t markExcess;
-
-
 
 public:
     // Default values
@@ -25,6 +24,7 @@ public:
 
     /** Using inverting sensor, like most TSOPs? */
     static const boolean invertingSensor = true;
+
     /**
      * Constructor.
      *
@@ -38,8 +38,7 @@ public:
 
     virtual ~IrReceiver() {
     };
-    virtual void enable() = 0;
-    virtual void disable() = 0;
+    virtual void receive();
 
     pin_t getPin() const {
         return pin;

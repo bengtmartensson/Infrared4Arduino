@@ -5,3 +5,10 @@ IrReceiver::IrReceiver(unsigned int bufSize, pin_t pin_, boolean pullup, microse
     markExcess = me;
     pinMode(pin, pullup ? INPUT_PULLUP : INPUT);
 }
+
+void IrReceiver::receive() {
+    enable();
+    while (!isReady())
+        ;
+    disable();
+}

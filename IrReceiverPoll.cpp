@@ -19,14 +19,15 @@ IrReceiverPoll::~IrReceiverPoll() {
 }
 
 void IrReceiverPoll::reset() {
+    IrReader::reset();
     dataLength = 0;
 }
 
 void IrReceiverPoll::enable() {
     reset();
-    boolean status = searchForStart();
-    if (!status)
-        return; // timeout
+    timeouted = !searchForStart();
+    if (timeouted)
+        return;
     collectData();
 }
 

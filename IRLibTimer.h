@@ -47,6 +47,11 @@
 #else
 #include "WProgram.h"
 #endif
+
+#ifndef USECPERTICK
+#define USECPERTICK 50
+#endif
+
  /* In this section reattempt to detect your hardware type and give you the choice of
   * various hardware timers to change the PWM frequency for output. In each hardware
   * section below you should un-comment only one of the choices. The defines also
@@ -64,7 +69,7 @@
 /* Teensy 1.0 */
 #elif defined(__AVR_AT90USB162__)
 	#define IR_SEND_TIMER1	17
-/* Teensy 2.0 versus Leonardo These boards use the same chip but the 
+/* Teensy 2.0 versus Leonardo These boards use the same chip but the
  * pinouts are different.*/
 #elif defined(__AVR_ATmega32U4__)
 	#ifdef CORE_TEENSY
@@ -101,7 +106,7 @@
  * available digital output pin. It need not be a designated PWM pin.
  * NOTE: By un-commenting this line, you are forcing the library to ignore
  * hardware detection and timer specifications above. The bit-bang frequency
- * code is not as accurate as using a hardware timer but it is more flexible and 
+ * code is not as accurate as using a hardware timer but it is more flexible and
  * less hardware platform dependent.
  */
 //#define IR_SEND_BIT_BANG  3  //Be sure to set this pin number if you un-comment
@@ -112,14 +117,14 @@
 
 /* We are going to presume that you want to use the same hardware timer to control
  * the 50 microsecond interrupt used by the IRrecv receiver class as was specified
- * above in the hardware detection section for sending. Even if you specified bit-bang 
- * for sending, the definitions above have selected a default sending timer for you based 
+ * above in the hardware detection section for sending. Even if you specified bit-bang
+ * for sending, the definitions above have selected a default sending timer for you based
  * on hardware detection. if that is correct, then do nothing below.  However if you do
- * wish to specify an IR_RECV_TIMER different than the IR_SEND_TIMER selected by the code 
- * above, then you should un-comment the IR_RECV_TIMER_OVERRIDE and also un-comment one 
+ * wish to specify an IR_RECV_TIMER different than the IR_SEND_TIMER selected by the code
+ * above, then you should un-comment the IR_RECV_TIMER_OVERRIDE and also un-comment one
  * and only one of the following IR_RECV_TIMERx lines below that.
- * NOTE: You are responsible for ensuring that the timer you are specifying is 
- * available on your hardware. You should only choose timers which are shown as available 
+ * NOTE: You are responsible for ensuring that the timer you are specifying is
+ * available on your hardware. You should only choose timers which are shown as available
  * for your hardware platform as shown in the defines in the IR_SEND_TIMER section above.
  */
 //#define IR_RECV_TIMER_OVERRIDE
@@ -160,7 +165,7 @@
 		for(unsigned int j=0;j<jmax;j++) {\
 		  digitalWrite(IR_SEND_BIT_BANG, HIGH);  delayMicroseconds(OnTime);\
 		  digitalWrite(IR_SEND_BIT_BANG, LOW);   delayMicroseconds(OffTime);}
-	#define IR_SEND_MARK_TIME(time) 
+	#define IR_SEND_MARK_TIME(time)
 	#define IR_SEND_PWM_STOP
 	#define IR_SEND_CONFIG_KHZ(val)  float Length=1000.0/(float)khz;\
 		iLength=int(Length+0.5); OnTime=int(Length/3.0); \
@@ -256,8 +261,8 @@
 #endif
 
 /* This section sets up the 50 microsecond interval timer used by the
- * IRrecv receiver class. The various timers hhave already been selected 
- * earlier in this file. 
+ * IRrecv receiver class. The various timers hhave already been selected
+ * earlier in this file.
  */
 
 #if defined(IR_RECV_TIMER1)  // defines for timer1 (16 bits)

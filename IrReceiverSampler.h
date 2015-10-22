@@ -3,9 +3,6 @@
 
 #include "IrReceiver.h"
 
-/** microseconds per clock interrupt */
-#define USECPERTICK 50  // FIXME
-
 /**
  * Singleton class due to ISP
  */
@@ -14,6 +11,10 @@
 // fumbles with it, volatile.
 class IrReceiverSampler : public IrReceiver {
 public:
+
+    /** microseconds per clock interrupt */
+    static const unsigned long microsPerTick = 50; // was USECPERTICK
+
     /** State space for the receiver state machine. */
     enum ReceiverState_t {
         STATE_IDLE, /**< Between signals; waiting for first mark */
@@ -89,7 +90,7 @@ public:
     }
 
     microseconds_t getDuration(unsigned int i) const {
-        return USECPERTICK * durationData[i] + (i & 1 ? markExcess : -markExcess);
+        return (microseconds_t) (microsPerTick * durationData[i] + (i & 1 ? markExcess : -markExcess));
     }
 
     boolean isReady() const {

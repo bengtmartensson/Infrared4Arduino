@@ -15,7 +15,7 @@ IrReceiverPoll::IrReceiverPoll(unsigned int captureLength,
 
 IrReceiverPoll::~IrReceiverPoll() {
     delete [] durationData;
-    // let the pin stay input
+    // let the pin stay as input
 }
 
 void IrReceiverPoll::reset() {

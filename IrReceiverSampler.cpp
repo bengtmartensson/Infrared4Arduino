@@ -20,11 +20,11 @@
 #include <IRLibTimer.h>
 
 uint32_t IrReceiverSampler::millisecs2ticks(milliseconds_t ms) {
-    return (1000UL * (uint32_t) ms) / USECPERTICK;
+    return (1000UL * (uint32_t) ms) / microsPerTick;
 }
 
 milliseconds_t IrReceiverSampler::ticks2millisecs(uint32_t tix) {
-    return (milliseconds_t) ((tix * USECPERTICK)/1000UL);
+    return (milliseconds_t) ((tix * microsPerTick)/1000UL);
 }
 
 IrReceiverSampler *IrReceiverSampler::instance = NULL;

@@ -4,14 +4,14 @@
 #include "IrReceiver.h"
 
 class IrReceiverPoll : public IrReceiver {
-    private:
-        milliseconds_t beginningTimeout;
-        milliseconds_t endingTimeout;
+private:
+    milliseconds_t beginningTimeout;
+    milliseconds_t endingTimeout;
 
-           /** Data buffer */
-    microseconds_t *durationData; // previously rawbuf;
+    /** Data buffer */
+    microseconds_t *durationData;
 
-    /** Number of entries in durationData */
+    /** Number of valid entries in durationData */
     unsigned int dataLength;
 
 public:
@@ -54,15 +54,16 @@ public:
         beginningTimeout = timeOut;
     }
 
-    /** Does the collection of the data, i.e. does not return before either
-     * the signal is captured, or timeout.
+    /**
+     * In this class, enable does the actual collection of the data.
+     * It returns when either the signal is captured, or (beginning)
+     * timeout occurs.
      */
     void enable();
 
     void disable() {};
 
-    private:
-
+private:
     boolean searchForStart();
 
     void collectData();

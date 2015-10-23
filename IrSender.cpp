@@ -16,6 +16,7 @@ this program. If not, see http://www.gnu.org/licenses/.
 */
 
 #include "IrSender.h"
+#include "IrSignal.h"
 
 // From IRLib.cpp, renamed from My_delay_uSecs.
 
@@ -43,4 +44,13 @@ IrSender::~IrSender() {
 
 void IrSender::mute() {
     digitalWrite(outputPin, LOW);
+}
+
+void IrSender::send(const IrSignal& irSignal, unsigned int noSends) {
+   if (irSignal.getIntroLength() > 0)
+        send(irSignal.getIntro(), irSignal.getIntroLength(), irSignal.getFrequency());
+    for (unsigned int i = 0; i < irSignal.noRepetitions(noSends); i++)
+        send(irSignal.getRepeat(), irSignal.getRepeaLength(), irSignal.getFrequency());
+    if (irSignal.getEndingLength() > 0)
+        send(irSignal.getEnding(), irSignal.getEndingLength(), irSignal.getFrequency());
 }

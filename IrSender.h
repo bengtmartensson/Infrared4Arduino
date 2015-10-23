@@ -20,6 +20,7 @@ this program. If not, see http://www.gnu.org/licenses/.
 
 #include <Arduino.h>
 #include "InfraredTypes.h"
+#include "IrSignal.h"
 
 /**
  * Common base class for all sending classes.
@@ -33,6 +34,8 @@ public:
     virtual ~IrSender();
 
     virtual void send(const microseconds_t buf[], unsigned int len, frequency_t frequency) = 0;
+
+    void send(const IrSignal& irSignal, unsigned int noSends);
 
     /** Force output pin inactive. */
     virtual void mute();

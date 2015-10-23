@@ -17,7 +17,7 @@ IrSignal::IrSignal(frequency_t frequency_, unsigned int lengthIntro_, unsigned i
     ending = ending_;
 }
 
-void IrSignal::dump(Stream& stream) {
+void IrSignal::dump(Stream& stream) const {
     stream.print("f=");
     stream.println(frequency);
     dump(stream, introLength, intro);

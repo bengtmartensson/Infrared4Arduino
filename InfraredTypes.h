@@ -20,7 +20,7 @@ typedef uint16_t microseconds_t;
 
 /**
  * Type for durations in milli seconds.
- * Using a larger type than 16 bits probably is not sendible.
+ * Using a larger type than 16 bits probably is not sensible.
  */
 typedef uint16_t milliseconds_t;
 #define MILLISECONDS_T_MAX 65535

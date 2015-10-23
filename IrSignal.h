@@ -54,10 +54,18 @@ public:
     }
 
     /** Print a human readable representation of the IrSignal on the Steam supplied. */
-    void dump(Stream& stream);
+    void dump(Stream& stream) const;
 
     /** Print a human readable representation of the IrSequence on the Stream supplied. */
     static void dump(Stream& stream, unsigned int length, const microseconds_t *data);
+
+    /**
+     * Implementation of the count semantics, i.e.,
+     * how many repetitions should be sent if the signal is sent noSend times.
+     */
+    unsigned int noRepetitions(unsigned int noSends) const {
+        return getIntro() == 0 ? noSends : noSends - 1;
+    }
 };
 
 #endif	/* IRSIGNAL_H */

@@ -21,11 +21,12 @@ void Rc5Renderer::init(unsigned int D, unsigned int F, unsigned int T) {
     emitMsb(D, 5U);
     emitMsb(F, 6U);
     emitEnd();
+    setup(NULL, 0, repeat, index, frequency);
 }
 
-const IrSignal& Rc5Renderer::render() const {
-    return *(new IrSignal(frequency, 0, index, 0, NULL, repeat, NULL));
-}
+//const IrSignal& Rc5Renderer::render() const {
+//    return *(new IrSignal(frequency, 0, index, 0, NULL, repeat, NULL));
+//}
 
 void Rc5Renderer::emitMsb(unsigned int x, unsigned int length) {
     unsigned int mask = 1U << (length - 1U);

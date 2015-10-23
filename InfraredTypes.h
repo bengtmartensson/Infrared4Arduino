@@ -1,6 +1,8 @@
 #ifndef INFRAREDTYPES_H
 #define	INFRAREDTYPES_H
 
+#include <Arduino.h>
+
 /**
  * Define some data types that should be used in the library.
  * Introduces some semantics.

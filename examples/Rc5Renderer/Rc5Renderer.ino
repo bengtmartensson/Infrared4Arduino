@@ -9,6 +9,6 @@ void setup() {
 }
 
 void loop() {
-    renderer->send(IrSenderPwm::getInstance(true));
+    renderer->send(*IrSenderPwm::getInstance(true));
     delay(10000);
 }

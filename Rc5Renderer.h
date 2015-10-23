@@ -19,8 +19,6 @@ public:
 
     virtual ~Rc5Renderer();
 
-    const IrSignal& render() const;
-
 private:
     unsigned int index;
     microseconds_t repeat[28];

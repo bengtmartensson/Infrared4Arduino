@@ -16,10 +16,7 @@ void Nec1Renderer::init(unsigned int D, unsigned int S, unsigned int F) {
     lsbByte(i, sum, 255-F);
     intro[i++] = 564;
     intro[i++] = (microseconds_t) (108000 - sum);
-}
-
-const IrSignal& Nec1Renderer::render() const {
-    return *(new IrSignal(frequency, introLength, repeatLength, endingLength, intro, repeat, NULL));
+    setup(intro, introLength, repeat, repeatLength, frequency);
 }
 
 void Nec1Renderer::lsbByte(unsigned int& i, uint32_t& sum, unsigned int X) {

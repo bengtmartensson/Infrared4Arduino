@@ -39,7 +39,7 @@ IrSender::IrSender(pin_t pin) {
 }
 
 IrSender::~IrSender() {
-    digitalWrite(outputPin, LOW); // ?
+    mute();
 }
 
 void IrSender::mute() {
@@ -47,10 +47,10 @@ void IrSender::mute() {
 }
 
 void IrSender::send(const IrSignal& irSignal, unsigned int noSends) {
-   if (irSignal.getIntroLength() > 0)
-        send(irSignal.getIntro(), irSignal.getIntroLength(), irSignal.getFrequency());
+   if (!irSignal.getIntro().isEmpty())
+        send(irSignal.getIntro(), irSignal.getFrequency());
     for (unsigned int i = 0; i < irSignal.noRepetitions(noSends); i++)
-        send(irSignal.getRepeat(), irSignal.getRepeaLength(), irSignal.getFrequency());
-    if (irSignal.getEndingLength() > 0)
-        send(irSignal.getEnding(), irSignal.getEndingLength(), irSignal.getFrequency());
+        send(irSignal.getRepeat(), irSignal.getFrequency());
+    if (!irSignal.getEnding().isEmpty())
+        send(irSignal.getEnding(), irSignal.getFrequency());
 }

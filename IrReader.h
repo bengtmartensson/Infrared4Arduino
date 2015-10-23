@@ -20,6 +20,7 @@ this program. If not, see http://www.gnu.org/licenses/.
 #include <Arduino.h>
 
 #include "InfraredTypes.h"
+#include "IrSequence.h"
 
 /**
  * This is an abstract base class for all IR readers, capturing or receiving.
@@ -73,6 +74,7 @@ public:
     virtual unsigned int getDataLength() const = 0; // was getCaptureCount())
     virtual microseconds_t getDuration(unsigned int index) const = 0;
     virtual void dump(Stream &stream) const;
+    IrSequence *toIrSequence() const;
 
     virtual boolean isEmpty() const { // was hasContent())
         return getDataLength() == 0;

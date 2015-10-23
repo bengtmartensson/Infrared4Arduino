@@ -12,11 +12,9 @@ public:
     static const frequency_t frequency = 38400U;
     static const unsigned int introLength = 68U;
     static const unsigned int repeatLength = 4U;
-    static const unsigned int endingLength = 0U;
     Nec1Renderer(unsigned int D, unsigned int S, unsigned int F) { init(D, S, F); }
     Nec1Renderer(unsigned int D, unsigned int F) { init(D, 255-D, F); };
     virtual ~Nec1Renderer();
-    const IrSignal& render() const;
 
 private:
     microseconds_t intro[introLength];

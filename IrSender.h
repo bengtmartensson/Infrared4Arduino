@@ -28,20 +28,19 @@ this program. If not, see http://www.gnu.org/licenses/.
 class IrSender {
 protected:
     void delayUSecs(microseconds_t T);
+    IrSender(pin_t pin);
+    pin_t outputPin;
 
 public:
-    IrSender(pin_t pin);
     virtual ~IrSender();
 
-    virtual void send(const microseconds_t buf[], unsigned int len, frequency_t frequency) = 0;
+    //virtual void send(const microseconds_t buf[], unsigned int len, frequency_t frequency) = 0;
+    virtual void send(const IrSequence& irSequence, frequency_t frequency) = 0;
 
     void send(const IrSignal& irSignal, unsigned int noSends);
 
     /** Force output pin inactive. */
     virtual void mute();
-
-protected:
-    pin_t outputPin;
 };
 
 #endif	/* ! IRSENDER_H */

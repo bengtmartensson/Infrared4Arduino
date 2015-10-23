@@ -1,27 +1,31 @@
 #ifndef IRSIGNAL_H
 #define	IRSIGNAL_H
 
-#include <Arduino.h>
 #include "InfraredTypes.h"
+#include "IrSequence.h"
 
 /**
  * This class models an IR signal with intro-, repeat-, and ending sequences.
  */
 class IrSignal {
 public:
+    static const frequency_t defaultFrequency = 38000U;
+
     IrSignal();
     //IrSignal(const IrSignal& orig);
-    virtual ~IrSignal();
-    IrSignal(frequency_t frequency, unsigned int lengthIntro, unsigned int lengthRepeat, unsigned int lengthEnding,
-            const microseconds_t *intro, const microseconds_t *repeat, const microseconds_t *ending);
+    virtual ~IrSignal() {
+    };
+    //IrSignal(frequency_t frequency, unsigned int lengthIntro, unsigned int lengthRepeat, unsigned int lengthEnding,
+    //        const microseconds_t *intro, const microseconds_t *repeat, const microseconds_t *ending);
+
+    IrSignal(const IrSequence& intro, const IrSequence& repeat, const IrSequence& ending, frequency_t frequency = defaultFrequency);
+
 private:
+    static IrSequence nullSequence();
     frequency_t frequency; // In Hz
-    unsigned int introLength;
-    unsigned int repeatLength;
-    unsigned int endingLength;
-    const microseconds_t *intro;
-    const microseconds_t *repeat;
-    const microseconds_t *ending;
+    const IrSequence& intro;
+    const IrSequence& repeat;
+    const IrSequence& ending;
 
 public:
 
@@ -29,42 +33,27 @@ public:
         return frequency;
     }
 
-    const microseconds_t *getEnding() const {
+    const IrSequence& getEnding() const {
         return ending;
     }
 
-    const microseconds_t *getRepeat() const {
+    const IrSequence& getRepeat() const {
         return repeat;
     }
 
-    const microseconds_t *getIntro() const {
+    const IrSequence& getIntro() const {
         return intro;
-    }
-
-    unsigned int getEndingLength() const {
-        return endingLength;
-    }
-
-    unsigned int getRepeaLength() const {
-        return repeatLength;
-    }
-
-    unsigned int getIntroLength() const {
-        return introLength;
     }
 
     /** Print a human readable representation of the IrSignal on the Steam supplied. */
     void dump(Stream& stream) const;
-
-    /** Print a human readable representation of the IrSequence on the Stream supplied. */
-    static void dump(Stream& stream, unsigned int length, const microseconds_t *data);
 
     /**
      * Implementation of the count semantics, i.e.,
      * how many repetitions should be sent if the signal is sent noSend times.
      */
     unsigned int noRepetitions(unsigned int noSends) const {
-        return getIntro() == 0 ? noSends : noSends - 1;
+        return getIntro().isEmpty() ? noSends : noSends - 1;
     }
 };
 

@@ -12,20 +12,23 @@ public:
     static const frequency_t defaultFrequency = 38000U;
 
     IrSignal();
-    //IrSignal(const IrSignal& orig);
+    IrSignal(const IrSignal& orig);
     virtual ~IrSignal() {
     };
-    //IrSignal(frequency_t frequency, unsigned int lengthIntro, unsigned int lengthRepeat, unsigned int lengthEnding,
-    //        const microseconds_t *intro, const microseconds_t *repeat, const microseconds_t *ending);
+    IrSignal(const microseconds_t *intro, unsigned int lengthIntro,
+            const microseconds_t *repeat, unsigned int lengthRepeat,
+            const microseconds_t *ending, unsigned int lengthEnding,
+            frequency_t frequency);
 
     IrSignal(const IrSequence& intro, const IrSequence& repeat, const IrSequence& ending, frequency_t frequency = defaultFrequency);
 
 private:
-    static IrSequence nullSequence();
+    //static IrSequence nullSequence();
+
     frequency_t frequency; // In Hz
-    const IrSequence& intro;
-    const IrSequence& repeat;
-    const IrSequence& ending;
+    const IrSequence *intro;
+    const IrSequence *repeat;
+    const IrSequence *ending;
 
 public:
 
@@ -34,19 +37,21 @@ public:
     }
 
     const IrSequence& getEnding() const {
-        return ending;
+        return *ending;
     }
 
     const IrSequence& getRepeat() const {
-        return repeat;
+        return *repeat;
     }
 
     const IrSequence& getIntro() const {
-        return intro;
+        return *intro;
     }
 
+#ifdef ARDUINO
     /** Print a human readable representation of the IrSignal on the Steam supplied. */
     void dump(Stream& stream) const;
+#endif
 
     /**
      * Implementation of the count semantics, i.e.,

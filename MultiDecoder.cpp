@@ -12,7 +12,6 @@ MultiDecoder::MultiDecoder(const IrReader &IrReader) {
     if (IrReader.getDataLength() < 3) {
         type = noise;
         decode = F(":");
-
         return;
     }
 

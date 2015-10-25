@@ -15,6 +15,7 @@ public:
     Nec1Renderer(unsigned int D, unsigned int S, unsigned int F) { init(D, S, F); }
     Nec1Renderer(unsigned int D, unsigned int F) { init(D, 255-D, F); };
     virtual ~Nec1Renderer();
+    const char *getProtocolName() const { return "NEC1"; }
 
 private:
     microseconds_t intro[introLength];

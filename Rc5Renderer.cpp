@@ -2,12 +2,16 @@
 
 #include "Rc5Renderer.h"
 
+// NOTE: writing intro[i++] = ... produces wrong result, compiler bug?
+// (Adding a print statement immediately after, and it works :-~)
+// So let's write intro[i] = ...; i++ at least for now.
+
 uint8_t Rc5Renderer::T = 1;
 
 Rc5Renderer::~Rc5Renderer() {
 }
 
-Rc5Renderer::Rc5Renderer(uint16_t D, uint16_t F) {
+Rc5Renderer::Rc5Renderer(unsigned int D, unsigned int F) {
     T = ! T;
     init(D, F, T);
 }
@@ -40,17 +44,18 @@ void Rc5Renderer::emit(unsigned int x) {
     if (pending == 0) {
         // First, do nothing, just stuff in pending.
     } else if ((pending > 0) == ((x & 1) != 0)) {
-        repeat[index++] = timebase;
-        repeat[index++] = timebase;
+        repeat[index] = timebase; index++;
+        repeat[index] = timebase; index++;
     } else {
-        repeat[index++] = 2 * timebase;
+        repeat[index] = 2 * timebase; index++;
     }
     pending = (x & 1U) ? 1 : -1;
 }
 
 void Rc5Renderer::emitEnd() {
-    if (pending > 0)
-        repeat[index++] = timebase;
+    if (pending > 0) {
+        repeat[index] = timebase; index++;
+    }
 
-    repeat[index++] = 0xFFFF;
+    repeat[index] = 0xFFFF; index++;
 }

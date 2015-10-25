@@ -19,6 +19,8 @@ public:
 
     virtual ~Rc5Renderer();
 
+    const char *getProtocolName() const { return "RC5"; }
+
 private:
     unsigned int index;
     microseconds_t repeat[28];

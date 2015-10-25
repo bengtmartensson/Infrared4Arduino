@@ -18,7 +18,6 @@ this program. If not, see http://www.gnu.org/licenses/.
 #ifndef IRSENDER_H
 #define	IRSENDER_H
 
-#include <Arduino.h>
 #include "InfraredTypes.h"
 #include "IrSignal.h"
 
@@ -35,9 +34,9 @@ public:
     virtual ~IrSender();
 
     //virtual void send(const microseconds_t buf[], unsigned int len, frequency_t frequency) = 0;
-    virtual void send(const IrSequence& irSequence, frequency_t frequency) = 0;
+    virtual void send(const IrSequence& irSequence, frequency_t frequency = IrSignal::defaultFrequency) = 0;
 
-    void send(const IrSignal& irSignal, unsigned int noSends);
+    virtual void sendSignal(const IrSignal& irSignal, unsigned int noSends = 1);
 
     /** Force output pin inactive. */
     virtual void mute();

@@ -1,0 +1,12 @@
+{
+  "name": "Infrared",
+  "keywords": "infrared, ir, remote",
+  "description": "Send and receive infrared signals with multiple protocols",
+  "repository":
+  {
+    "type": "git",
+    "url": "http://github.com/bengtmartensson/Infrared4Arduino.git"
+  },
+  "frameworks": "arduino",
+  "platforms": "atmelavr"
+}

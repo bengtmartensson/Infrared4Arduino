@@ -20,9 +20,7 @@ protected:
     void setup(const microseconds_t introArray[], unsigned int introLength,
             const microseconds_t repeatArray[], unsigned int repeatLength,
             frequency_t frequency) {
-        IrSequence intro(introArray, introLength);
-        IrSequence repeat(repeatArray, repeatLength);
-        setup(intro, repeat, frequency);
+        irSignal = new IrSignal(introArray, introLength, repeatArray, repeatLength, NULL, 0, frequency);
     }
 
 public:
@@ -34,12 +32,18 @@ public:
 
     const IrSignal& render() const {
         return *irSignal;
+    };
+
+    operator const IrSignal& () const {
+        return *irSignal;
     }
 
     /** Just a convenience function */
     void send(IrSender& irSender, unsigned int noSends = 1) {
-        irSender.send(render(), noSends);
+        irSender.sendSignal(render(), noSends);
     }
+
+    virtual const char *getProtocolName() const = 0;
 };
 
 #endif	/* IRRENDERER_H */

@@ -32,7 +32,9 @@ public:
         return durations;
     }
 
+#ifdef ARDUINO
     void dump(Stream& stream) const;
+#endif
 };
 
 #endif	/* IRSEQUENCE_H */

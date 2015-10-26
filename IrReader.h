@@ -73,9 +73,7 @@ public:
 
     virtual unsigned int getDataLength() const = 0; // was getCaptureCount())
     virtual microseconds_t getDuration(unsigned int index) const = 0;
-#ifdef ARDUINO
     virtual void dump(Stream &stream) const;
-#endif
     IrSequence *toIrSequence() const;
 
     virtual boolean isEmpty() const { // was hasContent())

@@ -2,13 +2,14 @@
 
 String Rc5Decoder::toString() const {
     return
+
+            isValid() ?
 #ifdef ARDUINO
-            isValid()
-      ? String(F("RC5 ")) + String(D) + F(" ") + String(F) + F(" ") + String(T)
-      : String();
+            String(F("RC5 ")) + String(D) + F(" ") + String(F) + F(" ") + String(T)
 #else
-    ""; // FIXME
+            String("RC5 ") + std::to_string(D) + String(" ") + std::to_string(F) + String(" ") + std::to_string(T)
 #endif
+            : String();
 }
 
 Rc5Decoder::Length Rc5Decoder::decode(microseconds_t t) {
@@ -29,12 +30,10 @@ unsigned int Rc5Decoder::decode(microseconds_t flash, microseconds_t gap) {
             : invalid;
 }
 
-#ifdef ARDUINO
 boolean Rc5Decoder::tryDecode(const IrReader& irCapturer, Stream& stream) {
     Rc5Decoder decoder(irCapturer);
     return decoder.printDecode(stream);
 }
-#endif
 
 Rc5Decoder::Rc5Decoder(const IrReader& irCapturer) {
     //super(irSequence);

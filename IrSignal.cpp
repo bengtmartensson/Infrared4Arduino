@@ -19,7 +19,6 @@ IrSignal::IrSignal(const microseconds_t *intro_, unsigned int introLength,
         ending(ending_, endingLength) {
 }
 
-#ifdef ARDUINO
 void IrSignal::dump(Stream& stream, boolean usingSigns) const {
     stream.print("f=");
     stream.println(frequency);
@@ -27,4 +26,3 @@ void IrSignal::dump(Stream& stream, boolean usingSigns) const {
     repeat.dump(stream, usingSigns);
     ending.dump(stream, usingSigns);
 }
-#endif

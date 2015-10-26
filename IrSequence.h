@@ -47,7 +47,6 @@ public:
         return durations;
     }
 
-#ifdef ARDUINO
     /**
      * Prints the IrSequence on the stream provided.
      * @param usingSigns If true,  Gaps are written with a leading '+', spaces with a leading '-'.
@@ -61,7 +60,6 @@ public:
     void dumpWithSigns(Stream& stream) const {
         dump(stream, true);
     };
-#endif
 };
 
 #endif	/* IRSEQUENCE_H */

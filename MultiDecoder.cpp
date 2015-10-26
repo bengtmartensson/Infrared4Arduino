@@ -32,9 +32,11 @@ MultiDecoder::MultiDecoder(const IrReader &IrReader) {
     }
 
     // Giving up
-    decode = String(F("*** "))
+    decode = String(F("*** ")) +
 #ifdef ARDUINO
-            + String(IrReader.getDataLength())
+            String(IrReader.getDataLength())
+#else
+            std::to_string(IrReader.getDataLength())
 #endif
             ;
     type = undecoded;

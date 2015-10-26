@@ -15,7 +15,6 @@ IrSequence::~IrSequence() {
         delete [] durations;
 }
 
-#ifdef ARDUINO
 void IrSequence::dump(Stream& stream, boolean usingSigns) const {
     for (unsigned int i = 0U; i < length; i++) {
         if (i > 0U)
@@ -26,4 +25,3 @@ void IrSequence::dump(Stream& stream, boolean usingSigns) const {
     }
     stream.println();
 }
-#endif

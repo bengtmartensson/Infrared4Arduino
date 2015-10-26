@@ -17,14 +17,12 @@ public:
         return valid;
     }
 
-#ifdef ARDUINO
     boolean printDecode(Stream& stream) const {
         if (isValid())
             stream.println(toString());
         return isValid();
     }
-#endif
-    
+
 private:
     //const static double tolerance = 0.1; //10% relative tolerance
     const static uint32_t endingMin = 20000U;

@@ -52,7 +52,6 @@ public:
         return intro;
     }
 
-#ifdef ARDUINO
     /**
      * Print a human readable representation of the IrSignal on the Stream supplied.
      * @param usingSigns is true, prepend marks with '+' and gaps with '-'.
@@ -65,7 +64,6 @@ public:
     void dumpWithSigns(Stream& stream) const {
         dump(stream, true);
     };
-#endif
 
     /**
      * Implementation of the count semantics, i.e.,

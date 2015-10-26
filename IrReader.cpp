@@ -17,18 +17,16 @@ this program. If not, see http://www.gnu.org/licenses/.
 
 #include "IrReader.h"
 
-#ifdef ARDUINO
 void IrReader::dump(Stream &stream) const {
     unsigned int count = getDataLength();
     for (unsigned int i = 0U; i < count; i++) {
         if (i > 0U)
             stream.print(" ");
-        stream.write((i & 1U) ? '-' : '+');
+        stream.print((i & 1U) ? '-' : '+');
         stream.print(getDuration(i), DEC);
     }
     stream.println();
 }
-#endif
 
 /**
  * Generate an IrSequence from the IrReader.

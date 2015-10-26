@@ -82,8 +82,10 @@ public:
         return frequency;
     }
 
+#ifdef ARDUINO
     void dump(Stream &stream) const;
-
+#endif
+    
 private:
     void setup(boolean setup);
 

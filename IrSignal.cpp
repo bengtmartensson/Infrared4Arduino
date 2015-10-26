@@ -2,28 +2,29 @@
 #include "IrSender.h"
 
 IrSignal::IrSignal(const IrSequence& intro_, const IrSequence& repeat_, const IrSequence& ending_, frequency_t frequency_)
-: intro(&intro_),repeat(&repeat_),ending(&ending_),frequency(frequency_) {
+: frequency(frequency_),intro(intro_),repeat(repeat_),ending(ending_) {
 }
 
 IrSignal::IrSignal(const IrSignal& orig)
-: intro(orig.intro),repeat(orig.repeat),ending(orig.ending),frequency(orig.frequency) {
+: frequency(orig.frequency),intro(orig.intro),repeat(orig.repeat),ending(orig.ending) {
 }
 
-IrSignal::IrSignal(const microseconds_t *intro_, unsigned int lengthIntro,
-            const microseconds_t *repeat_, unsigned int lengthRepeat,
-            const microseconds_t *ending_, unsigned int lengthEnding,
-            frequency_t frequency_) : frequency(frequency_) {
-    intro = new IrSequence(intro_, lengthIntro);
-    repeat = new IrSequence(repeat_, lengthRepeat);
-    ending = new IrSequence(ending_, lengthEnding);
+IrSignal::IrSignal(const microseconds_t *intro_, unsigned int introLength,
+            const microseconds_t *repeat_, unsigned int repeatLength,
+            const microseconds_t *ending_, unsigned int endingLength,
+            frequency_t frequency_)
+: frequency(frequency_),
+        intro(intro_, introLength),
+  repeat(repeat_, repeatLength),
+        ending(ending_, endingLength) {
 }
 
 #ifdef ARDUINO
-void IrSignal::dump(Stream& stream) const {
+void IrSignal::dump(Stream& stream, boolean usingSigns) const {
     stream.print("f=");
     stream.println(frequency);
-    intro.dump(stream);
-    repeat.dump(stream);
-    ending.dump(stream);
+    intro.dump(stream, usingSigns);
+    repeat.dump(stream, usingSigns);
+    ending.dump(stream, usingSigns);
 }
 #endif

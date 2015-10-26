@@ -20,7 +20,9 @@ this program. If not, see http://www.gnu.org/licenses/.
 
 // Copied from IRLib.c, necessary for the timing wizardry to work.
 // Provides ISR
+#ifdef ARDUINO
 #include <avr/interrupt.h>
+#endif
 // defines for setting and clearing register bits
 #ifndef cbi
 #define cbi(sfr, bit) (_SFR_BYTE(sfr) &= ~_BV(bit))

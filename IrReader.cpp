@@ -17,6 +17,7 @@ this program. If not, see http://www.gnu.org/licenses/.
 
 #include "IrReader.h"
 
+#ifdef ARDUINO
 void IrReader::dump(Stream &stream) const {
     unsigned int count = getDataLength();
     for (unsigned int i = 0U; i < count; i++) {
@@ -27,7 +28,12 @@ void IrReader::dump(Stream &stream) const {
     }
     stream.println();
 }
+#endif
 
+/**
+ * Generate an IrSequence from the IrReader.
+ * @return IrSequence. The user must delete this to avoid memory leaks.
+ */
 IrSequence *IrReader::toIrSequence() const {
     microseconds_t *durations = new microseconds_t[getDataLength()];
     for (unsigned int i = 0; i < getDataLength(); i++)

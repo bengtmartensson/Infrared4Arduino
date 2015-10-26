@@ -42,7 +42,9 @@ public:
 
     String toString() const;
 
+#ifdef ARDUINO
     static boolean tryDecode(const IrReader &irCapturer, Stream& string);
+#endif
 };
 
 #endif	/* NEC1DECODER_H */

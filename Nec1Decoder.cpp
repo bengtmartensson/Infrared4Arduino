@@ -7,9 +7,14 @@
 //{38.4k,564}<1,-1|1,-3>(16,-8,D:8,S:8,F:8,~F:8,1,^108m,(16,-4,1,^108m)*) [D:0..255,S:0..255=255-D,F:0..255]
 
 String Nec1Decoder::toString() const {
-  return !isValid() ? String()
+  return
+#ifdef ARDUINO
+          !isValid() ? String()
     : ditto ? String(F("NEC1 ditto"))
     : String(F("NEC1 ")) + String(D) + String(F(" ")) + String(S) + String(F(" ")) + String(F);
+#else
+  ""; // FIXME
+#endif
 }
 
 int Nec1Decoder::decodeFlashGap(microseconds_t flash, microseconds_t gap) {
@@ -22,10 +27,12 @@ int Nec1Decoder::decodeFlashGap(microseconds_t flash, microseconds_t gap) {
             : invalid;
 }
 
+#ifdef ARDUINO
 boolean Nec1Decoder::tryDecode(const IrReader& irReader, Stream& stream) {
     Nec1Decoder decoder(irReader);
     return decoder.printDecode(stream);
 }
+#endif
 
 int Nec1Decoder::decode(const IrReader& irReader, unsigned int index) {
     unsigned int sum = 0;

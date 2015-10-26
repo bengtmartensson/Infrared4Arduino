@@ -5,7 +5,6 @@
 
 #include <Arduino.h>
 #include "IrRenderer.h"
-//#include "IrSignal.h"
 
 class Nec1Renderer : public IrRenderer {
 public:

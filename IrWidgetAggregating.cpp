@@ -1,3 +1,4 @@
+#ifdef ARDUINO
 // Copyright (c) 2012 Michael Dreher  <michael(at)5dot1.de>
 // this code may be distributed under the terms of the General Public License V2 (GPL V2)
 
@@ -164,3 +165,4 @@ endCapture:
     uint32_t mediumPeriod = timerValueToNanoSeconds(period);
     frequency = (frequency_t) (1000000000L / mediumPeriod);
 }
+#endif // ARDUINO

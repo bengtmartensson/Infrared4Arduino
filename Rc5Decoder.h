@@ -21,8 +21,10 @@ public:
     int getT() const {
         return T;
     }
+#ifdef ARDUINO
     static boolean tryDecode(const IrReader& irReader, Stream& string);
-
+#endif
+    
 private:
     const static microseconds_t timebase = 889U;
     const static microseconds_t timebaseLower = 800U;

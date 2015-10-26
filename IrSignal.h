@@ -13,22 +13,26 @@ public:
 
     IrSignal();
     IrSignal(const IrSignal& orig);
+
     virtual ~IrSignal() {
     };
     IrSignal(const microseconds_t *intro, unsigned int lengthIntro,
             const microseconds_t *repeat, unsigned int lengthRepeat,
             const microseconds_t *ending, unsigned int lengthEnding,
-            frequency_t frequency);
+            frequency_t frequency = defaultFrequency);
 
-    IrSignal(const IrSequence& intro, const IrSequence& repeat, const IrSequence& ending, frequency_t frequency = defaultFrequency);
+    IrSignal(const microseconds_t *intro, unsigned int lengthIntro,
+            const microseconds_t *repeat, unsigned int lengthRepeat,
+            frequency_t frequency = defaultFrequency);
+
+    IrSignal(const IrSequence& intro, const IrSequence& repeat, const IrSequence& ending,
+            frequency_t frequency = defaultFrequency);
 
 private:
-    //static IrSequence nullSequence();
-
-    frequency_t frequency; // In Hz
-    const IrSequence *intro;
-    const IrSequence *repeat;
-    const IrSequence *ending;
+    frequency_t frequency;
+    IrSequence intro;
+    IrSequence repeat;
+    IrSequence ending;
 
 public:
 
@@ -37,20 +41,30 @@ public:
     }
 
     const IrSequence& getEnding() const {
-        return *ending;
+        return ending;
     }
 
     const IrSequence& getRepeat() const {
-        return *repeat;
+        return repeat;
     }
 
     const IrSequence& getIntro() const {
-        return *intro;
+        return intro;
     }
 
 #ifdef ARDUINO
-    /** Print a human readable representation of the IrSignal on the Steam supplied. */
-    void dump(Stream& stream) const;
+    /**
+     * Print a human readable representation of the IrSignal on the Stream supplied.
+     * @param usingSigns is true, prepend marks with '+' and gaps with '-'.
+     */
+    void dump(Stream& stream, boolean usingSigns = false) const;
+
+    /**
+     * Print a human readable representation of the IrSignal on the Stream supplied, using signs.
+     */
+    void dumpWithSigns(Stream& stream) const {
+        dump(stream, true);
+    };
 #endif
 
     /**

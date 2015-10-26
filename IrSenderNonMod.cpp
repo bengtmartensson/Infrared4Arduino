@@ -22,8 +22,8 @@ IrSenderNonMod::IrSenderNonMod(pin_t pin) : IrSender(pin) {
 
 void IrSenderNonMod::sendNonModulated(const microseconds_t buf[], unsigned int len) {
     for (unsigned int i = 0; i < len; i++) {
-        digitalWrite(outputPin, (i & 1) ? LOW : HIGH);
+        digitalWrite(getOutputPin(), (i & 1) ? LOW : HIGH);
         delayUSecs(buf[i]);
     }
-    digitalWrite(outputPin, LOW);
+    digitalWrite(getOutputPin(), LOW);
 }

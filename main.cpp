@@ -7,6 +7,7 @@
 #include "IrSenderPwm.h"
 #include "IrSequenceReader.h"
 #include "Nec1Decoder.h"
+#include "IrSenderSimulator.h"
 #include <unistd.h>
 #include <iostream>
 
@@ -19,4 +20,7 @@ int main() {
     IrSequenceReader irSequenceReader(renderer->render().getIntro());
     Nec1Decoder decoder(irSequenceReader);
     decoder.printDecode(str);
+
+    IrSender *sender = new IrSenderSimulator(str);
+    sender->sendSignal(*renderer, 3);
 }

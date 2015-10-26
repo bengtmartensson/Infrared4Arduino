@@ -10,6 +10,7 @@
 class IrSignal {
 public:
     static const frequency_t defaultFrequency = 38000U;
+    static const frequency_t invalidFrequency = (frequency_t) -1;
 
     IrSignal();
     IrSignal(const IrSignal& orig);
@@ -66,12 +67,28 @@ public:
     };
 
     /**
+     * If the frequency is sensible, print it to the stream and return true.
+     * Otherwise do nothing and return false.
+     * No extra spaces or line feeds are generated.
+     */
+    boolean dumpFrequency(Stream& stream) const {
+        return dumpFrequency(stream, frequency);
+    };
+
+    /**
+     * Static version of dumpFrequency.
+     */
+    static boolean dumpFrequency(Stream& stream, frequency_t frequency);
+
+    /**
      * Implementation of the count semantics, i.e.,
      * how many repetitions should be sent if the signal is sent noSend times.
      */
     unsigned int noRepetitions(unsigned int noSends) const {
         return getIntro().isEmpty() ? noSends : noSends - 1;
     }
+
+
 };
 
 #endif	/* IRSIGNAL_H */

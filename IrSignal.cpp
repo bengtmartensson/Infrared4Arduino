@@ -20,9 +20,19 @@ IrSignal::IrSignal(const microseconds_t *intro_, unsigned int introLength,
 }
 
 void IrSignal::dump(Stream& stream, boolean usingSigns) const {
-    stream.print("f=");
-    stream.println(frequency);
+    boolean printedSomething = dumpFrequency(stream);
+    if (printedSomething)
+        stream.println();
     intro.dump(stream, usingSigns);
     repeat.dump(stream, usingSigns);
     ending.dump(stream, usingSigns);
+}
+
+boolean IrSignal::dumpFrequency(Stream& stream, frequency_t frequency) {
+    if (frequency > 0 && frequency != invalidFrequency) {
+        stream.print(F("f="));
+        stream.print(frequency);
+        return true;
+    }
+    return false;
 }

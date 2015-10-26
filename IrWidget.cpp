@@ -1,3 +1,6 @@
+
+#include "IrSignal.h"
+
 #ifdef ARDUINO
 /* IR Widget: capture a raw IR signal and dump the timing of the non-demodulated signal
 
@@ -57,11 +60,9 @@ milliseconds_t IrWidget::getEndingTimeout() const {
 }
 
 void IrWidget::dump(Stream &stream) const {
-    if (getFrequency() > 0 && getFrequency() != (frequency_t) -1) {
-        stream.print(F("f="));
-        stream.print(getFrequency(), DEC);
+    boolean printedSomething = IrSignal::dumpFrequency(stream, getFrequency());
+    if (printedSomething)
         stream.write(' ');
-    }
     IrReader::dump(stream);
 }
 

@@ -25,10 +25,18 @@ this program. If not, see http://www.gnu.org/licenses/.
  * Common base class for all sending classes.
  */
 class IrSender {
-protected:
-    void delayUSecs(microseconds_t T);
-    IrSender(pin_t pin);
+private:
     pin_t outputPin;
+
+protected:
+    static const pin_t invalid_pin = (pin_t) -1;
+
+    pin_t getOutputPin() const {
+        return outputPin;
+    }
+    void delayUSecs(microseconds_t T);
+    IrSender();
+    IrSender(pin_t pin);
 
 public:
     virtual ~IrSender();
@@ -36,7 +44,7 @@ public:
     //virtual void send(const microseconds_t buf[], unsigned int len, frequency_t frequency) = 0;
     virtual void send(const IrSequence& irSequence, frequency_t frequency = IrSignal::defaultFrequency) = 0;
 
-    virtual void sendSignal(const IrSignal& irSignal, unsigned int noSends = 1);
+    void sendSignal(const IrSignal& irSignal, unsigned int noSends = 1);
 
     /** Force output pin inactive. */
     virtual void mute();

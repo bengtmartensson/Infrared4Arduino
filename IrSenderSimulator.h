@@ -9,7 +9,7 @@
  */
 class IrSenderSimulator : public IrSender {
 private:
-    Stream stream;
+    Stream& stream;
 
 public:
     IrSenderSimulator(Stream& stream_) : stream(stream_) {};

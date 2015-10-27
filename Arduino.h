@@ -2,9 +2,10 @@
 #define ARDUINO_H
 
 #ifdef ARDUINO
-#include_next
+#include_next <Arduino.h>
 
-#else
+#else // ! ARDUINO
+
 #include <stdint.h>
 #include <stdio.h>
 #include <string>
@@ -29,7 +30,6 @@ inline void delay(unsigned long t) {};
 inline void noInterrupts() {};
 inline void interrupts() {};
 
-#ifndef HIGH
 #define HIGH 1
 #define LOW 0
 
@@ -37,12 +37,7 @@ inline void interrupts() {};
 #define OUTPUT 0x1
 #define INPUT_PULLUP 0x2
 
-
-#endif
-
 #define F_CPU 16000000
-
-#endif
 
 // Stream
 
@@ -62,5 +57,6 @@ public:
 
 #define DEC std::dec
 
+#endif // ! ARDUINO
 
 #endif // ARDUINO_H

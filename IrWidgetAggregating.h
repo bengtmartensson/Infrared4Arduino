@@ -20,13 +20,13 @@ public:
         return instance;
     }
 
-    static IrWidgetAggregating *newIrWidgetAggregating(unsigned int captureLength = defaultCaptureLength,
+    static IrWidgetAggregating *newIrWidgetAggregating(size_t captureLength = defaultCaptureLength,
             boolean pullup = false,
             milliseconds_t beginningTimeout = defaultBeginningTimeout,
             milliseconds_t endingTimeout = defaultEndingTimeout);
 
 protected:
-    IrWidgetAggregating(unsigned int captureLength = defaultCaptureLength,
+    IrWidgetAggregating(size_t captureLength = defaultCaptureLength,
             boolean pullup = false,
             milliseconds_t beginningTimeout = defaultBeginningTimeout,
             milliseconds_t endingTimeout = defaultEndingTimeout);

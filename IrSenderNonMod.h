@@ -27,12 +27,12 @@ public:
     IrSenderNonMod(pin_t pin);
 
     /** Three parameter form just to be compatible with the super class */
-    void send(const microseconds_t buf[], unsigned int len, frequency_t frequency = 0) {
+    void send(const microseconds_t buf[], size_t len, frequency_t frequency = 0) {
         if (frequency == 0U)
             sendNonModulated(buf, len);
     }
 
-    void sendNonModulated(const microseconds_t buf[], unsigned int len);
+    void sendNonModulated(const microseconds_t buf[], size_t len);
 };
 
 #endif	/* ! IRSENDERNONMOD_H */

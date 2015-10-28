@@ -9,9 +9,9 @@ IrSignal::IrSignal(const IrSignal& orig)
 : frequency(orig.frequency),intro(orig.intro),repeat(orig.repeat),ending(orig.ending) {
 }
 
-IrSignal::IrSignal(const microseconds_t *intro_, unsigned int introLength,
-            const microseconds_t *repeat_, unsigned int repeatLength,
-            const microseconds_t *ending_, unsigned int endingLength,
+IrSignal::IrSignal(const microseconds_t *intro_, size_t introLength,
+            const microseconds_t *repeat_, size_t repeatLength,
+            const microseconds_t *ending_, size_t endingLength,
             frequency_t frequency_)
 : frequency(frequency_),
         intro(intro_, introLength),

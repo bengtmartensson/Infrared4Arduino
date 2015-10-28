@@ -32,13 +32,13 @@ public:
     // Defaults
     static const milliseconds_t defaultBeginningTimeout = 2000U;
     static const milliseconds_t defaultEndingTimeout = 30U;
-    static const unsigned int defaultCaptureLength = 100U;
+    static const size_t defaultCaptureLength = 100U;
 
 protected:
     milliseconds_t beginningTimeout;
     milliseconds_t endingTimeout;
 
-    unsigned int bufferSize;
+    size_t bufferSize;
 
     /** True if last receive ended with a timeout */
     boolean timeouted;
@@ -47,7 +47,7 @@ protected:
         return (x & 1) ? x + 1 : x;
     }
 
-    IrReader(unsigned int bufSize_) : bufferSize(forceEven(bufSize_)),timeouted(false) {
+    IrReader(size_t bufSize_) : bufferSize(forceEven(bufSize_)),timeouted(false) {
     }
 
     IrReader() {
@@ -71,7 +71,7 @@ public:
 
     virtual boolean isReady() const = 0;
 
-    virtual unsigned int getDataLength() const = 0; // was getCaptureCount())
+    virtual size_t getDataLength() const = 0; // was getCaptureCount())
     virtual microseconds_t getDuration(unsigned int index) const = 0;
     virtual void dump(Stream &stream) const;
     IrSequence *toIrSequence() const;

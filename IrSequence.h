@@ -11,7 +11,7 @@
 class IrSequence {
 private:
     const microseconds_t *durations;
-    unsigned int length;
+    size_t length;
     boolean toBeFreed;
 
 public:
@@ -24,14 +24,14 @@ public:
      * @param length length of durations. Shuld be even (not checked).
      * @param toBeFreed If true, the destructor will delete the durations array.
      */
-    IrSequence(const microseconds_t *durations, unsigned int length, boolean toBeFreed = false);
+    IrSequence(const microseconds_t *durations, size_t length, boolean toBeFreed = false);
 
     virtual ~IrSequence();
 
     /** Performs shallow copy. */
     IrSequence(const IrSequence& orig);
 
-    unsigned int getLength() const {
+    size_t getLength() const {
         return length;
     }
 

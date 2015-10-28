@@ -9,10 +9,10 @@ private:
     microseconds_t *durationData;
 
     /** Number of valid entries in durationData */
-    unsigned int dataLength;
+    size_t dataLength;
 
 public:
-    IrReceiverPoll(unsigned int captureLength = defaultCaptureLength,
+    IrReceiverPoll(size_t captureLength = defaultCaptureLength,
             pin_t pin = defaultPin,
             boolean pullup = false,
             microseconds_t markExcess = defaultMarkExcess,
@@ -27,7 +27,7 @@ public:
 
     void reset();
 
-    unsigned int getDataLength() const {
+    size_t getDataLength() const {
         return dataLength;
     }
 

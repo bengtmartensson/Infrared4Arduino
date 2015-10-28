@@ -18,7 +18,7 @@ this program. If not, see http://www.gnu.org/licenses/.
 #include "IrReader.h"
 
 void IrReader::dump(Stream &stream) const {
-    unsigned int count = getDataLength();
+    size_t count = getDataLength();
     for (unsigned int i = 0U; i < count; i++) {
         if (i > 0U)
             stream.print(" ");

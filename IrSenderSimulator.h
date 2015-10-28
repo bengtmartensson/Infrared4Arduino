@@ -15,7 +15,7 @@ public:
     IrSenderSimulator(Stream& stream_) : stream(stream_) {};
     IrSenderSimulator(const IrSenderSimulator& orig) : stream(orig.stream) {};
     virtual ~IrSenderSimulator() {};
-    void send(const IrSequence&, frequency_t);
+    void send(const IrSequence& irSequence, frequency_t frequency = IrSignal::defaultFrequency);
 };
 
 #endif	/* IRSENDERSIMULATOR_H */

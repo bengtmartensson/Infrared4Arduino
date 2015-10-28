@@ -3,7 +3,7 @@
 IrSequence::IrSequence() : durations(NULL), length(0U), toBeFreed(false) {
 };
 
-IrSequence::IrSequence(const microseconds_t *durations_, unsigned int length_, boolean toBeFreed_)
+IrSequence::IrSequence(const microseconds_t *durations_, size_t length_, boolean toBeFreed_)
 : durations(durations_), length(length_), toBeFreed(toBeFreed_) {
 }
 

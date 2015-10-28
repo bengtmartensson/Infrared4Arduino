@@ -9,8 +9,8 @@
 class Nec1Renderer : public IrRenderer {
 public:
     static const frequency_t frequency = 38400U;
-    static const unsigned int introLength = 68U;
-    static const unsigned int repeatLength = 4U;
+    static const size_t introLength = 68U;
+    static const size_t repeatLength = 4U;
     Nec1Renderer(unsigned int D, unsigned int S, unsigned int F) { init(D, S, F); }
     Nec1Renderer(unsigned int D, unsigned int F) { init(D, 255-D, F); };
     virtual ~Nec1Renderer();

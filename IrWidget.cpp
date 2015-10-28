@@ -31,7 +31,7 @@ http://arduino.cc/en/Hacking/PinMapping2560
 
 #include "IrWidget.h"
 
-IrWidget::IrWidget(unsigned int captureLength,
+IrWidget::IrWidget(size_t captureLength,
         boolean pullup,
         milliseconds_t beginningTimeout,
         milliseconds_t endingTimeout) : IrReader(captureLength) {

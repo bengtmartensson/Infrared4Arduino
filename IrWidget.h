@@ -41,7 +41,7 @@ class IrWidget : public IrReader {
 protected:
     frequency_t frequency;
 
-    IrWidget(unsigned int captureLength = defaultCaptureLength,
+    IrWidget(size_t captureLength = defaultCaptureLength,
             boolean pullup = false,
             milliseconds_t beginningTimeout = defaultBeginningTimeout,
             milliseconds_t endingTimeout = defaultEndingTimeout);
@@ -54,7 +54,7 @@ public:
     /** For compatibility with the receiver classes, receive is a synonym for capture. */
     void receive() { capture(); }
 
-    unsigned int getDataLength() const { // was: getCaptureCount()
+    size_t getDataLength() const { // was: getCaptureCount()
         return captureCount;
     }
 
@@ -85,7 +85,7 @@ public:
 #ifdef ARDUINO
     void dump(Stream &stream) const;
 #endif
-    
+
 private:
     void setup(boolean setup);
 

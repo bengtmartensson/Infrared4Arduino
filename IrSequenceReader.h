@@ -6,6 +6,7 @@
 
 /**
  * This class packs an IrSequence into a dummy, immutable IrReader.
+ * It is basically intended for debugging and such.
  */
 class IrSequenceReader : public IrReader {
 private:
@@ -31,7 +32,7 @@ public:
         return true;
     };
 
-    unsigned int getDataLength() const {
+    size_t getDataLength() const {
         return irSequence.getLength();
     };
 

@@ -12,7 +12,7 @@ milliseconds_t IrReceiverSampler::ticks2millisecs(uint32_t tix) {
 
 IrReceiverSampler *IrReceiverSampler::instance = NULL;
 
-IrReceiverSampler::IrReceiverSampler(unsigned int captureLength,
+IrReceiverSampler::IrReceiverSampler(size_t captureLength,
         pin_t pin_,
         boolean pullup,
         microseconds_t markExcess,
@@ -26,7 +26,7 @@ IrReceiverSampler::IrReceiverSampler(unsigned int captureLength,
     receiverState = STATE_IDLE;
 }
 
-IrReceiverSampler *IrReceiverSampler::newIrReceiverSampler(unsigned int captureLength,
+IrReceiverSampler *IrReceiverSampler::newIrReceiverSampler(size_t captureLength,
         pin_t pin,
         boolean pullup,
         microseconds_t markExcess,

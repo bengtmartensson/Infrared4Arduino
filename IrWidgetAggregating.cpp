@@ -6,7 +6,7 @@
 
 #include "IrWidgetAggregating.h"
 
-IrWidgetAggregating::IrWidgetAggregating(unsigned int captureLength,
+IrWidgetAggregating::IrWidgetAggregating(size_t captureLength,
         boolean pullup,
         milliseconds_t beginningTimeout,
         milliseconds_t endingTimeout)
@@ -15,7 +15,7 @@ IrWidgetAggregating::IrWidgetAggregating(unsigned int captureLength,
 
 IrWidgetAggregating *IrWidgetAggregating::instance = NULL;
 
-IrWidgetAggregating *IrWidgetAggregating::newIrWidgetAggregating(unsigned int captureLength,
+IrWidgetAggregating *IrWidgetAggregating::newIrWidgetAggregating(size_t captureLength,
             boolean pullup,
             milliseconds_t beginningTimeout,
             milliseconds_t endingTimeout) {

@@ -40,7 +40,7 @@ public:
     volatile microseconds_t *durationData; // previously rawbuf;
 
     /** Number of entries in durationData */
-    volatile unsigned int dataLength; // previously rawlen
+    volatile size_t dataLength; // previously rawlen
 
 private:
     static IrReceiverSampler *instance;
@@ -51,7 +51,7 @@ protected:
     virtual ~IrReceiverSampler();
 
 private:
-    IrReceiverSampler(unsigned int captureLength = defaultCaptureLength,
+    IrReceiverSampler(size_t captureLength = defaultCaptureLength,
             pin_t pin = defaultPin,
             boolean pullup = false,
             microseconds_t markExcess = defaultMarkExcess,
@@ -59,8 +59,9 @@ private:
             milliseconds_t endingTimeout = defaultEndingTimeout);
 
 public:
-    static IrReceiverSampler *newIrReceiverSampler(unsigned int captureLength = defaultCaptureLength,
-            pin_t pin = defaultPin, boolean pullup = false,
+    static IrReceiverSampler *newIrReceiverSampler(size_t captureLength = defaultCaptureLength,
+            pin_t pin = defaultPin,
+            boolean pullup = false,
             microseconds_t markExcess = defaultMarkExcess,
             milliseconds_t beginningTimeout = defaultBeginningTimeout,
             milliseconds_t endingTimeout = defaultEndingTimeout);
@@ -85,7 +86,7 @@ public:
 
     milliseconds_t getBeginningTimeout() const;
 
-    unsigned int getDataLength() const {
+    size_t getDataLength() const {
         return dataLength;
     }
 

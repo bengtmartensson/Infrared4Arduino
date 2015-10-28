@@ -9,8 +9,8 @@
 class Rc5Renderer : public IrRenderer {
 public:
     static const frequency_t frequency = 36000;
-    static const unsigned int introLength = 0;
-    static const unsigned int endingLength = 0;
+    static const size_t introLength = 0;
+    static const size_t endingLength = 0;
 
     Rc5Renderer(unsigned int D, unsigned int F, unsigned int T) { init(D, F, T); }
 

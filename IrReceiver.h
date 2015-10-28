@@ -33,7 +33,7 @@ public:
      * @param pullup Enable hardware pullup within the processor.
      * @param markExcess
      */
-    IrReceiver(unsigned int bufSize, pin_t pin, boolean pullup = false,
+    IrReceiver(size_t bufSize, pin_t pin, boolean pullup = false,
             microseconds_t markExcess = defaultMarkExcess);
 
     virtual ~IrReceiver() {

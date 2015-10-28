@@ -17,13 +17,13 @@ public:
 
     virtual ~IrSignal() {
     };
-    IrSignal(const microseconds_t *intro, unsigned int lengthIntro,
-            const microseconds_t *repeat, unsigned int lengthRepeat,
-            const microseconds_t *ending, unsigned int lengthEnding,
+    IrSignal(const microseconds_t *intro, size_t lengthIntro,
+            const microseconds_t *repeat, size_t lengthRepeat,
+            const microseconds_t *ending, size_t lengthEnding,
             frequency_t frequency = defaultFrequency);
 
-    IrSignal(const microseconds_t *intro, unsigned int lengthIntro,
-            const microseconds_t *repeat, unsigned int lengthRepeat,
+    IrSignal(const microseconds_t *intro, size_t lengthIntro,
+            const microseconds_t *repeat, size_t lengthRepeat,
             frequency_t frequency = defaultFrequency);
 
     IrSignal(const IrSequence& intro, const IrSequence& repeat, const IrSequence& ending,

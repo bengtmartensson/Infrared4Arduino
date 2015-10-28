@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include "IrReceiverPoll.h"
 
-IrReceiverPoll::IrReceiverPoll(unsigned int captureLength,
+IrReceiverPoll::IrReceiverPoll(size_t captureLength,
         pin_t pin_,
         boolean pullup,
         microseconds_t markExcess,

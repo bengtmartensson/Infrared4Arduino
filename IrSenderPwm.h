@@ -51,7 +51,7 @@ public:
         delete instance;
         instance = NULL;
     }
-    void send(const IrSequence& sequence, frequency_t frequency = 38000);
+    void send(const IrSequence& sequence, frequency_t frequency = IrSignal::defaultFrequency);
 };
 
 #endif	/* IRSENDERPWM_H */

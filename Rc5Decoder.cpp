@@ -1,18 +1,6 @@
 #include "Rc5Decoder.h"
 
-String Rc5Decoder::toString() const {
-    return
-
-            isValid() ?
-#ifdef ARDUINO
-            String(F("RC5 ")) + String(D) + F(" ") + String(F) + F(" ") + String(T)
-#else
-            String("RC5 ") + std::to_string(D) + String(" ") + std::to_string(F) + String(" ") + std::to_string(T)
-#endif
-            : String();
-}
-
-Rc5Decoder::Length Rc5Decoder::decode(microseconds_t t) {
+Rc5Decoder::Length Rc5Decoder::decodeDuration(microseconds_t t) {
     Length len =  (t < timebaseLower) ? invalid
             : (t <= timebaseUpper) ? half
             : (t >= 2*timebaseLower && t <= 2*timebaseUpper) ? full
@@ -20,7 +8,7 @@ Rc5Decoder::Length Rc5Decoder::decode(microseconds_t t) {
     return len;
 }
 
-unsigned int Rc5Decoder::decode(microseconds_t flash, microseconds_t gap) {
+unsigned int Rc5Decoder::decodeFlashGap(microseconds_t flash, microseconds_t gap) {
     boolean result = getDuration(flash, 1);
     if (!result)
         return invalid;
@@ -42,7 +30,7 @@ Rc5Decoder::Rc5Decoder(const IrReader& irCapturer) {
     int doublet = -1;
 
     while (doublet < 25) {
-        Length length = decode(irCapturer.getDuration(index++));
+        Length length = decodeDuration(irCapturer.getDuration(index++));
         if (length == invalid)
             return;
         doublet += (int) length;
@@ -60,4 +48,10 @@ Rc5Decoder::Rc5Decoder(const IrReader& irCapturer) {
     T = (sum & 0x0800U) >> 11U;
 
     setValid(true);
+    decode =
+#ifdef ARDUINO
+            String(F("RC5 ")) + String(D) + F(" ") + String(F) + F(" ") + String(T);
+#else
+            String("RC5 ") + std::to_string(D) + String(" ") + std::to_string(F) + String(" ") + std::to_string(T);
+#endif
 }

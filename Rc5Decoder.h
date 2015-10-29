@@ -8,7 +8,6 @@ class Rc5Decoder : public IrDecoder {
 public:
     Rc5Decoder(const IrReader& irReader);
     virtual ~Rc5Decoder() {}
-    String toString() const;
 
     int getF() const {
         return F;
@@ -41,8 +40,8 @@ private:
         full = 2
     };
 
-    static Length decode(microseconds_t t);
-    static unsigned int decode(microseconds_t flash, microseconds_t gap);
+    static Length decodeDuration(microseconds_t t);
+    static unsigned int decodeFlashGap(microseconds_t flash, microseconds_t gap);
 };
 
 #endif	/* RC5DECODER_H */

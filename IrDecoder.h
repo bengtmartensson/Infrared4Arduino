@@ -6,12 +6,15 @@
 class IrDecoder {
 public:
     IrDecoder() {
+        decode = "";
         valid = false;
     }
 
     virtual ~IrDecoder() {}
 
-    virtual String toString() const = 0;
+    const String& toString() const {
+        return decode;
+    }
 
     virtual boolean isValid() const {
         return valid;
@@ -24,12 +27,11 @@ public:
     }
 
 private:
-    //const static double tolerance = 0.1; //10% relative tolerance
     const static uint32_t endingMin = 20000U;
-
     boolean valid;
 
 protected:
+    String decode;
     static const int invalid = -1;
     void setValid(bool valid_) {
         valid = valid_;

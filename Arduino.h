@@ -30,8 +30,11 @@ typedef bool boolean;
 inline uint8_t digitalRead(uint8_t pin UNUSED) { return 0; };
 inline void digitalWrite(uint8_t pin UNUSED, uint8_t value UNUSED) {};
 
-inline void pinMode(uint8_t pin UNUSED, int x UNUSED) {};
-
+inline void pinMode(uint8_t pin, int mode) {
+    std::cout << "pinMode(" << (int) pin << ", "
+            << (mode == 0 ? "INPUT" : mode == 1 ? "OUTPUT" : "INPUT_PULLUP")
+            << ")" << std::endl;
+};
 
 inline void delayMicroseconds(unsigned int t) { sleep(t / 1000000); }; // ???
 
@@ -74,6 +77,7 @@ public:
     Stream(std::ostream& stream_) : stream(stream_) {};
     void print(char c) { stream << c; };
     void print(const char *c) { stream << c; };
+    void print(const std::string& string) { stream << string; };
     void print(int x) { stream << x; };
     void print(int x, std::ios_base& manipulator(std::ios_base&)) { stream << manipulator << x; };
     void println() { stream << std::endl; };

@@ -18,26 +18,15 @@ public:
 private:
     Type type;
 
-    String decode;
-
 public:
-    String toString() const {
-        return decode;
-    };
-
     Type getType() const {
         return type;
     }
-
-    //const String& getDecode() const {
-    //    return decode;
-    //}
 
     MultiDecoder(const IrReader &irReader);
 
     virtual ~MultiDecoder() {
     }
-
 };
 
 #endif // ! _MULTIDECODER_H

@@ -20,7 +20,7 @@ private:
         return duration <= time * timebaseUpper
                 && duration >= time * timebaseLower;
     }
-    static int decode(const IrReader &irCapturer, unsigned int index);
+    static int decodeParameter(const IrReader &irCapturer, unsigned int index);
     static int decodeFlashGap(microseconds_t flash, microseconds_t gap);
 public:
     Nec1Decoder();
@@ -39,8 +39,6 @@ public:
     boolean isDitto() const {
         return ditto;
     };
-
-    String toString() const;
 
     static boolean tryDecode(const IrReader &irCapturer, Stream& string);
 };

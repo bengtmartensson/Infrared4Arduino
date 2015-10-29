@@ -16,10 +16,10 @@ public:
     IrSequenceReader() : irSequence() {
     };
 
-    IrSequenceReader(const IrSequenceReader& orig) : irSequence(orig.irSequence) {
+    IrSequenceReader(const IrSequenceReader& orig) : IrReader(),irSequence(orig.irSequence) {
     };
 
-    IrSequenceReader(const IrSequence irSequence_) : irSequence(irSequence_) {
+    IrSequenceReader(const IrSequence irSequence_) : IrReader(),irSequence(irSequence_) {
     };
 
     virtual ~IrSequenceReader() {

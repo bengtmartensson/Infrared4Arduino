@@ -80,7 +80,10 @@ IrSenderPwm *IrSenderPwm::getInstance(boolean create) {
 //}
 
 // Copied from IrLib.c, renamed from IRsendBase::enableIROut
-void IrSenderPwm::enable(unsigned char khz) {
+#ifndef UNUSED
+#define UNUSED
+#endif
+void IrSenderPwm::enable(unsigned char khz UNUSED) {
     //NOTE: the comments on this routine accompanied the original early version of IRremote library
     //which only used TIMER2. The parameters defined in IRLibTimer.h may or may not work this way.
     // Enables IR output.  The khz value controls the modulation frequency in kilohertz.

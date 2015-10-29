@@ -33,7 +33,7 @@ void IrSender::delayUSecs(microseconds_t T) {
 }
 
 IrSender::IrSender() {
-    outputPin = invalid_pin;
+    outputPin = invalidPin;
 }
 
 IrSender::IrSender(pin_t pin) {

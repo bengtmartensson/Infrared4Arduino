@@ -4,7 +4,7 @@
 CXX=g++
 BROWSER=firefox
 DEBUGFLAGS=-g
-WARNINGFLAGS=-Wall -Werror
+WARNINGFLAGS=-Wall -Werror -Wextra
 
 VPATH=tests
 

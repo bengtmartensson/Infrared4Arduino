@@ -29,8 +29,6 @@ private:
     pin_t outputPin;
 
 protected:
-    static const pin_t invalid_pin = (pin_t) -1;
-
     pin_t getOutputPin() const {
         return outputPin;
     }

@@ -10,25 +10,51 @@
 #include <stdio.h>
 #include <string>
 #include <iostream>
-//#include <iomanip>
+#include <sys/time.h>
+#include <unistd.h>
+
+#ifdef __GNUC__
+#define UNUSED __attribute__ ((unused))
+#else
+#define UNUSED
+#endif
 
 typedef bool boolean;
 
 #define String std::string
+#define indexOf find
+#define charAt at
 
 #define F(x) x
 
-inline uint8_t digitalRead(uint8_t pin) { return 0; };
-inline void digitalWrite(uint8_t pin, uint8_t value) {};
+inline uint8_t digitalRead(uint8_t pin UNUSED) { return 0; };
+inline void digitalWrite(uint8_t pin UNUSED, uint8_t value UNUSED) {};
 
-inline void pinMode(uint8_t pin, int x) {};
+inline void pinMode(uint8_t pin UNUSED, int x UNUSED) {};
 
-inline long micros() { return 0L; }
-inline void delayMicroseconds(unsigned int t) {};
-inline void delay(unsigned long t) {};
+
+inline void delayMicroseconds(unsigned int t) { sleep(t / 1000000); }; // ???
+
+inline void delay(unsigned long t) {
+    sleep(t / 1000);
+};
 
 inline void noInterrupts() {};
 inline void interrupts() {};
+
+inline unsigned long micros() {
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    // Probably overflows, but this should be OK in 99.99% of all cases, which is enough here.
+    return 1000000 * tv.tv_sec + tv.tv_usec;
+}
+
+inline unsigned long millis() {
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    // Probably overflows, but this should be OK in 99.99% of all cases, which is enough here.
+    return 1000*tv.tv_sec + tv.tv_usec/1000;
+}
 
 #define HIGH 1
 #define LOW 0

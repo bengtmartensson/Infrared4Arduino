@@ -37,6 +37,7 @@ typedef uint16_t frequency_t;
  * Type for GPIO pin, compatible with Arduino libs.
  */
 typedef uint8_t pin_t;
+const pin_t invalidPin = 255;
 #define PIN_T_MAX 255
 
 #endif	// INFRAREDTYPES_H

@@ -20,10 +20,10 @@ this program. If not, see http://www.gnu.org/licenses/.
 IrSenderNonMod::IrSenderNonMod(pin_t pin) : IrSender(pin) {
 }
 
-void IrSenderNonMod::sendNonModulated(const microseconds_t buf[], size_t len) {
-    for (unsigned int i = 0; i < len; i++) {
+void IrSenderNonMod::sendNonModulated(const IrSequence &irSequence) {
+    for (unsigned int i = 0; i < irSequence.getLength(); i++) {
         digitalWrite(getOutputPin(), (i & 1) ? LOW : HIGH);
-        delayUSecs(buf[i]);
+        delayUSecs(irSequence.getDurations()[i]);
     }
     digitalWrite(getOutputPin(), LOW);
 }

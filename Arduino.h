@@ -27,6 +27,16 @@ typedef bool boolean;
 
 #define F(x) x
 
+#define A0 100
+#define A1 101
+#define A2 102
+#define A3 103
+#define A4 104
+#define A5 101
+#define A6 106
+#define A7 107
+#define  LED_BUILTIN 13
+
 inline uint8_t digitalRead(uint8_t pin UNUSED) { return 0; };
 inline void digitalWrite(uint8_t pin UNUSED, uint8_t value UNUSED) {};
 
@@ -83,6 +93,7 @@ public:
     void println() { stream << std::endl; };
     void println(const std::string& string) { stream << string << std::endl; };
     void println(long x) { stream << x << std::endl; }
+    int available() { return 0; }
 };
 
 #define DEC std::dec

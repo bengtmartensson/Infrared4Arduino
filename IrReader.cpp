@@ -17,6 +17,7 @@ this program. If not, see http://www.gnu.org/licenses/.
 
 #include "IrReader.h"
 
+// Cannot use IrSequence.dump directly!
 void IrReader::dump(Stream &stream) const {
     size_t count = getDataLength();
     for (unsigned int i = 0U; i < count; i++) {

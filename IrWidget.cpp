@@ -1,7 +1,5 @@
-
 #include "IrSignal.h"
 
-#ifdef ARDUINO
 /* IR Widget: capture a raw IR signal and dump the timing of the non-demodulated signal
 
 http://www.piclist.com/images/boards/irwidget/index.htm
@@ -62,7 +60,7 @@ milliseconds_t IrWidget::getEndingTimeout() const {
 void IrWidget::dump(Stream &stream) const {
     boolean printedSomething = IrSignal::dumpFrequency(stream, getFrequency());
     if (printedSomething)
-        stream.write(' ');
+        stream.print(' ');
     IrReader::dump(stream);
 }
 
@@ -72,6 +70,7 @@ void IrWidget::dump(Stream &stream) const {
 
 // initialize Timer and IO pins, needs to be called once
 void IrWidget::setup(boolean pullup) {
+#ifdef ARDUINO
     // configure signal capture ICP pin as input
     cbi(CAT2(DDR, CAP_PORT), CAP_PIN);
     if (pullup)
@@ -94,5 +93,7 @@ void IrWidget::setup(boolean pullup) {
 
     CAT3(TCCR, CAP_TIM, A) = 0; // Timer mode 0 = normal
     CAT3(TCCR, CAP_TIM, B) = _BV(CAT2(ICNC, CAP_TIM)) | CAPTURE_PRESCALER_SETTING; // prescaler according to setting, enable noise canceler
+#else
+    (void) pullup;
+#endif
 }
-#endif // ARDUINO

@@ -12,7 +12,7 @@ public:
 
     virtual ~IrDecoder() {}
 
-    const String& toString() const {
+    const String& getDecode() const {
         return decode;
     }
 
@@ -22,7 +22,7 @@ public:
 
     boolean printDecode(Stream& stream) const {
         if (isValid())
-            stream.println(toString());
+            stream.println(getDecode());
         return isValid();
     }
 

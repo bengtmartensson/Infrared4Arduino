@@ -66,7 +66,7 @@ public:
         captureCount = 0;
     }
 
-    microseconds_t inline getDuration(uint16_t i) const {
+    microseconds_t inline getDuration(unsigned int i) const {
         return timerValueToNanoSeconds(unpackTimeVal(captureData[i])) / 1000;
     }
 
@@ -82,9 +82,7 @@ public:
         return frequency;
     }
 
-#ifdef ARDUINO
     void dump(Stream &stream) const;
-#endif
 
 private:
     void setup(boolean setup);

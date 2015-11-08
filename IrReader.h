@@ -26,7 +26,6 @@ this program. If not, see http://www.gnu.org/licenses/.
  * This is an abstract base class for all IR readers, capturing or receiving.
  * It should also serve as an interface that can be printed and decoded.
  */
-
 class IrReader {
 public:
     // Defaults

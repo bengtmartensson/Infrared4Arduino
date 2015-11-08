@@ -1,4 +1,3 @@
-#ifdef ARDUINO
 // Copyright (c) 2012 Michael Dreher  <michael(at)5dot1.de>
 // this code may be distributed under the terms of the General Public License V2 (GPL V2)
 
@@ -33,6 +32,7 @@ void IrWidgetAggregating::deleteInstance() {
 
 // Wait for a signal on pin ICP1 and store the captured time values in the array 'captureData'
 void IrWidgetAggregating::capture() {
+#ifdef ARDUINO
     uint32_t timeForBeginTimeout = millis() + beginningTimeout;
     uint8_t tccr0b = TCCR0B;
     //TCCR0B &= ~(_BV(CS02) | _BV(CS01) | _BV(CS00)); // stop timer0 (disables timer IRQs)
@@ -164,5 +164,5 @@ endCapture:
 
     uint32_t mediumPeriod = timerValueToNanoSeconds(period);
     frequency = (frequency_t) (1000000000L / mediumPeriod);
-}
 #endif // ARDUINO
+}

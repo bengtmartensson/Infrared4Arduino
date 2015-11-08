@@ -17,7 +17,7 @@ MultiDecoder::MultiDecoder(const IrReader &IrReader) {
 
     Nec1Decoder nec1decoder(IrReader);
     if (nec1decoder.isValid()) {
-        decode = nec1decoder.toString();
+        decode = nec1decoder.getDecode();
         type = nec1decoder.isDitto() ? nec_ditto : nec;
         setValid(true);
         return;
@@ -25,7 +25,7 @@ MultiDecoder::MultiDecoder(const IrReader &IrReader) {
 
     Rc5Decoder rc5decoder(IrReader);
     if (rc5decoder.isValid()) {
-        decode = rc5decoder.toString();
+        decode = rc5decoder.getDecode();
         type = rc5;
         setValid(true);
         return;

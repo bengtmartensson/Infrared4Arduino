@@ -1,23 +1,24 @@
 #include "MultiDecoder.h"
 #include "Nec1Decoder.h"
 #include "Rc5Decoder.h"
+#include <string.h>
 
 MultiDecoder::MultiDecoder(const IrReader &IrReader) {
     if (IrReader.isEmpty()) {
         type = timeout;
-        decode = F(".");
+        strcpy(decode, ".");
         return;
     }
 
     if (IrReader.getDataLength() < 3) {
         type = noise;
-        decode = F(":");
+        strcpy(decode, ":");
         return;
     }
 
     Nec1Decoder nec1decoder(IrReader);
     if (nec1decoder.isValid()) {
-        decode = nec1decoder.getDecode();
+        strcpy(decode, nec1decoder.getDecode());
         type = nec1decoder.isDitto() ? nec_ditto : nec;
         setValid(true);
         return;
@@ -25,19 +26,13 @@ MultiDecoder::MultiDecoder(const IrReader &IrReader) {
 
     Rc5Decoder rc5decoder(IrReader);
     if (rc5decoder.isValid()) {
-        decode = rc5decoder.getDecode();
+        strcpy(decode, rc5decoder.getDecode());
         type = rc5;
         setValid(true);
         return;
     }
 
     // Giving up
-    decode = String(F("*** ")) +
-#ifdef ARDUINO
-            String(IrReader.getDataLength())
-#else
-            std::to_string(IrReader.getDataLength())
-#endif
-            ;
+    strcpy(decode, "***");
     type = undecoded;
 }

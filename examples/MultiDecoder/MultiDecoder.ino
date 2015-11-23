@@ -4,7 +4,7 @@
 IrReceiver *receiver;
 
 void setup() {
-    Serial.begin(9600);
+    Serial.begin(115200);
     receiver = IrReceiverSampler::newIrReceiverSampler(200, 5);
 }
 
@@ -14,9 +14,9 @@ void loop() {
     if (receiver->isEmpty())
         Serial.println("timeout");
     else {
-        IrDecoder *decoder = new MultiDecoder(*receiver);
-        if (decoder->isValid())
-            decoder->printDecode(Serial);
+        MultiDecoder decoder(*receiver);
+        if (decoder.isValid())
+            decoder.printDecode(Serial);
         else
             Serial.println("No decode");
     }

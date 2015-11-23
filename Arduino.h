@@ -22,6 +22,7 @@
 typedef bool boolean;
 
 #define String std::string
+
 #define indexOf find
 #define charAt at
 
@@ -38,7 +39,10 @@ typedef bool boolean;
 #define  LED_BUILTIN 13
 
 inline uint8_t digitalRead(uint8_t pin UNUSED) { return 0; };
-inline void digitalWrite(uint8_t pin UNUSED, uint8_t value UNUSED) {};
+inline void digitalWrite(uint8_t pin, uint8_t value) {
+    std::cout << "digitalWrite(" << (int) pin << ", "
+            << (value == 0 ? "LOW" : "HIGH") << ")" << std::endl;
+};
 
 inline void pinMode(uint8_t pin, int mode) {
     std::cout << "pinMode(" << (int) pin << ", "

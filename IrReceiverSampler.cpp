@@ -32,7 +32,7 @@ IrReceiverSampler *IrReceiverSampler::newIrReceiverSampler(size_t captureLength,
         microseconds_t markExcess,
         milliseconds_t beginningTimeout,
         milliseconds_t endingTimeout) {
-    if (instance != NULL)
+    if (instance != NULL || pin == invalidPin)
         return NULL;
     instance = new IrReceiverSampler(captureLength, pin, pullup, markExcess, beginningTimeout, endingTimeout);
     return instance;

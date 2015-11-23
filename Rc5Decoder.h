@@ -6,6 +6,7 @@
 
 class Rc5Decoder : public IrDecoder {
 public:
+    static const char *format;
     Rc5Decoder(const IrReader& irReader);
     virtual ~Rc5Decoder() {}
 
@@ -22,7 +23,10 @@ public:
     }
     static boolean tryDecode(const IrReader& irReader, Stream& string);
 
+    const char *getDecode() const;
+
 private:
+    char decode[13];
     const static microseconds_t timebase = 889U;
     const static microseconds_t timebaseLower = 800U;
     const static microseconds_t timebaseUpper = 1000U;

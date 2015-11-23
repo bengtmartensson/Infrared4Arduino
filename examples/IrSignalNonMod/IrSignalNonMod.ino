@@ -3,30 +3,30 @@
 #include <Arduino.h>
 #include <IrSenderNonMod.h>
 
-const microseconds_t off[] = {
+const microseconds_t offData[] = {
     388, 1164, 388, 1164, 388, 1164, 388, 1164, 388, 1164, 1164, 388, 388,
     1164, 1164, 388, 388, 1164, 1164, 388, 388, 1164, 1164, 388, 388, 1164,
     1164, 388, 388, 1164, 388, 1164, 388, 1164, 388, 1164, 388, 1164, 1164,
     388, 388, 1164, 1164, 388, 388, 1164, 388, 1164, 388, 11364
 };
+IrSequence off(offData, sizeof(offData)/sizeof(microseconds_t));
 
-const microseconds_t on[] = {
+const microseconds_t onData[] = {
     388, 1164, 388, 1164, 388, 1164, 388, 1164, 388, 1164, 1164, 388, 388,
     1164, 1164, 388, 388, 1164, 1164, 388, 388, 1164, 1164, 388, 388, 1164,
     1164, 388, 388, 1164, 388, 1164, 388, 1164, 388, 1164, 388, 1164, 1164,
     388, 388, 1164, 1164, 388, 388, 1164, 1164, 388, 388, 11364
 };
+IrSequence on(onData, sizeof(onData)/sizeof(microseconds_t));
 
-IrSenderNonMod sender(3U);
+IrSenderNonMod sender(9U);
 
 void setup() {
 }
 
 void loop() {
-    sender.send(on, sizeof(on)/sizeof(microseconds_t));
-    sender.send(on, sizeof(on)/sizeof(microseconds_t));
+    sender.send(on);sender.send(on);
     delay(2000);
-    sender.send(off, sizeof(off)/sizeof(microseconds_t));
-    sender.send(off, sizeof(on)/sizeof(microseconds_t));
+    sender.send(off);sender.send(off);
     delay(2000);
 }

@@ -16,6 +16,8 @@ private:
     int S;
     bool ditto;
 
+    char decode[17];
+
     static boolean getDuration(microseconds_t duration, unsigned int time) {
         return duration <= time * timebaseUpper
                 && duration >= time * timebaseLower;
@@ -41,6 +43,11 @@ public:
     };
 
     static boolean tryDecode(const IrReader &irCapturer, Stream& string);
+
+    const char *getDecode() const {
+        return decode;
+    };
+
 };
 
 #endif	/* NEC1DECODER_H */

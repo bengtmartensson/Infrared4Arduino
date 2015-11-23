@@ -42,15 +42,13 @@
 #ifndef IRLibTimer_h
 #define IRLibTimer_h
 
-#ifdef ARDUINO
-#if defined(ARDUINO) && ARDUINO >= 100
+//#ifdef ARDUINO
+#if defined(ARDUINO)
 #include "Arduino.h"
-#else
-#include "WProgram.h"
-#endif
 
 // BM: Stuff moved from other places to here.
 #include <avr/interrupt.h>
+#endif
 
 #ifndef USECPERTICK
 #define USECPERTICK 50
@@ -371,18 +369,30 @@
 #define BLINKLED_OFF() (PORTB &= B11011111)
 #endif
 
-#else // ! ARDUINO
-
+//#else // ! ARDUINO
+#ifndef ARDUINO
 // Just dummy junk to have it compile outside of the Arduino environment.
 
+#undef IR_RECV_CONFIG_TICKS
 #define IR_RECV_CONFIG_TICKS()
+
+#undef IR_RECV_ENABLE_INTR
 #define IR_RECV_ENABLE_INTR
+
+#undef IR_RECV_DISABLE_INTR
 #define IR_RECV_DISABLE_INTR
+
 #define ISR(x) void functionThatIDoNotNeed()
 
-#define IR_SEND_PWM_PIN 0
+//#define IR_SEND_PWM_PIN 0
+
+#undef IR_SEND_PWM_STOP
 #define IR_SEND_PWM_STOP
+
+#undef IR_SEND_PWM_START
 #define IR_SEND_PWM_START
+
+#undef IR_SEND_CONFIG_KHZ
 #define IR_SEND_CONFIG_KHZ(x)
 
 #endif // ! ARDUINO

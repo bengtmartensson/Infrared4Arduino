@@ -12,8 +12,9 @@ microseconds_t intro[] = {
 
 microseconds_t repeat[] = { +9041, -2267, 573, -96193};
 
-IrSignal irSignal(38400U, sizeof(intro)/sizeof(microseconds_t), sizeof(repeat)/sizeof(microseconds_t), 0,
-        intro, repeat, NULL);
+IrSignal irSignal(intro, sizeof(intro)/sizeof(microseconds_t),
+        repeat, sizeof(repeat)/sizeof(microseconds_t),
+        NULL, 0, 38400U);
 
 void setup() {
     Serial.begin(9600);

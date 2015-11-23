@@ -94,6 +94,6 @@ void IrWidget::setup(boolean pullup) {
     CAT3(TCCR, CAP_TIM, A) = 0; // Timer mode 0 = normal
     CAT3(TCCR, CAP_TIM, B) = _BV(CAT2(ICNC, CAP_TIM)) | CAPTURE_PRESCALER_SETTING; // prescaler according to setting, enable noise canceler
 #else
-    (void) pullup;
+    std::cout << "pinMode(CAPTURE_PIN_1, " << (pullup ? "INPUT_PULLUP)" : "INPUT)") << std::endl;
 #endif
 }

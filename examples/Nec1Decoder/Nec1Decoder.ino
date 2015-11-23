@@ -14,9 +14,9 @@ void loop() {
     if (receiver->isEmpty())
         Serial.println("timeout");
     else {
-        IrDecoder *decoder = new Nec1Decoder(*receiver);
-        if (decoder->isValid())
-            decoder->printDecode(Serial);
+        Nec1Decoder decoder(*receiver);
+        if (decoder.isValid())
+            decoder.printDecode(Serial);
         else
             Serial.println("No decode");
     }

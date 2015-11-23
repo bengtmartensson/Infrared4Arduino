@@ -16,6 +16,7 @@ public:
     };
 
 private:
+    char decode[17];
     Type type;
 
 public:
@@ -26,6 +27,10 @@ public:
     MultiDecoder(const IrReader &irReader);
 
     virtual ~MultiDecoder() {
+    }
+
+    const char *getDecode() const {
+        return decode;
     }
 };
 

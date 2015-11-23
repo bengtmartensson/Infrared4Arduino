@@ -1,10 +1,17 @@
 #include "Nec1Decoder.h"
 #include "IrReader.h"
-//#include "IrReceiver.h"
+#include <string.h>
+#include <stdlib.h>
+#ifdef ARDUINO
+#include <avr/pgmspace.h>
+#else
+#define PROGMEM
+#define strcpy_P strcpy
+#endif
 
-//Nec1Decoder::~Nec1Decoder() {
-//}
 //{38.4k,564}<1,-1|1,-3>(16,-8,D:8,S:8,F:8,~F:8,1,^108m,(16,-4,1,^108m)*) [D:0..255,S:0..255=255-D,F:0..255]
+
+static const char nec1DittoLiteral[] = "NEC1 ditto";
 
 int Nec1Decoder::decodeFlashGap(microseconds_t flash, microseconds_t gap) {
     boolean result = getDuration(flash, 1);
@@ -45,12 +52,13 @@ Nec1Decoder::Nec1Decoder(const IrReader &irReader) : IrDecoder() {
         success = getDuration(irReader.getDuration(index++), 1U);
         if (!success)
             return;
-        success = getEnding(irReader.getDuration(index));
+        success = isEnding(irReader.getDuration(index));
         if (!success)
             return;
         ditto = true;
         setValid(true);
-        decode = F("NEC1 ditto");
+        //strcpy_PF(decode, (uint_farptr_t) nec1DittoLiteral); // FIXME
+        strcpy(decode, nec1DittoLiteral); // FIXME
     } else if (irReader.getDataLength() == 34U * 2U) {
         success = getDuration(irReader.getDuration(index++), 16U);
         if (!success)
@@ -80,16 +88,22 @@ Nec1Decoder::Nec1Decoder(const IrReader &irReader) : IrDecoder() {
         success = getDuration(irReader.getDuration(index++), 1U);
         if (!success)
             return;
-        success = getEnding(irReader.getDuration(index));
+        success = isEnding(irReader.getDuration(index));
         if (!success)
             return;
         ditto = false;
         setValid(true);
-        decode = String(F("NEC1 ")) +
-#ifdef ARDUINO
-            String(D) + String(F(" ")) + String(S) + String(F(" ")) + String(F);
-#else
-            std::to_string(D) + " " + std::to_string(S) + " " + std::to_string(F);
-#endif
+        //strncpy_PF(decode, pgm_read_byte(nec1DittoLiteral), 4);
+        //strcpy_PF(decode, (uint_farptr_t) F("NEC1"));
+        strcpy(decode, "NEC1");
+        char junk[5];
+        sprintf(junk, " %d", D);
+        strcat(decode, junk);
+        if (S != 255 - D) {
+            sprintf(junk, " %d", S);
+            strcat(decode, junk);
+        }
+        sprintf(junk, " %d", F);
+        strcat(decode, junk);
     }
 }

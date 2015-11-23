@@ -1,6 +1,7 @@
 # Makefile for creating stuff on host.
 # Use Arduino IDE for compiling for Arduino
 
+BOARDDEFINES=
 CXX=g++
 BROWSER=firefox
 DEBUGFLAGS=-g
@@ -19,7 +20,7 @@ libInfrared.a: $(OBJS)
 	$(AR) rs $@ $(OBJS)
 
 %.o: %.cpp
-	$(CXX) -I. -std=c++11 $(WARNINGFLAGS) $(OPTIMIZEFLAGS) $(DEBUGFLAGS) -c $<
+	$(CXX) -I. -std=c++11 $(BOARDDEFINES) $(WARNINGFLAGS) $(OPTIMIZEFLAGS) $(DEBUGFLAGS) -c $<
 
 test%: test%.o libInfrared.a
 	$(CXX) -o $@ $< -L. -lInfrared

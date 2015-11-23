@@ -6,15 +6,12 @@
 class IrDecoder {
 public:
     IrDecoder() {
-        decode = "";
         valid = false;
     }
 
     virtual ~IrDecoder() {}
 
-    const String& getDecode() const {
-        return decode;
-    }
+    virtual const char *getDecode() const = 0;
 
     virtual boolean isValid() const {
         return valid;
@@ -31,13 +28,12 @@ private:
     boolean valid;
 
 protected:
-    String decode;
     static const int invalid = -1;
     void setValid(bool valid_) {
         valid = valid_;
     }
 
-    static boolean getEnding(microseconds_t duration) {
+    static boolean isEnding(microseconds_t duration) {
         return duration > endingMin;
     }
 };

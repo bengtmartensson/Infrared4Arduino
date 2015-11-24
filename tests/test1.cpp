@@ -8,6 +8,7 @@
 #include "IrSequenceReader.h"
 #include "Nec1Decoder.h"
 #include "IrSenderSimulator.h"
+#include "Pronto.h"
 #include <unistd.h>
 #include <iostream>
 
@@ -23,4 +24,10 @@ int main() {
 
     IrSender *sender = new IrSenderSimulator(str);
     sender->sendSignal(*renderer, 3);
+
+    IrSignal *sig = Pronto::parse("0000 006C 0022 0002 015B 00AD 0016 0016 0016 0041 0016 0016 0016 0041 0016 0041 0016 0041 0016 0041 0016 0016 0016 0041 0016 0016 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0041 0016 0016 0016 0041 0016 0041 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0016 0016 0016 0016 0016 0016 0041 0016 0041 0016 0041 0016 05F7 015B 0057 0016 0E6C");
+    if (sig == NULL)
+        std::cerr << "Blast!" << std::endl;
+    else
+        sig->dump(str, true);
 }

@@ -9,12 +9,14 @@ WARNINGFLAGS=-Wall -Werror -Wextra
 
 VPATH=tests
 
+.PRECIOUS: test1
+
 OBJS=\
 IrReader.o           IrSenderNonMod.o     IrWidget.o             Rc5Decoder.o \
 IrReceiver.o         IrSenderPwm.o        IrWidgetAggregating.o  Rc5Renderer.o \
 IrReceiverPoll.o     IrSenderSimulator.o  MultiDecoder.o \
 IrReceiverSampler.o  IrSequence.o         Nec1Decoder.o \
-IrSender.o           IrSignal.o           Nec1Renderer.o
+IrSender.o           IrSignal.o           Nec1Renderer.o         Pronto.o
 
 libInfrared.a: $(OBJS)
 	$(AR) rs $@ $(OBJS)

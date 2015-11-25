@@ -85,7 +85,8 @@ public:
      * how many repetitions should be sent if the signal is sent noSend times.
      */
     unsigned int noRepetitions(unsigned int noSends) const {
-        return getIntro().isEmpty() ? noSends : noSends - 1;
+        return noSends == 0 ? 0
+                : getIntro().isEmpty() ? noSends : noSends - 1;
     }
 
 

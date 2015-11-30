@@ -30,7 +30,7 @@ public:
     virtual ~IrSequence();
 
     /** Performs shallow copy. */
-    IrSequence(const IrSequence& orig);
+    IrSequence(const IrSequence& orig, boolean toBeFreed = false);
 
     size_t getLength() const {
         return length;
@@ -44,9 +44,9 @@ public:
         return durations;
     }
 
-    operator const microseconds_t* () const {
-        return durations;
-    }
+    //operator const microseconds_t* () const {
+    //    return durations;
+    //}
 
     /**
      * Creates a (deep) clone of the current object.

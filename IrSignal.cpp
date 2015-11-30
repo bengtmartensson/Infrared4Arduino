@@ -1,32 +1,33 @@
 #include "IrSignal.h"
 #include "IrSender.h"
 
-IrSignal::IrSignal(const IrSequence& intro_, const IrSequence& repeat_, const IrSequence& ending_, frequency_t frequency_)
-: frequency(frequency_),intro(intro_),repeat(repeat_),ending(ending_) {
+IrSignal::IrSignal(const IrSequence& intro_, const IrSequence& repeat_, const IrSequence& ending_,
+        frequency_t frequency_, boolean toBeFreed)
+: frequency(frequency_),intro(intro_, toBeFreed),repeat(repeat_, toBeFreed),ending(ending_, toBeFreed) {
 }
 
-IrSignal::IrSignal(const IrSignal& orig)
-: frequency(orig.frequency),intro(orig.intro),repeat(orig.repeat),ending(orig.ending) {
+IrSignal::IrSignal(const IrSignal& orig, boolean toBeFreed)
+: frequency(orig.frequency),intro(orig.intro,toBeFreed),repeat(orig.repeat,toBeFreed),ending(orig.ending,toBeFreed) {
 }
 
 IrSignal::IrSignal(const microseconds_t *intro_, size_t introLength,
             const microseconds_t *repeat_, size_t repeatLength,
             const microseconds_t *ending_, size_t endingLength,
-            frequency_t frequency_)
+            frequency_t frequency_, boolean toBeFreed)
 : frequency(frequency_),
-        intro(intro_, introLength),
-  repeat(repeat_, repeatLength),
-        ending(ending_, endingLength) {
+        intro(intro_, introLength, toBeFreed),
+  repeat(repeat_, repeatLength, toBeFreed),
+        ending(ending_, endingLength, toBeFreed) {
 }
 
 IrSignal::~IrSignal() {
-    delete intro;
-    delete repeat;
-    delete ending;
+    //delete intro;
+    //delete repeat;
+    //delete ending;
 }
 
 IrSignal *IrSignal::clone() const {
-    return new IrSignal(*intro.clone(), *repeat.clone(), *ending.clone(), frequency);
+    return new IrSignal(*intro.clone(), *repeat.clone(), *ending.clone(), frequency, true);
 }
 
 void IrSignal::dump(Stream& stream, boolean usingSigns) const {

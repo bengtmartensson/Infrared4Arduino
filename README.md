@@ -43,6 +43,12 @@ are not configurable, but (due to hardware limitations) have to be taken from th
     Mega2560 (ATmega2560)          9            49
 
 
+## User parameters
+As opposed to other infrared libraries, there are no user changeable parameters as CPP symbols.
+However, the timer
+configuration is compiled in, depending on the CPP processors given to the compiler, see
+the file `IRLibTimer.h`.
+
 ## Protocols
 Comparing with the predecessor works, this project may look meager, currently supporting only
 two protocols (NEC1 and RC5). It is [planned](https://github.com/bengtmartensson/IrpTransmogrifier)

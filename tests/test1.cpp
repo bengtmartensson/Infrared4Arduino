@@ -17,13 +17,16 @@ int main() {
     renderer = new Nec1Renderer(122, 29); // power_on for Yahama receivers
     Stream str(std::cout);
     renderer->render().dump(str, true);
+    //const IrSignal& irSignal = (const IrSignal&)renderer;
+    //irSignal.dump(str);
 
     IrSequenceReader irSequenceReader(renderer->render().getIntro());
     Nec1Decoder decoder(irSequenceReader);
     decoder.printDecode(str);
 
-    IrSender *sender = new IrSenderSimulator(str);
-    sender->sendSignal(*renderer, 3);
+    IrSenderSimulator sender(str);
+    renderer->send(sender, 3);
+    //sender->sendSignal(*renderer, 3);
 
     IrSignal *sig = Pronto::parse("0000 006C 0022 0002 015B 00AD 0016 0016 0016 0041 0016 0016 0016 0041 0016 0041 0016 0041 0016 0041 0016 0016 0016 0041 0016 0016 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0041 0016 0016 0016 0041 0016 0041 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0016 0016 0016 0016 0016 0016 0041 0016 0041 0016 0041 0016 05F7 015B 0057 0016 0E6C");
     if (sig == NULL)

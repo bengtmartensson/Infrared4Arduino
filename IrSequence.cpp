@@ -15,6 +15,11 @@ IrSequence::~IrSequence() {
         delete [] durations;
 }
 
+IrSequence *IrSequence::clone() const {
+    const microseconds_t *durationsClone = new microseconds_t[length];
+    return new IrSequence(durationsClone, length, true);
+}
+
 void IrSequence::dump(Stream& stream, boolean usingSigns) const {
     for (unsigned int i = 0U; i < length; i++) {
         if (i > 0U)

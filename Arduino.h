@@ -25,6 +25,7 @@ typedef bool boolean;
 
 #define indexOf find
 #define charAt at
+#define substring substr
 
 #define F(x) x
 

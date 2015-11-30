@@ -11,7 +11,7 @@ const pin_t receiverPin = 5;
 const microseconds_t markExcess = 50;
 
 void setup() {
-    Serial.begin(9600);
+    Serial.begin(115200);
     Serial.setTimeout(10000);
     Serial.flush();
     Serial.println(F("Enter s for sampler, p for poll, w for widget"));

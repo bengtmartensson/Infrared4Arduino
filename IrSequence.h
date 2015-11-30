@@ -7,6 +7,7 @@
  * This class consists of a vector of durations. The even entries denotes spaces,
  * while the odd entries denotes gaps. The length should always be even, i.e.,
  * the sequences starts with a space, and ends with a gap.
+ * This class is immutablle.
  */
 class IrSequence {
 private:
@@ -46,6 +47,13 @@ public:
     operator const microseconds_t* () const {
         return durations;
     }
+
+    /**
+     * Creates a (deep) clone of the current object.
+     * The used must delete it manually.
+     * @return pointer to the cloned object
+     */
+    IrSequence *clone() const;
 
     /**
      * Prints the IrSequence on the stream provided.

@@ -4,7 +4,7 @@
 IrWidgetAggregating *capturer;
 
 void setup() {
-    Serial.begin(9600);
+    Serial.begin(115200);
     capturer = IrWidgetAggregating::newIrWidgetAggregating(200);
 }
 

@@ -6,6 +6,7 @@
 
 /**
  * This class models an IR signal with intro-, repeat-, and ending sequences.
+ * This class is immutable.
  */
 class IrSignal {
 public:
@@ -15,8 +16,7 @@ public:
     IrSignal();
     IrSignal(const IrSignal& orig);
 
-    virtual ~IrSignal() {
-    };
+    virtual ~IrSignal();
     IrSignal(const microseconds_t *intro, size_t lengthIntro,
             const microseconds_t *repeat, size_t lengthRepeat,
             const microseconds_t *ending, size_t lengthEnding,
@@ -30,12 +30,19 @@ public:
             frequency_t frequency = defaultFrequency);
 
 private:
-    frequency_t frequency;
-    IrSequence intro;
-    IrSequence repeat;
-    IrSequence ending;
+    const frequency_t frequency;
+    const IrSequence intro;
+    const IrSequence repeat;
+    const IrSequence ending;
 
 public:
+
+    /**
+     * Creates a (deep) copy of the current object.
+     * The user must delete it manually.
+     * @return Pointer to the cloned object.
+     */
+    IrSignal *clone() const;
 
     frequency_t getFrequency() const {
         return frequency;

@@ -19,6 +19,16 @@ IrSignal::IrSignal(const microseconds_t *intro_, size_t introLength,
         ending(ending_, endingLength) {
 }
 
+IrSignal::~IrSignal() {
+    delete intro;
+    delete repeat;
+    delete ending;
+}
+
+IrSignal *IrSignal::clone() const {
+    return new IrSignal(*intro.clone(), *repeat.clone(), *ending.clone(), frequency);
+}
+
 void IrSignal::dump(Stream& stream, boolean usingSigns) const {
     boolean printedSomething = dumpFrequency(stream);
     if (printedSomething)

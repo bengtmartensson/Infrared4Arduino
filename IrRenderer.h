@@ -28,15 +28,16 @@ public:
     };
 
     virtual ~IrRenderer() {
+        delete irSignal;
     };
 
     const IrSignal& render() const {
         return *irSignal;
     };
 
-    operator const IrSignal& () const {
-        return *irSignal;
-    }
+    //operator const IrSignal& () const {
+    //    return *irSignal;
+    //}
 
     /** Just a convenience function */
     void send(IrSender& irSender, unsigned int noSends = 1) {

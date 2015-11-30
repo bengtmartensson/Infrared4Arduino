@@ -4,7 +4,7 @@
 IrReceiver *receiver;
 
 void setup() {
-    Serial.begin(9600);
+    Serial.begin(115200);
     receiver = IrReceiverSampler::newIrReceiverSampler(200, 5);
 }
 

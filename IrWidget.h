@@ -74,6 +74,11 @@ public:
 
     //milliseconds_t getBeginningTimeout() const { return beginningTimeout; }
 
+    /**
+     * Sets the ending timeout. In this implementation, this is effectively
+     * rounded to the nearest multiple of 32 milliseconds.
+     * @param timeout timeout in milliseconds.
+     */
     void setEndingTimeout(milliseconds_t timeout);
 
     milliseconds_t getEndingTimeout() const;

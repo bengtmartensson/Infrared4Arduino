@@ -30,7 +30,9 @@ public:
     virtual ~IrSequence();
 
     /** Performs shallow copy. */
-    IrSequence(const IrSequence& orig, boolean toBeFreed = false);
+    IrSequence(const IrSequence& orig);
+
+    IrSequence(const IrSequence& orig, boolean toBeFreed);
 
     size_t getLength() const {
         return length;

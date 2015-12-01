@@ -9,28 +9,31 @@
 #include "Nec1Decoder.h"
 #include "IrSenderSimulator.h"
 #include "Pronto.h"
+#include "Rc5Renderer.h"
+#include "Rc5Decoder.h"
 #include <unistd.h>
 #include <iostream>
 
 int main() {
-    IrRenderer *renderer;
-    renderer = new Nec1Renderer(122, 29); // power_on for Yahama receivers
+    //sleep(20);
+    const IrSignal *nec1 = Nec1Renderer::newIrSignal(122, 29); // power_on for Yahama receivers
     Stream str(std::cout);
-    renderer->render().dump(str, true);
-    //const IrSignal& irSignal = (const IrSignal&)renderer;
-    //irSignal.dump(str);
+    nec1->dump(str, true);
 
-    IrSequenceReader irSequenceReader(renderer->render().getIntro());
+    IrSequenceReader irSequenceReader(nec1->getIntro());
     Nec1Decoder decoder(irSequenceReader);
     decoder.printDecode(str);
 
     IrSenderSimulator sender(str);
-    renderer->send(sender, 3);
-    //sender->sendSignal(*renderer, 3);
+    sender.sendIrSignal(*nec1, 3);
 
-    IrSignal *sig = Pronto::parse("0000 006C 0022 0002 015B 00AD 0016 0016 0016 0041 0016 0016 0016 0041 0016 0041 0016 0041 0016 0041 0016 0016 0016 0041 0016 0016 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0041 0016 0016 0016 0041 0016 0041 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0016 0016 0016 0016 0016 0016 0041 0016 0041 0016 0041 0016 05F7 015B 0057 0016 0E6C");
-    if (sig == NULL)
-        std::cerr << "Blast!" << std::endl;
-    else
-        sig->dump(str, true);
+    const IrSignal *sig = Pronto::parse("0000 006C 0022 0002 015B 00AD 0016 0016 0016 0041 0016 0016 0016 0041 0016 0041 0016 0041 0016 0041 0016 0016 0016 0041 0016 0016 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0041 0016 0016 0016 0041 0016 0041 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0016 0016 0016 0016 0016 0016 0041 0016 0041 0016 0041 0016 05F7 015B 0057 0016 0E6C");
+    sig->dump(str, true);
+
+    sig = Rc5Renderer::newIrSignal(0, 1, 0);
+    sig->dump(str, true);
+    IrSequenceReader irSequenceReaderRc5(sig->getRepeat());
+    Rc5Decoder rc5Decoder(irSequenceReaderRc5);
+    rc5Decoder.printDecode(str);
+
 }

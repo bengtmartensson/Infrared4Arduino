@@ -6,8 +6,17 @@ IrSignal::IrSignal(const IrSequence& intro_, const IrSequence& repeat_, const Ir
 : frequency(frequency_),intro(intro_, toBeFreed),repeat(repeat_, toBeFreed),ending(ending_, toBeFreed) {
 }
 
-IrSignal::IrSignal(const IrSignal& orig, boolean toBeFreed)
-: frequency(orig.frequency),intro(orig.intro,toBeFreed),repeat(orig.repeat,toBeFreed),ending(orig.ending,toBeFreed) {
+IrSignal::IrSignal(const IrSequence& intro_, const IrSequence& repeat_, const IrSequence& ending_,
+        frequency_t frequency_)
+: frequency(frequency_),intro(intro_),repeat(repeat_),ending(ending_) {
+}
+
+//IrSignal::IrSignal(const IrSignal& orig, boolean toBeFreed)
+//: frequency(orig.frequency),intro(orig.intro,toBeFreed),repeat(orig.repeat,toBeFreed),ending(orig.ending,toBeFreed) {
+//}
+
+IrSignal::IrSignal(const IrSignal& orig)
+: frequency(orig.frequency),intro(orig.intro),repeat(orig.repeat),ending(orig.ending) {
 }
 
 IrSignal::IrSignal(const microseconds_t *intro_, size_t introLength,

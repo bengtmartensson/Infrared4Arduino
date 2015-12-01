@@ -50,8 +50,8 @@ void IrSender::mute() {
     digitalWrite(outputPin, LOW);
 }
 
-void IrSender::sendSignal(const IrSignal& irSignal, unsigned int noSends) {
-   if (!irSignal.getIntro().isEmpty())
+void IrSender::sendIrSignal(const IrSignal& irSignal, unsigned int noSends) {
+    if (!irSignal.getIntro().isEmpty())
         send(irSignal.getIntro(), irSignal.getFrequency());
     for (unsigned int i = 0; i < irSignal.noRepetitions(noSends); i++)
         send(irSignal.getRepeat(), irSignal.getFrequency());

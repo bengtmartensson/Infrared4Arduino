@@ -42,7 +42,7 @@ public:
     //virtual void send(const microseconds_t buf[], unsigned int len, frequency_t frequency) = 0;
     virtual void send(const IrSequence& irSequence, frequency_t frequency = IrSignal::defaultFrequency) = 0;
 
-    void sendSignal(const IrSignal& irSignal, unsigned int noSends = 1);
+    void sendIrSignal(const IrSignal& irSignal, unsigned int noSends = 1);
 
     /** Force output pin inactive. */
     virtual void mute();

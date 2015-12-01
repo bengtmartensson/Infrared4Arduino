@@ -14,7 +14,7 @@ public:
     static const frequency_t invalidFrequency = (frequency_t) -1;
 
     IrSignal();
-    IrSignal(const IrSignal& orig, boolean toBeFreed = false);
+    IrSignal(const IrSignal& orig);
 
     virtual ~IrSignal();
     IrSignal(const microseconds_t *intro, size_t lengthIntro,
@@ -29,8 +29,10 @@ public:
             boolean toBeFreed = false);
 
     IrSignal(const IrSequence& intro, const IrSequence& repeat, const IrSequence& ending,
-            frequency_t frequency = defaultFrequency,
-            boolean toBeFreed = false);
+            frequency_t frequency, boolean toBeFreed);
+
+    IrSignal(const IrSequence& intro, const IrSequence& repeat, const IrSequence& ending,
+            frequency_t frequency = defaultFrequency);
 
 private:
     const frequency_t frequency;

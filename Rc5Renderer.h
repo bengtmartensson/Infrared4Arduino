@@ -3,33 +3,30 @@
 #ifndef RC5RENDERER_H
 #define	RC5RENDERER_H
 
-#include <Arduino.h>
-#include "IrRenderer.h"
+#include "IrSignal.h"
 
-class Rc5Renderer : public IrRenderer {
+class Rc5Renderer {
+private:
+    static const frequency_t frequency = 36000U;
+    static const size_t introLength = 0U;
+    static const size_t endingLength = 0U;
+
 public:
-    static const frequency_t frequency = 36000;
-    static const size_t introLength = 0;
-    static const size_t endingLength = 0;
-
-    Rc5Renderer(unsigned int D, unsigned int F, unsigned int T) { init(D, F, T); }
+    static const IrSignal *newIrSignal(unsigned int D, unsigned int F, unsigned int T);
 
     /** This function uses an internal toggle of the class to compute T */
-    Rc5Renderer(unsigned int D, unsigned int F);
-
-    virtual ~Rc5Renderer();
-
-    const char *getProtocolName() const { return "RC5"; }
+    static const IrSignal *newIrSignal(unsigned int D, unsigned int F);
 
 private:
-    unsigned int index;
-    microseconds_t repeat[28];
-    int pending;
+    Rc5Renderer();
+    //unsigned int index;
+    //microseconds_t repeat[28];
+    //int pending;
     static const microseconds_t timebase = 889;
-    void emit(unsigned int t);
-    void emitMsb(unsigned int x, unsigned int length);
-    void emitEnd();
-    void init(unsigned int D, unsigned int F, unsigned int T);
+    static void emit(unsigned int t, unsigned int& index, int& pending, microseconds_t *repeat);
+    static void emitMsb(unsigned int x, unsigned int length, unsigned int& index,
+                        int& pending, microseconds_t *repeat);
+    static void emitEnd(unsigned int& index, int& pending, microseconds_t *repeat);
 
     static uint8_t T;
 };

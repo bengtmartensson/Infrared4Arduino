@@ -100,7 +100,7 @@ As opposed to the predecessor projects, this project has a header (`*.h`) file a
 (`*.cpp`, sometimes missing) for each public class.
 
 ## Types
-There are some project specific data typedefs in `Infrared.h`.
+There are some project specific data typedefs in `InfraredTypes.h`.
 For durations in microseconds, the data type `microseconds_t` is to be
 used. If desired/necessary, this can be either `uint16_t` or
 `uint32_t`. For durations in milliseconds, use the type

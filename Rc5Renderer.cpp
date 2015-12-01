@@ -8,54 +8,59 @@
 
 uint8_t Rc5Renderer::T = 1;
 
-Rc5Renderer::~Rc5Renderer() {
-}
-
-Rc5Renderer::Rc5Renderer(unsigned int D, unsigned int F) {
+const IrSignal *Rc5Renderer::newIrSignal(unsigned int D, unsigned int F) {
     T = ! T;
-    init(D, F, T);
+    return newIrSignal(D, F, T);
 }
 
-void Rc5Renderer::init(unsigned int D, unsigned int F, unsigned int T) {
-    index = 0;
-    pending = 0;
-    emit(1U);
-    emit(((~F) & 0x40U) >> 6U);
-    emit(T & 1U);
-    emitMsb(D, 5U);
-    emitMsb(F, 6U);
-    emitEnd();
-    setup(NULL, 0, repeat, index, frequency);
+const IrSignal *Rc5Renderer::newIrSignal(unsigned int D, unsigned int F, unsigned int T) {
+    unsigned int index = 0U;
+    int pending = 0;
+    microseconds_t *repeat = new microseconds_t[28];
+    emit(1U, index, pending, repeat);
+    emit(((~F) & 0x40U) >> 6U, index, pending, repeat);
+    emit(T & 1U, index, pending, repeat);
+    emitMsb(D, 5U, index, pending, repeat);
+    emitMsb(F, 6U, index, pending, repeat);
+    emitEnd(index, pending, repeat);
+    IrSequence *intro = new IrSequence();
+    IrSequence *repeatSequence = new IrSequence(repeat, index, true);
+    IrSequence *ending = new IrSequence();
+    return new IrSignal(*intro, *repeatSequence, *ending, frequency);
 }
 
 //const IrSignal& Rc5Renderer::render() const {
 //    return *(new IrSignal(frequency, 0, index, 0, NULL, repeat, NULL));
 //}
 
-void Rc5Renderer::emitMsb(unsigned int x, unsigned int length) {
+void Rc5Renderer::emitMsb(unsigned int x, unsigned int length,
+        unsigned int& index, int& pending, microseconds_t *repeat) {
     unsigned int mask = 1U << (length - 1U);
     while (mask != 0U) {
-        emit((x & mask) != 0);
+        emit((x & mask) != 0, index, pending, repeat);
         mask >>= 1U;
     }
 }
 
-void Rc5Renderer::emit(unsigned int x) {
+void Rc5Renderer::emit(unsigned int x, unsigned int& index, int& pending,
+                       microseconds_t *repeat) {
     if (pending == 0) {
         // First, do nothing, just stuff in pending.
     } else if ((pending > 0) == ((x & 1) != 0)) {
-        repeat[index] = timebase; index++;
-        repeat[index] = timebase; index++;
+        repeat[index] = timebase;
+        index++;
+        repeat[index] = timebase;
+        index++;
     } else {
-        repeat[index] = 2 * timebase; index++;
+        repeat[index] = 2 * timebase;
+        index++;
     }
     pending = (x & 1U) ? 1 : -1;
 }
 
-void Rc5Renderer::emitEnd() {
+void Rc5Renderer::emitEnd(unsigned int& index, int& pending, microseconds_t *repeat) {
     if (pending > 0) {
         repeat[index] = timebase; index++;
     }
-
     repeat[index] = 0xFFFF; index++;
 }

@@ -67,7 +67,8 @@ public:
     }
 
     microseconds_t inline getDuration(unsigned int i) const {
-        return timerValueToNanoSeconds(unpackTimeVal(captureData[i])) / 1000;
+        return timerValueToNanoSeconds(unpackTimeVal(captureData[i])) / 1000
+                + (i & 1 ? markExcess : -markExcess);
     }
 
     //void setBeginningTimeout(milliseconds_t timeOut) { beginningTimeout = timeOut; }

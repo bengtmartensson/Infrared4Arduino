@@ -13,10 +13,6 @@ private:
     /** GPIO pin the receiver is connected to. */
     pin_t pin;
 
-protected:
-    /** Microseconds subtracted from pulses and added to gaps. */
-    microseconds_t markExcess;
-
 public:
     // Default values
     static const pin_t defaultPin = 5;
@@ -42,14 +38,6 @@ public:
 
     pin_t getPin() const {
         return pin;
-    }
-
-    void setMarkExcess(microseconds_t markExcess_) {
-        markExcess = markExcess_;
-    }
-
-    microseconds_t getMarkExcess() const {
-        return markExcess;
     }
 
     enum irdata_t {

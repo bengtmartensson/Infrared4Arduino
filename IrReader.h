@@ -39,6 +39,9 @@ protected:
 
     size_t bufferSize;
 
+    /** Microseconds subtracted from pulses and added to gaps. May be negative. */
+    int16_t markExcess;
+
     /** True if last receive ended with a timeout */
     boolean timeouted;
 
@@ -97,6 +100,14 @@ public:
 
     unsigned int getBufferSize() const {
         return bufferSize;
+    }
+
+    void setMarkExcess(int16_t markExcess_) {
+        markExcess = markExcess_;
+    }
+
+    int16_t getMarkExcess() const {
+        return markExcess;
     }
 };
 

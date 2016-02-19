@@ -4,15 +4,17 @@
 #include <Rc5Renderer.h>
 #include <IrSenderPwm.h>
 
-IrRenderer *renderer;
+IrSender *sender;
 
 void setup() {
-    renderer = new Rc5Renderer(0, 1);
+    sender = IrSenderPwm::getInstance(true);
 }
 
 void loop() {
-    renderer->send(*IrSenderPwm::getInstance(true));
+    const IrSignal *signal = Rc5Renderer::newIrSignal(0, 1);
+    sender->sendIrSignal(*signal);
     delay(1000);
-    renderer->send(*IrSenderPwm::getInstance(true));
+    signal = Rc5Renderer::newIrSignal(0, 1);
+    sender->sendIrSignal(*signal);
     delay(10000);
 }

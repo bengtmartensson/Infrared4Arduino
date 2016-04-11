@@ -101,6 +101,11 @@ void IrWidgetAggregating::capture() {
 
         if (tifr & _BV(ICF_)) // check for input capture event
         {
+            // After the previous input capture event,
+            // both OCR_ and prevVal were set to that event's timestamp.
+            // If we calculated (ICR_ - OCR_) here,
+            // it would give the same result as timerdiff a few lines below.
+            // This equivalence will be used in the overflow handling block further down.
             val = ICR_;
             OCR_ = val; // timeout based on previous trigger time
             timerdiff = (val - prevVal);
@@ -109,7 +114,28 @@ void IrWidgetAggregating::capture() {
 
         if (tifr & _BV(OCF_)) // check for overflow bit
         {
-            ovlCnt++;
+            // Count the timer overflow, unless it occured after an input capture
+            // event and both ICF and OCF were read as '1' at the same time.
+            //
+            // Timer overflow after input capture is equivalent to ICR_ < OCR_
+            // when they are considered as having infinite range.
+            // In the relevant case of ICF and OCF triggering close to each other,
+            // the absolute value of the difference (ICR_ - OCR_) is small,
+            // and the sign can be derived by calculating in unsigned int
+            // (modulo 2^16) and looking at the most significant bit of the
+            // result.
+            //
+            // timerdiff is used here in place of (ICR_ - OCR_),
+            // as mentioned previously.
+            //
+            // Another explanation for checking the most significant bit
+            // can be found in this posting (in German):
+            // https://www.mikrocontroller.net/topic/avr-timer-mit-32-bit
+            //
+            if (!(tifr & _BV(ICF_) && timerdiff & 0x8000))
+            {
+                ovlCnt++;
+            }
 
             if (ovlCnt >= endingTimeout) // TODO: handle this check together with the check for the pulse length (if packTimeValNormal can handle the value)
             {

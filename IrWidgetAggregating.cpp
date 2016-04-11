@@ -90,13 +90,13 @@ void IrWidgetAggregating::capture() {
 
     /////////////////////////////////////////
     // wait for all following edges
-    for (; pCapDat <= &captureData[bufferSize - sampleSize];) // 2 values are stored in each loop, TODO: change to 3 when adding the aggCount
+    while (pCapDat <= &captureData[bufferSize - sampleSize]) // 2 values are stored in each loop, TODO: change to 3 when adding the aggCount
     {
         debugPinToggle();
         // wait for edge or overflow (output compare match)
-        while (!(tifr =
-                (TIFR_ & (_BV(ICF_) | _BV(OCF_))))) {
-        }
+        do {
+            tifr = TIFR_ & (_BV(ICF_) | _BV(OCF_));
+        } while (!tifr);
         debugPinToggle();
         val = ICR_;
         OCR_ = val; // timeout based on previous trigger time

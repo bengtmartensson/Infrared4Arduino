@@ -53,6 +53,7 @@ void IrWidgetAggregating::capture() {
     register ovlBitsDataType ovlCnt = 0;
     register uint16_t val;
     register uint16_t prevVal;
+    register uint16_t timerdiff;
     register uint16_t *pCapDat = captureData; // pointer to current item in captureData[]
     register uint32_t aggVal = 0;
     register uint32_t diffVal;
@@ -102,6 +103,8 @@ void IrWidgetAggregating::capture() {
         {
             val = ICR_;
             OCR_ = val; // timeout based on previous trigger time
+            timerdiff = (val - prevVal);
+            prevVal = val;
         }
 
         if (tifr & _BV(OCF_)) // check for overflow bit
@@ -122,9 +125,8 @@ void IrWidgetAggregating::capture() {
 
         if (tifr & _BV(ICF_)) // check for input capture event again, still using the same cached tifr value
         {
-            diffVal = ((val - prevVal) & 0xffff) | ((uint32_t) ovlCnt << 16);
+            diffVal = (uint32_t) ovlCnt << 16 | timerdiff;
             ovlCnt = 0;
-            prevVal = val;
 
             if (diffVal < aggThreshold) {
                 aggVal += diffVal;

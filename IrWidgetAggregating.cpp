@@ -95,8 +95,11 @@ void IrWidgetAggregating::capture() {
         debugPinToggle();
         // wait for edge or overflow (output compare match)
         do {
+            // Fetch the input capture and output compare flags.
             tifr = TIFR_ & (_BV(ICF_) | _BV(OCF_));
         } while (!tifr);
+        // Clear the input capture and output compare flags if they were set.
+        TIFR_ = tifr;
         debugPinToggle();
         val = ICR_;
         OCR_ = val; // timeout based on previous trigger time
@@ -115,13 +118,8 @@ void IrWidgetAggregating::capture() {
                 break; // maximum value reached, treat this as timeout and abort capture
             }
             ovlCnt++;
-            // clear input capture and output compare flag bit
-            TIFR_ = _BV(ICF_) | _BV(OCF_);
             continue;
         }
-
-        // clear input capture and output compare flag bit
-        TIFR_ = _BV(ICF_) | _BV(OCF_);
 
         diffVal = ((val - prevVal) & 0xffff) | ((uint32_t) ovlCnt << 16);
         ovlCnt = 0;

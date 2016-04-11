@@ -40,24 +40,19 @@ void IrWidgetAggregating::capture() {
     /*register uint16_t*/ period = ((F_CPU) / (20000UL)) >> CAPTURE_PRESCALER_BITS; // the time of one period in CPU clocks
     //register uint16_t aggThreshold = (period * 10UL) / 8UL; // 65 us = (1/20kHz * 130%) might be a good starting point
     register uint16_t aggThreshold = period * 2;
-    register uint8_t icesn_val = _BV(ICES_);
-    register uint8_t tccrnb = TCCR_;
-    if (invertingSensor)
-        tccrnb &= ~icesn_val; // trigger on falling edge
-    else
-        tccrnb |= icesn_val; // trigger on rising edge
 
-    TCCR_ = tccrnb;
-    OCR1A = CAT2(TCNT, CAP_TIM) - 1;
-    TIFR_ = _BV(ICF_)
-            | _BV(OCF_) | _BV(CAT2(TOV, CAP_TIM)); // clear all timer flags
+    if (invertingSensor)
+        TCCR_ &= ~_BV(ICES_); // trigger on falling edge
+    else
+        TCCR_ |= _BV(ICES_); // trigger on rising edge
+
     register uint8_t tifr; // cache the result of reading TIFR1 (masked with ICF1 and OCF1A)
     register uint8_t calShiftM1 = 1;
     register uint8_t calCount = 1 << (calShiftM1 + 1);
     register uint8_t aggCount = 0;
     register ovlBitsDataType ovlCnt = 0;
     register uint16_t val;
-    register uint16_t prevVal = 0;
+    register uint16_t prevVal;
     register uint16_t *pCapDat = captureData; // pointer to current item in captureData[]
     register uint32_t aggVal = 0;
     register uint32_t diffVal;
@@ -69,6 +64,7 @@ void IrWidgetAggregating::capture() {
 
     /////////////////////////////////////////
     // wait for first edge
+    TIFR_ = _BV(ICF_); // clear input capture flag
     while (!(TIFR_ & _BV(ICF_))) {
         if (millis() >= timeForBeginTimeout) {
             timeouted = true;

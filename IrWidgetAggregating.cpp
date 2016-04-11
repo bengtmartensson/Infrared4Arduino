@@ -109,6 +109,8 @@ void IrWidgetAggregating::capture() {
 
         if (tifr & _BV(OCF_)) // check for overflow bit
         {
+            ovlCnt++;
+
             if (ovlCnt >= endingTimeout) // TODO: handle this check together with the check for the pulse length (if packTimeValNormal can handle the value)
             {
                 if (aggVal > 0) {
@@ -120,7 +122,6 @@ void IrWidgetAggregating::capture() {
                 }
                 break; // maximum value reached, treat this as timeout and abort capture
             }
-            ovlCnt++;
         }
 
         if (tifr & _BV(ICF_)) // check for input capture event again, still using the same cached tifr value

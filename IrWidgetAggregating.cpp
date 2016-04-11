@@ -69,7 +69,7 @@ void IrWidgetAggregating::capture() {
 
     /////////////////////////////////////////
     // wait for first edge
-    while (!(tifr = (TIFR_ & (_BV(ICF_))))) {
+    while (!(TIFR_ & _BV(ICF_))) {
         if (millis() >= timeForBeginTimeout) {
             timeouted = true;
             goto endCapture;

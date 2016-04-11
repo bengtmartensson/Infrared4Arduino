@@ -97,8 +97,12 @@ void IrWidgetAggregating::capture() {
         // Clear the input capture and output compare flags if they were set.
         TIFR_ = tifr;
         debugPinToggle();
-        val = ICR_;
-        OCR_ = val; // timeout based on previous trigger time
+
+        if (tifr & _BV(ICF_)) // check for input capture event
+        {
+            val = ICR_;
+            OCR_ = val; // timeout based on previous trigger time
+        }
 
         if (tifr & _BV(OCF_)) // check for overflow bit
         {
@@ -114,36 +118,38 @@ void IrWidgetAggregating::capture() {
                 break; // maximum value reached, treat this as timeout and abort capture
             }
             ovlCnt++;
-            continue;
         }
 
-        diffVal = ((val - prevVal) & 0xffff) | ((uint32_t) ovlCnt << 16);
-        ovlCnt = 0;
-        prevVal = val;
+        if (tifr & _BV(ICF_)) // check for input capture event again, still using the same cached tifr value
+        {
+            diffVal = ((val - prevVal) & 0xffff) | ((uint32_t) ovlCnt << 16);
+            ovlCnt = 0;
+            prevVal = val;
 
-        if (diffVal < aggThreshold) {
-            aggVal += diffVal;
+            if (diffVal < aggThreshold) {
+                aggVal += diffVal;
 
-            // calculate the carrier frequency only within the first burst (often a preamble)
-            if (calCount) {
-                aggCount++; // only used to calculate the period
-                // do a calibration on every aggCount which is a power of two because then dividing by calShiftM1
-                // (shiftcount - 1) can simply be performed by shifting right
-                if (aggCount == calCount) {
-                    aggThreshold = aggVal >> calShiftM1;
-                    calShiftM1++;
-                    calCount = calCount << 1; // this will automatically terminate calibrating when calCount is 128 because then (128 << 1) & 0xff = 0
+                // calculate the carrier frequency only within the first burst (often a preamble)
+                if (calCount) {
+                    aggCount++; // only used to calculate the period
+                    // do a calibration on every aggCount which is a power of two because then dividing by calShiftM1
+                    // (shiftcount - 1) can simply be performed by shifting right
+                    if (aggCount == calCount) {
+                        aggThreshold = aggVal >> calShiftM1;
+                        calShiftM1++;
+                        calCount = calCount << 1; // this will automatically terminate calibrating when calCount is 128 because then (128 << 1) & 0xff = 0
+                    }
                 }
-            }
-        } else {
-            *pCapDat = packTimeVal/*Normal*/(aggVal); // store the pulse length
-            pCapDat++;
-            // TODO check if value is small enough to be stored
-            *pCapDat = packTimeVal/*Normal*/(diffVal); // store the pause length
-            pCapDat++;
+            } else {
+                *pCapDat = packTimeVal/*Normal*/(aggVal); // store the pulse length
+                pCapDat++;
+                // TODO check if value is small enough to be stored
+                *pCapDat = packTimeVal/*Normal*/(diffVal); // store the pause length
+                pCapDat++;
 
-            aggVal = 0;
-            calCount = 0; // avoid further period calculation and calibration
+                aggVal = 0;
+                calCount = 0; // avoid further period calculation and calibration
+            }
         }
     }
 

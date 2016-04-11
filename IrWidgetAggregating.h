@@ -8,6 +8,14 @@
 
 #include "IrWidget.h"
 
+#define TCCR_ CAT3(TCCR, CAP_TIM, B)
+#define ICES_ CAT2(ICES, CAP_TIM)
+#define TIFR_ CAT2(TIFR, CAP_TIM)
+#define ICF_  CAT2(ICF, CAP_TIM)
+#define OCF_  CAT3(OCF, CAP_TIM, CAP_TIM_OC)
+#define ICR_  CAT2(ICR, CAP_TIM)
+#define OCR_  CAT3(OCR, CAP_TIM, CAP_TIM_OC)
+
 class IrWidgetAggregating : public IrWidget {
 private:
     static IrWidgetAggregating *instance;

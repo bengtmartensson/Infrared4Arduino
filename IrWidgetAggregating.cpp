@@ -40,17 +40,17 @@ void IrWidgetAggregating::capture() {
     /*register uint16_t*/ period = ((F_CPU) / (20000UL)) >> CAPTURE_PRESCALER_BITS; // the time of one period in CPU clocks
     //register uint16_t aggThreshold = (period * 10UL) / 8UL; // 65 us = (1/20kHz * 130%) might be a good starting point
     register uint16_t aggThreshold = period * 2;
-    register uint8_t icesn_val = _BV(CAT2(ICES, CAP_TIM));
-    register uint8_t tccrnb = CAT3(TCCR, CAP_TIM, B);
+    register uint8_t icesn_val = _BV(ICES_);
+    register uint8_t tccrnb = TCCR_;
     if (invertingSensor)
         tccrnb &= ~icesn_val; // trigger on falling edge
     else
         tccrnb |= icesn_val; // trigger on rising edge
 
-    CAT3(TCCR, CAP_TIM, B) = tccrnb;
+    TCCR_ = tccrnb;
     OCR1A = CAT2(TCNT, CAP_TIM) - 1;
-    CAT2(TIFR, CAP_TIM) = _BV(CAT2(ICF, CAP_TIM))
-            | _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC)) | _BV(CAT2(TOV, CAP_TIM)); // clear all timer flags
+    TIFR_ = _BV(ICF_)
+            | _BV(OCF_) | _BV(CAT2(TOV, CAP_TIM)); // clear all timer flags
     register uint8_t tifr; // cache the result of reading TIFR1 (masked with ICF1 and OCF1A)
     register uint8_t calShiftM1 = 1;
     register uint8_t calCount = 1 << (calShiftM1 + 1);
@@ -69,7 +69,7 @@ void IrWidgetAggregating::capture() {
 
     /////////////////////////////////////////
     // wait for first edge
-    while (!(tifr = (CAT2(TIFR, CAP_TIM) & (_BV(CAT2(ICF, CAP_TIM)))))) {
+    while (!(tifr = (TIFR_ & (_BV(ICF_))))) {
         if (millis() >= timeForBeginTimeout) {
             timeouted = true;
             goto endCapture;
@@ -79,13 +79,13 @@ void IrWidgetAggregating::capture() {
     }
     TCCR0B &= ~(_BV(CS02) | _BV(CS01) | _BV(CS00)); // stop timer0 (disables timer IRQs)
     debugPinToggle();
-    val = CAT2(ICR, CAP_TIM);
-    CAT3(OCR, CAP_TIM, CAP_TIM_OC) = val; // timeout based on previous trigger time
+    val = ICR_;
+    OCR_ = val; // timeout based on previous trigger time
 
     noInterrupts(); // disable IRQs after the first edge
 
     // clear input capture and output compare flag bit
-    CAT2(TIFR, CAP_TIM) = _BV(CAT2(ICF, CAP_TIM)) | _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC));
+    TIFR_ = _BV(ICF_) | _BV(OCF_);
     prevVal = val;
 
     /////////////////////////////////////////
@@ -95,13 +95,13 @@ void IrWidgetAggregating::capture() {
         debugPinToggle();
         // wait for edge or overflow (output compare match)
         while (!(tifr =
-                (CAT2(TIFR, CAP_TIM) & (_BV(CAT2(ICF, CAP_TIM)) | _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC)))))) {
+                (TIFR_ & (_BV(ICF_) | _BV(OCF_))))) {
         }
         debugPinToggle();
-        val = CAT2(ICR, CAP_TIM);
-        CAT3(OCR, CAP_TIM, CAP_TIM_OC) = val; // timeout based on previous trigger time
+        val = ICR_;
+        OCR_ = val; // timeout based on previous trigger time
 
-        if (tifr & _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC))) // check for overflow bit
+        if (tifr & _BV(OCF_)) // check for overflow bit
         {
             if (ovlCnt >= endingTimeout) // TODO: handle this check together with the check for the pulse length (if packTimeValNormal can handle the value)
             {
@@ -116,12 +116,12 @@ void IrWidgetAggregating::capture() {
             }
             ovlCnt++;
             // clear input capture and output compare flag bit
-            CAT2(TIFR, CAP_TIM) = _BV(CAT2(ICF, CAP_TIM)) | _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC));
+            TIFR_ = _BV(ICF_) | _BV(OCF_);
             continue;
         }
 
         // clear input capture and output compare flag bit
-        CAT2(TIFR, CAP_TIM) = _BV(CAT2(ICF, CAP_TIM)) | _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC));
+        TIFR_ = _BV(ICF_) | _BV(OCF_);
 
         diffVal = ((val - prevVal) & 0xffff) | ((uint32_t) ovlCnt << 16);
         ovlCnt = 0;

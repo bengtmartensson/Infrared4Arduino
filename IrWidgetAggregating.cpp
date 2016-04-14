@@ -40,24 +40,20 @@ void IrWidgetAggregating::capture() {
     /*register uint16_t*/ period = ((F_CPU) / (20000UL)) >> CAPTURE_PRESCALER_BITS; // the time of one period in CPU clocks
     //register uint16_t aggThreshold = (period * 10UL) / 8UL; // 65 us = (1/20kHz * 130%) might be a good starting point
     register uint16_t aggThreshold = period * 2;
-    register uint8_t icesn_val = _BV(CAT2(ICES, CAP_TIM));
-    register uint8_t tccrnb = CAT3(TCCR, CAP_TIM, B);
-    if (invertingSensor)
-        tccrnb &= ~icesn_val; // trigger on falling edge
-    else
-        tccrnb |= icesn_val; // trigger on rising edge
 
-    CAT3(TCCR, CAP_TIM, B) = tccrnb;
-    OCR1A = CAT2(TCNT, CAP_TIM) - 1;
-    CAT2(TIFR, CAP_TIM) = _BV(CAT2(ICF, CAP_TIM))
-            | _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC)) | _BV(CAT2(TOV, CAP_TIM)); // clear all timer flags
+    if (invertingSensor)
+        TCCR_ &= ~_BV(ICES_); // trigger on falling edge
+    else
+        TCCR_ |= _BV(ICES_); // trigger on rising edge
+
     register uint8_t tifr; // cache the result of reading TIFR1 (masked with ICF1 and OCF1A)
     register uint8_t calShiftM1 = 1;
     register uint8_t calCount = 1 << (calShiftM1 + 1);
     register uint8_t aggCount = 0;
     register ovlBitsDataType ovlCnt = 0;
     register uint16_t val;
-    register uint16_t prevVal = 0;
+    register uint16_t prevVal;
+    register uint16_t timerdiff;
     register uint16_t *pCapDat = captureData; // pointer to current item in captureData[]
     register uint32_t aggVal = 0;
     register uint32_t diffVal;
@@ -69,7 +65,8 @@ void IrWidgetAggregating::capture() {
 
     /////////////////////////////////////////
     // wait for first edge
-    while (!(tifr = (CAT2(TIFR, CAP_TIM) & (_BV(CAT2(ICF, CAP_TIM)))))) {
+    TIFR_ = _BV(ICF_); // clear input capture flag
+    while (!(TIFR_ & _BV(ICF_))) {
         if (millis() >= timeForBeginTimeout) {
             timeouted = true;
             goto endCapture;
@@ -79,30 +76,67 @@ void IrWidgetAggregating::capture() {
     }
     TCCR0B &= ~(_BV(CS02) | _BV(CS01) | _BV(CS00)); // stop timer0 (disables timer IRQs)
     debugPinToggle();
-    val = CAT2(ICR, CAP_TIM);
-    CAT3(OCR, CAP_TIM, CAP_TIM_OC) = val; // timeout based on previous trigger time
+    val = ICR_;
+    OCR_ = val; // timeout based on previous trigger time
 
     noInterrupts(); // disable IRQs after the first edge
 
     // clear input capture and output compare flag bit
-    CAT2(TIFR, CAP_TIM) = _BV(CAT2(ICF, CAP_TIM)) | _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC));
+    TIFR_ = _BV(ICF_) | _BV(OCF_);
     prevVal = val;
 
     /////////////////////////////////////////
     // wait for all following edges
-    for (; pCapDat <= &captureData[bufferSize - sampleSize];) // 2 values are stored in each loop, TODO: change to 3 when adding the aggCount
+    while (pCapDat <= &captureData[bufferSize - sampleSize]) // 2 values are stored in each loop, TODO: change to 3 when adding the aggCount
     {
         debugPinToggle();
         // wait for edge or overflow (output compare match)
-        while (!(tifr =
-                (CAT2(TIFR, CAP_TIM) & (_BV(CAT2(ICF, CAP_TIM)) | _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC)))))) {
-        }
+        do {
+            // Fetch the input capture and output compare flags.
+            tifr = TIFR_ & (_BV(ICF_) | _BV(OCF_));
+        } while (!tifr);
+        // Clear the input capture and output compare flags if they were set.
+        TIFR_ = tifr;
         debugPinToggle();
-        val = CAT2(ICR, CAP_TIM);
-        CAT3(OCR, CAP_TIM, CAP_TIM_OC) = val; // timeout based on previous trigger time
 
-        if (tifr & _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC))) // check for overflow bit
+        if (tifr & _BV(ICF_)) // check for input capture event
         {
+            // After the previous input capture event,
+            // both OCR_ and prevVal were set to that event's timestamp.
+            // If we calculated (ICR_ - OCR_) here,
+            // it would give the same result as timerdiff a few lines below.
+            // This equivalence will be used in the overflow handling block further down.
+            val = ICR_;
+            OCR_ = val; // timeout based on previous trigger time
+            timerdiff = (val - prevVal);
+            prevVal = val;
+        }
+
+        if (tifr & _BV(OCF_)) // check for overflow bit
+        {
+            // Count the timer overflow, unless it occured after an input capture
+            // event and both ICF and OCF were read as '1' at the same time.
+            //
+            // Timer overflow after input capture is equivalent to ICR_ < OCR_
+            // when they are considered as having infinite range.
+            // In the relevant case of ICF and OCF triggering close to each other,
+            // the absolute value of the difference (ICR_ - OCR_) is small,
+            // and the sign can be derived by calculating in unsigned int
+            // (modulo 2^16) and looking at the most significant bit of the
+            // result.
+            //
+            // timerdiff is used here in place of (ICR_ - OCR_),
+            // as mentioned previously.
+            //
+            // Another explanation for checking the most significant bit
+            // can be found in this posting (in German):
+            // https://www.mikrocontroller.net/topic/avr-timer-mit-32-bit
+            //
+            if (!(tifr & _BV(ICF_) && timerdiff & 0x8000))
+            {
+                ovlCnt++;
+            }
+
             if (ovlCnt >= endingTimeout) // TODO: handle this check together with the check for the pulse length (if packTimeValNormal can handle the value)
             {
                 if (aggVal > 0) {
@@ -114,42 +148,37 @@ void IrWidgetAggregating::capture() {
                 }
                 break; // maximum value reached, treat this as timeout and abort capture
             }
-            ovlCnt++;
-            // clear input capture and output compare flag bit
-            CAT2(TIFR, CAP_TIM) = _BV(CAT2(ICF, CAP_TIM)) | _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC));
-            continue;
         }
 
-        // clear input capture and output compare flag bit
-        CAT2(TIFR, CAP_TIM) = _BV(CAT2(ICF, CAP_TIM)) | _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC));
+        if (tifr & _BV(ICF_)) // check for input capture event again, still using the same cached tifr value
+        {
+            diffVal = (uint32_t) ovlCnt << 16 | timerdiff;
+            ovlCnt = 0;
 
-        diffVal = ((val - prevVal) & 0xffff) | ((uint32_t) ovlCnt << 16);
-        ovlCnt = 0;
-        prevVal = val;
+            if (diffVal < aggThreshold) {
+                aggVal += diffVal;
 
-        if (diffVal < aggThreshold) {
-            aggVal += diffVal;
-
-            // calculate the carrier frequency only within the first burst (often a preamble)
-            if (calCount) {
-                aggCount++; // only used to calculate the period
-                // do a calibration on every aggCount which is a power of two because then dividing by calShiftM1
-                // (shiftcount - 1) can simply be performed by shifting right
-                if (aggCount == calCount) {
-                    aggThreshold = aggVal >> calShiftM1;
-                    calShiftM1++;
-                    calCount = calCount << 1; // this will automatically terminate calibrating when calCount is 128 because then (128 << 1) & 0xff = 0
+                // calculate the carrier frequency only within the first burst (often a preamble)
+                if (calCount) {
+                    aggCount++; // only used to calculate the period
+                    // do a calibration on every aggCount which is a power of two because then dividing by calShiftM1
+                    // (shiftcount - 1) can simply be performed by shifting right
+                    if (aggCount == calCount) {
+                        aggThreshold = aggVal >> calShiftM1;
+                        calShiftM1++;
+                        calCount = calCount << 1; // this will automatically terminate calibrating when calCount is 128 because then (128 << 1) & 0xff = 0
+                    }
                 }
-            }
-        } else {
-            *pCapDat = packTimeVal/*Normal*/(aggVal); // store the pulse length
-            pCapDat++;
-            // TODO check if value is small enough to be stored
-            *pCapDat = packTimeVal/*Normal*/(diffVal); // store the pause length
-            pCapDat++;
+            } else {
+                *pCapDat = packTimeVal/*Normal*/(aggVal); // store the pulse length
+                pCapDat++;
+                // TODO check if value is small enough to be stored
+                *pCapDat = packTimeVal/*Normal*/(diffVal); // store the pause length
+                pCapDat++;
 
-            aggVal = 0;
-            calCount = 0; // avoid further period calculation and calibration
+                aggVal = 0;
+                calCount = 0; // avoid further period calculation and calibration
+            }
         }
     }
 

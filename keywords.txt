@@ -1,0 +1,91 @@
+#######################################
+# Syntax Coloring Map For Infrared4Arduino
+# Only public stuff go here.
+#######################################
+
+#######################################
+# Classes (KEYWORD1)
+#######################################
+
+IrDecoder		KEYWORD1
+IrReader		KEYWORD1
+IrReceiver		KEYWORD1
+IrReceiverPoll		KEYWORD1
+IrReceiverSampler	KEYWORD1
+IrSender		KEYWORD1
+IrSenderNonMod		KEYWORD1
+IrSenderPwm		KEYWORD1
+IrSenderSimulator	KEYWORD1
+IrSequence		KEYWORD1
+IrSequenceReader	KEYWORD1
+IrSignal		KEYWORD1
+IrWidget		KEYWORD1
+IrWidgetAggregating	KEYWORD1
+MultiDecoder		KEYWORD1
+Nec1Decoder		KEYWORD1
+Nec1Renderer		KEYWORD1
+Pronto			KEYWORD1
+Rc5Decoder		KEYWORD1
+Rc5Renderer		KEYWORD1
+
+Type			KEYWORD1
+frequency_t		KEYWORD1
+irdata_t		KEYWORD1
+microseconds_t		KEYWORD1	
+milliseconds_t		KEYWORD1
+pin_t			KEYWORD1
+
+#######################################
+# public Methods and Functions (KEYWORD2)
+#######################################
+clone			KEYWORD2
+deleteInstance		KEYWORD2
+disable			KEYWORD2
+dump			KEYWORD2
+dumpWithSigns		KEYWORD2
+enable			KEYWORD2
+getBeginningTimeout	KEYWORD2
+getBufferSize		KEYWORD2
+getD			KEYWORD2
+getDataLength		KEYWORD2
+getDecode		KEYWORD2
+getDuration		KEYWORD2
+getDurations		KEYWORD2
+getEnding		KEYWORD2
+getEndingTimeout	KEYWORD2
+getFrequency		KEYWORD2
+getInstance		KEYWORD2
+getIntro		KEYWORD2
+getMarkExcess		KEYWORD2
+getRepeat		KEYWORD2
+getS			KEYWORD2
+getType			KEYWORD2
+isDitto			KEYWORD2
+isEmpty			KEYWORD2
+isReady			KEYWORD2
+isValid			KEYWORD2
+mute			KEYWORD2
+newIrSignal		KEYWORD2
+parse			KEYWORD2
+printDecode		KEYWORD2
+receive			KEYWORD2
+reset			KEYWORD2
+send			KEYWORD2
+sendIrSignal		KEYWORD2
+sendNonModulated	KEYWORD2
+setBeginningTimeout	KEYWORD2
+setEndingTimeout	KEYWORD2
+setMarkExcess		KEYWORD2
+toIrSequence		KEYWORD2
+tryDecode		KEYWORD2
+
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+MICROSECONDS_T_MAX	LITERAL1
+MILLISECONDS_T_MAX	LITERAL1
+FREQUENCY_T_MAX		LITERAL1
+invalidPin		LITERAL1
+PIN_T_MAX		LITERAL1

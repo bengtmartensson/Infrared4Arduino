@@ -1,6 +1,10 @@
 # Makefile for creating stuff on host.
 # Use Arduino IDE for compiling for Arduino
 
+ifneq ($(ARDUINO),)
+$(error This Makefile is not for compiling target code, use the Arduino IDE inst)
+endif
+
 BOARDDEFINES=
 CXX=g++
 BROWSER=firefox

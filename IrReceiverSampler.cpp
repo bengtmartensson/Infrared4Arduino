@@ -1,6 +1,5 @@
 #include "IrReceiverSampler.h"
-
-#include <IRLibTimer.h>
+#include <IrTimerDefs.h>
 
 uint32_t IrReceiverSampler::millisecs2ticks(milliseconds_t ms) {
     return (1000UL * (uint32_t) ms) / microsPerTick;
@@ -58,13 +57,14 @@ void IrReceiverSampler::reset() {
 void IrReceiverSampler::enable() {
     reset();
     noInterrupts();
-    IR_RECV_CONFIG_TICKS();
-    IR_RECV_ENABLE_INTR;
+    TIMER_CONFIG_NORMAL();
+    TIMER_ENABLE_INTR;
+    TIMER_RESET;
     interrupts();
 }
 
 void IrReceiverSampler::disable() {
-    IR_RECV_DISABLE_INTR;
+    TIMER_DISABLE_INTR;
 }
 
 void IrReceiverSampler::setEndingTimeout(milliseconds_t timeOut) {
@@ -84,7 +84,7 @@ milliseconds_t IrReceiverSampler::getBeginningTimeout() const {
 }
 
 /** Interrupt routine. It collects data into the data buffer. */
-ISR(IR_RECV_INTR_NAME) {
+ISR(TIMER_INTR_NAME) {
     IrReceiverSampler *recv = IrReceiverSampler::getInstance();
     IrReceiver::irdata_t irdata = recv->readIr();
     recv->timer++; // One more 50us tick

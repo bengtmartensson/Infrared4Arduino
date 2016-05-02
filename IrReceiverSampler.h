@@ -14,7 +14,6 @@ public:
 
     /** microseconds per clock interrupt */
     static const unsigned long microsPerTick = 50; // was USECPERTICK
-    // Note doubled in IRLibTimer.h
 
     /** State space for the receiver state machine. */
     enum ReceiverState_t {

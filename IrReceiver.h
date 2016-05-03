@@ -6,7 +6,7 @@
 #include "IrReader.h"
 
 /**
- * This class servers as an abstract base class for (demodulating) IR receivers.
+ * Abstract base class for demodulating IR receivers.
  */
 class IrReceiver : public IrReader {
 private:
@@ -18,7 +18,7 @@ public:
     static const pin_t defaultPin = 5;
     static const microseconds_t defaultMarkExcess = 50U;
 
-    /** Using inverting sensor, like most TSOPs? */
+    /** Are we using inverting sensor, like most TSOPs? */
     static const boolean invertingSensor = true;
 
     /**
@@ -34,20 +34,27 @@ public:
 
     virtual ~IrReceiver() {
     };
+
     virtual void receive();
 
     pin_t getPin() const {
         return pin;
     }
 
+    /**
+     * Enum for the duration types.
+     */
     enum irdata_t {
-        IR_MARK,
-        IR_SPACE
+        IR_MARK, ///< on-period, also called flash
+        IR_SPACE ///< off-period, also called gap
     };
 
+    // Needs to be public since used in ISP. Therefore hide it from Doxygen
+    /// @cond false
     irdata_t readIr() {
         return ((digitalRead(getPin()) == HIGH) ^ invertingSensor) ? IR_MARK : IR_SPACE;
     }
+    /// @endcond
 };
 
 #endif	/* IRRECEIVER_H */

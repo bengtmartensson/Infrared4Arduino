@@ -4,23 +4,52 @@
 #include "IrDecoder.h"
 #include "IrReader.h"
 
+/**
+ * A decoder class for RC5 signals.
+ */
 class Rc5Decoder : public IrDecoder {
 public:
     static const char *format;
-    Rc5Decoder(const IrReader& irReader);
-    virtual ~Rc5Decoder() {}
 
+    /**
+     * Constructs a Rc5Decoder from an IrReader, containing data.
+     * @param irReader IrReader with data, i.e. with isReady() true.
+     */
+    Rc5Decoder(const IrReader& irReader);
+
+    virtual ~Rc5Decoder() {
+    }
+
+    /**
+     * Returns the F parameter, or -1 if invalid.
+     * @return int
+     */
     int getF() const {
         return F;
     }
 
+    /**
+     * Returns the D parameter, or -1 if invalid.
+     * @return int
+     */
     int getD() const {
         return D;
     }
 
+    /**
+     * Returns the T parameter, or -1 if invalid.
+     * @return int
+     */
     int getT() const {
         return T;
     }
+
+    /**
+     * Convenience function; constructs an Rc5Decoder and calls its printDecode.
+     * @param irReader IrReader to use
+     * @param stream Stream
+     * @return success of operation
+     */
     static boolean tryDecode(const IrReader& irReader, Stream& string);
 
     const char *getDecode() const;

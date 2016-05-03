@@ -1,7 +1,7 @@
 #include "Rc5Decoder.h"
 #include <string.h>
 
-const char *Rc5Decoder::format = "RC5 %d %d %d"; // FIXME
+const char *Rc5Decoder::format = "RC5 %d %d %d";
 
 Rc5Decoder::Length Rc5Decoder::decodeDuration(microseconds_t t) {
     Length len =  (t < timebaseLower) ? invalid
@@ -27,7 +27,6 @@ boolean Rc5Decoder::tryDecode(const IrReader& irCapturer, Stream& stream) {
 }
 
 Rc5Decoder::Rc5Decoder(const IrReader& irCapturer) {
-    //super(irSequence);
     unsigned int index = 0U;
     unsigned int sum = 0U;
     int doublet = -1;

@@ -29,11 +29,23 @@ public:
 
     virtual ~IrSequence();
 
-    /** Performs shallow copy. */
+    /**
+     * Performs shallow copy.
+     * @param orig original IrSequence to be cloned
+     */
     IrSequence(const IrSequence& orig);
 
+    /**
+     * Performs shallow copy.
+     * @param orig original IrSequence to be cloned
+     * @param toBeFreed If true, the destructor will delete the durations array.
+     */
     IrSequence(const IrSequence& orig, boolean toBeFreed);
 
+    /**
+     * Returns the length of the data.
+     * @return length
+     */
     size_t getLength() const {
         return length;
     }
@@ -46,10 +58,6 @@ public:
         return durations;
     }
 
-    //operator const microseconds_t* () const {
-    //    return durations;
-    //}
-
     /**
      * Creates a (deep) clone of the current object.
      * The used must delete it manually.
@@ -59,6 +67,7 @@ public:
 
     /**
      * Prints the IrSequence on the stream provided.
+     * @param stream Stream onto the output is printed.
      * @param usingSigns If true,  Gaps are written with a leading '+', spaces with a leading '-'.
      */
     void dump(Stream& stream, boolean usingSigns = false) const;
@@ -66,6 +75,7 @@ public:
     /**
      * Prints the IrSequence on the stream provided. Gaps are written with a
      * leading '+', spaces with a leading '-'.
+     * @param stream Stream onto the output is printed.
      */
     void dumpWithSigns(Stream& stream) const {
         dump(stream, true);

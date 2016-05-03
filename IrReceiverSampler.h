@@ -4,8 +4,14 @@
 #include "IrReceiver.h"
 
 /**
- * Singleton class due to ISP
+ * This receiving class samples the input pin every 50 microseconds using a timer
+ * interrupt. Due to the ISP, this is a singleton class;
+ * it can only be instantiated once.
+ * This is enforced by the absence of public constructors:
+ * it has to be instantiated by the
+ * factory method newIrReceiverSampler.
  */
+
 // The interrupt routine must have access to some stuff here.
 // This needs to be public, and, since the interrupt routing
 // fumbles with it, volatile.
@@ -58,6 +64,18 @@ private:
             milliseconds_t endingTimeout = defaultEndingTimeout);
 
 public:
+    /**
+     * This factory method replaces public constructors. Provided that no instance currently exists,
+     * it constructs a new instance and return a pointer to it, if possible. Otherwise, it returns NULL.
+     *
+     * @param captureLength buffersize requested
+     * @param pin GPIO pin to use
+     * @param pullup true if the internal pullup resistor should be enabled
+     * @param markExcess markExcess to use
+     * @param beginningTimeout beginningTimeout to use
+     * @param endingTimeout endingTimeout to use
+     * @return pointer to a valid instance, or NULL.
+     */
     static IrReceiverSampler *newIrReceiverSampler(size_t captureLength = defaultCaptureLength,
             pin_t pin = defaultPin,
             boolean pullup = false,
@@ -65,8 +83,16 @@ public:
             milliseconds_t beginningTimeout = defaultBeginningTimeout,
             milliseconds_t endingTimeout = defaultEndingTimeout);
 
+    /**
+     * Deletes the instance, thereby freeing up the resources it occupied, and
+     * allowing for another instance to be created.
+     */
     static void deleteInstance();
 
+    /**
+     * Returns a pointer to the instance, or NULL.
+     * @return pointer to instance, possibly NULL.
+     */
     static IrReceiverSampler *getInstance() {
         return instance;
     }

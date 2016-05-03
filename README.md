@@ -3,11 +3,10 @@ This is yet another infrared library for the Arduino. (Although its name does no
 start with YA...)
 
 It is a major rewrite of [Chris Young's
-IRLib](http://tech.cyborg5.com/irlib/,
-https://github.com/cyborg5/IRLib), which itself is a major
+IRLib](http://tech.cyborg5.com/irlib/), ([GitHub repo](https://github.com/cyborg5/IRLib)), which itself is a major
 rewrite of a library called IRremote, published by
 Ken Shirriff in [his blog](http://www.righto.com/2009/08/multi-protocol-infrared-remote-library.html),
-now maintained [here](https://github.com/z3t0/Arduino-IRremote).
+now maintained [on GitHub](https://github.com/z3t0/Arduino-IRremote).
 It uses Michael Dreher's
 IrWidget [(article in
 German)](http://www.mikrocontroller.net/articles/High-Speed_capture_mit_ATmega_Timer),
@@ -16,22 +15,65 @@ contribution](http://www.hifi-remote.com/forums/viewtopic.php?p=111876#111876).
 
 
 The classes `IrWidget` and `IrWidgetAggregating` are based on Michael's code.
-The classes `IrReceiverSampler` and `IrSenderPwm`, and in particular the file `IRLibTimer.h`,
+The classes `IrReceiverSampler` and `IrSenderPwm`, and in particular the file [`IRremoteInt.h`](IRremoteInt.h),
 are adapted from Kevin's and Chris' work. The remaining files are almost completely written
 from scratch, although the influence of Kevin and Chris is gratefully acknowledged.
 
+This work is a low-level library (like IRremote and IRLib) that can be used in other projects,
+like [AGirs](https://github.com/bengtmartensson/AGirs), which is an high-level program taking commands interactively
+from a user or a program through a bi-directional `Stream`.
+The goal has been to provide a sound, object oriented basis for the fundamental basis, not
+to provide maximal functionality, the maximal number of protocols supported, or the most complete support of
+different hardware. A clean design and high readability, without being "too" inefficient,
+has been the highest priority. Dynamic memory allocation with `new` and `delete` is used extensively.
+The user who is afraid of this can create his required objects at the start of the run, and keep
+them. Most classes are immutable. The classes are `const`-correct.
+
+# API
+
+## Types
+There are some project specific data typedefs in [`InfraredTypes.h`](InfraredTypes.h).
+For durations in microseconds, the data type `microseconds_t` is to be
+used. If desired/necessary, this can be either `uint16_t` or
+`uint32_t`. For durations in milliseconds, use the type
+`millisecons_t`. Likewise, use `frequency_t` for modulation frequency in
+Hz (_not_ kHz as in the IRremote/IRLib).
+
+For "sizes", `size_t`, the standard C type, is used.
+
+Implementation dependent types like `int` are used if and _only if_ it is OK for the
+compiler to select any implementation allowed by the C++ language.
+
+`unsigned int` is used for quantities that can "impossibly" be larger than 65535.
+
+## IrSequences and IrSignals
+An `IrSequence` is a vector of durations, i.e. sequence of interleaving gaps and spaces. It does not
+contain the modulation frequence. As opposed to IRremote and IRLib, our sequences always start with
+a space and end with a gap. It is claimed to be a more relevant representation than the one of IRremote and IRLib.
+
+An `IrSignal` consists of a modulation frequency and three IrSequences: intro-, repeat-, and ending sequence. All of these, but not all, can be
+empty. If repeat is empty, intro has to be non-empty and ending empty. The intro sequence is always sent first,
+then comes a zero or more repeat sequences, and finally the ending sequence. To send a signal _n_ > 0 times shall mean
+the following: If the intro  is non-empty, send intro, _n_ - 1 repeats, and then the ending. If the intro is empty,
+send _n_ repeats, and then then ending.
+
 ## Class construction
-For some receiving/transmitting classes, multiple instantiations is not sensible,
+For some receiving and transmitting classes, multiple instantiations are not sensible,
 for other it may be. In this library, the classes that should only be instantiated
 once are implemented as singleton classes, i.e. with no public constructor, but instead
-a static factory method (`new*()`) that delivers a pointer to a newly constructed instance,
-provided that it has not been instantiated before. The classes, where multiple instances
-is sensible, come with public constructors. (However, the user may still have to take responsibility
+a static "factory" method (`newThing()`) that delivers a pointer to a newly constructed instance
+of `Thing`,
+provided that `Thing` has not been instantiated before. The classes, where multiple instances
+is sensible, come with public constructors. (However, the user still has to take responsibility
 for avoiding pin- and timer-conflicts.)
 
 ## Hardware configuration
-At the time of this writing, The boards Uno/Nano (ATmega328P), Leonardo/Micro (ATmega32U4),
-and Mega2560 (ATmega2560) are supported.
+For hardware support, the file [`IRremoteInt.h`](IRremoteInt.h) from the IRremote project is used. This means that
+all hardware that project supports is also supported here (for `IrReceiverSampler` and `IrSenderPwm`).
+(Actually, a small fix, borrowed from IRLib, was used
+to support Arduinos with ATMega32U4 (Leonardo, Micro).)
+However, IrWidgetAggregating is currently supported on the boards Uno/Nano (ATmega328P), Leonardo/Micro (ATmega32U4),
+and Mega2560 (ATmega2560).
 
 Several of the sending and receiving classes take a GPIO pin as argument to the constructor.
 However, the sending pin of `IrSenderPwm` and the capture pin of `IrWidgetAggregating`
@@ -42,12 +84,33 @@ are not configurable, but (due to hardware limitations) have to be taken from th
     Leonardo/Micro (ATmega32U4)    9             4
     Mega2560 (ATmega2560)          9            49
 
+## Timeouts
+All the receiving classes adhere to the following conventions: When initialized, it waits
+up to the time `beginningTimeout` for the first on-period. If not received within that period,
+it returns with a timeout. Otherwise, is starts collecting data. It will collect data until one of the
+following occurs:
+* A silence of length `endingTimeout` has been detected. This is the normal ending. The detected last gap is returned with the data.
+* The buffer gets full. Reception stops.
 
 ## User parameters
 As opposed to other infrared libraries, there are no user changeable parameters as CPP symbols.
 However, the timer
 configuration is compiled in, depending on the CPP processors given to the compiler, see
-the file `IRLibTimer.h`.
+the file [`IRremoteInt.h`](IRremoteInt.h).
+
+## Files
+As opposed to the predecessor projects, this project has a header (`*.h`) file and an implementation file
+(`*.cpp`, sometimes missing) for each public class.
+
+## Error handling
+Simple answer: there is none. If a function is sent erroneous data,
+it just silently ignores the request, or does something else instead.
+This (unfortunately) seems to be the standard procedure in Arduino programming.
+
+I am used to exception based error handling, for some reason this is not used by
+the Arduino community.
+
+Constructive suggestions are welcome.
 
 ## Protocols
 Comparing with the predecessor works, this project may look meager, currently supporting only
@@ -81,48 +144,23 @@ this terminology is not universally accepted (yet!).
 
 # Coding style
 
-## General
 My goal is to write excellent code, even though I do not always succeed :-).
 Cleanliness, logical structure, readability and maintainability are the most important
 requirements. Efficiency (runtime and/or space) is also important, although it normally
 comes on second place. [The Arduino Style Guide](https://www.arduino.cc/en/Reference/APIStyleGuide)
-has different goals (essentially optimizing for novice programmers). I therefore
-do not recognize it.
+has different goals (essentially optimizing for novice programmers,
+"Some of these run counter to professional programming practice"). It is therefore
+not given priority in this project.
 
-## Documentation
+# Documentation
 The main documentation for the classes is found in the source files themselves. It can be
 extracted to a browse-able documentation using the program [Doxygen](http://www.doxygen.org).
 After installing the program, fire up the program in the source directory. It will generate documentation in
 a subdirectory `html`. To browse, open `html/index.html` in a browser.
 
-## Files
-As opposed to the predecessor projects, this project has a header (`*.h`) file and an implementation file
-(`*.cpp`, sometimes missing) for each public class.
-
-## Types
-There are some project specific data typedefs in `InfraredTypes.h`.
-For durations in microseconds, the data type `microseconds_t` is to be
-used. If desired/necessary, this can be either `uint16_t` or
-`uint32_t`. For durations in milliseconds, use the type
-`millisecons_t`. Likewise, use `frequency_t` for modulation frequency in
-Hz.
-
-For "sizes", use `size_t`, which is a standard C type.
-
-Use implementation dependent types like `int` if and _only if_ it is OK for the
-compiler to select any implementation allowed by the C++ language.
-
-Use `unsigned int` for quantities that can "impossibly" be larger than 65535.
-
-## Error handling
-Simple answer: there is none. If a function is sent erroneous data,
-it just silently ignores the request, or does something else instead.
-This (unfortunately) seems to be the standard procedure in Arduino programming.
-
-I am used to exception based error handling, for some reason this is not used by
-the Arduino community.
-
-Constructive suggestions are welcome.
+The documentation is written for the _user_ of the library, not the developer.
+For this reason, the files `Arduino.h` and `IRremoteInt.h` have been deliberately excluded from the documentation,
+to keep it centered on the main issues for the programming on the target system.
 
 # Multi platform coding
 For someone used to, e.g., Netbeans or Eclipse, the Arduino IDE
@@ -131,8 +169,8 @@ for this reason, the code in the present library is designed to compile, and at 
 to some extent, run in a normal C++ environment on the host compiler. For this,
 some code modifications, in particular, a customized `Arduino.h` was needed.
 If the preprocessor symbol `ARDUINO` is defined,
-it just includes the standard Arduino `Arduino.h`, otherwise (i.e. for compiling for the host),
-it defines some more-or-less dummy stuff for allowing compiling for, and execution/debugging
+just includes the standard Arduino `Arduino.h` is included, otherwise (i.e. for compiling for the host),
+some more-or-less dummy stuff are defined, allowing compiling for, and execution/debugging
 on the host.
 
 This way, certain types of problems can be solved much faster. The drawback is that the code
@@ -142,7 +180,6 @@ makes maintenance harder.
 The subdirectory `tests` contains test(s) that run on the host. The supplied `Makefile`
 is intended for compiling for the host as target. It creates a library in the
 standard sense (`*.a`), and can be used to build and run tests in subdirectory `tests`.
-Tested on Linux only.
 
 With the provided `Doxyfile`, Doxygen will document only the (strict) Arduino parts,
 not the "portable C++".

@@ -51,7 +51,7 @@ IrSenderPwm *IrSenderPwm::getInstance(boolean create) {
     return instance;
 }
 
-#ifndef UNUSED
+#if ! defined(ARDUINO) & !defined(UNUSED)
 #define UNUSED
 #endif
 void IrSenderPwm::enable(unsigned char khz UNUSED) {

@@ -2,12 +2,6 @@
 #include "IrReader.h"
 #include <string.h>
 #include <stdlib.h>
-#ifdef ARDUINO
-#include <avr/pgmspace.h>
-#else
-#define PROGMEM
-#define strcpy_P strcpy
-#endif
 
 //{38.4k,564}<1,-1|1,-3>(16,-8,D:8,S:8,F:8,~F:8,1,^108m,(16,-4,1,^108m)*) [D:0..255,S:0..255=255-D,F:0..255]
 

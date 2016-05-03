@@ -8,9 +8,16 @@
 
 #include "IrWidget.h"
 
+/**
+ * This class implements the IrWidget. It delivers the duration and an estimate of the
+ * modulation frequency based upon the collected samples. Since it uses a single timer,
+ * it is singleton class, only instantiable by the factory method newIrWidgetAggregating.
+ */
 class IrWidgetAggregating : public IrWidget {
 private:
     static IrWidgetAggregating *instance;
+    IrWidgetAggregating() {
+    }
 
 public:
     void capture();

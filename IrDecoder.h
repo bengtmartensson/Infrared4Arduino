@@ -3,6 +3,9 @@
 
 #include "InfraredTypes.h"
 
+/**
+ * Abstract base class for all decoder classes.
+ */
 class IrDecoder {
 public:
     IrDecoder() {
@@ -11,12 +14,25 @@ public:
 
     virtual ~IrDecoder() {}
 
+    /**
+     * Returns a textual description the decode for human consumption.
+     * @return decode as text.
+     */
     virtual const char *getDecode() const = 0;
 
+    /**
+     * Returns true if the decode was successful.
+     * @return validity
+     */
     virtual boolean isValid() const {
         return valid;
     }
 
+    /**
+     * If valid, prints the decode to the stream.
+     * @param stream where the output is generated
+     * @return success status
+     */
     boolean printDecode(Stream& stream) const {
         if (isValid())
             stream.println(getDecode());
@@ -33,6 +49,11 @@ protected:
         valid = valid_;
     }
 
+    /**
+     * Tests if the argument is large enough to be considered an ending of a decodable signal.
+     * @param duration time to be tested
+     * @return true if the duration is long enough
+     */
     static boolean isEnding(microseconds_t duration) {
         return duration > endingMin;
     }

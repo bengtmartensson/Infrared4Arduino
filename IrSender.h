@@ -22,7 +22,7 @@ this program. If not, see http://www.gnu.org/licenses/.
 #include "IrSignal.h"
 
 /**
- * Common base class for all sending classes.
+ * Abstract base class for all sending classes.
  */
 class IrSender {
 private:
@@ -39,9 +39,21 @@ protected:
 public:
     virtual ~IrSender();
 
-    //virtual void send(const microseconds_t buf[], unsigned int len, frequency_t frequency) = 0;
+    /**
+     * Sends an IrSequence with the prescribed frequency
+     * @param irSequence
+     * @param frequency frequency in Hz
+     */
     virtual void send(const IrSequence& irSequence, frequency_t frequency = IrSignal::defaultFrequency) = 0;
 
+    /**
+     * Sends the IrSignal given as argument the prescribed number of times.
+     * This will send the intro sequence signal of the IrSignal, noSend of the
+     * repeat, alternatively noSends - 1 repeats if intro is non-empty, and finally
+     * the ending sequence.
+     * @param irSignal
+     * @param noSends
+     */
     void sendIrSignal(const IrSignal& irSignal, unsigned int noSends = 1);
 
     /** Force output pin inactive. */

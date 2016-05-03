@@ -1,10 +1,18 @@
 #ifndef IRTIMERDEFS_H
 #define IRTIMERDEFS_H
 
-#define IRPRONTO
-#include "IRremoteInt.h"
+/**
+ * @file IrTimerDefs.h
+ * @brief Definition of timers etc is encapsulated in this file.
+ */
 
-// These have different meanings for us
+/// @cond false
+#define IRPRONTO
+/// @endcond
+#include "IRremoteInt.h"
+#undef IRPRONTO
+
+// These have different meanings for us than in IRremote, undefine
 #undef STATE_IDLE
 #undef STATE_MARK
 #undef STATE_SPACE

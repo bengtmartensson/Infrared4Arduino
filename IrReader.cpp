@@ -29,10 +29,6 @@ void IrReader::dump(Stream &stream) const {
     stream.println();
 }
 
-/**
- * Generate an IrSequence from the IrReader.
- * @return IrSequence. The user must delete this to avoid memory leaks.
- */
 IrSequence *IrReader::toIrSequence() const {
     microseconds_t *durations = new microseconds_t[getDataLength()];
     for (unsigned int i = 0; i < getDataLength(); i++)

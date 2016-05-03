@@ -3,6 +3,9 @@
 
 #include "IrReceiver.h"
 
+/**
+ * An implementation of IrReceiver using polling of the input pin. Thus uses no timer.
+ */
 class IrReceiverPoll : public IrReceiver {
 private:
     /** Data buffer */

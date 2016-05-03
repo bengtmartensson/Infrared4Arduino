@@ -67,12 +67,14 @@ public:
 
     /**
      * Print a human readable representation of the IrSignal on the Stream supplied.
+     * @param stream Stream onto the output is printed.
      * @param usingSigns is true, prepend marks with '+' and gaps with '-'.
      */
     void dump(Stream& stream, boolean usingSigns = false) const;
 
     /**
      * Print a human readable representation of the IrSignal on the Stream supplied, using signs.
+     * @param stream Stream onto the output is printed.
      */
     void dumpWithSigns(Stream& stream) const {
         dump(stream, true);
@@ -89,12 +91,15 @@ public:
 
     /**
      * Static version of dumpFrequency.
+     * @param stream Stream onto the output is printed.
+     * @param frequency modulation frequency
      */
     static boolean dumpFrequency(Stream& stream, frequency_t frequency);
 
     /**
      * Implementation of the count semantics, i.e.,
      * how many repetitions should be sent if the signal is sent noSend times.
+     * @param noSends number of times to "send signal".
      */
     unsigned int noRepetitions(unsigned int noSends) const {
         return noSends == 0 ? 0

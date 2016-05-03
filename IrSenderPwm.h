@@ -35,9 +35,8 @@ private:
 
 public:
     /**
-     *  Returns a pointer to the instance, or NULL if not initialized.
+     * Returns a pointer to the instance, or NULL if not initialized.
      * If argument true, in the latter case creates a new instance and returns it.
-     * (Yes, this is against the Arduino style...)
      */
     static IrSenderPwm *getInstance(boolean create = false);
 
@@ -51,6 +50,7 @@ public:
         delete instance;
         instance = NULL;
     }
+
     void send(const IrSequence& sequence, frequency_t frequency = IrSignal::defaultFrequency);
 };
 

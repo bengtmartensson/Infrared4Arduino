@@ -23,8 +23,9 @@ this program. If not, see http://www.gnu.org/licenses/.
 #include "IrSequence.h"
 
 /**
- * This is an abstract base class for all IR readers, capturing or receiving.
- * It should also serve as an interface that can be printed and decoded.
+ * Abstract base class for all IR readers, capturing or receiving.
+ * It should also serve as an interface description,
+ * allowing for received data to be printed and decoded.
  */
 class IrReader {
 public:
@@ -49,6 +50,10 @@ protected:
         return (x & 1) ? x + 1 : x;
     }
 
+    /**
+     * Constructs an IrReader with buffersize bufSize_, possibly increased to be even.
+     * @param bufSize_
+     */
     IrReader(size_t bufSize_) : bufferSize(forceEven(bufSize_)),timeouted(false) {
     }
 
@@ -63,22 +68,55 @@ public:
         timeouted = false;
     };
 
+    /**
+     * Start reception of IR data.
+     */
     virtual void enable() {
     };
 
+    /**
+     * Stop reception of IR data.
+     */
     virtual void disable() {
     };
 
+    /**
+     * Convenience function: enable, wait until data is collected or timeout has occured, disable.
+     */
     virtual void receive() = 0;
 
+    /**
+     * Returns true if there is collected data.
+     * @return status
+     */
     virtual boolean isReady() const = 0;
 
-    virtual size_t getDataLength() const = 0; // was getCaptureCount())
+    /**
+     * Returns the number of collected durations.
+     * @return number durations
+     */
+    virtual size_t getDataLength() const = 0;
+
+    /**
+     * Returns the index-th duration, if possible.
+     * @param index index of duration
+     * @return requested duration
+     */
     virtual microseconds_t getDuration(unsigned int index) const = 0;
+
+    /**
+     * Prints a textual representation of the received data to the Stream supplied.
+     * @param stream Stream to which to print
+     */
     virtual void dump(Stream &stream) const;
+
+    /**
+     * Generates an IrSequence from the IrReader.
+     * @return IrSequence. The user must delete this to avoid memory leaks.
+     */
     IrSequence *toIrSequence() const;
 
-    virtual boolean isEmpty() const { // was hasContent())
+    virtual boolean isEmpty() const {
         return getDataLength() == 0;
     }
 
@@ -102,10 +140,20 @@ public:
         return bufferSize;
     }
 
+    /**
+     * Sets the markExcess, a number (possibly negative) to be subtracted from the on-durations
+     * and added to the off.durations.
+     * @param markExcess_ possibly negative new value
+     */
     void setMarkExcess(int16_t markExcess_) {
         markExcess = markExcess_;
     }
 
+    /**
+     * Gets the markExcess, a number (possibly negative) to be subtracted from the on-durations
+     * and added to the off.durations.
+     * @return markExcess
+     */
     int16_t getMarkExcess() const {
         return markExcess;
     }

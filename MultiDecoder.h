@@ -4,15 +4,21 @@
 #include "IrReader.h"
 #include "IrDecoder.h"
 
+/**
+ * A preliminary multi protocol decoder. Tries the Nec1- and the Rc5 decoders.
+ */
 class MultiDecoder : public IrDecoder {
 public:
+    /**
+     * Enum over possible outcomes of the decoder.
+     */
     enum Type {
-        timeout,
-        noise,
-        undecoded,
-        nec,
-        nec_ditto,
-        rc5
+        timeout,        ///< beginTimeout reached
+        noise,          ///< nothing sensible found
+        undecoded,      ///< decoding failed
+        nec,            ///< NEC1 intro
+        nec_ditto,      ///< NEC1 repeat
+        rc5             ///< RC5 signal (= repeat sequence)
     };
 
 private:
@@ -24,6 +30,10 @@ public:
         return type;
     }
 
+    /**
+     * Constructs a MultiDecoder from an IrReader, containing data.
+     * @param irReader IrReader with data, i.e. with isReady() true.
+     */
     MultiDecoder(const IrReader &irReader);
 
     virtual ~MultiDecoder() {

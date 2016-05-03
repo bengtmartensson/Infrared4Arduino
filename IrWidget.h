@@ -37,6 +37,10 @@ http://arduino.cc/en/Hacking/PinMapping2560
 
 #define USE_PRESCALER_FACTOR_8 1
 
+/**
+ * Base class for classes based upon ICP pins capture.
+ * See <a href="http://www.mikrocontroller.net/articles/High-Speed_capture_mit_ATmega_Timer">this article (in German)</a>.
+ */
 class IrWidget : public IrReader {
 protected:
     frequency_t frequency;

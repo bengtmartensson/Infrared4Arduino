@@ -1,5 +1,3 @@
-// {36k,msb,889}<1,-1|-1,1>((1:1,~F:1:6,T:1,D:5,F:6,^114m)+,T=1-T)[T@:0..1=0,D:0..31,F:0..127]
-
 #include "Rc5Renderer.h"
 
 // NOTE: writing intro[i++] = ... produces wrong result, compiler bug?
@@ -28,10 +26,6 @@ const IrSignal *Rc5Renderer::newIrSignal(unsigned int D, unsigned int F, unsigne
     IrSequence *ending = new IrSequence();
     return new IrSignal(*intro, *repeatSequence, *ending, frequency);
 }
-
-//const IrSignal& Rc5Renderer::render() const {
-//    return *(new IrSignal(frequency, 0, index, 0, NULL, repeat, NULL));
-//}
 
 void Rc5Renderer::emitMsb(unsigned int x, unsigned int length,
         unsigned int& index, int& pending, microseconds_t *repeat) {

@@ -42,11 +42,15 @@ http://arduino.cc/en/Hacking/PinMapping2560
  * See <a href="http://www.mikrocontroller.net/articles/High-Speed_capture_mit_ATmega_Timer">this article (in German)</a>.
  */
 class IrWidget : public IrReader {
+public:
+    static const int16_t defaultMarkExcess = 0;
+
 protected:
     frequency_t frequency;
 
     IrWidget(size_t captureLength = defaultCaptureLength,
             boolean pullup = false,
+            int16_t markExcess = defaultMarkExcess,
             milliseconds_t beginningTimeout = defaultBeginningTimeout,
             milliseconds_t endingTimeout = defaultEndingTimeout);
     virtual ~IrWidget();
@@ -55,8 +59,10 @@ public:
 
     virtual void capture() = 0;
 
-    /** For compatibility with the receiver classes, receive is a synonym for capture. */
-    void receive() { capture(); }
+/** For compatibility with the receiver classes, receive is a synonym for capture. */
+    void receive() {
+        capture();
+    }
 
     size_t getDataLength() const { // was: getCaptureCount()
         return captureCount;

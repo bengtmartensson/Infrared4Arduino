@@ -7,20 +7,22 @@
 
 IrWidgetAggregating::IrWidgetAggregating(size_t captureLength,
         boolean pullup,
+        int16_t markExcess,
         milliseconds_t beginningTimeout,
         milliseconds_t endingTimeout)
-: IrWidget(captureLength, pullup, beginningTimeout, endingTimeout) {
+: IrWidget(captureLength, pullup, markExcess, beginningTimeout, endingTimeout) {
 }
 
 IrWidgetAggregating *IrWidgetAggregating::instance = NULL;
 
 IrWidgetAggregating *IrWidgetAggregating::newIrWidgetAggregating(size_t captureLength,
             boolean pullup,
+            int16_t markExcess,
             milliseconds_t beginningTimeout,
             milliseconds_t endingTimeout) {
     if (instance != NULL)
         return NULL;
-    instance = new IrWidgetAggregating(captureLength, pullup,
+    instance = new IrWidgetAggregating(captureLength, pullup, markExcess,
             beginningTimeout, endingTimeout);
     return instance;
 }

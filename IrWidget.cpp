@@ -31,10 +31,12 @@ http://arduino.cc/en/Hacking/PinMapping2560
 
 IrWidget::IrWidget(size_t captureLength,
         boolean pullup,
+        int16_t markExcess,
         milliseconds_t beginningTimeout,
         milliseconds_t endingTimeout) : IrReader(captureLength) {
     setup(pullup);
     captureData = new microseconds_t[bufferSize];
+    setMarkExcess(markExcess);
     setBeginningTimeout(beginningTimeout);
     //endingTimeout = _BV(RANGE_EXTENSION_BITS) - 1;
     setEndingTimeout(endingTimeout);

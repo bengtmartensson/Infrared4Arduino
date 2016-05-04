@@ -29,12 +29,14 @@ public:
 
     static IrWidgetAggregating *newIrWidgetAggregating(size_t captureLength = defaultCaptureLength,
             boolean pullup = false,
+            int16_t markExcess = defaultMarkExcess,
             milliseconds_t beginningTimeout = defaultBeginningTimeout,
             milliseconds_t endingTimeout = defaultEndingTimeout);
 
 protected:
     IrWidgetAggregating(size_t captureLength = defaultCaptureLength,
             boolean pullup = false,
+            int16_t markExcess = defaultMarkExcess,
             milliseconds_t beginningTimeout = defaultBeginningTimeout,
             milliseconds_t endingTimeout = defaultEndingTimeout);
 

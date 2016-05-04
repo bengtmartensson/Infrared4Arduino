@@ -11,6 +11,8 @@ const IrSignal *Rc5Renderer::newIrSignal(unsigned int D, unsigned int F) {
     return newIrSignal(D, F, T);
 }
 
+static const IrSequence emptyIrSequence;
+
 const IrSignal *Rc5Renderer::newIrSignal(unsigned int D, unsigned int F, unsigned int T) {
     unsigned int index = 0U;
     int pending = 0;
@@ -21,10 +23,8 @@ const IrSignal *Rc5Renderer::newIrSignal(unsigned int D, unsigned int F, unsigne
     emitMsb(D, 5U, index, pending, repeat);
     emitMsb(F, 6U, index, pending, repeat);
     emitEnd(index, pending, repeat);
-    IrSequence *intro = new IrSequence();
     IrSequence *repeatSequence = new IrSequence(repeat, index, true);
-    IrSequence *ending = new IrSequence();
-    return new IrSignal(*intro, *repeatSequence, *ending, frequency);
+    return new IrSignal(emptyIrSequence, *repeatSequence, emptyIrSequence, frequency);
 }
 
 void Rc5Renderer::emitMsb(unsigned int x, unsigned int length,

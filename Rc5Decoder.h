@@ -50,7 +50,7 @@ public:
      * @param stream Stream
      * @return success of operation
      */
-    static boolean tryDecode(const IrReader& irReader, Stream& string);
+    static boolean tryDecode(const IrReader& irReader, Stream& stream);
 
     const char *getDecode() const;
 

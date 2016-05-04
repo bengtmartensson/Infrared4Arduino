@@ -6,6 +6,7 @@
 
 const microseconds_t Nec1Renderer::repeatData[repeatLength] = { 9024, 2256, 564, 65535 };
 const IrSequence Nec1Renderer::repeat(repeatData, repeatLength, false);
+static const IrSequence emptyIrSequence;
 
 const IrSignal *Nec1Renderer::newIrSignal(unsigned int D, unsigned int S, unsigned int F) {
     microseconds_t *introData = new microseconds_t[introLength];
@@ -19,9 +20,8 @@ const IrSignal *Nec1Renderer::newIrSignal(unsigned int D, unsigned int S, unsign
     lsbByte(introData, i, sum, 255-F);
     introData[i] = 564; i++;
     introData[i] = (microseconds_t) (108000 - sum); i++;
-    IrSequence *intro = new IrSequence(introData, introLength, true);
-    IrSequence *ending = new IrSequence();
-    return new IrSignal(*intro, repeat, *ending, frequency);
+    IrSequence *introPtr = new IrSequence(introData, introLength, true);
+    return new IrSignal(*introPtr, repeat, emptyIrSequence, frequency);
 }
 
 void Nec1Renderer::lsbByte(microseconds_t *intro, unsigned int& i, uint32_t& sum, unsigned int X) {

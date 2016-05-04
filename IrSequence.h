@@ -7,7 +7,7 @@
  * This class consists of a vector of durations. The even entries denotes spaces,
  * while the odd entries denotes gaps. The length should always be even, i.e.,
  * the sequences starts with a space, and ends with a gap.
- * This class is immutablle.
+ * This class is immutable.
  */
 class IrSequence {
 private:

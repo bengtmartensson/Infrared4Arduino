@@ -51,8 +51,10 @@ IrSenderPwm *IrSenderPwm::getInstance(boolean create) {
     return instance;
 }
 
-#if ! defined(ARDUINO) & !defined(UNUSED)
+#ifndef UNUSED
+/// @cond false
 #define UNUSED
+/// @endcond
 #endif
 void IrSenderPwm::enable(unsigned char khz UNUSED) {
     TIMER_DISABLE_INTR;

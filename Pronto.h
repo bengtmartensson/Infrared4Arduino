@@ -34,6 +34,8 @@ public:
      * @return IrSignal
      */
     static IrSignal *parse(const char *str);
+
+    // TODO: static IrSignal *parse(const __FlashStringHelper *str);
 };
 
 #endif	/* PRONTO_H */

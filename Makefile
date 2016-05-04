@@ -43,3 +43,4 @@ build-tests:
 
 test: test1
 
+all: test doc

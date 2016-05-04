@@ -1,23 +1,30 @@
+// This sketch demonstrates the MultiDecoder.
+// It requires a demodulating sensor connected to pin RECEIVE_PIN.
+
 #include <IrReceiverSampler.h>
 #include <MultiDecoder.h>
+
+#define RECEIVE_PIN 5U
+#define BUFFERSIZE 200U
+#define BAUD 115200
 
 IrReceiver *receiver;
 
 void setup() {
-    Serial.begin(115200);
-    receiver = IrReceiverSampler::newIrReceiverSampler(200, 5);
+    Serial.begin(BAUD);
+    receiver = IrReceiverSampler::newIrReceiverSampler(BUFFERSIZE, RECEIVE_PIN);
 }
 
 void loop() {
     receiver->receive();
 
     if (receiver->isEmpty())
-        Serial.println("timeout");
+        Serial.println(F("timeout"));
     else {
         MultiDecoder decoder(*receiver);
         if (decoder.isValid())
             decoder.printDecode(Serial);
         else
-            Serial.println("No decode");
+            Serial.println(F("No decode"));
     }
 }

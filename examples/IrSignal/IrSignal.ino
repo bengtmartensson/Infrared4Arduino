@@ -1,3 +1,5 @@
+// Just a trivial exercise on creating and printing of IrSignal
+
 #include <IrSignal.h>
 
 static const microseconds_t intro[] = {

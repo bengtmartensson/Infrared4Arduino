@@ -1,18 +1,23 @@
+// This sketch demonstrates the IrWidgetAggregating.
+// It requires a non-demodulating sensor connected to the capture pin.
+
 #include <Arduino.h>
 #include <IrWidgetAggregating.h>
+
+#define BUFFERSIZE 200U
+#define BAUD 115200
 
 IrWidgetAggregating *capturer;
 
 void setup() {
-    Serial.begin(115200);
-    capturer = IrWidgetAggregating::newIrWidgetAggregating(200);
+    Serial.begin(BAUD);
+    capturer = IrWidgetAggregating::newIrWidgetAggregating(BUFFERSIZE);
 }
 
 void loop() {
-    capturer->reset();
-    capturer->receive();
-    if (capturer->isReady())
-        capturer->dump(Serial);
+    capturer->capture();
+    if (capturer->isEmpty())
+        Serial.println(F("timeout"));
     else
-        Serial.println("timeout");
+        capturer->dump(Serial);
 }

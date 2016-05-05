@@ -3,8 +3,6 @@
 #include <IrReceiverPoll.h>
 #include <IrReceiverSampler.h>
 
-#include "IrReceiverSampler.h"
-
 IrReader *reader;
 const unsigned int captureLength = 200;
 const pin_t receiverPin = 5;
@@ -33,7 +31,7 @@ void setup() {
             ? (IrReader*) new IrReceiverPoll(captureLength, receiverPin,
             false, markExcess, beginningTimeout, endingTimeout)
             : (IrReader*) IrWidgetAggregating::newIrWidgetAggregating(captureLength,
-            false, beginningTimeout, endingTimeout);
+            false, markExcess, beginningTimeout, endingTimeout);
     Serial.println(F("Now fire IR signals at your sensor."));
 }
 

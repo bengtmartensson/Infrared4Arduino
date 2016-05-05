@@ -2,7 +2,7 @@
 # Use Arduino IDE for compiling for Arduino
 
 ifneq ($(ARDUINO),)
-$(error This Makefile is not for compiling target code, use the Arduino IDE inst)
+$(error This Makefile is not for compiling target code, for that, use the Arduino IDE.)
 endif
 
 BOARDDEFINES=
@@ -11,7 +11,7 @@ BROWSER=firefox
 DEBUGFLAGS=-g
 WARNINGFLAGS=-Wall -Werror -Wextra
 
-VPATH=tests
+VPATH=tests src
 
 .PRECIOUS: test1
 
@@ -26,7 +26,7 @@ libInfrared.a: $(OBJS)
 	$(AR) rs $@ $(OBJS)
 
 %.o: %.cpp
-	$(CXX) -I. -std=c++11 $(BOARDDEFINES) $(WARNINGFLAGS) $(OPTIMIZEFLAGS) $(DEBUGFLAGS) -c $<
+	$(CXX) -Isrc -std=c++11 $(BOARDDEFINES) $(WARNINGFLAGS) $(OPTIMIZEFLAGS) $(DEBUGFLAGS) -c $<
 
 test%: test%.o libInfrared.a
 	$(CXX) -o $@ $< -L. -lInfrared
@@ -34,10 +34,10 @@ test%: test%.o libInfrared.a
 
 doc:
 	doxygen
-	$(BROWSER) html/index.html
+	$(BROWSER) api-doc/index.html
 
 clean:
-	rm -rf *.a *.o html test1
+	rm -rf *.a *.o api-doc test1
 
 build-tests:
 

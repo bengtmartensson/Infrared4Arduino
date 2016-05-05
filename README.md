@@ -15,7 +15,7 @@ contribution](http://www.hifi-remote.com/forums/viewtopic.php?p=111876#111876).
 
 
 The classes `IrWidget` and `IrWidgetAggregating` are based on Michael's code.
-The classes `IrReceiverSampler` and `IrSenderPwm`, and in particular the file [`IRremoteInt.h`](IRremoteInt.h),
+The classes `IrReceiverSampler` and `IrSenderPwm`, and in particular the file `IRremoteInt.h`,
 are adapted from Kevin's and Chris' work. The remaining files are almost completely written
 from scratch, although the influence of Kevin and Chris is gratefully acknowledged.
 
@@ -32,7 +32,7 @@ them. Most classes are immutable. The classes are `const`-correct.
 # API
 
 ## Types
-There are some project specific data typedefs in [`InfraredTypes.h`](InfraredTypes.h).
+There are some project specific data typedefs in `InfraredTypes.h`.
 For durations in microseconds, the data type `microseconds_t` is to be
 used. If desired/necessary, this can be either `uint16_t` or
 `uint32_t`. For durations in milliseconds, use the type
@@ -51,7 +51,7 @@ An `IrSequence` is a vector of durations, i.e. sequence of interleaving gaps and
 contain the modulation frequence. As opposed to IRremote and IRLib, our sequences always start with
 a space and end with a gap. It is claimed to be a more relevant representation than the one of IRremote and IRLib.
 
-An `IrSignal` consists of a modulation frequency and three IrSequences: intro-, repeat-, and ending sequence. All of these, but not all, can be
+An `IrSignal` consists of a modulation frequency and three `IrSequence`s: intro-, repeat-, and ending sequence. All of these, but not all, can be
 empty. If repeat is empty, intro has to be non-empty and ending empty. The intro sequence is always sent first,
 then comes a zero or more repeat sequences, and finally the ending sequence. To send a signal _n_ > 0 times shall mean
 the following: If the intro  is non-empty, send intro, _n_ - 1 repeats, and then the ending. If the intro is empty,
@@ -68,7 +68,7 @@ is sensible, come with public constructors. (However, the user still has to take
 for avoiding pin- and timer-conflicts.)
 
 ## Hardware configuration
-For hardware support, the file [`IRremoteInt.h`](IRremoteInt.h) from the IRremote project is used. This means that
+For hardware support, the file `IRremoteInt.h` from the IRremote project is used. This means that
 all hardware that project supports is also supported here (for `IrReceiverSampler` and `IrSenderPwm`).
 (Actually, a small fix, borrowed from IRLib, was used
 to support Arduinos with ATMega32U4 (Leonardo, Micro).)
@@ -96,7 +96,7 @@ following occurs:
 As opposed to other infrared libraries, there are no user changeable parameters as CPP symbols.
 However, the timer
 configuration is compiled in, depending on the CPP processors given to the compiler, see
-the file [`IRremoteInt.h`](IRremoteInt.h).
+the file `IRremoteInt.h`.
 
 ## Files
 As opposed to the predecessor projects, this project has a header (`*.h`) file and an implementation file
@@ -145,6 +145,7 @@ this terminology is not universally accepted (yet!).
 # Coding style
 
 My goal is to write excellent code, even though I do not always succeed :-).
+"Everything as simple as possible, but not simpler."
 Cleanliness, logical structure, readability and maintainability are the most important
 requirements. Efficiency (runtime and/or space) is also important, although it normally
 comes on second place. [The Arduino Style Guide](https://www.arduino.cc/en/Reference/APIStyleGuide)
@@ -159,7 +160,7 @@ After installing the program, fire up the program in the source directory. It wi
 a subdirectory `html`. To browse, open `html/index.html` in a browser.
 
 The documentation is written for the _user_ of the library, not the developer.
-For this reason, the files `Arduino.h` and `IRremoteInt.h` have been deliberately excluded from the documentation,
+For this reason, the file `Arduino.h` has been deliberately excluded from the documentation,
 to keep it centered on the main issues for the programming on the target system.
 
 # Multi platform coding

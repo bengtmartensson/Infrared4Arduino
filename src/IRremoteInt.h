@@ -166,17 +166,17 @@ EXTERN  volatile irparams_t  irparams;
 
 // Teensy 2.0
 #elif defined(__AVR_ATmega32U4__)
-        #ifdef CORE_TEENSY
-		// it's Teensy 2.0
-		//#define IR_SEND_TIMER1	// tx = pin 14
-		//#define IR_SEND_TIMER3	// tx = pin 9
-		#define IR_SEND_TIMER4_HS	// tx = pin 10
-	#else
-	/* it's probably Leonardo */
-		#define IR_SEND_TIMER1		// tx = pin 9
-		//#define IR_SEND_TIMER3	// tx = pin 5
-		//#define IR_SEND_TIMER4_HS	// tx = pin 13
-	#endif
+#ifdef CORE_TEENSY
+	// it's Teensy 2.0
+	//#define IR_SEND_TIMER1  // tx = pin 14
+	//#define IR_SEND_TIMER3  // tx = pin 9
+	#define IR_SEND_TIMER4_HS // tx = pin 10
+#else
+        // it's probably Leonardo or Micro
+        #define IR_USE_TIMER1      // tx = pin 9
+        //#define IR_USE_TIMER3	  // tx = pin 5
+        //#define IR_USE_TIMER4_HS // tx = pin 13
+#endif
 
 // Teensy 3.0 / Teensy 3.1
 #elif defined(__MK20DX128__) || defined(__MK20DX256__)

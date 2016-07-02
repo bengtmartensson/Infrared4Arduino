@@ -14,9 +14,9 @@
  * But DO NOT use a system dependent type like int!
  */
 typedef uint16_t microseconds_t;
+//typedef uint32_t microseconds_t;
 /** Largest microseconds_t number possible */
 #define MICROSECONDS_T_MAX 65535
-//typedef uint32_t microseconds_t;
 //#define MICROSECONDS_T_MAX 4294967295
 
 /**

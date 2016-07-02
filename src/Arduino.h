@@ -51,10 +51,10 @@ inline void pinMode(uint8_t pin, int mode) {
             << ")" << std::endl;
 };
 
-inline void delayMicroseconds(unsigned int t) { sleep(t / 1000000); }; // ???
+inline void delayMicroseconds(unsigned int t) { usleep(t); };
 
 inline void delay(unsigned long t) {
-    sleep(t / 1000);
+    usleep(1000U * t);
 };
 
 inline void noInterrupts() {};

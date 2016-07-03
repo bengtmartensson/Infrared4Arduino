@@ -4,7 +4,9 @@
 // (Adding a print statement immediately after, and it works :-~)
 // So let's write intro[i] = ...; i++ at least for now.
 
-uint8_t Rc5Renderer::T = 1;
+#define MIN(a, b) ((a) < (b) ? (a) : (b))
+
+uint8_t Rc5Renderer::T = 1U;
 
 const IrSignal *Rc5Renderer::newIrSignal(unsigned int D, unsigned int F) {
     T = ! T;
@@ -40,13 +42,13 @@ void Rc5Renderer::emit(unsigned int x, unsigned int& index, int& pending,
                        microseconds_t *repeat) {
     if (pending == 0) {
         // First, do nothing, just stuff in pending.
-    } else if ((pending > 0) == ((x & 1) != 0)) {
+    } else if ((pending > 0) == ((x & 1U) != 0U)) {
         repeat[index] = timebase;
         index++;
         repeat[index] = timebase;
         index++;
     } else {
-        repeat[index] = 2 * timebase;
+        repeat[index] = 2U * timebase;
         index++;
     }
     pending = (x & 1U) ? 1 : -1;
@@ -56,5 +58,5 @@ void Rc5Renderer::emitEnd(unsigned int& index, int& pending, microseconds_t *rep
     if (pending > 0) {
         repeat[index] = timebase; index++;
     }
-    repeat[index] = 0xFFFF; index++;
+    repeat[index] = MIN(90000U, MICROSECONDS_T_MAX); index++;
 }

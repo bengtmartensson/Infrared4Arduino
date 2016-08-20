@@ -63,5 +63,5 @@ void IrReceiverPoll::collectData() {
 }
 
 void IrReceiverPoll::recordDuration(unsigned long t) {
-    durationData[dataLength++] = (microseconds_t) t;
+    durationData[dataLength++] = t <= MICROSECONDS_T_MAX ? (microseconds_t) t : MICROSECONDS_T_MAX;
 }

@@ -186,7 +186,7 @@ With the provided `Doxyfile`, Doxygen will document only the (strict) Arduino pa
 not the "portable C++".
 
 # License
-The entire work is licensed under the GPL3 license. Chris' as well as Ken's
+The entire work is licensed under the GPL2 "or later" license. Chris' as well as Ken's
 code is licensed under the LGPL 2.1-license. Michael's code carries the
 GPL2-license, although he is [willing to agree to "or later
 versions"](http://www.hifi-remote.com/forums/viewtopic.php?p=112586#112586).

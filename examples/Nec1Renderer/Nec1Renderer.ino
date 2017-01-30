@@ -3,15 +3,15 @@
 #include <Nec1Renderer.h>
 #include <IrSenderPwm.h>
 
-IrRenderer *renderer;
+const IrSignal *irSignal;
 
 void setup() {
     Serial.begin(115200);
-    renderer = new Nec1Renderer(122, 27); // volume_down for Yahama receivers
+    irSignal = Nec1Renderer::newIrSignal(122, 27); // volume_down for Yahama receivers
 }
 
 void loop() {
-    renderer->render().dump(Serial, true);
-    renderer->send(*IrSenderPwm::getInstance(true), 11);
+    irSignal->dump(Serial, true);
+    IrSenderPwm::getInstance(true)->sendIrSignal(*irSignal, 11);
     delay(10000);
 }

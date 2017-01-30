@@ -3,7 +3,10 @@
 // Version 2.0.1 June, 2015
 // Copyright 2009 Ken Shirriff
 // For details, see http://arcfn.com/2009/08/multi-protocol-infrared-remote-library.html
-//
+
+// This file contains all board specific information. It was previously contained within
+// IRremoteInt.h
+
 // Modified by Paul Stoffregen <paul@pjrc.com> to support other boards and timers
 //
 // Interrupt code based on NECIRrcv by Joe Knapp
@@ -14,59 +17,8 @@
 // Whynter A/C ARC-110WD added by Francesco Meschia
 //******************************************************************************
 
-#ifndef IRremoteint_h
-#define IRremoteint_h
-
-//------------------------------------------------------------------------------
-// Include the right Arduino header
-//
-#if defined(ARDUINO) && (ARDUINO >= 100)
-#	include <Arduino.h>
-#else
-#	if !defined(IRPRONTO)
-#		include <WProgram.h>
-#	endif
-#endif
-
-//------------------------------------------------------------------------------
-// This handles definition and access to global variables
-//
-#ifdef IR_GLOBAL
-#	define EXTERN
-#else
-#	define EXTERN extern
-#endif
-
-//------------------------------------------------------------------------------
-// Information for the Interrupt Service Routine
-//
-#define RAWBUF  101  // Maximum length of raw duration buffer
-
-typedef
-	struct {
-		// The fields are ordered to reduce memory over caused by struct-padding
-		uint8_t       rcvstate;        // State Machine state
-		uint8_t       recvpin;         // Pin connected to IR data from detector
-		uint8_t       blinkpin;
-		uint8_t       blinkflag;       // true -> enable blinking of pin on IR processing
-		uint8_t       rawlen;          // counter of entries in rawbuf
-		unsigned int  timer;           // State timer, counts 50uS ticks.
-		unsigned int  rawbuf[RAWBUF];  // raw data
-		uint8_t       overflow;        // Raw buffer overflow occurred
-	}
-irparams_t;
-
-// ISR State-Machine : Receiver States
-#define STATE_IDLE      2
-#define STATE_MARK      3
-#define STATE_SPACE     4
-#define STATE_STOP      5
-#define STATE_OVERFLOW  6
-
-// Allow all parts of the code access to the ISR data
-// NB. The data can be changed by the ISR at any time, even mid-function
-// Therefore we declare it as "volatile" to stop the compiler/CPU caching it
-EXTERN  volatile irparams_t  irparams;
+#ifndef IRremoteBoardDefs_h
+#define IRremoteBoardDefs_h
 
 //------------------------------------------------------------------------------
 // Defines for blinking the LED
@@ -102,47 +54,8 @@ EXTERN  volatile irparams_t  irparams;
 #	define SYSCLOCK  16000000  // main Arduino clock
 #endif
 
-//------------------------------------------------------------------------------
-// Defines for setting and clearing register bits
-//
-#ifndef cbi
-#	define cbi(sfr, bit)  (_SFR_BYTE(sfr) &= ~_BV(bit))
-#endif
-
-#ifndef sbi
-#	define sbi(sfr, bit)  (_SFR_BYTE(sfr) |= _BV(bit))
-#endif
-
-//------------------------------------------------------------------------------
-// Pulse parms are ((X*50)-100) for the Mark and ((X*50)+100) for the Space.
-// First MARK is the one after the long gap
-// Pulse parameters in uSec
-//
-
-// Due to sensor lag, when received, Marks  tend to be 100us too long and
-//                                   Spaces tend to be 100us too short
-#define MARK_EXCESS    100
-
 // microseconds per clock interrupt tick
 #define USECPERTICK    50
-
-// Upper and Lower percentage tolerances in measurements
-#define TOLERANCE       25
-#define LTOL            (1.0 - (TOLERANCE/100.))
-#define UTOL            (1.0 + (TOLERANCE/100.))
-
-// Minimum gap between IR transmissions
-#define _GAP            5000
-#define GAP_TICKS       (_GAP/USECPERTICK)
-
-#define TICKS_LOW(us)   ((int)(((us)*LTOL/USECPERTICK)))
-#define TICKS_HIGH(us)  ((int)(((us)*UTOL/USECPERTICK + 1)))
-
-//------------------------------------------------------------------------------
-// IR detector output is active low
-//
-#define MARK   0
-#define SPACE  1
 
 //------------------------------------------------------------------------------
 // Define which timer to use
@@ -166,20 +79,12 @@ EXTERN  volatile irparams_t  irparams;
 
 // Teensy 2.0
 #elif defined(__AVR_ATmega32U4__)
-#ifdef CORE_TEENSY
-	// it's Teensy 2.0
-	//#define IR_SEND_TIMER1  // tx = pin 14
-	//#define IR_SEND_TIMER3  // tx = pin 9
-	#define IR_SEND_TIMER4_HS // tx = pin 10
-#else
-        // it's probably Leonardo or Micro
-        #define IR_USE_TIMER1      // tx = pin 9
-        //#define IR_USE_TIMER3	  // tx = pin 5
-        //#define IR_USE_TIMER4_HS // tx = pin 13
-#endif
+	//#define IR_USE_TIMER1   // tx = pin 14
+	//#define IR_USE_TIMER3   // tx = pin 9
+	#define IR_USE_TIMER4_HS  // tx = pin 10
 
 // Teensy 3.0 / Teensy 3.1
-#elif defined(__MK20DX128__) || defined(__MK20DX256__)
+#elif defined(__MK20DX128__) || defined(__MK20DX256__) || defined(__MK64FX512__) || defined(__MK66FX1M0__)
 	#define IR_USE_TIMER_CMT  // tx = pin 5
 
 // Teensy-LC
@@ -192,13 +97,30 @@ EXTERN  volatile irparams_t  irparams;
 	#define IR_USE_TIMER2     // tx = pin 1
 	//#define IR_USE_TIMER3   // tx = pin 16
 
-// Sanguino
-#elif defined(__AVR_ATmega644P__) || defined(__AVR_ATmega644__)
+// MightyCore - ATmega1284
+#elif defined(__AVR_ATmega1284__) || defined(__AVR_ATmega1284P__)
 	//#define IR_USE_TIMER1   // tx = pin 13
 	#define IR_USE_TIMER2     // tx = pin 14
+	//#define IR_USE_TIMER3   // tx = pin 6
+
+// MightyCore - ATmega164, ATmega324, ATmega644
+#elif defined(__AVR_ATmega644__) || defined(__AVR_ATmega644P__) \
+|| defined(__AVR_ATmega324P__) || defined(__AVR_ATmega324A__) \
+|| defined(__AVR_ATmega324PA__) || defined(__AVR_ATmega164A__) \
+|| defined(__AVR_ATmega164P__)
+	//#define IR_USE_TIMER1   // tx = pin 13
+	#define IR_USE_TIMER2     // tx = pin 14
+	
+//MegaCore - ATmega64, ATmega128
+#elif defined(__AVR_ATmega64__) || defined(__AVR_ATmega128__)
+ 	#define IR_USE_TIMER1     // tx = pin 13
+
+// MightyCore - ATmega8535, ATmega16, ATmega32
+#elif defined(__AVR_ATmega8535__) || defined(__AVR_ATmega16__) || defined(__AVR_ATmega32__)
+ 	#define IR_USE_TIMER1     // tx = pin 13
 
 // Atmega8
-#elif defined(__AVR_ATmega8P__) || defined(__AVR_ATmega8__)
+#elif defined(__AVR_ATmega8__)
 	#define IR_USE_TIMER1     // tx = pin 9
 
 // ATtiny84
@@ -210,6 +132,7 @@ EXTERN  volatile irparams_t  irparams;
   #define IR_USE_TIMER_TINY0   // tx = pin 1
 
 // Arduino Duemilanove, Diecimila, LilyPad, Mini, Fio, Nano, etc
+// ATmega48, ATmega88, ATmega168, ATmega328
 #else
 	//#define IR_USE_TIMER1   // tx = pin 9
 	#define IR_USE_TIMER2     // tx = pin 3
@@ -263,11 +186,15 @@ EXTERN  volatile irparams_t  irparams;
 #	define TIMER_PWM_PIN  CORE_OC2B_PIN  // Teensy
 #elif defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
 #	define TIMER_PWM_PIN  9              // Arduino Mega
-#elif defined(__AVR_ATmega644P__) || defined(__AVR_ATmega644__)
-#	define TIMER_PWM_PIN  14             // Sanguino
+#elif defined(__AVR_ATmega1284__) || defined(__AVR_ATmega1284P__) \
+|| defined(__AVR_ATmega644__) || defined(__AVR_ATmega644P__) \
+|| defined(__AVR_ATmega324P__) || defined(__AVR_ATmega324A__) \
+|| defined(__AVR_ATmega324PA__) || defined(__AVR_ATmega164A__) \
+|| defined(__AVR_ATmega164P__)
+#	define TIMER_PWM_PIN  14             // MightyCore
 #else
 #	define TIMER_PWM_PIN  3              // Arduino Duemilanove, Diecimila, LilyPad, etc
-#endif
+#endif					     // ATmega48, ATmega88, ATmega168, ATmega328
 
 //---------------------------------------------------------
 // Timer1 (16 bits)
@@ -279,7 +206,9 @@ EXTERN  volatile irparams_t  irparams;
 #define TIMER_DISABLE_PWM  (TCCR1A &= ~(_BV(COM1A1)))
 
 //-----------------
-#if defined(__AVR_ATmega8P__) || defined(__AVR_ATmega8__)
+#if defined(__AVR_ATmega8__) || defined(__AVR_ATmega8535__) \
+|| defined(__AVR_ATmega16__) || defined(__AVR_ATmega32__) \
+|| defined(__AVR_ATmega64__) || defined(__AVR_ATmega128__)
 #	define TIMER_ENABLE_INTR   (TIMSK |= _BV(OCIE1A))
 #	define TIMER_DISABLE_INTR  (TIMSK &= ~_BV(OCIE1A))
 #else
@@ -310,13 +239,20 @@ EXTERN  volatile irparams_t  irparams;
 #	define TIMER_PWM_PIN  CORE_OC1A_PIN  // Teensy
 #elif defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
 #	define TIMER_PWM_PIN  11             // Arduino Mega
-#elif defined(__AVR_ATmega644P__) || defined(__AVR_ATmega644__)
-#	define TIMER_PWM_PIN  13             // Sanguino
+#elif defined(__AVR_ATmega64__) || defined(__AVR_ATmega128__)
+#	define TIMER_PWM_PIN  13	     // MegaCore
+#elif defined(__AVR_ATmega1284__) || defined(__AVR_ATmega1284P__) \
+|| defined(__AVR_ATmega644__) || defined(__AVR_ATmega644P__) \
+|| defined(__AVR_ATmega324P__) || defined(__AVR_ATmega324A__) \
+|| defined(__AVR_ATmega324PA__) || defined(__AVR_ATmega164A__) \
+|| defined(__AVR_ATmega164P__) || defined(__AVR_ATmega32__) \
+|| defined(__AVR_ATmega16__) || defined(__AVR_ATmega8535__)
+#	define TIMER_PWM_PIN  13             // MightyCore
 #elif defined(__AVR_ATtiny84__)
-# define TIMER_PWM_PIN  6
+# 	define TIMER_PWM_PIN  6
 #else
 #	define TIMER_PWM_PIN  9              // Arduino Duemilanove, Diecimila, LilyPad, etc
-#endif
+#endif					     // ATmega48, ATmega88, ATmega168, ATmega328
 
 //---------------------------------------------------------
 // Timer3 (16 bits)
@@ -350,6 +286,8 @@ EXTERN  volatile irparams_t  irparams;
 #	define TIMER_PWM_PIN  CORE_OC3A_PIN  // Teensy
 #elif defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
 #	define TIMER_PWM_PIN  5              // Arduino Mega
+#elif defined(__AVR_ATmega1284__) || defined(__AVR_ATmega1284P__)
+#	define TIMER_PWM_PIN  6              // MightyCore
 #else
 #	error "Please add OC3A pin number here\n"
 #endif
@@ -478,7 +416,7 @@ EXTERN  volatile irparams_t  irparams;
 #elif defined(IR_USE_TIMER_CMT)
 
 #define TIMER_RESET ({     \
-	uint8_t tmp = CMT_MSC; \
+	uint8_t tmp __attribute__((unused)) = CMT_MSC; \
 	CMT_CMD2 = 30;         \
 })
 
@@ -501,19 +439,18 @@ EXTERN  volatile irparams_t  irparams;
 #define  ISR(f)  void f(void)
 
 //-----------------
-#if (F_BUS == 48000000)
-#	define CMT_PPS_VAL  5
-#else
-#	define CMT_PPS_VAL  2
+#define CMT_PPS_DIV  ((F_BUS + 7999999) / 8000000)
+#if F_BUS < 8000000
+#error IRremote requires at least 8 MHz on Teensy 3.x
 #endif
 
 //-----------------
 #define TIMER_CONFIG_KHZ(val) ({ 	 \
 	SIM_SCGC4 |= SIM_SCGC4_CMT;      \
 	SIM_SOPT2 |= SIM_SOPT2_PTD7PAD;  \
-	CMT_PPS    = CMT_PPS_VAL;        \
-	CMT_CGH1   = 2667 / val;         \
-	CMT_CGL1   = 5333 / val;         \
+	CMT_PPS    = CMT_PPS_DIV - 1;    \
+	CMT_CGH1   = ((F_BUS / CMT_PPS_DIV / 3000) + ((val)/2)) / (val); \
+	CMT_CGL1   = ((F_BUS / CMT_PPS_DIV / 1500) + ((val)/2)) / (val); \
 	CMT_CMD1   = 0;                  \
 	CMT_CMD2   = 30;                 \
 	CMT_CMD3   = 0;                  \
@@ -524,13 +461,13 @@ EXTERN  volatile irparams_t  irparams;
 
 #define TIMER_CONFIG_NORMAL() ({  \
 	SIM_SCGC4 |= SIM_SCGC4_CMT;   \
-	CMT_PPS    = CMT_PPS_VAL;     \
+	CMT_PPS    = CMT_PPS_DIV - 1; \
 	CMT_CGH1   = 1;               \
 	CMT_CGL1   = 1;               \
 	CMT_CMD1   = 0;               \
-	CMT_CMD2   = 30               \
+	CMT_CMD2   = 30;              \
 	CMT_CMD3   = 0;               \
-	CMT_CMD4   = 19;              \
+	CMT_CMD4   = (F_BUS / 160000 + CMT_PPS_DIV / 2) / CMT_PPS_DIV - 31; \
 	CMT_OC     = 0;               \
 	CMT_MSC    = 0x03;            \
 })
@@ -607,4 +544,5 @@ EXTERN  volatile irparams_t  irparams;
 #else
 #	error "Internal code configuration error, no known IR_USE_TIMER# defined\n"
 #endif
-#endif
+
+#endif // ! IRremoteBoardDefs_h

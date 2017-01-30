@@ -6,25 +6,7 @@
  * @brief Definition of timers etc is encapsulated in this file.
  */
 
-/// @cond false
-#define IRPRONTO
-/// @endcond
-#include "IRremoteInt.h"
-#undef IRPRONTO
-
-// These have different meanings for us than in IRremote, undefine
-#undef STATE_IDLE
-#undef STATE_MARK
-#undef STATE_SPACE
-#undef STATE_STOP
-#undef STATE_OVERFLOW
-
-// Undef these, just to be on the safe side
-#undef RAWBUF
-#undef MARK_EXCESS
-#undef TOLERANCE
-#undef MARK
-#undef SPACE
+#include "IRremoteBoardDefs.h"
 
 #ifndef ARDUINO
 

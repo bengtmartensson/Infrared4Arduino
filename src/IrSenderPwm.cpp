@@ -21,7 +21,7 @@ this program. If not, see http://www.gnu.org/licenses/.
 
 IrSenderPwm *IrSenderPwm::instance = NULL;
 
-IrSenderPwm::IrSenderPwm() : IrSender(TIMER_PWM_PIN) {
+IrSenderPwm::IrSenderPwm() : IrSender(SEND_PIN) {
 }
 
 void IrSenderPwm::send(const IrSequence& irSequence, frequency_t frequency) {
@@ -58,7 +58,7 @@ IrSenderPwm *IrSenderPwm::getInstance(boolean create) {
 #endif
 void IrSenderPwm::enable(unsigned char khz UNUSED) {
     TIMER_DISABLE_INTR;
-    pinMode(TIMER_PWM_PIN, OUTPUT);
-    digitalWrite(TIMER_PWM_PIN, LOW);
+    pinMode(SEND_PIN, OUTPUT);
+    digitalWrite(SEND_PIN, LOW);
     TIMER_CONFIG_KHZ(khz);
 }

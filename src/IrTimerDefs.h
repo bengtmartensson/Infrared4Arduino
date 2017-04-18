@@ -6,7 +6,7 @@
  * @brief Definition of timers etc is encapsulated in this file.
  */
 
-#include "IRremoteBoardDefs.h"
+#include "boarddefs.h"
 
 #ifndef ARDUINO
 

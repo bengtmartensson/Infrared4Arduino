@@ -32,15 +32,16 @@ public:
     /**
      * Performs shallow copy.
      * @param orig original IrSequence to be cloned
+     * @param toBeFreed unused
      */
-    IrSequence(const IrSequence& orig);
+    IrSequence(const IrSequence& orig, boolean toBeFreed = false);
 
     /**
      * Performs shallow copy.
      * @param orig original IrSequence to be cloned
-     * @param toBeFreed If true, the destructor will delete the durations array.
+     * @param toBeFreed If true, will transfer the responsibility to delete the durations array.
      */
-    IrSequence(const IrSequence& orig, boolean toBeFreed);
+    IrSequence(IrSequence& orig, boolean toBeFreed = false);
 
     /**
      * Returns the length of the data.

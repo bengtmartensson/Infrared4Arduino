@@ -1,22 +1,22 @@
 #include "IrSignal.h"
 #include "IrSender.h"
 
-IrSignal::IrSignal(const IrSequence& intro_, const IrSequence& repeat_, const IrSequence& ending_,
-        frequency_t frequency_, boolean toBeFreed)
-: frequency(frequency_),intro(intro_, toBeFreed),repeat(repeat_, toBeFreed),ending(ending_, toBeFreed) {
+IrSignal::IrSignal(IrSequence& intro, IrSequence& repeat, IrSequence& ending,
+        frequency_t frequency, boolean toBeFreed)
+: frequency(frequency), intro(intro, toBeFreed), repeat(repeat, toBeFreed), ending(ending, toBeFreed) {
 }
 
-IrSignal::IrSignal(const IrSequence& intro_, const IrSequence& repeat_, const IrSequence& ending_,
-        frequency_t frequency_)
-: frequency(frequency_),intro(intro_),repeat(repeat_),ending(ending_) {
+IrSignal::IrSignal(const IrSequence& intro, const IrSequence& repeat, const IrSequence& ending,
+        frequency_t frequency, boolean toBeFreed __attribute__((unused)))
+: frequency(frequency), intro(intro, false), repeat(repeat, false), ending(ending, false) {
 }
 
-//IrSignal::IrSignal(const IrSignal& orig, boolean toBeFreed)
-//: frequency(orig.frequency),intro(orig.intro,toBeFreed),repeat(orig.repeat,toBeFreed),ending(orig.ending,toBeFreed) {
-//}
+IrSignal::IrSignal(IrSignal& orig, boolean toBeFreed)
+: IrSignal(orig.intro, orig.repeat, orig.ending, orig.frequency, toBeFreed) {
+}
 
-IrSignal::IrSignal(const IrSignal& orig)
-: frequency(orig.frequency),intro(orig.intro),repeat(orig.repeat),ending(orig.ending) {
+IrSignal::IrSignal(const IrSignal& orig, boolean toBeFreed __attribute__((unused)))
+: IrSignal(orig.intro, orig.repeat, orig.ending, orig.frequency, false) {
 }
 
 IrSignal::IrSignal(const microseconds_t *intro_, size_t introLength,
@@ -27,12 +27,6 @@ IrSignal::IrSignal(const microseconds_t *intro_, size_t introLength,
         intro(intro_, introLength, toBeFreed),
   repeat(repeat_, repeatLength, toBeFreed),
         ending(ending_, endingLength, toBeFreed) {
-}
-
-IrSignal::~IrSignal() {
-    //delete intro;
-    //delete repeat;
-    //delete ending;
 }
 
 IrSignal *IrSignal::clone() const {

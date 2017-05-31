@@ -53,5 +53,5 @@ IrSequence *Pronto::mkSequence(const uint16_t* data, size_t noPairs, double time
         uint32_t duration = (uint32_t) (data[i] * timebase);
         durations[i] = (microseconds_t)((duration <= MICROSECONDS_T_MAX) ? duration : MICROSECONDS_T_MAX);
     }
-    return new IrSequence(durations, 2*noPairs, false);
+    return new IrSequence(durations, 2*noPairs, true);
 }

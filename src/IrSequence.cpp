@@ -1,17 +1,22 @@
 #include "IrSequence.h"
 #include <string.h>
 
-IrSequence::IrSequence() : durations(NULL), length(0U), toBeFreed(false) {
+IrSequence::IrSequence() : durations(nullptr), length(0U), toBeFreed(false) {
 };
 
-IrSequence::IrSequence(const microseconds_t *durations_, size_t length_, boolean toBeFreed_)
-: durations(durations_), length(length_), toBeFreed(toBeFreed_) {
+IrSequence::IrSequence(const microseconds_t *durations, size_t length, boolean toBeFreed)
+: durations(durations), length(length), toBeFreed(toBeFreed) {
 }
 
-IrSequence::IrSequence(const IrSequence& orig) : durations(orig.durations), length(orig.length), toBeFreed(orig.toBeFreed) {
+IrSequence::IrSequence(const IrSequence& orig, boolean toBeFreed __attribute__((unused)))
+: durations(orig.durations), length(orig.length), toBeFreed(false) {
 };
 
-IrSequence::IrSequence(const IrSequence& orig, boolean toBeFreed_) : durations(orig.durations), length(orig.length), toBeFreed(toBeFreed_) {
+IrSequence::IrSequence(IrSequence& orig, boolean toBeFreed)
+: durations(orig.durations), length(orig.length), toBeFreed(toBeFreed && orig.toBeFreed) {
+    // If we're taking ownership of the underlying data, relinquish the original
+    if (this->toBeFreed)
+        orig.toBeFreed = false;
 };
 
 IrSequence::~IrSequence() {

@@ -1,5 +1,7 @@
 #include "IrSignal.h"
 
+#ifdef PRR
+
 /* IR Widget: capture a raw IR signal and dump the timing of the non-demodulated signal
 
 http://www.piclist.com/images/boards/irwidget/index.htm
@@ -99,3 +101,5 @@ void IrWidget::setup(boolean pullup) {
     std::cout << "pinMode(CAPTURE_PIN_1, " << (pullup ? "INPUT_PULLUP)" : "INPUT)") << std::endl;
 #endif
 }
+
+#endif

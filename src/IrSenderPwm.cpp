@@ -25,18 +25,68 @@ IrSenderPwm::IrSenderPwm() : IrSender(SEND_PIN) {
 }
 
 void IrSenderPwm::send(const IrSequence& irSequence, frequency_t frequency) {
-    enable(frequency/1000);
+    enable(frequency / 1000);
     for (unsigned int i = 0; i < irSequence.getLength(); i++) {
-        digitalWrite(getOutputPin(), (i & 1) ? LOW : HIGH);
-        if (i & 1) {
-            TIMER_DISABLE_PWM;
-        } else {
-            TIMER_ENABLE_PWM;
-        }
-        delayUSecs(irSequence.getDurations()[i]);
+        if (i & 1)
+            sendSpace(irSequence.getDurations()[i]);
+        else
+            sendMark(irSequence.getDurations()[i]);
     }
-    digitalWrite(getOutputPin(), LOW);
 }
+
+void inline IrSenderPwm::sendMark(milliseconds_t time) {
+#ifdef USE_SOFT_CARRIER
+    unsigned long start = micros();
+    unsigned long stop = start + time;
+    if (stop + (unsigned long) periodTime < start)
+        // Counter wrap-around, happens very seldomly, but CAN happen.
+        // Just give up instead of possibly damaging the hardware.
+        return;
+
+    unsigned long nextPeriodEnding = start;
+    unsigned long now = micros();
+    while (now < stop) {
+        SENDPIN_ON(getOutputPin());
+        sleepMicros(periodOnTime);
+        SENDPIN_OFF(getOutputPin());
+        nextPeriodEnding += periodTime;
+        sleepUntilMicros(nextPeriodEnding);
+        now = micros();
+    }
+#else
+    TIMER_ENABLE_PWM; // supposed to turn on
+    delayUSecs(time);
+#endif
+}
+
+void inline IrSenderPwm::sendSpace(milliseconds_t time) {
+    SENDPIN_OFF(getOutputPin());
+#ifndef USE_SOFT_CARRIER
+    TIMER_DISABLE_PWM;
+#endif
+    delayUSecs(time);
+}
+
+#ifdef USE_SOFT_CARRIER
+
+void inline IrSenderPwm::sleepMicros(unsigned long us) {
+#ifdef USE_SPIN_WAIT
+    sleepUntilMicros(micros() + us);
+#else
+    if (us > 0U) // Is this necessary? (Official docu https://www.arduino.cc/en/Reference/DelayMicroseconds does not tell.)
+        delayMicroseconds((unsigned int) us);
+#endif
+}
+
+void inline IrSenderPwm::sleepUntilMicros(unsigned long targetTime) {
+#ifdef USE_SPIN_WAIT
+    while (micros() < targetTime)
+        ;
+#else
+    sleepMicros(targetTime - micros());
+#endif
+}
+#endif // USE_SOFT_CARRIER
 
 IrSenderPwm *IrSenderPwm::newInstance() {
     if (instance != NULL)
@@ -56,9 +106,19 @@ IrSenderPwm *IrSenderPwm::getInstance(boolean create) {
 #define UNUSED
 /// @endcond
 #endif
-void IrSenderPwm::enable(unsigned char khz UNUSED) {
+
+void IrSenderPwm::enable(unsigned char khz
+#ifndef USE_SOFT_CARRIER
+        UNUSED
+#endif
+        ) {
     TIMER_DISABLE_INTR;
     pinMode(SEND_PIN, OUTPUT);
-    digitalWrite(SEND_PIN, LOW);
+    SENDPIN_OFF(SEND_PIN);
     TIMER_CONFIG_KHZ(khz);
+#ifdef USE_SOFT_CARRIER
+    periodTime = (1000U + khz / 2) / khz; // = 1000/khz + 1/2 = round(1000.0/khz)
+    periodOnTime = periodTime * DUTY_CYCLE / 100U - PULSE_CORRECTION;
+
+#endif
 }

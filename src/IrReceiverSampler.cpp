@@ -54,6 +54,7 @@ void IrReceiverSampler::reset() {
     dataLength = 0;
 }
 
+#ifdef USE_DEFAULT_ENABLE_IR_IN
 void IrReceiverSampler::enable() {
     reset();
     noInterrupts();
@@ -62,6 +63,7 @@ void IrReceiverSampler::enable() {
     TIMER_RESET;
     interrupts();
 }
+#endif
 
 void IrReceiverSampler::disable() {
     TIMER_DISABLE_INTR;
@@ -83,6 +85,7 @@ milliseconds_t IrReceiverSampler::getBeginningTimeout() const {
     return ticks2millisecs(beginningTimeoutInTicks);
 }
 
+#ifdef ISR
 /** Interrupt routine. It collects data into the data buffer. */
 ISR(TIMER_INTR_NAME) {
     IrReceiverSampler *recv = IrReceiverSampler::getInstance();
@@ -138,3 +141,4 @@ ISR(TIMER_INTR_NAME) {
             break;
     }
 }
+#endif // ISR

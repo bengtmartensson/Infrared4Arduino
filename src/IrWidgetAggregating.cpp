@@ -5,6 +5,8 @@
 
 #include "IrWidgetAggregating.h"
 
+#ifdef TCCR0B
+
 IrWidgetAggregating::IrWidgetAggregating(size_t captureLength,
         boolean pullup,
         int16_t markExcess,
@@ -168,3 +170,4 @@ endCapture:
     frequency = (frequency_t) (1000000000L / mediumPeriod);
 #endif // ARDUINO
 }
+#endif // TCCR0B

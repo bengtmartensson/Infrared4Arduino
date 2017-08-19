@@ -50,7 +50,7 @@ public:
      * @param stream Stream
      * @return success of operation
      */
-    static boolean tryDecode(const IrReader& irReader, Stream& stream);
+    static bool tryDecode(const IrReader& irReader, Stream& stream);
 
     const char *getDecode() const;
 
@@ -59,7 +59,7 @@ private:
     const static microseconds_t timebase = 889U;
     const static microseconds_t timebaseLower = 800U;
     const static microseconds_t timebaseUpper = 1000U;
-    static boolean getDuration(microseconds_t duration, unsigned int time) {
+    static bool getDuration(microseconds_t duration, unsigned int time) {
         return duration <= time * timebaseUpper
                 && duration >= time * timebaseLower;
     }

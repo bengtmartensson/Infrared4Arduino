@@ -8,7 +8,7 @@
 static const char nec1DittoLiteral[] = "NEC1 ditto";
 
 int Nec1Decoder::decodeFlashGap(microseconds_t flash, microseconds_t gap) {
-    boolean result = getDuration(flash, 1);
+    bool result = getDuration(flash, 1);
     if (!result)
         return invalid;
 
@@ -17,7 +17,7 @@ int Nec1Decoder::decodeFlashGap(microseconds_t flash, microseconds_t gap) {
             : invalid;
 }
 
-boolean Nec1Decoder::tryDecode(const IrReader& irReader, Stream& stream) {
+bool Nec1Decoder::tryDecode(const IrReader& irReader, Stream& stream) {
     Nec1Decoder decoder(irReader);
     return decoder.printDecode(stream);
 }
@@ -35,7 +35,7 @@ int Nec1Decoder::decodeParameter(const IrReader& irReader, unsigned int index) {
 
 Nec1Decoder::Nec1Decoder(const IrReader &irReader) : IrDecoder() {
     unsigned int index = 0;
-    boolean success;
+    bool success;
     if (irReader.getDataLength() == 4U) {
         success = getDuration(irReader.getDuration(index++), 16U);
         if (!success)

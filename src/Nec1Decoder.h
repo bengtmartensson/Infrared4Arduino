@@ -21,7 +21,7 @@ private:
 
     char decode[17];
 
-    static boolean getDuration(microseconds_t duration, unsigned int time) {
+    static bool getDuration(microseconds_t duration, unsigned int time) {
         return duration <= time * timebaseUpper
                 && duration >= time * timebaseLower;
     }
@@ -66,7 +66,7 @@ public:
      * Returns true if the signal received is a NEC1 ditto, i,e. a repeat sequence.
      * @return true if repeat sequence
      */
-    boolean isDitto() const {
+    bool isDitto() const {
         return ditto;
     };
 
@@ -76,7 +76,7 @@ public:
      * @param stream Stream
      * @return success of operation
      */
-    static boolean tryDecode(const IrReader &irReader, Stream& stream);
+    static bool tryDecode(const IrReader &irReader, Stream& stream);
 
     const char *getDecode() const {
         return decode;

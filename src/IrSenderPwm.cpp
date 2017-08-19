@@ -45,7 +45,7 @@ IrSenderPwm *IrSenderPwm::newInstance() {
     return instance;
 }
 
-IrSenderPwm *IrSenderPwm::getInstance(boolean create) {
+IrSenderPwm *IrSenderPwm::getInstance(bool create) {
     if (instance == NULL && create)
         instance = new IrSenderPwm();
     return instance;

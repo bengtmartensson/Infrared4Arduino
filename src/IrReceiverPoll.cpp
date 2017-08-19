@@ -3,7 +3,7 @@
 
 IrReceiverPoll::IrReceiverPoll(size_t captureLength,
         pin_t pin_,
-        boolean pullup,
+        bool pullup,
         microseconds_t markExcess,
         milliseconds_t beginningTimeout,
         milliseconds_t endingTimeout) : IrReceiver(captureLength, pin_, pullup, markExcess) {
@@ -35,7 +35,7 @@ unsigned long timeSince(unsigned long then) {
     return micros() - then;
 }
 
-boolean IrReceiverPoll::searchForStart() {
+bool IrReceiverPoll::searchForStart() {
     unsigned long start = micros();
     unsigned long beginningTimeoutInMicros = 1000UL * beginningTimeout;
     while (readIr() == IrReceiver::IR_SPACE)

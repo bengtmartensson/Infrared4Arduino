@@ -44,7 +44,7 @@ protected:
     int16_t markExcess;
 
     /** True if last receive ended with a timeout */
-    boolean timeouted;
+    bool timeouted;
 
     static unsigned int forceEven(unsigned int x) {
         return (x & 1) ? x + 1 : x;
@@ -89,7 +89,7 @@ public:
      * Returns true if there is collected data.
      * @return status
      */
-    virtual boolean isReady() const = 0;
+    virtual bool isReady() const = 0;
 
     /**
      * Returns the number of collected durations.
@@ -116,7 +116,7 @@ public:
      */
     IrSequence *toIrSequence() const;
 
-    virtual boolean isEmpty() const {
+    virtual bool isEmpty() const {
         return getDataLength() == 0;
     }
 

@@ -19,7 +19,7 @@ public:
     static const microseconds_t defaultMarkExcess = 50U;
 
     /** Are we using inverting sensor, like most TSOPs? */
-    static const boolean invertingSensor = true;
+    static const bool invertingSensor = true;
 
     /**
      * Constructor.
@@ -29,7 +29,7 @@ public:
      * @param pullup Enable hardware pullup within the processor.
      * @param markExcess
      */
-    IrReceiver(size_t bufSize, pin_t pin, boolean pullup = false,
+    IrReceiver(size_t bufSize, pin_t pin, bool pullup = false,
             microseconds_t markExcess = defaultMarkExcess);
 
     virtual ~IrReceiver() {

@@ -13,7 +13,7 @@ class IrSequence {
 private:
     const microseconds_t *durations;
     size_t length;
-    boolean toBeFreed;
+    bool toBeFreed;
 
 public:
     /** Create an empty sequence. */
@@ -25,7 +25,7 @@ public:
      * @param length length of durations. Shuld be even (not checked).
      * @param toBeFreed If true, the destructor will delete the durations array.
      */
-    IrSequence(const microseconds_t *durations, size_t length, boolean toBeFreed = false);
+    IrSequence(const microseconds_t *durations, size_t length, bool toBeFreed = false);
 
     virtual ~IrSequence();
 
@@ -40,7 +40,7 @@ public:
      * @param orig original IrSequence to be cloned
      * @param toBeFreed If true, the destructor will delete the durations array.
      */
-    IrSequence(const IrSequence& orig, boolean toBeFreed);
+    IrSequence(const IrSequence& orig, bool toBeFreed);
 
     /**
      * Returns the length of the data.
@@ -50,7 +50,7 @@ public:
         return length;
     }
 
-    boolean isEmpty() const {
+    bool isEmpty() const {
         return length == 0;
     }
 
@@ -70,7 +70,7 @@ public:
      * @param stream Stream onto the output is printed.
      * @param usingSigns If true,  Gaps are written with a leading '+', spaces with a leading '-'.
      */
-    void dump(Stream& stream, boolean usingSigns = false) const;
+    void dump(Stream& stream, bool usingSigns = false) const;
 
     /**
      * Prints the IrSequence on the stream provided. Gaps are written with a

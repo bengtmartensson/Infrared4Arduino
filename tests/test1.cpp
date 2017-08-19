@@ -15,21 +15,21 @@
 #include <iostream>
 #include <sstream>
 
-boolean checkIrSignalDump(const IrSignal& irSignal, const char *ref) {
+bool checkIrSignalDump(const IrSignal& irSignal, const char *ref) {
     std::ostringstream oss;
     Stream ss(oss);
     irSignal.dump(ss, true);
     return oss.str() == std::string(ref);
 }
 
-boolean checkDecoderDump(const IrDecoder& decoder, const char *ref) {
+bool checkDecoderDump(const IrDecoder& decoder, const char *ref) {
     std::ostringstream oss;
     Stream ss(oss);
     decoder.printDecode(ss);
     return oss.str() == std::string(ref);
 }
 
-boolean checkSenderSimulator(const IrSignal& irSignal, unsigned int noSends, const char *ref) {
+bool checkSenderSimulator(const IrSignal& irSignal, unsigned int noSends, const char *ref) {
     std::ostringstream oss;
     Stream ss(oss);
     IrSenderSimulator sender(ss);
@@ -46,7 +46,7 @@ int main() {
     const IrSignal *nec1 = Nec1Renderer::newIrSignal(122, 29); // power_on for Yahama receivers
     Stream stdout(std::cout);
     nec1->dump(stdout, true);
-    boolean ok = checkIrSignalDump(*nec1, "f=38400\n"
+    bool ok = checkIrSignalDump(*nec1, "f=38400\n"
             "+9024 -4512 +564 -564 +564 -1692 +564 -564 +564 -1692 +564 -1692 +564 -1692 +564 -1692 +564 -564 +564 -1692 +564 -564 +564 -1692 +564 -564 +564 -564 +564 -564 +564 -564 +564 -1692 +564 -1692 +564 -564 +564 -1692 +564 -1692 +564 -1692 +564 -564 +564 -564 +564 -564 +564 -564 +564 -1692 +564 -564 +564 -564 +564 -564 +564 -1692 +564 -1692 +564 -1692 +564 -39756\n"
             "+9024 -2256 +564 -65535\n\n");
     (ok ? successes : fails)++;

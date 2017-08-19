@@ -21,15 +21,15 @@ public:
             const microseconds_t *repeat, size_t lengthRepeat,
             const microseconds_t *ending, size_t lengthEnding,
             frequency_t frequency = defaultFrequency,
-            boolean toBeFreed = false);
+            bool toBeFreed = false);
 
     IrSignal(const microseconds_t *intro, size_t lengthIntro,
             const microseconds_t *repeat, size_t lengthRepeat,
             frequency_t frequency = defaultFrequency,
-            boolean toBeFreed = false);
+            bool toBeFreed = false);
 
     IrSignal(const IrSequence& intro, const IrSequence& repeat, const IrSequence& ending,
-            frequency_t frequency, boolean toBeFreed);
+            frequency_t frequency, bool toBeFreed);
 
     IrSignal(const IrSequence& intro, const IrSequence& repeat, const IrSequence& ending,
             frequency_t frequency = defaultFrequency);
@@ -70,7 +70,7 @@ public:
      * @param stream Stream onto the output is printed.
      * @param usingSigns is true, prepend marks with '+' and gaps with '-'.
      */
-    void dump(Stream& stream, boolean usingSigns = false) const;
+    void dump(Stream& stream, bool usingSigns = false) const;
 
     /**
      * Print a human readable representation of the IrSignal on the Stream supplied, using signs.
@@ -85,7 +85,7 @@ public:
      * Otherwise do nothing and return false.
      * No extra spaces or line feeds are generated.
      */
-    boolean dumpFrequency(Stream& stream) const {
+    bool dumpFrequency(Stream& stream) const {
         return dumpFrequency(stream, frequency);
     };
 
@@ -94,7 +94,7 @@ public:
      * @param stream Stream onto the output is printed.
      * @param frequency modulation frequency
      */
-    static boolean dumpFrequency(Stream& stream, frequency_t frequency);
+    static bool dumpFrequency(Stream& stream, frequency_t frequency);
 
     /**
      * Implementation of the count semantics, i.e.,

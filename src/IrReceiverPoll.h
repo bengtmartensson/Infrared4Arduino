@@ -17,14 +17,14 @@ private:
 public:
     IrReceiverPoll(size_t captureLength = defaultCaptureLength,
             pin_t pin = defaultPin,
-            boolean pullup = false,
+            bool pullup = false,
             microseconds_t markExcess = defaultMarkExcess,
             milliseconds_t beginningTimeout = defaultBeginningTimeout,
             milliseconds_t endingTimeout = defaultEndingTimeout);
 
     ~IrReceiverPoll();
 
-    boolean isReady() const {
+    bool isReady() const {
         return timeouted || !isEmpty();
     }
 
@@ -64,7 +64,7 @@ public:
     void disable() {};
 
 private:
-    boolean searchForStart();
+    bool searchForStart();
 
     void collectData();
 

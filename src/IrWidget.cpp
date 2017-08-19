@@ -30,7 +30,7 @@ http://arduino.cc/en/Hacking/PinMapping2560
 #include "IrWidget.h"
 
 IrWidget::IrWidget(size_t captureLength,
-        boolean pullup,
+        bool pullup,
         int16_t markExcess,
         milliseconds_t beginningTimeout,
         milliseconds_t endingTimeout) : IrReader(captureLength) {
@@ -60,7 +60,7 @@ milliseconds_t IrWidget::getEndingTimeout() const {
 }
 
 void IrWidget::dump(Stream &stream) const {
-    boolean printedSomething = IrSignal::dumpFrequency(stream, getFrequency());
+    bool printedSomething = IrSignal::dumpFrequency(stream, getFrequency());
     if (printedSomething)
         stream.print(' ');
     IrReader::dump(stream);
@@ -71,7 +71,7 @@ void IrWidget::dump(Stream &stream) const {
 ////////////////////////////////////////////////////////////////////////////////
 
 // initialize Timer and IO pins, needs to be called once
-void IrWidget::setup(boolean pullup) {
+void IrWidget::setup(bool pullup) {
 #ifdef ARDUINO
     // configure signal capture ICP pin as input
     cbi(CAT2(DDR, CAP_PORT), CAP_PIN);

@@ -4,14 +4,14 @@
 IrSequence::IrSequence() : durations(NULL), length(0U), toBeFreed(false) {
 };
 
-IrSequence::IrSequence(const microseconds_t *durations_, size_t length_, boolean toBeFreed_)
+IrSequence::IrSequence(const microseconds_t *durations_, size_t length_, bool toBeFreed_)
 : durations(durations_), length(length_), toBeFreed(toBeFreed_) {
 }
 
 IrSequence::IrSequence(const IrSequence& orig) : durations(orig.durations), length(orig.length), toBeFreed(orig.toBeFreed) {
 };
 
-IrSequence::IrSequence(const IrSequence& orig, boolean toBeFreed_) : durations(orig.durations), length(orig.length), toBeFreed(toBeFreed_) {
+IrSequence::IrSequence(const IrSequence& orig, bool toBeFreed_) : durations(orig.durations), length(orig.length), toBeFreed(toBeFreed_) {
 };
 
 IrSequence::~IrSequence() {
@@ -25,7 +25,7 @@ IrSequence *IrSequence::clone() const {
     return new IrSequence(durationsClone, length, true);
 }
 
-void IrSequence::dump(Stream& stream, boolean usingSigns) const {
+void IrSequence::dump(Stream& stream, bool usingSigns) const {
     for (unsigned int i = 0U; i < length; i++) {
         if (i > 0U)
             stream.print(' ');

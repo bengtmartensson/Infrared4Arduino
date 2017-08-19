@@ -38,7 +38,7 @@ public:
      * Returns a pointer to the instance, or NULL if not initialized.
      * If argument true, in the latter case creates a new instance and returns it.
      */
-    static IrSenderPwm *getInstance(boolean create = false);
+    static IrSenderPwm *getInstance(bool create = false);
 
     /**
      *  Creates a new instance (if not existing) and returns it.

@@ -24,7 +24,7 @@ public:
      * Returns true if the decode was successful.
      * @return validity
      */
-    virtual boolean isValid() const {
+    virtual bool isValid() const {
         return valid;
     }
 
@@ -33,7 +33,7 @@ public:
      * @param stream where the output is generated
      * @return success status
      */
-    boolean printDecode(Stream& stream) const {
+    bool printDecode(Stream& stream) const {
         if (isValid())
             stream.println(getDecode());
         return isValid();
@@ -41,7 +41,7 @@ public:
 
 private:
     const static uint32_t endingMin = 20000U;
-    boolean valid;
+    bool valid;
 
 protected:
     static const int invalid = -1;
@@ -54,7 +54,7 @@ protected:
      * @param duration time to be tested
      * @return true if the duration is long enough
      */
-    static boolean isEnding(microseconds_t duration) {
+    static bool isEnding(microseconds_t duration) {
         return duration > endingMin;
     }
 };

@@ -19,8 +19,6 @@
 #define UNUSED
 #endif
 
-typedef bool boolean;
-
 #define String std::string
 
 #define indexOf find

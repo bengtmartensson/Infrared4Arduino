@@ -58,7 +58,7 @@ protected:
 private:
     IrReceiverSampler(size_t captureLength = defaultCaptureLength,
             pin_t pin = defaultPin,
-            boolean pullup = false,
+            bool pullup = false,
             microseconds_t markExcess = defaultMarkExcess,
             milliseconds_t beginningTimeout = defaultBeginningTimeout,
             milliseconds_t endingTimeout = defaultEndingTimeout);
@@ -78,7 +78,7 @@ public:
      */
     static IrReceiverSampler *newIrReceiverSampler(size_t captureLength = defaultCaptureLength,
             pin_t pin = defaultPin,
-            boolean pullup = false,
+            bool pullup = false,
             microseconds_t markExcess = defaultMarkExcess,
             milliseconds_t beginningTimeout = defaultBeginningTimeout,
             milliseconds_t endingTimeout = defaultEndingTimeout);
@@ -120,7 +120,7 @@ public:
         return bigvalue <=  MICROSECONDS_T_MAX ? (microseconds_t) bigvalue : MICROSECONDS_T_MAX;
     }
 
-    boolean isReady() const {
+    bool isReady() const {
         return receiverState == STATE_STOP;
     }
 };

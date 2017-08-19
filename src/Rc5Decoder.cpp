@@ -12,7 +12,7 @@ Rc5Decoder::Length Rc5Decoder::decodeDuration(microseconds_t t) {
 }
 
 unsigned int Rc5Decoder::decodeFlashGap(microseconds_t flash, microseconds_t gap) {
-    boolean result = getDuration(flash, 1);
+    bool result = getDuration(flash, 1);
     if (!result)
         return invalid;
 
@@ -21,7 +21,7 @@ unsigned int Rc5Decoder::decodeFlashGap(microseconds_t flash, microseconds_t gap
             : invalid;
 }
 
-boolean Rc5Decoder::tryDecode(const IrReader& irCapturer, Stream& stream) {
+bool Rc5Decoder::tryDecode(const IrReader& irCapturer, Stream& stream) {
     Rc5Decoder decoder(irCapturer);
     return decoder.printDecode(stream);
 }
@@ -42,7 +42,7 @@ Rc5Decoder::Rc5Decoder(const IrReader& irCapturer) {
     }
     sum = ~sum & 0x1FFFU;
 
-    boolean success = isEnding(irCapturer.getDuration(irCapturer.getDataLength()-1));
+    bool success = isEnding(irCapturer.getDuration(irCapturer.getDataLength()-1));
     if (!success)
         return;
 

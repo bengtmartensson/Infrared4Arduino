@@ -49,13 +49,13 @@ protected:
     frequency_t frequency;
 
     IrWidget(size_t captureLength = defaultCaptureLength,
-            boolean pullup = false,
+            bool pullup = false,
             int16_t markExcess = defaultMarkExcess,
             milliseconds_t beginningTimeout = defaultBeginningTimeout,
             milliseconds_t endingTimeout = defaultEndingTimeout);
     virtual ~IrWidget();
 public:
-    static const boolean invertingSensor = true;
+    static const bool invertingSensor = true;
 
     virtual void capture() = 0;
 
@@ -68,7 +68,7 @@ public:
         return captureCount;
     }
 
-    boolean isReady() const {
+    bool isReady() const {
         return timeouted || !isEmpty();
     }
 
@@ -102,7 +102,7 @@ public:
     void dump(Stream &stream) const;
 
 private:
-    void setup(boolean setup);
+    void setup(bool setup);
 
     ////////////////////////////////////////////////////////////////////////////////
     // Internal defines, don't change

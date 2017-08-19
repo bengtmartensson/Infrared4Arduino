@@ -28,7 +28,7 @@ public:
     void receive() {
     };
 
-    boolean isReady() const {
+    bool isReady() const {
         return true;
     };
 

@@ -37,10 +37,12 @@ doc:
 	$(BROWSER) api-doc/index.html
 
 clean:
-	rm -rf *.a *.o api-doc test1
+	rm -rf *.a *.o api-doc xml test1
 
 build-tests:
 
 test: test1
 
 all: test doc
+
+.PHONY: clean

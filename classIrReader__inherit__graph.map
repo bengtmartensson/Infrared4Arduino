@@ -1,0 +1,8 @@
+<map id="IrReader" name="IrReader">
+<area shape="rect" id="node2" href="$classIrReceiver.html" title="Abstract base class for demodulating IR receivers. " alt="" coords="109,80,192,107"/>
+<area shape="rect" id="node5" href="$classIrSequenceReader.html" title="This class packs an IrSequence into a dummy, immutable IrReader. " alt="" coords="216,80,347,107"/>
+<area shape="rect" id="node6" href="$classIrWidget.html" title="Base class for classes based upon ICP pins capture. " alt="" coords="371,80,442,107"/>
+<area shape="rect" id="node3" href="$classIrReceiverPoll.html" title="An implementation of IrReceiver using polling of the input pin. " alt="" coords="5,155,109,181"/>
+<area shape="rect" id="node4" href="$classIrReceiverSampler.html" title="This receiving class samples the input pin every 50 microseconds using a timer interrupt. " alt="" coords="133,155,264,181"/>
+<area shape="rect" id="node7" href="$classIrWidgetAggregating.html" title="This class implements the IrWidget. " alt="" coords="337,155,477,181"/>
+</map>

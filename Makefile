@@ -1,9 +1,19 @@
 # Makefile for creating stuff on host.
-# Use Arduino IDE for compiling for Arduino
+# Use Arduino IDE for compiling for Arduino.
+
+# The functions for generating keywords.txt requires KeywordsTxtGenerator,
+# https://github.com/bengtmartensson/KeywordsTxtGenerator, to be installed in
+# KEYWORD_TXT_GENERATOR_DIR.
 
 ifneq ($(ARDUINO),)
 $(error This Makefile is not for compiling target code, for that, use the Arduino IDE.)
 endif
+
+KEYWORD_TXT_GENERATOR_DIR = ../KeywordsTxtGenerator
+DOXYGEN := doxygen
+DOXYFILE :=  $(KEYWORD_TXT_GENERATOR_DIR)/keywords_txt_generator.doxy
+XSLTPROC := xsltproc
+TRANSFORMATION := $(KEYWORD_TXT_GENERATOR_DIR)/doxygen2keywords.xsl
 
 BOARDDEFINES=
 CXX=g++
@@ -39,10 +49,19 @@ doc:
 clean:
 	rm -rf *.a *.o api-doc xml test1
 
+spotless: clean
+	rm -rf keywords.txt
+
 build-tests:
 
 test: test1
 
-all: test doc
+xml/index.xml: $(wildcard src/*)
+	$(DOXYGEN) $(DOXYFILE)
 
-.PHONY: clean
+keywords.txt: xml/index.xml
+	$(XSLTPROC) $(TRANSFORMATION) $< > $@
+
+all: test doc keywords.txt
+
+.PHONY: clean spotless

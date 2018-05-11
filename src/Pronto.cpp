@@ -3,13 +3,13 @@
 #include <string.h>
 
 IrSignal *Pronto::parse(const uint16_t *data, size_t size) {
-    double timebase = 0.241246 * data[1];
+    double timebase = prontoFreqConst * data[1];
     frequency_t frequency;
     switch (data[0]) {
-        case 0x0000: // normal, "learned"
+        case learnedToken: // normal, "learned"
              frequency = toFrequency(data[1]);
              break;
-        case 0x0100: // non-demodulated, "learned"
+        case learnedNonModulatedToken: // non-demodulated, "learned"
             frequency = (frequency_t) 0;
             break;
         default:
@@ -17,11 +17,11 @@ IrSignal *Pronto::parse(const uint16_t *data, size_t size) {
     }
     size_t introPairs = data[2];
     size_t repetitionPairs = data[3];
-    if (4 + 2*(introPairs + repetitionPairs) != size) // inconsistent sizes
+    if (numbersInPreamble + 2*(introPairs + repetitionPairs) != size) // inconsistent sizes
         return NULL;
 
-    IrSequence *intro = mkSequence(data + 4, introPairs, timebase);
-    IrSequence *repeat = mkSequence(data + 4 + 2*introPairs, repetitionPairs, timebase);
+    IrSequence *intro = mkSequence(data + numbersInPreamble, introPairs, timebase);
+    IrSequence *repeat = mkSequence(data + numbersInPreamble + 2*introPairs, repetitionPairs, timebase);
     IrSequence *ending = new IrSequence();
 
     IrSignal *code = new IrSignal(*intro, *repeat, *ending, frequency, true);
@@ -34,7 +34,7 @@ IrSignal *Pronto::parse(const uint16_t *data, size_t size) {
 }
 
 IrSignal *Pronto::parse(const char *str) {
-    size_t len = strlen(str)/5 + 1;
+    size_t len = strlen(str)/(digitsInProntoNumber + 1) + 1;
     uint16_t data[len];
     unsigned int index = 0;
     const char *p = str;
@@ -54,4 +54,8 @@ IrSequence *Pronto::mkSequence(const uint16_t* data, size_t noPairs, double time
         durations[i] = (microseconds_t)((duration <= MICROSECONDS_T_MAX) ? duration : MICROSECONDS_T_MAX);
     }
     return new IrSequence(durations, 2*noPairs, false);
+}
+
+frequency_t Pronto::toFrequency(prontoInt code) {
+    return (frequency_t) (prontoConst / code);
 }

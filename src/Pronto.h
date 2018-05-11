@@ -11,13 +11,25 @@
 
 class Pronto {
 private:
+    typedef uint16_t prontoInt;
+
+    static const prontoInt learnedToken = 0x0000;
+    static const prontoInt learnedNonModulatedToken = 0x0100;
+    static const unsigned int bitsInHexadecimal = 4;
+    static const unsigned int digitsInProntoNumber = 4;
+    static const unsigned int numbersInPreamble = 4;
+    static const unsigned int hexMask = 0xF;
+    static const unsigned int charsInPreamble = numbersInPreamble * (digitsInProntoNumber + 1);
+    static constexpr double prontoFreqConst = 0.241246;
+    static const uint32_t prontoConst = (uint32_t) (1E6 / prontoFreqConst); // 4145146
+    static const prontoInt fallbackFrequencyCode = 0x0040; // To use with frequency = 0;
+    static const frequency_t fallbackFrequency = 64767; // To use with frequency = 0;
+
     Pronto() {};
 
     static IrSequence *mkSequence(const uint16_t *data, size_t pairs, double timebase);
 
-    static frequency_t toFrequency(uint16_t code) {
-        return (frequency_t) (4145146L/code);
-    }
+    static frequency_t toFrequency(prontoInt code);
 
 public:
     /**

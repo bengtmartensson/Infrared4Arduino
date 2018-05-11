@@ -15,6 +15,8 @@ DOXYFILE :=  $(KEYWORD_TXT_GENERATOR_DIR)/keywords_txt_generator.doxy
 XSLTPROC := xsltproc
 TRANSFORMATION := $(KEYWORD_TXT_GENERATOR_DIR)/doxygen2keywords.xsl
 
+GH_DIR := ../Infrared4Arduino-gh
+
 BOARDDEFINES=
 CXX=g++
 BROWSER=firefox
@@ -44,6 +46,8 @@ test%: test%.o libInfrared.a
 
 doc:
 	doxygen
+	rm -rf $(GH_DIR)/*
+	cp -r api-doc/* $(GH_DIR)
 	$(BROWSER) api-doc/index.html
 
 clean:

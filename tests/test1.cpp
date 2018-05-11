@@ -91,6 +91,27 @@ int main() {
 
     delete nec1;
 
+    // Test 7
+    const char prontoHex[] = "0000 006C 0022 0000 015B 00AD 0016 0016 0016 0041 0016 0016 0016 0041 0016 0041 0016 0041 0016 0041 0016 0016 0016 0041 0016 0016 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0041 0016 0016 0016 0041 0016 0041 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0016 0016 0016 0016 0016 0016 0041 0016 0041 0016 0041 0016 05F7";
+
+    microseconds_t data[] = {
+        9040, 4507, 573, 573, 573, 1693, 573, 573, 573, 1693, 573, 1693, 573, 1693, 573, 1693, 573, 573, 573, 1693, 573, 573, 573, 1693, 573, 573, 573, 573, 573, 573, 573, 573, 573, 1693, 573, 1693, 573, 573, 573, 1693, 573, 1693, 573, 1693, 573, 573, 573, 573, 573, 573, 573, 573, 573, 1693, 573, 573, 573, 573, 573, 573, 573, 1693, 573, 1693, 573, 1693, 573, 39785,
+        //9040, 2266, 573, 65535
+    };
+    char *result = Pronto::toProntoHex(data, sizeof(data)/sizeof(microseconds_t), 38380);
+    std::cout << result << std::endl;
+
+    ok = result == std::string(prontoHex);
+    (ok ? successes : fails)++;
+    delete [] result;
+
+
+    // Test 8
+    IrSignal* irSignal = Pronto::parse(prontoHex);
+    const char* s = Pronto::toProntoHex(*irSignal);
+    ok = std::string(s) == std::string(prontoHex);
+    (ok ? successes : fails)++;
+
     // Report
     std::cout << "Successes: " << successes << std::endl;
     std::cout << "Fails: " << fails << std::endl;

@@ -1,6 +1,6 @@
 <map id="src/IrReceiverSampler.h" name="src/IrReceiverSampler.h">
-<area shape="rect" id="node2" href="$IrReceiver_8h.html" title="IrReceiver.h" alt="" coords="40,80,133,107"/>
-<area shape="rect" id="node4" href="$InfraredTypes_8h.html" title="This file defines some general data types that are used in the library. " alt="" coords="81,304,194,331"/>
-<area shape="rect" id="node5" href="$IrReader_8h.html" title="IrReader.h" alt="" coords="153,155,236,181"/>
-<area shape="rect" id="node6" href="$IrSequence_8h.html" title="IrSequence.h" alt="" coords="175,229,273,256"/>
+<area shape="rect" id="node2" href="$IrReceiver_8h.html" title="IrReceiver.h" alt="" coords="44,80,144,107"/>
+<area shape="rect" id="node4" href="$InfraredTypes_8h.html" title="This file defines some general data types that are used in the library. " alt="" coords="83,304,207,331"/>
+<area shape="rect" id="node5" href="$IrReader_8h.html" title="IrReader.h" alt="" coords="161,155,251,181"/>
+<area shape="rect" id="node6" href="$IrSequence_8h.html" title="IrSequence.h" alt="" coords="182,229,289,256"/>
 </map>

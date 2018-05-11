@@ -1,4 +1,4 @@
 <map id="IrReceiverPoll" name="IrReceiverPoll">
-<area shape="rect" id="node2" href="$classIrReceiver.html" title="Abstract base class for demodulating IR receivers. " alt="" coords="16,80,99,107"/>
-<area shape="rect" id="node3" href="$classIrReader.html" title="Abstract base class for all IR readers, capturing or receiving. " alt="" coords="21,5,93,32"/>
+<area shape="rect" id="node2" href="$classIrReceiver.html" title="Abstract base class for demodulating IR receivers. " alt="" coords="17,80,105,107"/>
+<area shape="rect" id="node3" href="$classIrReader.html" title="Abstract base class for all IR readers, capturing or receiving. " alt="" coords="23,5,100,32"/>
 </map>

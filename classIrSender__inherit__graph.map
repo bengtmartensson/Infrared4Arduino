@@ -1,5 +1,5 @@
 <map id="IrSender" name="IrSender">
-<area shape="rect" id="node2" href="$classIrSenderNonMod.html" title="IrSender implementation without modulation. " alt="" coords="5,80,125,107"/>
-<area shape="rect" id="node3" href="$classIrSenderPwm.html" title="Sending function using timer PWM. " alt="" coords="149,80,251,107"/>
-<area shape="rect" id="node4" href="$classIrSenderSimulator.html" title="Simulates sending in the sense that it prints the IrSequences on the Stream given as argument..." alt="" coords="275,80,402,107"/>
+<area shape="rect" id="node2" href="$classIrSenderNonMod.html" title="IrSender implementation without modulation. " alt="" coords="5,80,135,107"/>
+<area shape="rect" id="node3" href="$classIrSenderPwm.html" title="Sending function using timer PWM. " alt="" coords="159,80,267,107"/>
+<area shape="rect" id="node4" href="$classIrSenderSimulator.html" title="Simulates sending in the sense that it prints the IrSequences on the Stream given as argument..." alt="" coords="291,80,430,107"/>
 </map>

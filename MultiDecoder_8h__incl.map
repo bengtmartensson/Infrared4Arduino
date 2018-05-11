@@ -1,6 +1,6 @@
 <map id="src/MultiDecoder.h" name="src/MultiDecoder.h">
-<area shape="rect" id="node2" href="$IrReader_8h.html" title="IrReader.h" alt="" coords="49,80,132,107"/>
-<area shape="rect" id="node6" href="$IrDecoder_8h.html" title="IrDecoder.h" alt="" coords="208,155,299,181"/>
-<area shape="rect" id="node4" href="$InfraredTypes_8h.html" title="This file defines some general data types that are used in the library. " alt="" coords="57,229,170,256"/>
-<area shape="rect" id="node5" href="$IrSequence_8h.html" title="IrSequence.h" alt="" coords="85,155,184,181"/>
+<area shape="rect" id="node2" href="$IrReader_8h.html" title="IrReader.h" alt="" coords="49,80,139,107"/>
+<area shape="rect" id="node6" href="$IrDecoder_8h.html" title="IrDecoder.h" alt="" coords="217,155,315,181"/>
+<area shape="rect" id="node4" href="$InfraredTypes_8h.html" title="This file defines some general data types that are used in the library. " alt="" coords="56,229,180,256"/>
+<area shape="rect" id="node5" href="$IrSequence_8h.html" title="IrSequence.h" alt="" coords="86,155,193,181"/>
 </map>

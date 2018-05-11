@@ -1,6 +1,6 @@
 <map id="src/IrSenderSimulator.h" name="src/IrSenderSimulator.h">
-<area shape="rect" id="node2" href="$IrSender_8h.html" title="IrSender.h" alt="" coords="43,80,126,107"/>
-<area shape="rect" id="node3" href="$InfraredTypes_8h.html" title="This file defines some general data types that are used in the library. " alt="" coords="41,304,155,331"/>
-<area shape="rect" id="node5" href="$IrSignal_8h.html" title="IrSignal.h" alt="" coords="85,155,162,181"/>
-<area shape="rect" id="node6" href="$IrSequence_8h.html" title="IrSequence.h" alt="" coords="135,229,234,256"/>
+<area shape="rect" id="node2" href="$IrSender_8h.html" title="IrSender.h" alt="" coords="49,80,137,107"/>
+<area shape="rect" id="node3" href="$InfraredTypes_8h.html" title="This file defines some general data types that are used in the library. " alt="" coords="43,304,167,331"/>
+<area shape="rect" id="node5" href="$IrSignal_8h.html" title="IrSignal.h" alt="" coords="91,155,174,181"/>
+<area shape="rect" id="node6" href="$IrSequence_8h.html" title="IrSequence.h" alt="" coords="142,229,249,256"/>
 </map>

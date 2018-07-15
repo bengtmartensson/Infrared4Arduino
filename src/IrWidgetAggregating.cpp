@@ -39,11 +39,11 @@ void IrWidgetAggregating::capture() {
     uint8_t tccr0b = TCCR0B;
     //TCCR0B &= ~(_BV(CS02) | _BV(CS01) | _BV(CS00)); // stop timer0 (disables timer IRQs)
 
-    /*register uint16_t*/ period = ((F_CPU) / (20000UL)) >> CAPTURE_PRESCALER_BITS; // the time of one period in CPU clocks
-    //register uint16_t aggThreshold = (period * 10UL) / 8UL; // 65 us = (1/20kHz * 130%) might be a good starting point
-    register uint16_t aggThreshold = period * 2;
-    register uint8_t icesn_val = _BV(CAT2(ICES, CAP_TIM));
-    register uint8_t tccrnb = CAT3(TCCR, CAP_TIM, B);
+    /*uint16_t*/ period = ((F_CPU) / (20000UL)) >> CAPTURE_PRESCALER_BITS; // the time of one period in CPU clocks
+    //uint16_t aggThreshold = (period * 10UL) / 8UL; // 65 us = (1/20kHz * 130%) might be a good starting point
+    uint16_t aggThreshold = period * 2;
+    uint8_t icesn_val = _BV(CAT2(ICES, CAP_TIM));
+    uint8_t tccrnb = CAT3(TCCR, CAP_TIM, B);
     if (invertingSensor)
         tccrnb &= ~icesn_val; // trigger on falling edge
     else
@@ -53,16 +53,16 @@ void IrWidgetAggregating::capture() {
     OCR1A = CAT2(TCNT, CAP_TIM) - 1;
     CAT2(TIFR, CAP_TIM) = _BV(CAT2(ICF, CAP_TIM))
             | _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC)) | _BV(CAT2(TOV, CAP_TIM)); // clear all timer flags
-    register uint8_t tifr; // cache the result of reading TIFR1 (masked with ICF1 and OCF1A)
-    register uint8_t calShiftM1 = 1;
-    register uint8_t calCount = 1 << (calShiftM1 + 1);
-    register uint8_t aggCount = 0;
-    register ovlBitsDataType ovlCnt = 0;
-    register uint16_t val;
-    register uint16_t prevVal = 0;
-    register uint16_t *pCapDat = captureData; // pointer to current item in captureData[]
-    register uint32_t aggVal = 0;
-    register uint32_t diffVal;
+    uint8_t tifr; // cache the result of reading TIFR1 (masked with ICF1 and OCF1A)
+    uint8_t calShiftM1 = 1;
+    uint8_t calCount = 1 << (calShiftM1 + 1);
+    uint8_t aggCount = 0;
+    ovlBitsDataType ovlCnt = 0;
+    uint16_t val;
+    uint16_t prevVal = 0;
+    uint16_t *pCapDat = captureData; // pointer to current item in captureData[]
+    uint32_t aggVal = 0;
+    uint32_t diffVal;
 
     // disabling IRQs for a long time will disconnect the USB connection of the ATmega32U4, therefore we
     // defer the sbi() instruction until we got the starting edge and only stop the Timer0 in the meanwhile

@@ -30,7 +30,6 @@ http://arduino.cc/en/Hacking/PinMapping2560
 #include <Arduino.h>
 #include "IrReader.h"
 
-#define ENABLE_PULL_UP
 //#define DEBUG_PORT D
 //#define DEBUG_PIN 6
 //#define DEBUG_PORT L
@@ -59,7 +58,7 @@ public:
 
     virtual void capture() = 0;
 
-/** For compatibility with the receiver classes, receive is a synonym for capture. */
+    /** For compatibility with the receiver classes, receive is a synonym for capture. */
     void receive() {
         capture();
     }
@@ -81,10 +80,6 @@ public:
                             + (i & 1 ? markExcess : -markExcess);
         return result32 <= MICROSECONDS_T_MAX ? (microseconds_t) result32 : MICROSECONDS_T_MAX;
     }
-
-    //void setBeginningTimeout(milliseconds_t timeOut) { beginningTimeout = timeOut; }
-
-    //milliseconds_t getBeginningTimeout() const { return beginningTimeout; }
 
     /**
      * Sets the ending timeout. In this implementation, this is effectively
@@ -110,10 +105,10 @@ private:
 protected:
 #if USE_PRESCALER_FACTOR_8
 #define CAPTURE_PRESCALER_SETTING (_BV(CAT3(CS, CAP_TIM, 1)))
-#define CAPTURE_PRESCALER_BITS (3)
+#define CAPTURE_PRESCALER_BITS 3
 #else
 #define CAPTURE_PRESCALER_SETTING (_BV(CAT3(CS, CAP_TIM, 0)))
-#define CAPTURE_PRESCALER_BITS (0)
+#define CAPTURE_PRESCALER_BITS 0
 #endif
 #define CAPTURE_PRESCALER_FACTOR (_BV(CAPTURE_PRESCALER_BITS))
 
@@ -122,12 +117,9 @@ protected:
 #else
     typedef uint8_t ovlBitsDataType;
 #endif
-    //static const uint16_t bufSize = ((RAMEND - 0x100 - projectRamUsage) / sizeof (uint16_t)); // use as much RAM as possible
-    //uint16_t bufSize;
     static const uint8_t RANGE_EXTENSION_BITS = 4; // factor for upper measurement range = 2^(RANGE_EXTENSION_BITS+1)
 
-    //public: // FIXME
-        ovlBitsDataType endingTimeout; // = _BV(RANGE_EXTENSION_BITS) - 1;
+    ovlBitsDataType endingTimeout; // = _BV(RANGE_EXTENSION_BITS) - 1;
 private:
     ////////////////////////////////////////////////////////////////////////////////
     // Adaption to different MCUs and clk values
@@ -181,13 +173,13 @@ private:
 
     // these macros are used to debug the timing with an logic analyzer or oscilloscope on a port pin
 protected:
-    inline void debugPinToggle(void) {
+    inline void debugPinToggle() {
 #if defined(DEBUG_PIN) && defined(DEBUG_PORT)
         CAT2(PIN, DEBUG_PORT) = _BV(DEBUG_PIN);
 #endif
     }
 
-    inline void debugPinClear(void) {
+    inline void debugPinClear() {
 #if defined(DEBUG_PIN) && defined(DEBUG_PORT)
         cbi(CAT2(PORT, DEBUG_PORT), DEBUG_PIN);
 #endif

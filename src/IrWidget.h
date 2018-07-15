@@ -30,9 +30,7 @@ http://arduino.cc/en/Hacking/PinMapping2560
 #include <Arduino.h>
 #include "IrReader.h"
 
-//#define DEBUG_PORT D
-//#define DEBUG_PIN 6
-//#define DEBUG_PORT L
+//#define DEBUG_PIN 12
 
 #define USE_PRESCALER_FACTOR_8 1
 
@@ -174,14 +172,20 @@ private:
     // these macros are used to debug the timing with an logic analyzer or oscilloscope on a port pin
 protected:
     inline void debugPinToggle() {
-#if defined(DEBUG_PIN) && defined(DEBUG_PORT)
-        CAT2(PIN, DEBUG_PORT) = _BV(DEBUG_PIN);
+#if defined(DEBUG_PIN)
+        digitalWrite(DEBUG_PIN, !digitalRead(DEBUG_PIN));
+#endif
+    }
+
+    inline void debugPinSet() {
+#if defined(DEBUG_PIN)
+        digitalWrite(DEBUG_PIN, HIGH);
 #endif
     }
 
     inline void debugPinClear() {
-#if defined(DEBUG_PIN) && defined(DEBUG_PORT)
-        cbi(CAT2(PORT, DEBUG_PORT), DEBUG_PIN);
+#if defined(DEBUG_PIN)
+        digitalWrite(DEBUG_PIN, LOW);
 #endif
     }
     uint16_t *captureData; //[bufSize]; // the buffer where the catured data is stored

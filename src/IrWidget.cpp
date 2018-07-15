@@ -78,8 +78,8 @@ void IrWidget::setup(bool pullup) {
     if (pullup)
         sbi(CAT2(PORT, CAP_PORT), CAP_PIN); // enable the internal 10k pull-up resistor
 
-#if defined(DEBUG_PIN) && defined(DEBUG_PORT)
-    sbi(CAT2(DDR, DEBUG_PORT), DEBUG_PIN); // configure logic analyzer debug pin as output
+#if defined(DEBUG_PIN)
+    pinMode(DEBUG_PIN, OUTPUT); // configure logic analyzer debug pin as output
 #endif
 
     // init timer, disable power save mode of timer

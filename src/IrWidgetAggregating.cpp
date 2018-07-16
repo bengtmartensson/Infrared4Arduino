@@ -51,11 +51,9 @@ void IrWidgetAggregating::capture() {
     uint8_t calCount = 1 << (calShiftM1 + 1);
     uint8_t aggCount = 0;
     ovlBitsDataType ovlCnt = 0;
-    uint16_t val;
     uint16_t prevVal = 0;
     uint16_t *pCapDat = captureData; // pointer to current item in captureData[]
     uint32_t aggVal = 0;
-    uint32_t diffVal;
 
     // disabling IRQs for a long time will disconnect the USB connection of the ATmega32U4, therefore we
     // defer the sbi() instruction until we got the starting edge and only stop the Timer0 in the meanwhile
@@ -69,7 +67,7 @@ void IrWidgetAggregating::capture() {
 
     TCCR0B &= ~(_BV(CS02) | _BV(CS01) | _BV(CS00)); // stop timer0 (disables timer IRQs)
     debugPinToggle();
-    val = CAT2(ICR, CAP_TIM);
+    uint16_t val = CAT2(ICR, CAP_TIM);
     CAT3(OCR, CAP_TIM, CAP_TIM_OC) = val; // timeout based on previous trigger time
 
     noInterrupts(); // disable IRQs after the first edge
@@ -89,7 +87,7 @@ void IrWidgetAggregating::capture() {
             tifr = CAT2(TIFR, CAP_TIM) & (_BV(CAT2(ICF, CAP_TIM)) | _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC)));
         } while (!tifr);
         debugPinToggle();
-        val = CAT2(ICR, CAP_TIM);
+        uint16_t val = CAT2(ICR, CAP_TIM);
         CAT3(OCR, CAP_TIM, CAP_TIM_OC) = val; // timeout based on previous trigger time
 
         if (tifr & _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC))) // check for overflow bit
@@ -114,7 +112,7 @@ void IrWidgetAggregating::capture() {
         // clear input capture and output compare flag bit
         CAT2(TIFR, CAP_TIM) = _BV(CAT2(ICF, CAP_TIM)) | _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC));
 
-        diffVal = ((val - prevVal) & 0xffff) | ((uint32_t) ovlCnt << 16);
+        uint32_t diffVal = ((val - prevVal) & 0xffff) | ((uint32_t) ovlCnt << 16);
         ovlCnt = 0;
         prevVal = val;
 

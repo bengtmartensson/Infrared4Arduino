@@ -43,7 +43,7 @@ protected:
 private:
     bool waitForFirstEdge();
 
-    void inline setupTrigger();
+    void inline setupTriggerAndTimers();
 
     inline uint16_t packTimeVal(uint32_t val) const {
         if (val >= 0x8000) {

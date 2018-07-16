@@ -38,15 +38,11 @@ void IrWidgetAggregating::capture() {
     uint8_t tccr0b = TCCR0B;
     //TCCR0B &= ~(_BV(CS02) | _BV(CS01) | _BV(CS00)); // stop timer0 (disables timer IRQs)
 
-    /*uint16_t*/ period = ((F_CPU) / (20000UL)) >> CAPTURE_PRESCALER_BITS; // the time of one period in CPU clocks
+    /*uint16_t*/ period = ((F_CPU) / (20000UL)) >> CAPTURE_PRESCALER_BITS; // the time of one period in CPU clocks (= 100)
     //uint16_t aggThreshold = (period * 10UL) / 8UL; // 65 us = (1/20kHz * 130%) might be a good starting point
     uint16_t aggThreshold = period * 2;
 
-    setupTrigger();
-
-    OCR1A = CAT2(TCNT, CAP_TIM) - 1;
-    CAT2(TIFR, CAP_TIM) = _BV(CAT2(ICF, CAP_TIM))
-            | _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC)) | _BV(CAT2(TOV, CAP_TIM)); // clear all timer flags
+    setupTriggerAndTimers();
 
     uint16_t *pCapDat = captureData; // pointer to current item in captureData[]
 
@@ -149,7 +145,7 @@ void IrWidgetAggregating::capture() {
     SREG = sreg; // enable IRQs
 
     captureCount = pCapDat - captureData;
-    period = aggThreshold >> 1;
+    period = aggThreshold / 2;
 
     uint32_t mediumPeriod = timerValueToNanoSeconds(period);
     frequency = (frequency_t) (1000000000L / mediumPeriod);
@@ -167,7 +163,7 @@ bool IrWidgetAggregating::waitForFirstEdge() {
     return true;
 }
 
-void IrWidgetAggregating::setupTrigger() {
+void IrWidgetAggregating::setupTriggerAndTimers() {
 #ifdef ARDUINO
     uint8_t icesn_val = _BV(CAT2(ICES, CAP_TIM));
     uint8_t tccrnb = CAT3(TCCR, CAP_TIM, B);
@@ -177,5 +173,9 @@ void IrWidgetAggregating::setupTrigger() {
         tccrnb |= icesn_val; // trigger on rising edge
 
     CAT3(TCCR, CAP_TIM, B) = tccrnb;
+
+    OCR1A = CAT2(TCNT, CAP_TIM) - 1;
+    CAT2(TIFR, CAP_TIM) = _BV(CAT2(ICF, CAP_TIM))
+            | _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC)) | _BV(CAT2(TOV, CAP_TIM)); // clear all timer flags
 #endif
 }

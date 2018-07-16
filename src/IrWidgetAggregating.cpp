@@ -57,7 +57,7 @@ void IrWidgetAggregating::capture() {
     if (! timeouted) {
 
     TCCR0B &= ~(_BV(CS02) | _BV(CS01) | _BV(CS00)); // stop timer0 (disables timer IRQs)
-    debugPinToggle();
+    //debugPinToggle();
     uint16_t val = CAT2(ICR, CAP_TIM);
     CAT3(OCR, CAP_TIM, CAP_TIM_OC) = val; // timeout based on previous trigger time
 
@@ -76,13 +76,8 @@ void IrWidgetAggregating::capture() {
     uint32_t aggVal = 0;
     while (pCapDat <= &captureData[bufferSize - sampleSize]) // sampleSize (= 2) values are stored in each loop
     {
-        debugPinToggle();
         // wait for edge or overflow (output compare match)
-        uint8_t tifr; // cache the result of reading TIFR1 (masked with ICF1 and OCF1A)
-        do {
-            tifr = CAT2(TIFR, CAP_TIM) & (_BV(CAT2(ICF, CAP_TIM)) | _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC)));
-        } while (!tifr);
-        debugPinToggle();
+        uint8_t tifr = waitForTimer(); // cache the result of reading TIFR1 (masked with ICF1 and OCF1A)
         uint16_t val = CAT2(ICR, CAP_TIM);
         CAT3(OCR, CAP_TIM, CAP_TIM_OC) = val; // timeout based on previous trigger time
 

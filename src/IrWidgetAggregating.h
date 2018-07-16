@@ -49,6 +49,16 @@ private:
         return tifr & _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC));
     }
 
+    uint8_t inline waitForTimer() {
+        debugPinSet();
+        uint8_t tifr;
+        do {
+            tifr = CAT2(TIFR, CAP_TIM) & (_BV(CAT2(ICF, CAP_TIM)) | _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC)));
+        } while (!tifr);
+        debugPinClear();
+        return tifr;
+    }
+
     inline uint16_t packTimeVal(uint32_t val) const {
         if (val >= 0x8000) {
             val = val >> (RANGE_EXTENSION_BITS + 1);

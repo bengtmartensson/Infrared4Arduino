@@ -65,8 +65,7 @@ void IrWidgetAggregating::capture() {
     /////////////////////////////////////////
     // wait for first edge
     timeouted = ! waitForFirstEdge();
-    if (timeouted)
-        goto endCapture;
+    if (! timeouted) {
 
     TCCR0B &= ~(_BV(CS02) | _BV(CS01) | _BV(CS00)); // stop timer0 (disables timer IRQs)
     debugPinToggle();
@@ -144,8 +143,8 @@ void IrWidgetAggregating::capture() {
             calCount = 0; // avoid further period calculation and calibration
         }
     }
+    }
 
-endCapture:
     debugPinClear();
 
     TCCR0B = tccr0b; // re-enable Timer0

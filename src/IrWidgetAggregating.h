@@ -45,6 +45,10 @@ private:
 
     void inline setupTriggerAndTimers();
 
+    bool inline overflowBit(uint8_t tifr) {
+        return tifr & _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC));
+    }
+
     inline uint16_t packTimeVal(uint32_t val) const {
         if (val >= 0x8000) {
             val = val >> (RANGE_EXTENSION_BITS + 1);

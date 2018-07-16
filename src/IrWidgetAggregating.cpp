@@ -38,7 +38,7 @@ void IrWidgetAggregating::capture() {
     uint8_t tccr0b = TCCR0B;
     //TCCR0B &= ~(_BV(CS02) | _BV(CS01) | _BV(CS00)); // stop timer0 (disables timer IRQs)
 
-    /*uint16_t*/ period = ((F_CPU) / (20000UL)) >> CAPTURE_PRESCALER_BITS; // the time of one period in CPU clocks (= 100)
+    period = ((F_CPU) / (20000UL)) >> CAPTURE_PRESCALER_BITS; // the time of one period in CPU clocks (presently = 100)
     //uint16_t aggThreshold = (period * 10UL) / 8UL; // 65 us = (1/20kHz * 130%) might be a good starting point
     uint16_t aggThreshold = period * 2;
 
@@ -74,7 +74,7 @@ void IrWidgetAggregating::capture() {
     ovlBitsDataType ovlCnt = 0;
     uint8_t aggCount = 0;
     uint32_t aggVal = 0;
-    while (pCapDat <= &captureData[bufferSize - sampleSize]) // 2 values are stored in each loop, TODO: change to 3 when adding the aggCount
+    while (pCapDat <= &captureData[bufferSize - sampleSize]) // sampleSize (= 2) values are stored in each loop
     {
         debugPinToggle();
         // wait for edge or overflow (output compare match)
@@ -86,7 +86,7 @@ void IrWidgetAggregating::capture() {
         uint16_t val = CAT2(ICR, CAP_TIM);
         CAT3(OCR, CAP_TIM, CAP_TIM_OC) = val; // timeout based on previous trigger time
 
-        if (tifr & _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC))) // check for overflow bit
+        if (overflowBit(tifr)) // check for overflow bit
         {
             if (ovlCnt >= endingTimeout) // TODO: handle this check together with the check for the pulse length (if packTimeVal can handle the value)
             {

@@ -97,8 +97,7 @@ void IrWidgetAggregating::capture() {
             ovlCnt++;
             // clear input capture and output compare flag bit
             CAT2(TIFR, CAP_TIM) = _BV(CAT2(ICF, CAP_TIM)) | _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC));
-            continue;
-        }
+        } else {
 
         // clear input capture and output compare flag bit
         CAT2(TIFR, CAP_TIM) = _BV(CAT2(ICF, CAP_TIM)) | _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC));
@@ -131,6 +130,7 @@ void IrWidgetAggregating::capture() {
             aggVal = 0;
             calCount = 0; // avoid further period calculation and calibration
         }
+    }
     }
     }
 

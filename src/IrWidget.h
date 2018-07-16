@@ -157,6 +157,7 @@ private:
 #define CAP_PIN 0
 #define CAP_TIM 1
 #define CAP_TIM_OC A
+//#define CAPTURE_PIN 8
 #endif
 
     ////////////////////////////////////////////////////////////////////////////////

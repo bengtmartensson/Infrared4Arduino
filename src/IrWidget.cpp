@@ -74,10 +74,13 @@ void IrWidget::dump(Stream &stream) const {
 void IrWidget::setup(bool pullup) {
 #ifdef ARDUINO
     // configure signal capture ICP pin as input
+#ifdef CAPTURE_PIN
+    pinMode(CAPTURE_PIN, pullup ? INPUT_PULLUP : INPUT);
+#else
     cbi(CAT2(DDR, CAP_PORT), CAP_PIN);
     if (pullup)
         sbi(CAT2(PORT, CAP_PORT), CAP_PIN); // enable the internal 10k pull-up resistor
-
+#endif
 #if defined(DEBUG_PIN)
     pinMode(DEBUG_PIN, OUTPUT); // configure logic analyzer debug pin as output
 #endif
@@ -89,13 +92,13 @@ void IrWidget::setup(bool pullup) {
 #else
     cbi(PRR1, CAT2(PRTIM, CAP_TIM)); // for ATmega2560
 #endif
-#else
+#else // ! PRR0
     cbi(PRR, CAT2(PRTIM, CAP_TIM));
 #endif
 
     CAT3(TCCR, CAP_TIM, A) = 0; // Timer mode 0 = normal
     CAT3(TCCR, CAP_TIM, B) = _BV(CAT2(ICNC, CAP_TIM)) | CAPTURE_PRESCALER_SETTING; // prescaler according to setting, enable noise canceler
 #else
-    std::cout << "pinMode(CAPTURE_PIN_1, " << (pullup ? "INPUT_PULLUP)" : "INPUT)") << std::endl;
+    std::cout << "pinMode(CAPTURE_PIN, " << (pullup ? "INPUT_PULLUP)" : "INPUT)") << std::endl;
 #endif
 }

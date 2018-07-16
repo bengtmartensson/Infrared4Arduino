@@ -47,13 +47,8 @@ void IrWidgetAggregating::capture() {
     OCR1A = CAT2(TCNT, CAP_TIM) - 1;
     CAT2(TIFR, CAP_TIM) = _BV(CAT2(ICF, CAP_TIM))
             | _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC)) | _BV(CAT2(TOV, CAP_TIM)); // clear all timer flags
-    uint8_t calShiftM1 = 1;
-    uint8_t calCount = 1 << (calShiftM1 + 1);
-    uint8_t aggCount = 0;
-    ovlBitsDataType ovlCnt = 0;
-    uint16_t prevVal = 0;
+
     uint16_t *pCapDat = captureData; // pointer to current item in captureData[]
-    uint32_t aggVal = 0;
 
     // disabling IRQs for a long time will disconnect the USB connection of the ATmega32U4, therefore we
     // defer the sbi() instruction until we got the starting edge and only stop the Timer0 in the meanwhile
@@ -74,10 +69,15 @@ void IrWidgetAggregating::capture() {
 
     // clear input capture and output compare flag bit
     CAT2(TIFR, CAP_TIM) = _BV(CAT2(ICF, CAP_TIM)) | _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC));
-    prevVal = val;
+    uint16_t prevVal = val;
 
     /////////////////////////////////////////
     // wait for all following edges
+    uint8_t calShiftM1 = 1;
+    uint8_t calCount = 1 << (calShiftM1 + 1);
+    ovlBitsDataType ovlCnt = 0;
+    uint8_t aggCount = 0;
+    uint32_t aggVal = 0;
     while (pCapDat <= &captureData[bufferSize - sampleSize]) // 2 values are stored in each loop, TODO: change to 3 when adding the aggCount
     {
         debugPinToggle();

@@ -105,13 +105,13 @@ void IrWidgetAggregating::capture() {
 
         if (tifr & _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC))) // check for overflow bit
         {
-            if (ovlCnt >= endingTimeout) // TODO: handle this check together with the check for the pulse length (if packTimeValNormal can handle the value)
+            if (ovlCnt >= endingTimeout) // TODO: handle this check together with the check for the pulse length (if packTimeVal can handle the value)
             {
                 if (aggVal > 0) {
                     // TODO check is to value is small enough to be stored
-                    *pCapDat = packTimeVal/*Normal*/(aggVal); // store the pulse length
+                    *pCapDat = packTimeVal(aggVal); // store the pulse length
                     pCapDat++;
-                    *pCapDat = packTimeVal/*Normal*/((uint32_t) endingTimeout << 16);
+                    *pCapDat = packTimeVal((uint32_t) endingTimeout << 16);
                     pCapDat++;
                 }
                 break; // maximum value reached, treat this as timeout and abort capture
@@ -144,10 +144,10 @@ void IrWidgetAggregating::capture() {
                 }
             }
         } else {
-            *pCapDat = packTimeVal/*Normal*/(aggVal); // store the pulse length
+            *pCapDat = packTimeVal(aggVal); // store the pulse length
             pCapDat++;
             // TODO check if value is small enough to be stored
-            *pCapDat = packTimeVal/*Normal*/(diffVal); // store the pause length
+            *pCapDat = packTimeVal(diffVal); // store the pause length
             pCapDat++;
 
             aggVal = 0;

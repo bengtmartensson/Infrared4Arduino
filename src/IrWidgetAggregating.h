@@ -41,7 +41,7 @@ protected:
             milliseconds_t endingTimeout = defaultEndingTimeout);
 
 private:
-    inline uint16_t packTimeVal/*Normal*/(uint32_t val) const {
+    inline uint16_t packTimeVal(uint32_t val) const {
         if (val >= 0x8000) {
             val = val >> (RANGE_EXTENSION_BITS + 1);
             val |= 0x8000;
@@ -50,7 +50,7 @@ private:
         return val;
     }
 
-    inline uint32_t unpackTimeVal/*Normal*/(uint32_t val) const {
+    inline uint32_t unpackTimeVal(uint32_t val) const {
         if (val & 0x8000) {
             val = (val & 0x7fff) << (RANGE_EXTENSION_BITS + 1);
         }

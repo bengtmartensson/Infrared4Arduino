@@ -108,7 +108,7 @@ void IrWidgetAggregating::capture() {
         // clear input capture and output compare flag bit
         CAT2(TIFR, CAP_TIM) = _BV(CAT2(ICF, CAP_TIM)) | _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC));
 
-        uint32_t diffVal = ((val - prevVal) & 0xffff) | ((uint32_t) ovlCnt << 16);
+        uint32_t diffVal = (val - prevVal) | ((uint32_t) ovlCnt << 16);
         ovlCnt = 0;
         prevVal = val;
 

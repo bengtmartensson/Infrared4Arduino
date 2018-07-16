@@ -43,6 +43,8 @@ protected:
 private:
     bool waitForFirstEdge();
 
+    void inline setupTrigger();
+
     inline uint16_t packTimeVal(uint32_t val) const {
         if (val >= 0x8000) {
             val = val >> (RANGE_EXTENSION_BITS + 1);

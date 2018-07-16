@@ -41,14 +41,9 @@ void IrWidgetAggregating::capture() {
     /*uint16_t*/ period = ((F_CPU) / (20000UL)) >> CAPTURE_PRESCALER_BITS; // the time of one period in CPU clocks
     //uint16_t aggThreshold = (period * 10UL) / 8UL; // 65 us = (1/20kHz * 130%) might be a good starting point
     uint16_t aggThreshold = period * 2;
-    uint8_t icesn_val = _BV(CAT2(ICES, CAP_TIM));
-    uint8_t tccrnb = CAT3(TCCR, CAP_TIM, B);
-    if (invertingSensor)
-        tccrnb &= ~icesn_val; // trigger on falling edge
-    else
-        tccrnb |= icesn_val; // trigger on rising edge
 
-    CAT3(TCCR, CAP_TIM, B) = tccrnb;
+    setupTrigger();
+
     OCR1A = CAT2(TCNT, CAP_TIM) - 1;
     CAT2(TIFR, CAP_TIM) = _BV(CAT2(ICF, CAP_TIM))
             | _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC)) | _BV(CAT2(TOV, CAP_TIM)); // clear all timer flags
@@ -173,4 +168,17 @@ bool IrWidgetAggregating::waitForFirstEdge() {
     }
 #endif
     return true;
+}
+
+void IrWidgetAggregating::setupTrigger() {
+#ifdef ARDUINO
+    uint8_t icesn_val = _BV(CAT2(ICES, CAP_TIM));
+    uint8_t tccrnb = CAT3(TCCR, CAP_TIM, B);
+    if (invertingSensor)
+        tccrnb &= ~icesn_val; // trigger on falling edge
+    else
+        tccrnb |= icesn_val; // trigger on rising edge
+
+    CAT3(TCCR, CAP_TIM, B) = tccrnb;
+#endif
 }

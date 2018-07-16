@@ -32,11 +32,10 @@ void IrWidgetAggregating::deleteInstance() {
     instance = NULL;
 }
 
-// Wait for a signal on pin ICP1 and store the captured time values in the array 'captureData'
+// Wait for a signal on pin ICP1 and store the captured time values in the array captureData
 void IrWidgetAggregating::capture() {
 #ifdef ARDUINO
     uint8_t tccr0b = TCCR0B;
-    //TCCR0B &= ~(_BV(CS02) | _BV(CS01) | _BV(CS00)); // stop timer0 (disables timer IRQs)
 
     period = ((F_CPU) / (20000UL)) >> CAPTURE_PRESCALER_BITS; // the time of one period in CPU clocks (presently = 100)
     //uint16_t aggThreshold = (period * 10UL) / 8UL; // 65 us = (1/20kHz * 130%) might be a good starting point
@@ -49,15 +48,10 @@ void IrWidgetAggregating::capture() {
     // disabling IRQs for a long time will disconnect the USB connection of the ATmega32U4, therefore we
     // defer the sbi() instruction until we got the starting edge and only stop the Timer0 in the meanwhile
     uint8_t sreg = SREG;
-    debugPinClear();
 
-    /////////////////////////////////////////
-    // wait for first edge
     timeouted = ! waitForFirstEdge();
     if (! timeouted) {
-
     TCCR0B &= ~(_BV(CS02) | _BV(CS01) | _BV(CS00)); // stop timer0 (disables timer IRQs)
-    //debugPinToggle();
     uint16_t val = CAT2(ICR, CAP_TIM);
     CAT3(OCR, CAP_TIM, CAP_TIM_OC) = val; // timeout based on previous trigger time
 
@@ -67,32 +61,23 @@ void IrWidgetAggregating::capture() {
     CAT2(TIFR, CAP_TIM) = _BV(CAT2(ICF, CAP_TIM)) | _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC));
     uint16_t prevVal = val;
 
-    /////////////////////////////////////////
-    // wait for all following edges
+    // process all following edges
     uint8_t calShiftM1 = 1;
     uint8_t calCount = 1 << (calShiftM1 + 1);
     ovlBitsDataType ovlCnt = 0;
     uint8_t aggCount = 0;
-    uint32_t aggVal = 0;
-    while (pCapDat <= &captureData[bufferSize - sampleSize]) // sampleSize (= 2) values are stored in each loop
-    {
+    uint32_t pulseTime = 0; // was: aggVal;
+    while (pCapDat <= &captureData[bufferSize - sampleSize]) { // sampleSize (= 2) values are stored in each loop
         // wait for edge or overflow (output compare match)
         uint8_t tifr = waitForTimer(); // cache the result of reading TIFR1 (masked with ICF1 and OCF1A)
         uint16_t val = CAT2(ICR, CAP_TIM);
         CAT3(OCR, CAP_TIM, CAP_TIM_OC) = val; // timeout based on previous trigger time
 
-        if (overflowBit(tifr)) // check for overflow bit
-        {
-            if (ovlCnt >= endingTimeout) // TODO: handle this check together with the check for the pulse length (if packTimeVal can handle the value)
-            {
-                if (aggVal > 0) {
-                    // TODO check is to value is small enough to be stored
-                    *pCapDat = packTimeVal(aggVal); // store the pulse length
-                    pCapDat++;
-                    *pCapDat = packTimeVal((uint32_t) endingTimeout << 16);
-                    pCapDat++;
-                }
-                break; // maximum value reached, treat this as timeout and abort capture
+        if (overflowBit(tifr)) {
+            if (ovlCnt >= endingTimeout) {
+                store(pCapDat, pulseTime, (uint32_t) endingTimeout << 16);
+                break; // Normal exit point
+                       // maximum value reached, treat this as timeout and abort capture
             }
             ovlCnt++;
             // clear input capture and output compare flag bit
@@ -107,34 +92,26 @@ void IrWidgetAggregating::capture() {
         prevVal = val;
 
         if (diffVal < aggThreshold) {
-            aggVal += diffVal;
+            pulseTime += diffVal;
 
-            // calculate the carrier frequency only within the first burst (often a preamble)
             if (calCount) {
                 aggCount++; // only used to calculate the period
                 // do a calibration on every aggCount which is a power of two because then dividing by calShiftM1
                 // (shiftcount - 1) can simply be performed by shifting right
                 if (aggCount == calCount) {
-                    aggThreshold = aggVal >> calShiftM1;
+                    aggThreshold = pulseTime >> calShiftM1;
                     calShiftM1++;
                     calCount = calCount << 1; // this will automatically terminate calibrating when calCount is 128 because then (128 << 1) & 0xff = 0
                 }
             }
         } else {
-            *pCapDat = packTimeVal(aggVal); // store the pulse length
-            pCapDat++;
-            // TODO check if value is small enough to be stored
-            *pCapDat = packTimeVal(diffVal); // store the pause length
-            pCapDat++;
-
-            aggVal = 0;
+            store(pCapDat, pulseTime, diffVal);
+            pulseTime = 0;
             calCount = 0; // avoid further period calculation and calibration
         }
     }
     }
     }
-
-    debugPinClear();
 
     TCCR0B = tccr0b; // re-enable Timer0
     SREG = sreg; // enable IRQs
@@ -173,4 +150,14 @@ void IrWidgetAggregating::setupTriggerAndTimers() {
     CAT2(TIFR, CAP_TIM) = _BV(CAT2(ICF, CAP_TIM))
             | _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC)) | _BV(CAT2(TOV, CAP_TIM)); // clear all timer flags
 #endif
+}
+
+void IrWidgetAggregating::store(uint16_t* &pCapDat, uint32_t pulseTime, uint32_t gapTime) {
+    //if (pulseTime > 0UL) {
+        // TODO check is to value is small enough to be stored
+        *pCapDat = packTimeVal(pulseTime); // store the pulse length
+        pCapDat++;
+        *pCapDat = packTimeVal(gapTime);
+        pCapDat++;
+    //}
 }

@@ -59,6 +59,8 @@ private:
         return tifr;
     }
 
+    void store(uint16_t* &pCapDat, uint32_t pulseTime, uint32_t gapTime);
+
     inline uint16_t packTimeVal(uint32_t val) const {
         if (val >= 0x8000) {
             val = val >> (RANGE_EXTENSION_BITS + 1);

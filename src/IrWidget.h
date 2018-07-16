@@ -30,6 +30,10 @@ http://arduino.cc/en/Hacking/PinMapping2560
 #include <Arduino.h>
 #include "IrReader.h"
 
+//#ifndef ARDUINO
+//#define ARDUINO // To be removed
+//#endif
+
 //#define DEBUG_PIN 12
 
 #define USE_PRESCALER_FACTOR_8 1
@@ -40,6 +44,7 @@ http://arduino.cc/en/Hacking/PinMapping2560
  */
 class IrWidget : public IrReader {
 public:
+    // can be negative, therefore not microseconds_t.
     static const int16_t defaultMarkExcess = 0;
 
 protected:
@@ -51,6 +56,7 @@ protected:
             milliseconds_t beginningTimeout = defaultBeginningTimeout,
             milliseconds_t endingTimeout = defaultEndingTimeout);
     virtual ~IrWidget();
+
 public:
     static const bool invertingSensor = true;
 
@@ -73,11 +79,7 @@ public:
         captureCount = 0;
     }
 
-    microseconds_t inline getDuration(unsigned int i) const {
-        uint32_t result32 = timerValueToNanoSeconds(unpackTimeVal(captureData[i])) / 1000
-                            + (i & 1 ? markExcess : -markExcess);
-        return result32 <= MICROSECONDS_T_MAX ? (microseconds_t) result32 : MICROSECONDS_T_MAX;
-    }
+    microseconds_t inline getDuration(unsigned int i) const = 0;
 
     /**
      * Sets the ending timeout. In this implementation, this is effectively
@@ -95,7 +97,7 @@ public:
     void dump(Stream &stream) const;
 
 private:
-    void setup(bool setup);
+    void setup(bool pullup);
 
     ////////////////////////////////////////////////////////////////////////////////
     // Internal defines, don't change
@@ -172,11 +174,6 @@ private:
 
     // these macros are used to debug the timing with an logic analyzer or oscilloscope on a port pin
 protected:
-    inline void debugPinToggle() {
-#if defined(DEBUG_PIN)
-        digitalWrite(DEBUG_PIN, !digitalRead(DEBUG_PIN));
-#endif
-    }
 
     inline void debugPinSet() {
 #if defined(DEBUG_PIN)
@@ -189,14 +186,20 @@ protected:
         digitalWrite(DEBUG_PIN, LOW);
 #endif
     }
-    uint16_t *captureData; //[bufSize]; // the buffer where the catured data is stored
-    uint16_t captureCount; // number of values stored in captureData
-    uint16_t period/* = 0*/; // the time of one period in CPU clocks
+
+    /** The buffer where the catured data is stored.*/
+    uint16_t *captureData; //[bufSize];
+
+    /** The number of values stored in captureData.*/
+    uint16_t captureCount;
+
+    /** The time of one period in CPU clocks.*/
+    uint16_t period/* = 0*/;
     // Only inverting sensors are supported in this version
     //static const bool sensorIsInverting = true;///* = false*/; // true means the sensor signal is inverted (low = signal on)
     static const uint8_t sampleSize = 2;
 
-    virtual uint32_t unpackTimeVal(uint32_t val) const = 0;
+    //virtual uint32_t unpackTimeVal(uint32_t val) const = 0;
 
     // convert number of clocks to nanoseconds, try to use integer arithmetic and avoid
     // overflow and too much truncation (double arithmetic costs additional 800 byte of code)

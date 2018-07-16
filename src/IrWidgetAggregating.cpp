@@ -37,8 +37,7 @@ void IrWidgetAggregating::capture() {
 #ifdef ARDUINO
     uint8_t tccr0b = TCCR0B;
 
-    period = ((F_CPU) / (20000UL)) >> CAPTURE_PRESCALER_BITS; // the time of one period in CPU clocks (presently = 100)
-    //uint16_t aggThreshold = (period * 10UL) / 8UL; // 65 us = (1/20kHz * 130%) might be a good starting point
+    period = ((F_CPU) / (20000UL)) >> CAPTURE_PRESCALER_BITS;
     uint16_t aggThreshold = period * 2;
 
     setupTriggerAndTimers();
@@ -51,14 +50,12 @@ void IrWidgetAggregating::capture() {
 
     timeouted = ! waitForFirstEdge();
     if (!timeouted) {
-        TCCR0B &= ~(_BV(CS02) | _BV(CS01) | _BV(CS00)); // stop timer0 (disables timer IRQs)
-        uint16_t val = CAT2(ICR, CAP_TIM);
-        CAT3(OCR, CAP_TIM, CAP_TIM_OC) = val; // timeout based on previous trigger time
+        stopTimer();
+        uint16_t val = updateTimeout();
 
         noInterrupts(); // disable IRQs after the first edge
 
-        // clear input capture and output compare flag bit
-        CAT2(TIFR, CAP_TIM) = _BV(CAT2(ICF, CAP_TIM)) | _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC));
+        clearInputCaptureOutputCompareFlag();
         uint16_t prevVal = val;
 
         // process all following edges
@@ -70,8 +67,7 @@ void IrWidgetAggregating::capture() {
         while (pCapDat <= &captureData[bufferSize - sampleSize]) { // sampleSize (= 2) values are stored in each loop
             // wait for edge or overflow (output compare match)
             uint8_t tifr = waitForTimer(); // cache the result of reading TIFR1 (masked with ICF1 and OCF1A)
-            uint16_t val = CAT2(ICR, CAP_TIM);
-            CAT3(OCR, CAP_TIM, CAP_TIM_OC) = val; // timeout based on previous trigger time
+            val = updateTimeout();
 
             if (overflowBit(tifr)) {
                 if (ovlCnt >= endingTimeout) {
@@ -80,12 +76,10 @@ void IrWidgetAggregating::capture() {
                     // maximum value reached, treat this as timeout and abort capture
                 }
                 ovlCnt++;
-                // clear input capture and output compare flag bit
-                CAT2(TIFR, CAP_TIM) = _BV(CAT2(ICF, CAP_TIM)) | _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC));
+                clearInputCaptureOutputCompareFlag();
             } else {
 
-                // clear input capture and output compare flag bit
-                CAT2(TIFR, CAP_TIM) = _BV(CAT2(ICF, CAP_TIM)) | _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC));
+                clearInputCaptureOutputCompareFlag();
 
                 uint32_t diffVal = (val - prevVal) | ((uint32_t) ovlCnt << 16);
                 ovlCnt = 0;
@@ -124,7 +118,7 @@ void IrWidgetAggregating::capture() {
 #endif // ARDUINO
 }
 
-bool IrWidgetAggregating::waitForFirstEdge() {
+bool IrWidgetAggregating::waitForFirstEdge() const {
 #ifdef ARDUINO
     uint32_t timeForBeginTimeout = millis() + beginningTimeout;
     while (!(CAT2(TIFR, CAP_TIM) & (_BV(CAT2(ICF, CAP_TIM))))) {
@@ -154,10 +148,10 @@ void IrWidgetAggregating::setupTriggerAndTimers() {
 
 void IrWidgetAggregating::store(uint16_t* &pCapDat, uint32_t pulseTime, uint32_t gapTime) {
     //if (pulseTime > 0UL) {
-        // TODO check is to value is small enough to be stored
-        *pCapDat = packTimeVal(pulseTime); // store the pulse length
-        pCapDat++;
-        *pCapDat = packTimeVal(gapTime);
-        pCapDat++;
+    // TODO check is to value is small enough to be stored
+    *pCapDat = packTimeVal(pulseTime); // store the pulse length
+    pCapDat++;
+    *pCapDat = packTimeVal(gapTime);
+    pCapDat++;
     //}
 }

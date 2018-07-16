@@ -33,6 +33,12 @@ public:
             milliseconds_t beginningTimeout = defaultBeginningTimeout,
             milliseconds_t endingTimeout = defaultEndingTimeout);
 
+    microseconds_t inline getDuration(unsigned int i) const {
+        uint32_t result32 = timerValueToNanoSeconds(unpackTimeVal(captureData[i])) / 1000
+                + (i & 1 ? markExcess : -markExcess);
+        return result32 <= MICROSECONDS_T_MAX ? (microseconds_t) result32 : MICROSECONDS_T_MAX;
+    }
+
 protected:
     IrWidgetAggregating(size_t captureLength = defaultCaptureLength,
             bool pullup = false,
@@ -41,11 +47,11 @@ protected:
             milliseconds_t endingTimeout = defaultEndingTimeout);
 
 private:
-    bool waitForFirstEdge();
+    bool waitForFirstEdge() const;
 
     void inline setupTriggerAndTimers();
 
-    bool inline overflowBit(uint8_t tifr) {
+    bool inline overflowBit(uint8_t tifr) const {
         return tifr & _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC));
     }
 
@@ -59,9 +65,24 @@ private:
         return tifr;
     }
 
-    void store(uint16_t* &pCapDat, uint32_t pulseTime, uint32_t gapTime);
+    // clear input capture and output compare flag bit
+    void clearInputCaptureOutputCompareFlag() const {
+        CAT2(TIFR, CAP_TIM) = _BV(CAT2(ICF, CAP_TIM)) | _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC));
+    }
 
-    inline uint16_t packTimeVal(uint32_t val) const {
+    void stopTimer() const {
+        TCCR0B &= ~(_BV(CS02) | _BV(CS01) | _BV(CS00)); // stop timer0 (disables timer IRQs)
+    }
+
+    uint16_t updateTimeout() const {
+        uint16_t val = CAT2(ICR, CAP_TIM);
+        CAT3(OCR, CAP_TIM, CAP_TIM_OC) = val; // timeout based on previous trigger time
+        return val;
+    }
+
+    void static store(uint16_t* &pCapDat, uint32_t pulseTime, uint32_t gapTime);
+
+    inline static uint16_t packTimeVal(uint32_t val) {
         if (val >= 0x8000) {
             val = val >> (RANGE_EXTENSION_BITS + 1);
             val |= 0x8000;
@@ -70,7 +91,7 @@ private:
         return val;
     }
 
-    inline uint32_t unpackTimeVal(uint32_t val) const {
+    inline static uint32_t unpackTimeVal(uint32_t val) {
         if (val & 0x8000) {
             val = (val & 0x7fff) << (RANGE_EXTENSION_BITS + 1);
         }

@@ -41,6 +41,8 @@ protected:
             milliseconds_t endingTimeout = defaultEndingTimeout);
 
 private:
+    bool waitForFirstEdge();
+
     inline uint16_t packTimeVal(uint32_t val) const {
         if (val >= 0x8000) {
             val = val >> (RANGE_EXTENSION_BITS + 1);

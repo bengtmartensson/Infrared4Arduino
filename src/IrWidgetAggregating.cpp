@@ -35,7 +35,6 @@ void IrWidgetAggregating::deleteInstance() {
 // Wait for a signal on pin ICP1 and store the captured time values in the array 'captureData'
 void IrWidgetAggregating::capture() {
 #ifdef ARDUINO
-    uint32_t timeForBeginTimeout = millis() + beginningTimeout;
     uint8_t tccr0b = TCCR0B;
     //TCCR0B &= ~(_BV(CS02) | _BV(CS01) | _BV(CS00)); // stop timer0 (disables timer IRQs)
 
@@ -70,14 +69,10 @@ void IrWidgetAggregating::capture() {
 
     /////////////////////////////////////////
     // wait for first edge
-    while (!(CAT2(TIFR, CAP_TIM) & (_BV(CAT2(ICF, CAP_TIM))))) {
-        if (millis() >= timeForBeginTimeout) {
-            timeouted = true;
-            goto endCapture;
-        }
-        //if (stream.available()) // abort the capture when any character is received // FIXME
-        //    goto endCapture;
-    }
+    timeouted = ! waitForFirstEdge();
+    if (timeouted)
+        goto endCapture;
+
     TCCR0B &= ~(_BV(CS02) | _BV(CS01) | _BV(CS00)); // stop timer0 (disables timer IRQs)
     debugPinToggle();
     val = CAT2(ICR, CAP_TIM);
@@ -167,4 +162,15 @@ endCapture:
     uint32_t mediumPeriod = timerValueToNanoSeconds(period);
     frequency = (frequency_t) (1000000000L / mediumPeriod);
 #endif // ARDUINO
+}
+
+bool IrWidgetAggregating::waitForFirstEdge() {
+#ifdef ARDUINO
+    uint32_t timeForBeginTimeout = millis() + beginningTimeout;
+    while (!(CAT2(TIFR, CAP_TIM) & (_BV(CAT2(ICF, CAP_TIM))))) {
+        if (millis() >= timeForBeginTimeout)
+            return false;
+    }
+#endif
+    return true;
 }

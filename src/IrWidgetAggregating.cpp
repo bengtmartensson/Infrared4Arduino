@@ -53,7 +53,6 @@ void IrWidgetAggregating::capture() {
     OCR1A = CAT2(TCNT, CAP_TIM) - 1;
     CAT2(TIFR, CAP_TIM) = _BV(CAT2(ICF, CAP_TIM))
             | _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC)) | _BV(CAT2(TOV, CAP_TIM)); // clear all timer flags
-    uint8_t tifr; // cache the result of reading TIFR1 (masked with ICF1 and OCF1A)
     uint8_t calShiftM1 = 1;
     uint8_t calCount = 1 << (calShiftM1 + 1);
     uint8_t aggCount = 0;
@@ -92,13 +91,14 @@ void IrWidgetAggregating::capture() {
 
     /////////////////////////////////////////
     // wait for all following edges
-    for (; pCapDat <= &captureData[bufferSize - sampleSize];) // 2 values are stored in each loop, TODO: change to 3 when adding the aggCount
+    while (pCapDat <= &captureData[bufferSize - sampleSize]) // 2 values are stored in each loop, TODO: change to 3 when adding the aggCount
     {
         debugPinToggle();
         // wait for edge or overflow (output compare match)
-        while (!(tifr =
-                (CAT2(TIFR, CAP_TIM) & (_BV(CAT2(ICF, CAP_TIM)) | _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC)))))) {
-        }
+        uint8_t tifr; // cache the result of reading TIFR1 (masked with ICF1 and OCF1A)
+        do {
+            tifr = CAT2(TIFR, CAP_TIM) & (_BV(CAT2(ICF, CAP_TIM)) | _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC)));
+        } while (!tifr);
         debugPinToggle();
         val = CAT2(ICR, CAP_TIM);
         CAT3(OCR, CAP_TIM, CAP_TIM_OC) = val; // timeout based on previous trigger time

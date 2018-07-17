@@ -32,9 +32,9 @@ void IrWidgetAggregating::deleteInstance() {
     instance = NULL;
 }
 
+#ifdef ARDUINO
 // Wait for a signal on pin ICP1 and store the captured time values in the array captureData
 void IrWidgetAggregating::capture() {
-#ifdef ARDUINO
     uint8_t tccr0b = TCCR0B;
 
     period = ((F_CPU) / (20000UL)) >> CAPTURE_PRESCALER_BITS;
@@ -115,17 +115,14 @@ void IrWidgetAggregating::capture() {
 
     uint32_t mediumPeriod = timerValueToNanoSeconds(period);
     frequency = (frequency_t) (1000000000L / mediumPeriod);
-#endif // ARDUINO
 }
 
 bool IrWidgetAggregating::waitForFirstEdge() const {
-#ifdef ARDUINO
     uint32_t timeForBeginTimeout = millis() + beginningTimeout;
     while (!(CAT2(TIFR, CAP_TIM) & (_BV(CAT2(ICF, CAP_TIM))))) {
         if (millis() >= timeForBeginTimeout)
             return false;
     }
-#endif
     return true;
 }
 
@@ -155,3 +152,4 @@ void IrWidgetAggregating::store(uint16_t* &pCapDat, uint32_t pulseTime, uint32_t
     pCapDat++;
     //}
 }
+#endif

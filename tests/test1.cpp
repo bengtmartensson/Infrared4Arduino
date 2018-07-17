@@ -11,6 +11,7 @@
 #include "Pronto.h"
 #include "Rc5Renderer.h"
 #include "Rc5Decoder.h"
+#include "Recs80Decoder.h"
 #include <unistd.h>
 #include <iostream>
 #include <sstream>
@@ -111,6 +112,15 @@ int main() {
     const char* s = Pronto::toProntoHex(*irSignal);
     ok = std::string(s) == std::string(prontoHex);
     (ok ? successes : fails)++;
+
+    // Test 9
+    microseconds_t recs80Array[] = { 158, 7426, 158, 7426, 158, 7426, 158, 4898, 158, 7426, 158, 4898, 158, 4898, 158, 7426, 158, 7426, 158, 4898, 158, 4898, 158, 45000 };
+    IrSequence recs80Sequence(recs80Array, sizeof(recs80Array)/sizeof(recs80Array[0]));
+    IrSequenceReader recs80Reader(recs80Sequence);
+    Recs80Decoder recs80Decoder(recs80Reader);
+    ok = checkDecoderDump(recs80Decoder, "RECS80 5 12 1\n");
+    (ok ? successes : fails)++;
+    std::cout << recs80Decoder.getDecode() << std::endl;
 
     // Report
     std::cout << "Successes: " << successes << std::endl;

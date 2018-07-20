@@ -1,6 +1,7 @@
 #include "MultiDecoder.h"
 #include "Nec1Decoder.h"
 #include "Rc5Decoder.h"
+#include "Recs80Decoder.h"
 #include <string.h>
 
 MultiDecoder::MultiDecoder(const IrReader &IrReader) {
@@ -28,6 +29,14 @@ MultiDecoder::MultiDecoder(const IrReader &IrReader) {
     if (rc5decoder.isValid()) {
         strcpy(decode, rc5decoder.getDecode());
         type = rc5;
+        setValid(true);
+        return;
+    }
+
+    Recs80Decoder recs80decoder(IrReader);
+    if (recs80decoder.isValid()) {
+        strcpy(decode, recs80decoder.getDecode());
+        type = recs80;
         setValid(true);
         return;
     }

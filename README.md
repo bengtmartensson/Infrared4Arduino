@@ -1,25 +1,26 @@
 # Infrared4Arduino
-This is yet another infrared library for the Arduino. (Although its name does not
-start with YA...)
+Infrared4Arduino is an object-oriented infrared library for the Arduino.
 
-It is a major rewrite of [Chris Young's
-IRLib](http://tech.cyborg5.com/irlib/), ([GitHub repo](https://github.com/cyborg5/IRLib)), which itself is a major
-rewrite of a library called IRremote, published by
-Ken Shirriff in [his blog](http://www.righto.com/2009/08/multi-protocol-infrared-remote-library.html),
-now maintained [on GitHub](https://github.com/z3t0/Arduino-IRremote).
+The library was (with some exceptions detailed below) written from scratch by myself.
 It uses Michael Dreher's
 IrWidget [(article in
 German)](http://www.mikrocontroller.net/articles/High-Speed_capture_mit_ATmega_Timer),
 see also [this forum
 contribution](http://www.hifi-remote.com/forums/viewtopic.php?p=111876#111876).
 
+The main inspiration for the present work was the well-known library called IRremote, published by
+Ken Shirriff in [his blog](http://www.righto.com/2009/08/multi-protocol-infrared-remote-library.html),
+now maintained [on GitHub](https://github.com/z3t0/Arduino-IRremote). The file `boarddefs.h` has
+essentially been stolen from IRremote.
+[Chris Young's IRLib](http://tech.cyborg5.com/irlib/), ([GitHub repo](https://github.com/cyborg5/IRLib)),
+should also be mentioned as a source of inspiration, but not of code.
 
 The classes `IrWidget` and `IrWidgetAggregating` are based on Michael's code.
-The classes `IrReceiverSampler` and `IrSenderPwm`, and in particular the file `IRremoteInt.h`,
-are adapted from Kevin's and Chris' work. The remaining files are almost completely written
-from scratch, although the influence of Kevin and Chris is gratefully acknowledged.
+The classes `IrReceiverSampler` and `IrSenderPwm`,
+are adapted from Kevin's work. The remaining files are almost completely written
+from scratch.
 
-This work is a low-level library (like IRremote and IRLib) that can be used in other projects,
+This work is a low-level library (like `IRremote` and `IRLib`) that can be used in other projects,
 like [AGirs](https://github.com/bengtmartensson/AGirs), which is an high-level program taking commands interactively
 from a user or a program through a bi-directional `Stream`.
 The goal has been to provide a sound, object oriented basis for the fundamental basis, not
@@ -28,6 +29,36 @@ different hardware. A clean design and high readability, without being "too" ine
 has been the highest priority. Dynamic memory allocation with `new` and `delete` is used extensively.
 The user who is afraid of this can create his required objects at the start of the run, and keep
 them. Most classes are immutable. The classes are `const`-correct.
+
+## Forum
+Feel free to open [issues at Github](https://github.com/bengtmartensson/Infrared4Arduino/issues) should
+the need or desire arise. A possible place to discuss is the
+[Sensor sub-forum at the Arduino forum](https://forum.arduino.cc/index.php?board=10.0).
+
+## Examples
+A fairly large numbers of examples are provided. Most of these are a straight-forward
+demonstration of a particular class, as indicated by the name.
+
+The examples `oppo_cooked` and `oppo_raw` consist of [IrScrutinizer](https://github.com/bengtmartensson/harctoolboxbundle)
+exports of the infrared command set of the Oppo Bluray players, in parametrized and raw form respectively.
+
+However, one "example" is not really an "example" but a deployment program:
+
+### MicroGirs
+This "example" implements a [Girs](http://www.harctoolbox.org/Girs.html) server for the Arduino.
+It can be used with [IrScrutinizer](https://github.com/bengtmartensson/harctoolboxbundle),
+and [Lirc](http://lirc.org) (using the [Girs driver](http://lirc.org/html/girs.html)).
+It is an interactive server that can send and receive IR signals, with some bells and whistles.
+The interactive server is mainly meant for interact with other programs. communicating over a serial line, likely in USB disguise.
+
+MicroGirs is essentially a simplified version of [AGirs](https://github.com/bengtmartensson/AGirs),
+stripped of features seldomly used (LCD and (visible-light) LED support, Ethernet, etc). As opposed to
+AGirs, it does not depend on other libraries. For more documentation, see the AGirs project.
+
+There are a number of configuration options. These are all contained in the
+file `config.h` and consists of CPP `#defines`.
+
+MicroGirs is essentially functionally equivalent to "GirsLite".
 
 # API
 
@@ -188,7 +219,7 @@ With the provided `Doxyfile`, Doxygen will document only the (strict) Arduino pa
 not the "portable C++".
 
 # License
-The entire work is licensed under the GPL2 "or later" license. Chris' as well as Ken's
+The entire work is licensed under the GPL2 "or later" license. Ken's
 code is licensed under the LGPL 2.1-license. Michael's code carries the
 GPL2-license, although he is [willing to agree to "or later
 versions"](http://www.hifi-remote.com/forums/viewtopic.php?p=112586#112586).

@@ -29,6 +29,15 @@ IrSignal::IrSignal(const microseconds_t *intro_, size_t introLength,
         ending(ending_, endingLength, toBeFreed) {
 }
 
+IrSignal::IrSignal(const microseconds_t *intro_, size_t introLength,
+        const microseconds_t *repeat_, size_t repeatLength,
+        frequency_t frequency_, bool toBeFreed)
+: frequency(frequency_),
+intro(intro_, introLength, toBeFreed),
+repeat(repeat_, repeatLength, toBeFreed),
+ending(NULL, 0, false) {
+}
+
 IrSignal::~IrSignal() {
     //delete intro;
     //delete repeat;

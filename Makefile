@@ -11,7 +11,7 @@ endif
 
 KEYWORD_TXT_GENERATOR_DIR = ../KeywordsTxtGenerator
 DOXYGEN := doxygen
-DOXYFILE :=  $(KEYWORD_TXT_GENERATOR_DIR)/keywords_txt_generator.doxy
+DOXYFILE :=  Doxyfile
 XSLTPROC := xsltproc
 TRANSFORMATION := $(KEYWORD_TXT_GENERATOR_DIR)/doxygen2keywords.xsl
 

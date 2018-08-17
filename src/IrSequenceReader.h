@@ -1,7 +1,7 @@
 #ifndef IRSEQUENCEREADER_H
 #define	IRSEQUENCEREADER_H
 
-#include "IrSequence.h"
+#include "IrSignal.h"
 #include "IrReader.h"
 
 /**
@@ -23,6 +23,10 @@ public:
     };
 
     virtual ~IrSequenceReader() {
+    };
+
+    virtual frequency_t getFrequency() const {
+        return IrSignal::defaultFrequency;
     };
 
     void receive() {

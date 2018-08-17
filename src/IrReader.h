@@ -69,6 +69,13 @@ public:
     };
 
     /**
+     * Returns frequency of received signal.
+     * This is a dumb default implementation, to be overridden when meaningful.
+     * @return frequency
+     */
+    virtual frequency_t getFrequency() const = 0;
+
+    /**
      * Start reception of IR data.
      */
     virtual void enable() {

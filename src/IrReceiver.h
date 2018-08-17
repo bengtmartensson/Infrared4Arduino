@@ -4,6 +4,7 @@
 #include <Arduino.h>
 #include "InfraredTypes.h"
 #include "IrReader.h"
+#include "IrSignal.h"
 
 /**
  * Abstract base class for demodulating IR receivers.
@@ -33,6 +34,10 @@ public:
             microseconds_t markExcess = defaultMarkExcess);
 
     virtual ~IrReceiver() {
+    };
+
+    virtual frequency_t getFrequency() const {
+        return IrSignal::defaultFrequency;
     };
 
     virtual void receive();

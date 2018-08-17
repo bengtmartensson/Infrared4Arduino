@@ -109,6 +109,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aceb3228d8af94cb49dc73cc5afdea95a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac536014f68efeca1b7c2883f04d5967c"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrReceiver.html#ac536014f68efeca1b7c2883f04d5967c">~IrReceiver</a> ()</td></tr>
 <tr class="separator:ac536014f68efeca1b7c2883f04d5967c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8bead5cb6acd844865917fce81d1b702"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="InfraredTypes_8h.html#aba83572ea1178fac02f628a76d313347">frequency_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrReceiver.html#a8bead5cb6acd844865917fce81d1b702">getFrequency</a> () const</td></tr>
+<tr class="memdesc:a8bead5cb6acd844865917fce81d1b702"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns frequency of received signal.  <a href="#a8bead5cb6acd844865917fce81d1b702">More...</a><br /></td></tr>
+<tr class="separator:a8bead5cb6acd844865917fce81d1b702"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aae1216200e7313aef3cb2298d06fc37e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrReceiver.html#aae1216200e7313aef3cb2298d06fc37e">receive</a> ()</td></tr>
 <tr class="memdesc:aae1216200e7313aef3cb2298d06fc37e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience function: enable, wait until data is collected or timeout has occured, disable.  <a href="#aae1216200e7313aef3cb2298d06fc37e">More...</a><br /></td></tr>
 <tr class="separator:aae1216200e7313aef3cb2298d06fc37e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -204,7 +207,7 @@ Additional Inherited Members</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Abstract base class for demodulating IR receivers. </p>
 
-<p class="definition">Definition at line <a class="el" href="IrReceiver_8h_source.html#l00011">11</a> of file <a class="el" href="IrReceiver_8h_source.html">IrReceiver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IrReceiver_8h_source.html#l00012">12</a> of file <a class="el" href="IrReceiver_8h_source.html">IrReceiver.h</a>.</p>
 </div><h2 class="groupheader">Member Enumeration Documentation</h2>
 <a id="abdb05eecb62ef9a28dbc1db4bf247d19"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abdb05eecb62ef9a28dbc1db4bf247d19">&#9670;&nbsp;</a></span>irdata_t</h2>
@@ -226,7 +229,7 @@ Additional Inherited Members</h2></td></tr>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="IrReceiver_8h_source.html#l00047">47</a> of file <a class="el" href="IrReceiver_8h_source.html">IrReceiver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IrReceiver_8h_source.html#l00052">52</a> of file <a class="el" href="IrReceiver_8h_source.html">IrReceiver.h</a>.</p>
 
 </div>
 </div>
@@ -307,11 +310,43 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="IrReceiver_8h_source.html#l00035">35</a> of file <a class="el" href="IrReceiver_8h_source.html">IrReceiver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IrReceiver_8h_source.html#l00036">36</a> of file <a class="el" href="IrReceiver_8h_source.html">IrReceiver.h</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a8bead5cb6acd844865917fce81d1b702"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8bead5cb6acd844865917fce81d1b702">&#9670;&nbsp;</a></span>getFrequency()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="InfraredTypes_8h.html#aba83572ea1178fac02f628a76d313347">frequency_t</a> IrReceiver::getFrequency </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns frequency of received signal. </p>
+<p>This is a dumb default implementation, to be overridden when meaningful. </p><dl class="section return"><dt>Returns</dt><dd>frequency </dd></dl>
+
+<p>Implements <a class="el" href="classIrReader.html#a21ddfce51867e01d3be924270b176620">IrReader</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="IrReceiver_8h_source.html#l00039">39</a> of file <a class="el" href="IrReceiver_8h_source.html">IrReceiver.h</a>.</p>
+
+</div>
+</div>
 <a id="a99e33482cb5006ade1572608a899eb93"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a99e33482cb5006ade1572608a899eb93">&#9670;&nbsp;</a></span>getPin()</h2>
 
@@ -335,7 +370,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="IrReceiver_8h_source.html#l00040">40</a> of file <a class="el" href="IrReceiver_8h_source.html">IrReceiver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IrReceiver_8h_source.html#l00045">45</a> of file <a class="el" href="IrReceiver_8h_source.html">IrReceiver.h</a>.</p>
 
 </div>
 </div>
@@ -391,7 +426,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="IrReceiver_8h_source.html#l00019">19</a> of file <a class="el" href="IrReceiver_8h_source.html">IrReceiver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IrReceiver_8h_source.html#l00020">20</a> of file <a class="el" href="IrReceiver_8h_source.html">IrReceiver.h</a>.</p>
 
 </div>
 </div>
@@ -415,7 +450,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="IrReceiver_8h_source.html#l00018">18</a> of file <a class="el" href="IrReceiver_8h_source.html">IrReceiver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IrReceiver_8h_source.html#l00019">19</a> of file <a class="el" href="IrReceiver_8h_source.html">IrReceiver.h</a>.</p>
 
 </div>
 </div>
@@ -441,7 +476,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Are we using inverting sensor, like most TSOPs? </p>
 
-<p class="definition">Definition at line <a class="el" href="IrReceiver_8h_source.html#l00022">22</a> of file <a class="el" href="IrReceiver_8h_source.html">IrReceiver.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IrReceiver_8h_source.html#l00023">23</a> of file <a class="el" href="IrReceiver_8h_source.html">IrReceiver.h</a>.</p>
 
 </div>
 </div>
@@ -452,7 +487,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Aug 11 2018 12:32:34 for Infrared4Arduino by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Aug 17 2018 16:16:33 for Infrared4Arduino by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

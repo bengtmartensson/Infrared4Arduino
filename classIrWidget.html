@@ -121,6 +121,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae8b636dfda0fcdea0fb2b8d3879e345e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="InfraredTypes_8h.html#ace35cfd2245c700198afb856211d7bcd">milliseconds_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrWidget.html#ae8b636dfda0fcdea0fb2b8d3879e345e">getEndingTimeout</a> () const</td></tr>
 <tr class="separator:ae8b636dfda0fcdea0fb2b8d3879e345e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47d27f3b458e0e95d0887b4beb9b199f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="InfraredTypes_8h.html#aba83572ea1178fac02f628a76d313347">frequency_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrWidget.html#a47d27f3b458e0e95d0887b4beb9b199f">getFrequency</a> () const</td></tr>
+<tr class="memdesc:a47d27f3b458e0e95d0887b4beb9b199f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns frequency of received signal.  <a href="#a47d27f3b458e0e95d0887b4beb9b199f">More...</a><br /></td></tr>
 <tr class="separator:a47d27f3b458e0e95d0887b4beb9b199f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa8bb29845ad2933c1c957d1f088f3835"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrWidget.html#aa8bb29845ad2933c1c957d1f088f3835">dump</a> (Stream &amp;stream) const</td></tr>
 <tr class="memdesc:aa8bb29845ad2933c1c957d1f088f3835"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints a textual representation of the received data to the Stream supplied.  <a href="#aa8bb29845ad2933c1c957d1f088f3835">More...</a><br /></td></tr>
@@ -585,10 +586,15 @@ Static Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Returns frequency of received signal. </p>
+<p>This is a dumb default implementation, to be overridden when meaningful. </p><dl class="section return"><dt>Returns</dt><dd>frequency </dd></dl>
+
+<p>Implements <a class="el" href="classIrReader.html#a21ddfce51867e01d3be924270b176620">IrReader</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="IrWidget_8h_source.html#l00098">98</a> of file <a class="el" href="IrWidget_8h_source.html">IrWidget.h</a>.</p>
 
@@ -1002,7 +1008,7 @@ Static Protected Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Aug 11 2018 12:32:34 for Infrared4Arduino by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Aug 17 2018 16:16:33 for Infrared4Arduino by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

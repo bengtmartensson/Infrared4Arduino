@@ -100,6 +100,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a19953f590f7136b015ec2e2a3c2576bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21080b7980b2c120843048641056a483"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrSequenceReader.html#a21080b7980b2c120843048641056a483">~IrSequenceReader</a> ()</td></tr>
 <tr class="separator:a21080b7980b2c120843048641056a483"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1effebe11362de23506a64ea81879828"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="InfraredTypes_8h.html#aba83572ea1178fac02f628a76d313347">frequency_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrSequenceReader.html#a1effebe11362de23506a64ea81879828">getFrequency</a> () const</td></tr>
+<tr class="memdesc:a1effebe11362de23506a64ea81879828"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns frequency of received signal.  <a href="#a1effebe11362de23506a64ea81879828">More...</a><br /></td></tr>
+<tr class="separator:a1effebe11362de23506a64ea81879828"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe0c5164e14aafebc025b953cd8a1f46"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrSequenceReader.html#abe0c5164e14aafebc025b953cd8a1f46">receive</a> ()</td></tr>
 <tr class="memdesc:abe0c5164e14aafebc025b953cd8a1f46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience function: enable, wait until data is collected or timeout has occured, disable.  <a href="#abe0c5164e14aafebc025b953cd8a1f46">More...</a><br /></td></tr>
 <tr class="separator:abe0c5164e14aafebc025b953cd8a1f46"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -325,7 +328,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classIrReader.html#a231b93b53da4e0d10f9683d3b2696846">IrReader</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="IrSequenceReader_8h_source.html#l00035">35</a> of file <a class="el" href="IrSequenceReader_8h_source.html">IrSequenceReader.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IrSequenceReader_8h_source.html#l00039">39</a> of file <a class="el" href="IrSequenceReader_8h_source.html">IrSequenceReader.h</a>.</p>
 
 </div>
 </div>
@@ -364,7 +367,39 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classIrReader.html#afbf78045acaf2569c610ca717a8acebf">IrReader</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="IrSequenceReader_8h_source.html#l00039">39</a> of file <a class="el" href="IrSequenceReader_8h_source.html">IrSequenceReader.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IrSequenceReader_8h_source.html#l00043">43</a> of file <a class="el" href="IrSequenceReader_8h_source.html">IrSequenceReader.h</a>.</p>
+
+</div>
+</div>
+<a id="a1effebe11362de23506a64ea81879828"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1effebe11362de23506a64ea81879828">&#9670;&nbsp;</a></span>getFrequency()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="InfraredTypes_8h.html#aba83572ea1178fac02f628a76d313347">frequency_t</a> IrSequenceReader::getFrequency </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns frequency of received signal. </p>
+<p>This is a dumb default implementation, to be overridden when meaningful. </p><dl class="section return"><dt>Returns</dt><dd>frequency </dd></dl>
+
+<p>Implements <a class="el" href="classIrReader.html#a21ddfce51867e01d3be924270b176620">IrReader</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="IrSequenceReader_8h_source.html#l00028">28</a> of file <a class="el" href="IrSequenceReader_8h_source.html">IrSequenceReader.h</a>.</p>
 
 </div>
 </div>
@@ -396,7 +431,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classIrReader.html#a0d5310fbb90701b54b00542fbd60356a">IrReader</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="IrSequenceReader_8h_source.html#l00031">31</a> of file <a class="el" href="IrSequenceReader_8h_source.html">IrSequenceReader.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IrSequenceReader_8h_source.html#l00035">35</a> of file <a class="el" href="IrSequenceReader_8h_source.html">IrSequenceReader.h</a>.</p>
 
 </div>
 </div>
@@ -427,7 +462,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classIrReader.html#a15f1d4bd27db84e399869bb4ebbd6e9e">IrReader</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="IrSequenceReader_8h_source.html#l00028">28</a> of file <a class="el" href="IrSequenceReader_8h_source.html">IrSequenceReader.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IrSequenceReader_8h_source.html#l00032">32</a> of file <a class="el" href="IrSequenceReader_8h_source.html">IrSequenceReader.h</a>.</p>
 
 </div>
 </div>
@@ -437,7 +472,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Aug 11 2018 12:32:34 for Infrared4Arduino by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Aug 17 2018 16:16:33 for Infrared4Arduino by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

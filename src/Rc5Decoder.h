@@ -1,5 +1,4 @@
-#ifndef RC5DECODER_H
-#define	RC5DECODER_H
+#pragma once
 
 #include "IrDecoder.h"
 #include "IrReader.h"
@@ -76,5 +75,3 @@ private:
     static Length decodeDuration(microseconds_t t);
     static unsigned int decodeFlashGap(microseconds_t flash, microseconds_t gap);
 };
-
-#endif	/* RC5DECODER_H */

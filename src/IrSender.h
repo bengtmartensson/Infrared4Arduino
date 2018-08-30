@@ -15,8 +15,7 @@ You should have received a copy of the GNU General Public License along with
 this program. If not, see http://www.gnu.org/licenses/.
 */
 
-#ifndef IRSENDER_H
-#define	IRSENDER_H
+#pragma once
 
 #include "InfraredTypes.h"
 #include "IrSignal.h"
@@ -59,6 +58,3 @@ public:
     /** Force output pin inactive. */
     virtual void mute();
 };
-
-#endif	/* ! IRSENDER_H */
-

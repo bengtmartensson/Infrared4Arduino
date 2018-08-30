@@ -1,5 +1,4 @@
-#ifndef RC5RENDERER_H
-#define	RC5RENDERER_H
+#pragma once
 
 #include "IrSignal.h"
 /**
@@ -42,6 +41,3 @@ private:
 
     static uint8_t T;
 };
-
-#endif	/* RC5RENDERER_H */
-

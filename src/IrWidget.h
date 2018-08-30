@@ -24,8 +24,7 @@ http://arduino.cc/en/Hacking/PinMapping2560
 // Code slighty reorganized by Bengt Martensson
 
 //#define ALTERNATE_PIN
-#ifndef IRWIDGET_H
-#define	IRWIDGET_H
+#pragma once
 
 #include <Arduino.h>
 #include "IrReader.h"
@@ -217,6 +216,3 @@ protected:
 #endif
     }
 };
-
-#endif	/* IRWIDGET_H */
-

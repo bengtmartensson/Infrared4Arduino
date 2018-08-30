@@ -1,5 +1,4 @@
-#ifndef NEC1RENDERER_H
-#define	NEC1RENDERER_H
+#pragma once
 
 #include <IrSignal.h>
 
@@ -44,6 +43,3 @@ private:
     static void lsbByte(microseconds_t *intro, unsigned int& i, uint32_t& sum, unsigned int D);
     static void process(microseconds_t *intro, unsigned int& i, uint32_t& sum, unsigned int data);
 };
-
-#endif	/* NEC1RENDERER_H */
-

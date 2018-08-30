@@ -1,5 +1,4 @@
-#ifndef IRSIGNAL_H
-#define	IRSIGNAL_H
+#pragma once
 
 #include "InfraredTypes.h"
 #include "IrSequence.h"
@@ -108,5 +107,3 @@ public:
 
 
 };
-
-#endif	/* IRSIGNAL_H */

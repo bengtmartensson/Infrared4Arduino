@@ -1,5 +1,4 @@
-#ifndef IRTIMERDEFS_H
-#define IRTIMERDEFS_H
+#pragma once
 
 /**
  * @file IrTimerDefs.h
@@ -35,6 +34,3 @@
 #define TIMER_CONFIG_KHZ(x) /* Empty */
 
 #endif // ! ARDUINO
-
-#endif /* IRTIMERDEFS_H */
-

@@ -1,5 +1,4 @@
-#ifndef NEC1DECODER_H
-#define	NEC1DECODER_H
+#pragma once
 
 #include "IrDecoder.h"
 #include "IrReader.h"
@@ -83,5 +82,3 @@ public:
     };
 
 };
-
-#endif	/* NEC1DECODER_H */

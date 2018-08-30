@@ -1,5 +1,4 @@
-#ifndef _MULTIDECODER_H
-#define _MULTIDECODER_H
+#pragma once
 
 #include "IrReader.h"
 #include "IrDecoder.h"
@@ -43,5 +42,3 @@ public:
         return decode;
     }
 };
-
-#endif // ! _MULTIDECODER_H

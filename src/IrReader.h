@@ -15,8 +15,8 @@ You should have received a copy of the GNU General Public License along with
 this program. If not, see http://www.gnu.org/licenses/.
 */
 
-#ifndef IRREADER_H
-#define	IRREADER_H
+#pragma once
+
 #include <Arduino.h>
 
 #include "InfraredTypes.h"
@@ -165,5 +165,3 @@ public:
         return markExcess;
     }
 };
-
-#endif	/* IRCAPTURER_H */

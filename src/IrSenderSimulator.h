@@ -1,5 +1,4 @@
-#ifndef IRSENDERSIMULATOR_H
-#define	IRSENDERSIMULATOR_H
+#pragma once
 
 #include "IrSender.h"
 
@@ -17,5 +16,3 @@ public:
     virtual ~IrSenderSimulator() {};
     void send(const IrSequence& irSequence, frequency_t frequency = IrSignal::defaultFrequency);
 };
-
-#endif	/* IRSENDERSIMULATOR_H */

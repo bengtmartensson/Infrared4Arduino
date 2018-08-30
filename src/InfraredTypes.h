@@ -1,5 +1,4 @@
-#ifndef INFRAREDTYPES_H
-#define	INFRAREDTYPES_H
+#pragma once
 
 #include <Arduino.h>
 
@@ -42,6 +41,3 @@ typedef uint8_t pin_t;
 const pin_t invalidPin = 255;
 /** Largest pin_t number possible */
 #define PIN_T_MAX 255
-
-#endif	// INFRAREDTYPES_H
-

@@ -1,5 +1,4 @@
-#ifndef IRSEQUENCE_H
-#define	IRSEQUENCE_H
+#pragma once
 
 #include "InfraredTypes.h"
 
@@ -81,6 +80,3 @@ public:
         dump(stream, true);
     };
 };
-
-#endif	/* IRSEQUENCE_H */
-

@@ -1,5 +1,4 @@
-#ifndef ARDUINO_H
-#define ARDUINO_H
+#pragma once
 
 #ifdef ARDUINO
 #include_next <Arduino.h>
@@ -102,5 +101,3 @@ public:
 #define DEC std::dec
 
 #endif // ! ARDUINO
-
-#endif // ARDUINO_H

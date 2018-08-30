@@ -1,5 +1,4 @@
-#ifndef IRRECEIVER_H
-#define	IRRECEIVER_H
+#pragma once
 
 #include <Arduino.h>
 #include "InfraredTypes.h"
@@ -61,5 +60,3 @@ public:
     }
     /// @endcond
 };
-
-#endif	/* IRRECEIVER_H */

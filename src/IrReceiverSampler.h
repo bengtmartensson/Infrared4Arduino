@@ -1,5 +1,4 @@
-#ifndef IRRECEIVERSAMPLE_H
-#define	IRRECEIVERSAMPLE_H
+#pragma once
 
 #include "IrReceiver.h"
 
@@ -124,5 +123,3 @@ public:
         return receiverState == STATE_STOP;
     }
 };
-
-#endif	/* IRRECEIVERSAMPLE_H */

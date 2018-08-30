@@ -1,5 +1,4 @@
-#ifndef IRRECEIVERPOLL_H
-#define	IRRECEIVERPOLL_H
+#pragma once
 
 #include "IrReceiver.h"
 
@@ -70,5 +69,3 @@ private:
 
     void recordDuration(unsigned long t);
 };
-
-#endif	/* IRRECEIVERPOLL_H */

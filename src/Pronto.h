@@ -4,8 +4,7 @@
  * <a href="http://harctoolbox.org/Glossary.html#ProntoSemantics">Reference</a>.
  */
 
-#ifndef PRONTO_H
-#define	PRONTO_H
+#pragma once
 
 #include "InfraredTypes.h"
 #include "IrSignal.h"
@@ -95,6 +94,3 @@ public:
      */
     static char* toProntoHex(const IrSequence& irSequence, frequency_t frequency = IrSignal::defaultFrequency);
 };
-
-#endif	/* PRONTO_H */
-

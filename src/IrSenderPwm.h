@@ -15,8 +15,7 @@ You should have received a copy of the GNU General Public License along with
 this program. If not, see http://www.gnu.org/licenses/.
 */
 
-#ifndef IRSENDERPWM_H
-#define	IRSENDERPWM_H
+#pragma once
 
 #include <Arduino.h>
 #include "IrSender.h"
@@ -53,6 +52,3 @@ public:
 
     void send(const IrSequence& sequence, frequency_t frequency = IrSignal::defaultFrequency);
 };
-
-#endif	/* IRSENDERPWM_H */
-

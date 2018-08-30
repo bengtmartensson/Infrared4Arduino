@@ -1,5 +1,4 @@
-#ifndef IRDECODER_H
-#define	IRDECODER_H
+#pragma once
 
 #include "InfraredTypes.h"
 
@@ -58,4 +57,3 @@ protected:
         return duration > endingMin;
     }
 };
-#endif	/* IRDECODER_H */

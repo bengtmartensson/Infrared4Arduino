@@ -1,5 +1,4 @@
-#ifndef IRSEQUENCEREADER_H
-#define	IRSEQUENCEREADER_H
+#pragma once
 
 #include "IrSignal.h"
 #include "IrReader.h"
@@ -44,5 +43,3 @@ public:
         return irSequence.getDurations()[index];
     };
 };
-
-#endif	/* IRSEQUENCEREADER_H */

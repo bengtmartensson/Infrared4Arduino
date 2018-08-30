@@ -1,5 +1,4 @@
-#ifndef TOKENIZER_H
-#define TOKENIZER_H
+#pragma once
 
 #include <InfraredTypes.h>
 #include <limits.h>
@@ -25,5 +24,3 @@ public:
 
     static const int invalid = INT_MAX;
 };
-
-#endif // ! TOKENIZER

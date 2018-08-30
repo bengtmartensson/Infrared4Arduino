@@ -15,8 +15,7 @@ You should have received a copy of the GNU General Public License along with
 this program. If not, see http://www.gnu.org/licenses/.
 */
 
-#ifndef IRSENDERNONMOD_H
-#define	IRSENDERNONMOD_H
+#pragma once
 
 #include <Arduino.h>
 #include "InfraredTypes.h"
@@ -45,6 +44,3 @@ public:
      */
     void sendNonModulated(const IrSequence& irSequence);
 };
-
-#endif	/* ! IRSENDERNONMOD_H */
-

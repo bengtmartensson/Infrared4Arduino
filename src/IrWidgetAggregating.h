@@ -3,8 +3,7 @@
 
 // This is a slight reorganization of the original code, by Bengt Martensson.
 
-#ifndef IRWIDGETAGGREGATING_H
-#define	IRWIDGETAGGREGATING_H
+#pragma once
 
 #include "IrWidget.h"
 
@@ -58,5 +57,3 @@ private:
         return val;
     }
 };
-
-#endif	/* IRWIDGETAGGREGATING_H */

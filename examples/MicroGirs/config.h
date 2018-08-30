@@ -1,5 +1,4 @@
-#ifndef CONFIG_H
-#define CONFIG_H
+#pragma once
 
 // Configuration options for MicroGirs.
 
@@ -65,5 +64,3 @@
 
 // Pin where the sender for non-modulated signals is connected, e.g. 434MHz RF.
 #define NON_MOD_PIN 10
-
-#endif // ! CONFIG_H

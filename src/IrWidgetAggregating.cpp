@@ -41,7 +41,7 @@ void IrWidgetAggregating::capture() {
     uint8_t tccr0b = TCCR0B;
     //TCCR0B &= ~(_BV(CS02) | _BV(CS01) | _BV(CS00)); // stop timer0 (disables timer IRQs)
 
-    /*uint16_t*/ period = (F_CPU / min_frequency) >> CAPTURE_PRESCALER_BITS; // the time of one period in CPU clocks
+    uint16_t period = (F_CPU / min_frequency) >> CAPTURE_PRESCALER_BITS; // the time of one period in CPU clocks
     //uint16_t aggThreshold = (period * 10UL) / 8UL; // 65 us = (1/20kHz * 130%) might be a good starting point
     uint16_t aggThreshold = period * 2;
     uint8_t icesn_val = _BV(CAT2(ICES, CAP_TIM));

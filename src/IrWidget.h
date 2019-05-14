@@ -196,7 +196,6 @@ protected:
     }
     uint16_t *captureData; //[bufSize]; // the buffer where the catured data is stored
     uint16_t captureCount; // number of values stored in captureData
-    uint16_t period; // the time of one period in CPU clocks TODO: make local
     static const uint8_t sampleSize = 2;
 
     virtual uint32_t unpackTimeVal(uint32_t val) const = 0;

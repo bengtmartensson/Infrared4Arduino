@@ -53,12 +53,19 @@ protected:
             milliseconds_t beginningTimeout = defaultBeginningTimeout,
             milliseconds_t endingTimeout = defaultEndingTimeout);
     virtual ~IrWidget();
+
 public:
+    /**
+     * Set true means if sensor signal is inverted (low = signal on)
+     * (false has not been tested, and is not supported).
+     */
     static const bool invertingSensor = true;
 
     virtual void capture() = 0;
 
-/** For compatibility with the receiver classes, receive is a synonym for capture. */
+    /**
+     *  For compatibility with the receiver classes, receive is a synonym for capture.
+     */
     void receive() {
         capture();
     }
@@ -81,10 +88,6 @@ public:
         return result32 <= MICROSECONDS_T_MAX ? (microseconds_t) result32 : MICROSECONDS_T_MAX;
     }
 
-    //void setBeginningTimeout(milliseconds_t timeOut) { beginningTimeout = timeOut; }
-
-    //milliseconds_t getBeginningTimeout() const { return beginningTimeout; }
-
     /**
      * Sets the ending timeout. In this implementation, this is effectively
      * rounded to the nearest multiple of 32 milliseconds.
@@ -106,6 +109,7 @@ private:
     ////////////////////////////////////////////////////////////////////////////////
     // Internal defines, don't change
     ////////////////////////////////////////////////////////////////////////////////
+
 protected:
 #if USE_PRESCALER_FACTOR_8
 #define CAPTURE_PRESCALER_SETTING (_BV(CAT3(CS, CAP_TIM, 1)))
@@ -121,12 +125,11 @@ protected:
 #else
     typedef uint8_t ovlBitsDataType;
 #endif
-    //static const uint16_t bufSize = ((RAMEND - 0x100 - projectRamUsage) / sizeof (uint16_t)); // use as much RAM as possible
-    //uint16_t bufSize;
+
     static const uint8_t RANGE_EXTENSION_BITS = 4; // factor for upper measurement range = 2^(RANGE_EXTENSION_BITS+1)
 
-    //public: // FIXME
-        ovlBitsDataType endingTimeout; // = _BV(RANGE_EXTENSION_BITS) - 1;
+    ovlBitsDataType endingTimeout; // = _BV(RANGE_EXTENSION_BITS) - 1;
+
 private:
     ////////////////////////////////////////////////////////////////////////////////
     // Adaption to different MCUs and clk values
@@ -193,9 +196,7 @@ protected:
     }
     uint16_t *captureData; //[bufSize]; // the buffer where the catured data is stored
     uint16_t captureCount; // number of values stored in captureData
-    uint16_t period/* = 0*/; // the time of one period in CPU clocks
-    // Only inverting sensors are supported in this version
-    //static const bool sensorIsInverting = true;///* = false*/; // true means the sensor signal is inverted (low = signal on)
+    uint16_t period; // the time of one period in CPU clocks TODO: make local
     static const uint8_t sampleSize = 2;
 
     virtual uint32_t unpackTimeVal(uint32_t val) const = 0;

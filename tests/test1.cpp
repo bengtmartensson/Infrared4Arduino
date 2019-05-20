@@ -37,80 +37,94 @@ bool checkSenderSimulator(const IrSignal& irSignal, unsigned int noSends, const 
     return oss.str() == std::string(ref);
 }
 
+static bool testNec1Renderer() {
+    const IrSignal *nec1 = Nec1Renderer::newIrSignal(122, 29); // power_on for Yahama receivers
+    Stream stdout(std::cout);
+    nec1->dump(stdout, true);
+    return checkIrSignalDump(*nec1, "f=38400\n"
+            "+9024 -4512 +564 -564 +564 -1692 +564 -564 +564 -1692 +564 -1692 +564 -1692 +564 -1692 +564 -564 +564 -1692 +564 -564 +564 -1692 +564 -564 +564 -564 +564 -564 +564 -564 +564 -1692 +564 -1692 +564 -564 +564 -1692 +564 -1692 +564 -1692 +564 -564 +564 -564 +564 -564 +564 -564 +564 -1692 +564 -564 +564 -564 +564 -564 +564 -1692 +564 -1692 +564 -1692 +564 -39756\n"
+            "+9024 -2256 +564 -65535\n\n");
+}
+
+static bool testNec1Decoder() {
+    const IrSignal *nec1 = Nec1Renderer::newIrSignal(122, 29); // power_on for Yahama receivers
+    IrSequenceReader irSequenceReader(nec1->getIntro());
+    Nec1Decoder decoder(irSequenceReader);
+    Stream stdout(std::cout);
+    decoder.printDecode(stdout);
+    return checkDecoderDump(decoder, "NEC1 122 29\n");
+}
+
+static bool testIrSenderSimulator() {
+    Stream stdout(std::cout);
+    IrSenderSimulator sender(stdout);
+    const IrSignal *nec1 = Nec1Renderer::newIrSignal(122, 29); // power_on for Yahama receivers
+    sender.sendIrSignal(*nec1, 3);
+    return checkSenderSimulator(*nec1, 3, "IrSenderSimulator: f=38400 +9024 -4512 +564 -564 +564 -1692 +564 -564 +564 -1692 +564 -1692 +564 -1692 +564 -1692 +564 -564 +564 -1692 +564 -564 +564 -1692 +564 -564 +564 -564 +564 -564 +564 -564 +564 -1692 +564 -1692 +564 -564 +564 -1692 +564 -1692 +564 -1692 +564 -564 +564 -564 +564 -564 +564 -564 +564 -1692 +564 -564 +564 -564 +564 -564 +564 -1692 +564 -1692 +564 -1692 +564 -39756\n"
+            "IrSenderSimulator: f=38400 +9024 -2256 +564 -65535\n"
+            "IrSenderSimulator: f=38400 +9024 -2256 +564 -65535\n");
+}
+
+static bool testPronto() {
+    const IrSignal *sig = Pronto::parse("0000 006C 0022 0002 015B 00AD 0016 0016 0016 0041 0016 0016 0016 0041 0016 0041 0016 0041 0016 0041 0016 0016 0016 0041 0016 0016 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0041 0016 0016 0016 0041 0016 0041 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0016 0016 0016 0016 0016 0016 0041 0016 0041 0016 0041 0016 05F7 015B 0057 0016 0E6C");
+    Stream stdout(std::cout);
+    sig->dump(stdout, true);
+    return checkIrSignalDump(*sig, "f=38380\n"
+            "+9040 -4507 +573 -573 +573 -1693 +573 -573 +573 -1693 +573 -1693 +573 -1693 +573 -1693 +573 -573 +573 -1693 +573 -573 +573 -1693 +573 -573 +573 -573 +573 -573 +573 -573 +573 -1693 +573 -1693 +573 -573 +573 -1693 +573 -1693 +573 -1693 +573 -573 +573 -573 +573 -573 +573 -573 +573 -1693 +573 -573 +573 -573 +573 -573 +573 -1693 +573 -1693 +573 -1693 +573 -39785\n"
+            "+9040 -2266 +573 -65535\n\n");
+}
+
+static bool testRc5Renderer() {
+    const IrSignal *sig = Rc5Renderer::newIrSignal(0, 1, 0);
+    Stream stdout(std::cout);
+    sig->dump(stdout, true);
+    return checkIrSignalDump(*sig, "f=36000\n\n"
+            "+889 -889 +1778 -889 +889 -889 +889 -889 +889 -889 +889 -889 +889 -889 +889 -889 +889 -889 +889 -889 +889 -889 +889 -1778 +889 -65535\n\n");
+}
+
+static bool testRc5Decoder() {
+    const IrSignal *sig = Rc5Renderer::newIrSignal(0, 1, 0);
+    IrSequenceReader irSequenceReaderRc5(sig->getRepeat());
+    Rc5Decoder rc5Decoder(irSequenceReaderRc5);
+    Stream stdout(std::cout);
+    rc5Decoder.printDecode(stdout);
+    return checkDecoderDump(rc5Decoder, "RC5 0 1 0\n");
+}
+
+static bool testToProntoHex() {
+    const char prontoHex[] = "0000 006C 0022 0000 015B 00AD 0016 0016 0016 0041 0016 0016 0016 0041 0016 0041 0016 0041 0016 0041 0016 0016 0016 0041 0016 0016 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0041 0016 0016 0016 0041 0016 0041 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0016 0016 0016 0016 0016 0016 0041 0016 0041 0016 0041 0016 05F7";
+    microseconds_t data[] =
+    {
+        9040, 4507, 573, 573, 573, 1693, 573, 573, 573, 1693, 573, 1693, 573, 1693, 573, 1693, 573, 573, 573, 1693, 573, 573, 573, 1693, 573, 573, 573, 573, 573, 573, 573, 573, 573, 1693, 573, 1693, 573, 573, 573, 1693, 573, 1693, 573, 1693, 573, 573, 573, 573, 573, 573, 573, 573, 573, 1693, 573, 573, 573, 573, 573, 573, 573, 1693, 573, 1693, 573, 1693, 573, 39785,
+        //9040, 2266, 573, 65535
+    };
+    char *result = Pronto::toProntoHex(data, sizeof (data) / sizeof (microseconds_t), 38380);
+    std::cout << result << std::endl;
+
+    bool ok = result == std::string(prontoHex);
+    delete [] result;
+    return ok;
+}
+
+static bool testProntoParse() {
+    const char prontoHex[] = "0000 006C 0022 0000 015B 00AD 0016 0016 0016 0041 0016 0016 0016 0041 0016 0041 0016 0041 0016 0041 0016 0016 0016 0041 0016 0016 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0041 0016 0016 0016 0041 0016 0041 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0016 0016 0016 0016 0016 0016 0041 0016 0041 0016 0041 0016 05F7";
+    IrSignal* irSignal = Pronto::parse(prontoHex);
+    const char* s = Pronto::toProntoHex(*irSignal);
+    return std::string(s) == std::string(prontoHex);
+}
 
 int main() {
     unsigned int fails = 0;
     unsigned int successes = 0;
 
-    // Test 1
-    const IrSignal *nec1 = Nec1Renderer::newIrSignal(122, 29); // power_on for Yahama receivers
-    Stream stdout(std::cout);
-    nec1->dump(stdout, true);
-    bool ok = checkIrSignalDump(*nec1, "f=38400\n"
-            "+9024 -4512 +564 -564 +564 -1692 +564 -564 +564 -1692 +564 -1692 +564 -1692 +564 -1692 +564 -564 +564 -1692 +564 -564 +564 -1692 +564 -564 +564 -564 +564 -564 +564 -564 +564 -1692 +564 -1692 +564 -564 +564 -1692 +564 -1692 +564 -1692 +564 -564 +564 -564 +564 -564 +564 -564 +564 -1692 +564 -564 +564 -564 +564 -564 +564 -1692 +564 -1692 +564 -1692 +564 -39756\n"
-            "+9024 -2256 +564 -65535\n\n");
-    (ok ? successes : fails)++;
-
-
-    // Test 2
-    IrSequenceReader irSequenceReader(nec1->getIntro());
-    Nec1Decoder decoder(irSequenceReader);
-    decoder.printDecode(stdout);
-    ok = checkDecoderDump(decoder, "NEC1 122 29\n");
-    (ok ? successes : fails)++;
-
-    // Test 3
-    IrSenderSimulator sender(stdout);
-    sender.sendIrSignal(*nec1, 3);
-    ok = checkSenderSimulator(*nec1, 3, "IrSenderSimulator: f=38400 +9024 -4512 +564 -564 +564 -1692 +564 -564 +564 -1692 +564 -1692 +564 -1692 +564 -1692 +564 -564 +564 -1692 +564 -564 +564 -1692 +564 -564 +564 -564 +564 -564 +564 -564 +564 -1692 +564 -1692 +564 -564 +564 -1692 +564 -1692 +564 -1692 +564 -564 +564 -564 +564 -564 +564 -564 +564 -1692 +564 -564 +564 -564 +564 -564 +564 -1692 +564 -1692 +564 -1692 +564 -39756\n"
-            "IrSenderSimulator: f=38400 +9024 -2256 +564 -65535\n"
-            "IrSenderSimulator: f=38400 +9024 -2256 +564 -65535\n");
-    (ok ? successes : fails)++;
-
-    // Test 4
-    const IrSignal *sig = Pronto::parse("0000 006C 0022 0002 015B 00AD 0016 0016 0016 0041 0016 0016 0016 0041 0016 0041 0016 0041 0016 0041 0016 0016 0016 0041 0016 0016 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0041 0016 0016 0016 0041 0016 0041 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0016 0016 0016 0016 0016 0016 0041 0016 0041 0016 0041 0016 05F7 015B 0057 0016 0E6C");
-    sig->dump(stdout, true);
-    ok = checkIrSignalDump(*sig, "f=38380\n"
-            "+9040 -4507 +573 -573 +573 -1693 +573 -573 +573 -1693 +573 -1693 +573 -1693 +573 -1693 +573 -573 +573 -1693 +573 -573 +573 -1693 +573 -573 +573 -573 +573 -573 +573 -573 +573 -1693 +573 -1693 +573 -573 +573 -1693 +573 -1693 +573 -1693 +573 -573 +573 -573 +573 -573 +573 -573 +573 -1693 +573 -573 +573 -573 +573 -573 +573 -1693 +573 -1693 +573 -1693 +573 -39785\n"
-            "+9040 -2266 +573 -65535\n\n");
-    (ok ? successes : fails)++;
-
-    // Test 5
-    sig = Rc5Renderer::newIrSignal(0, 1, 0);
-    sig->dump(stdout, true);
-    ok = checkIrSignalDump(*sig, "f=36000\n\n"
-            "+889 -889 +1778 -889 +889 -889 +889 -889 +889 -889 +889 -889 +889 -889 +889 -889 +889 -889 +889 -889 +889 -889 +889 -1778 +889 -65535\n\n");
-    (ok ? successes : fails)++;
-
-    // Test 6
-    IrSequenceReader irSequenceReaderRc5(sig->getRepeat());
-    Rc5Decoder rc5Decoder(irSequenceReaderRc5);
-    rc5Decoder.printDecode(stdout);
-    ok = checkDecoderDump(rc5Decoder, "RC5 0 1 0\n");
-    (ok ? successes : fails)++;
-
-    delete nec1;
-
-    // Test 7
-    const char prontoHex[] = "0000 006C 0022 0000 015B 00AD 0016 0016 0016 0041 0016 0016 0016 0041 0016 0041 0016 0041 0016 0041 0016 0016 0016 0041 0016 0016 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0041 0016 0016 0016 0041 0016 0041 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0016 0016 0016 0016 0016 0016 0041 0016 0041 0016 0041 0016 05F7";
-
-    microseconds_t data[] = {
-        9040, 4507, 573, 573, 573, 1693, 573, 573, 573, 1693, 573, 1693, 573, 1693, 573, 1693, 573, 573, 573, 1693, 573, 573, 573, 1693, 573, 573, 573, 573, 573, 573, 573, 573, 573, 1693, 573, 1693, 573, 573, 573, 1693, 573, 1693, 573, 1693, 573, 573, 573, 573, 573, 573, 573, 573, 573, 1693, 573, 573, 573, 573, 573, 573, 573, 1693, 573, 1693, 573, 1693, 573, 39785,
-        //9040, 2266, 573, 65535
-    };
-    char *result = Pronto::toProntoHex(data, sizeof(data)/sizeof(microseconds_t), 38380);
-    std::cout << result << std::endl;
-
-    ok = result == std::string(prontoHex);
-    (ok ? successes : fails)++;
-    delete [] result;
-
-
-    // Test 8
-    IrSignal* irSignal = Pronto::parse(prontoHex);
-    const char* s = Pronto::toProntoHex(*irSignal);
-    ok = std::string(s) == std::string(prontoHex);
-    (ok ? successes : fails)++;
+    (testNec1Renderer()         ? successes : fails)++;
+    (testNec1Decoder()          ? successes : fails)++;
+    (testIrSenderSimulator()    ? successes : fails)++;
+    (testPronto()               ? successes : fails)++;
+    (testRc5Renderer()          ? successes : fails)++;
+    (testRc5Decoder()           ? successes : fails)++;
+    (testToProntoHex()          ? successes : fails)++;
+    (testProntoParse()          ? successes : fails)++;
 
     // Report
     std::cout << "Successes: " << successes << std::endl;

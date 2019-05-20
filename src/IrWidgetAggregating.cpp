@@ -43,7 +43,7 @@ void IrWidgetAggregating::capture() {
 
     uint16_t period = (F_CPU / min_frequency) >> CAPTURE_PRESCALER_BITS; // the time of one period in CPU clocks
     //uint16_t aggThreshold = (period * 10UL) / 8UL; // 65 us = (1/20kHz * 130%) might be a good starting point
-    uint16_t aggThreshold = period * 2;
+    uint16_t aggThreshold = period * 2U;
     uint8_t icesn_val = _BV(CAT2(ICES, CAP_TIM));
     uint8_t tccrnb = CAT3(TCCR, CAP_TIM, B);
     if (invertingSensor)
@@ -162,9 +162,11 @@ endCapture:
     SREG = sreg; // enable IRQs
 
     captureCount = pCapDat - captureData;
-    period = aggThreshold / 2U;
-
-    uint32_t mediumPeriod = timerValueToNanoSeconds(period);
-    frequency = (frequency_t) (1000000000L / mediumPeriod);
+    if (aggThreshold == period * 2U) {
+        frequency = 0U;
+    } else {
+        uint32_t mediumPeriod = timerValueToNanoSeconds(aggThreshold / 2U);
+        frequency = (frequency_t) (1000000000L / mediumPeriod);
+    }
 #endif // ARDUINO
 }

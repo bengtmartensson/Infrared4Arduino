@@ -28,12 +28,12 @@ const IrSignal *Nec1Renderer::newIrSignal(unsigned int D, unsigned int S, unsign
 
 void Nec1Renderer::lsbByte(microseconds_t *intro, unsigned int& i, uint32_t& sum, unsigned int X) {
     for (unsigned int index = 0; index < 8U; index++) {
-        process(intro, i, sum, X & 1U);
+        transmitBit(intro, i, sum, X & 1U);
         X >>= 1U;
     }
 }
 
-void inline Nec1Renderer::process(microseconds_t *intro, unsigned int& i, uint32_t& sum, unsigned int data) {
+void inline Nec1Renderer::transmitBit(microseconds_t *intro, unsigned int& i, uint32_t& sum, unsigned int data) {
     intro[i++] = 564U;
     intro[i++] = data ? 1692U : 564U;
     sum += data ? 564U+1692U : 564U+564U;

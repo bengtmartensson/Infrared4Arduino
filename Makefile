@@ -15,7 +15,6 @@ DOXYFILE :=  Doxyfile
 XSLTPROC := xsltproc
 TRANSFORMATION := $(KEYWORD_TXT_GENERATOR_DIR)/doxygen2keywords.xsl
 
-BOARDDEFINES=
 CXX=g++
 BROWSER=firefox
 DEBUGFLAGS=-g
@@ -36,7 +35,7 @@ libInfrared.a: $(OBJS)
 	$(AR) rs $@ $(OBJS)
 
 %.o: %.cpp
-	$(CXX) -Isrc -std=c++11 $(BOARDDEFINES) $(WARNINGFLAGS) $(OPTIMIZEFLAGS) $(DEBUGFLAGS) -c $<
+	$(CXX) -Isrc -std=c++11 $(WARNINGFLAGS) $(OPTIMIZEFLAGS) $(DEBUGFLAGS) -c $<
 
 test%: test%.o libInfrared.a
 	$(CXX) -o $@ $< -L. -lInfrared

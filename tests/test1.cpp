@@ -22,7 +22,11 @@ bool checkIrSignalDump(const IrSignal& irSignal, const char *ref) {
     return oss.str() == std::string(ref);
 }
 
-bool checkDecoderDump(const IrDecoder& decoder, const char *ref) {
+bool checkDecoderDump(bool verbose, const IrDecoder& decoder, const char *ref) {
+    if (verbose) {
+        Stream stdout(std::cout);
+        decoder.printDecode(stdout);
+    }
     std::ostringstream oss;
     Stream ss(oss);
     decoder.printDecode(ss);
@@ -37,61 +41,65 @@ bool checkSenderSimulator(const IrSignal& irSignal, unsigned int noSends, const 
     return oss.str() == std::string(ref);
 }
 
-static bool testNec1Renderer() {
+static bool testSignalRenderer(bool verbose, const IrSignal *signal, const char* str) {
+    if (verbose) {
+        Stream stdout(std::cout);
+        signal->dump(stdout, true);
+    }
+    return checkIrSignalDump(*signal, str);
+}
+
+static bool testNec1Renderer(bool verbose) {
     const IrSignal *nec1 = Nec1Renderer::newIrSignal(122, 29); // power_on for Yahama receivers
-    Stream stdout(std::cout);
-    nec1->dump(stdout, true);
-    return checkIrSignalDump(*nec1, "f=38400\n"
+    return testSignalRenderer(verbose, nec1, "f=38400\n"
             "+9024 -4512 +564 -564 +564 -1692 +564 -564 +564 -1692 +564 -1692 +564 -1692 +564 -1692 +564 -564 +564 -1692 +564 -564 +564 -1692 +564 -564 +564 -564 +564 -564 +564 -564 +564 -1692 +564 -1692 +564 -564 +564 -1692 +564 -1692 +564 -1692 +564 -564 +564 -564 +564 -564 +564 -564 +564 -1692 +564 -564 +564 -564 +564 -564 +564 -1692 +564 -1692 +564 -1692 +564 -39756\n"
             "+9024 -2256 +564 -65535\n\n");
 }
 
-static bool testNec1Decoder() {
+static bool testRc5Renderer(bool verbose) {
+    const IrSignal *sig = Rc5Renderer::newIrSignal(0, 1, 0);
+    return testSignalRenderer(verbose, sig, "f=36000\n\n"
+            "+889 -889 +1778 -889 +889 -889 +889 -889 +889 -889 +889 -889 +889 -889 +889 -889 +889 -889 +889 -889 +889 -889 +889 -1778 +889 -65535\n\n");
+}
+
+static bool testNec1Decoder(bool verbose) {
     const IrSignal *nec1 = Nec1Renderer::newIrSignal(122, 29); // power_on for Yahama receivers
     IrSequenceReader irSequenceReader(nec1->getIntro());
     Nec1Decoder decoder(irSequenceReader);
-    Stream stdout(std::cout);
-    decoder.printDecode(stdout);
-    return checkDecoderDump(decoder, "NEC1 122 29\n");
+    return checkDecoderDump(verbose, decoder, "NEC1 122 29\n");
 }
 
-static bool testIrSenderSimulator() {
-    Stream stdout(std::cout);
-    IrSenderSimulator sender(stdout);
+static bool testRc5Decoder(bool verbose) {
+    const IrSignal *sig = Rc5Renderer::newIrSignal(0, 1, 0);
+    IrSequenceReader irSequenceReaderRc5(sig->getRepeat());
+    Rc5Decoder rc5Decoder(irSequenceReaderRc5);
+    return checkDecoderDump(verbose, rc5Decoder, "RC5 0 1 0\n");
+}
+
+static bool testIrSenderSimulator(bool verbose) {
     const IrSignal *nec1 = Nec1Renderer::newIrSignal(122, 29); // power_on for Yahama receivers
-    sender.sendIrSignal(*nec1, 3);
+    if (verbose) {
+        Stream stdout(std::cout);
+        IrSenderSimulator sender(stdout);
+        sender.sendIrSignal(*nec1, 3);
+    }
     return checkSenderSimulator(*nec1, 3, "IrSenderSimulator: f=38400 +9024 -4512 +564 -564 +564 -1692 +564 -564 +564 -1692 +564 -1692 +564 -1692 +564 -1692 +564 -564 +564 -1692 +564 -564 +564 -1692 +564 -564 +564 -564 +564 -564 +564 -564 +564 -1692 +564 -1692 +564 -564 +564 -1692 +564 -1692 +564 -1692 +564 -564 +564 -564 +564 -564 +564 -564 +564 -1692 +564 -564 +564 -564 +564 -564 +564 -1692 +564 -1692 +564 -1692 +564 -39756\n"
             "IrSenderSimulator: f=38400 +9024 -2256 +564 -65535\n"
             "IrSenderSimulator: f=38400 +9024 -2256 +564 -65535\n");
 }
 
-static bool testPronto() {
+static bool testPronto(bool verbose) {
     const IrSignal *sig = Pronto::parse("0000 006C 0022 0002 015B 00AD 0016 0016 0016 0041 0016 0016 0016 0041 0016 0041 0016 0041 0016 0041 0016 0016 0016 0041 0016 0016 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0041 0016 0016 0016 0041 0016 0041 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0016 0016 0016 0016 0016 0016 0041 0016 0041 0016 0041 0016 05F7 015B 0057 0016 0E6C");
-    Stream stdout(std::cout);
-    sig->dump(stdout, true);
+    if (verbose) {
+        Stream stdout(std::cout);
+        sig->dump(stdout, true);
+    }
     return checkIrSignalDump(*sig, "f=38380\n"
             "+9040 -4507 +573 -573 +573 -1693 +573 -573 +573 -1693 +573 -1693 +573 -1693 +573 -1693 +573 -573 +573 -1693 +573 -573 +573 -1693 +573 -573 +573 -573 +573 -573 +573 -573 +573 -1693 +573 -1693 +573 -573 +573 -1693 +573 -1693 +573 -1693 +573 -573 +573 -573 +573 -573 +573 -573 +573 -1693 +573 -573 +573 -573 +573 -573 +573 -1693 +573 -1693 +573 -1693 +573 -39785\n"
             "+9040 -2266 +573 -65535\n\n");
 }
 
-static bool testRc5Renderer() {
-    const IrSignal *sig = Rc5Renderer::newIrSignal(0, 1, 0);
-    Stream stdout(std::cout);
-    sig->dump(stdout, true);
-    return checkIrSignalDump(*sig, "f=36000\n\n"
-            "+889 -889 +1778 -889 +889 -889 +889 -889 +889 -889 +889 -889 +889 -889 +889 -889 +889 -889 +889 -889 +889 -889 +889 -1778 +889 -65535\n\n");
-}
-
-static bool testRc5Decoder() {
-    const IrSignal *sig = Rc5Renderer::newIrSignal(0, 1, 0);
-    IrSequenceReader irSequenceReaderRc5(sig->getRepeat());
-    Rc5Decoder rc5Decoder(irSequenceReaderRc5);
-    Stream stdout(std::cout);
-    rc5Decoder.printDecode(stdout);
-    return checkDecoderDump(rc5Decoder, "RC5 0 1 0\n");
-}
-
-static bool testToProntoHex() {
+static bool testToProntoHex(bool verbose) {
     const char prontoHex[] = "0000 006C 0022 0000 015B 00AD 0016 0016 0016 0041 0016 0016 0016 0041 0016 0041 0016 0041 0016 0041 0016 0016 0016 0041 0016 0016 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0041 0016 0016 0016 0041 0016 0041 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0016 0016 0016 0016 0016 0016 0041 0016 0041 0016 0041 0016 05F7";
     microseconds_t data[] =
     {
@@ -99,32 +107,36 @@ static bool testToProntoHex() {
         //9040, 2266, 573, 65535
     };
     char *result = Pronto::toProntoHex(data, sizeof (data) / sizeof (microseconds_t), 38380);
-    std::cout << result << std::endl;
+    if (verbose)
+        std::cout << result << std::endl;
 
     bool ok = result == std::string(prontoHex);
     delete [] result;
     return ok;
 }
 
-static bool testProntoParse() {
+static bool testProntoParse(bool verbose __attribute__((unused))) {
     const char prontoHex[] = "0000 006C 0022 0000 015B 00AD 0016 0016 0016 0041 0016 0016 0016 0041 0016 0041 0016 0041 0016 0041 0016 0016 0016 0041 0016 0016 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0041 0016 0016 0016 0041 0016 0041 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0016 0016 0016 0016 0016 0016 0041 0016 0041 0016 0041 0016 05F7";
     IrSignal* irSignal = Pronto::parse(prontoHex);
     const char* s = Pronto::toProntoHex(*irSignal);
     return std::string(s) == std::string(prontoHex);
 }
 
-int main() {
+#define TEST(f) if (f(verbose)) {successes++;} else {std::cout << #f << " failed!" << std::endl; fails++;}
+
+int main(int argc, const char *args[] __attribute__((unused))) {
+    bool verbose = argc > 1;
     unsigned int fails = 0;
     unsigned int successes = 0;
 
-    (testNec1Renderer()         ? successes : fails)++;
-    (testNec1Decoder()          ? successes : fails)++;
-    (testIrSenderSimulator()    ? successes : fails)++;
-    (testPronto()               ? successes : fails)++;
-    (testRc5Renderer()          ? successes : fails)++;
-    (testRc5Decoder()           ? successes : fails)++;
-    (testToProntoHex()          ? successes : fails)++;
-    (testProntoParse()          ? successes : fails)++;
+    TEST(testNec1Renderer);
+    TEST(testRc5Renderer);   
+    TEST(testNec1Decoder);
+    TEST(testRc5Decoder);                  
+    TEST(testIrSenderSimulator);     
+    TEST(testPronto);                
+    TEST(testToProntoHex);
+    TEST(testProntoParse);           
 
     // Report
     std::cout << "Successes: " << successes << std::endl;

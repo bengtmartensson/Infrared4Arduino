@@ -27,7 +27,7 @@ VPATH=tests src
 OBJS=\
 IrReader.o           IrSenderNonMod.o     IrWidget.o             Rc5Decoder.o \
 IrReceiver.o         IrSenderPwm.o        IrWidgetAggregating.o  Rc5Renderer.o \
-IrReceiverPoll.o     IrSenderSimulator.o  MultiDecoder.o \
+IrReceiverPoll.o     IrSenderSimulator.o  MultiDecoder.o         PanasonicRenderer.o \
 IrReceiverSampler.o  IrSequence.o         Nec1Decoder.o \
 IrSender.o           IrSignal.o           Nec1Renderer.o         Pronto.o
 

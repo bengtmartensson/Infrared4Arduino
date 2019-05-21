@@ -63,6 +63,13 @@ static bool testRc5Renderer(bool verbose) {
             "+889 -889 +1778 -889 +889 -889 +889 -889 +889 -889 +889 -889 +889 -889 +889 -889 +889 -889 +889 -889 +889 -889 +889 -1778 +889 -65535\n\n");
 }
 
+static bool testPanasonicRenderer(bool verbose) {
+    const IrSignal* pana = PanasonicRenderer::newIrSignal(122, 234, 29);
+    return testSignalRenderer(verbose, pana, "f=37000\n\n"
+            "+3456 -1728 +432 -432 +432 -1296 +432 -432 +432 -432 +432 -432 +432 -432 +432 -432 +432 -432 +432 -432 +432 -432 +432 -432 +432 -432 +432 -432 +432 -1296 +432 -432 +432 -432 +432 -432 +432 -1296 +432 -432 +432 -1296 +432 -1296 +432 -1296 +432 -1296 +432 -432 +432 -432 +432 -1296 +432 -432 +432 -1296 +432 -432 +432 -1296 +432 -1296 +432 -1296 +432 -1296 +432 -432 +432 -1296 +432 -1296 +432 -1296 +432 -432 +432 -432 +432 -432 +432 -1296 +432 -432 +432 -1296 +432 -1296 +432 -432 +432 -432 +432 -432 +432 -1296 +432 -65535\n"
+            "\n");
+}
+
 static bool testNec1Decoder(bool verbose) {
     const IrSignal *nec1 = Nec1Renderer::newIrSignal(122, 29); // power_on for Yahama receivers
     IrSequenceReader irSequenceReader(nec1->getIntro());
@@ -130,6 +137,7 @@ int main(int argc, const char *args[] __attribute__((unused))) {
     unsigned int fails = 0;
     unsigned int successes = 0;
 
+    TEST(testPanasonicRenderer);
     TEST(testNec1Renderer);
     TEST(testRc5Renderer);   
     TEST(testNec1Decoder);

@@ -19,6 +19,7 @@ this program. If not, see http://www.gnu.org/licenses/.
 
 #include <Arduino.h>
 #include "IrSender.h"
+#include "boarddefs.h" // for USE_SOFT_CARRIER
 
 /**
  * Sending function using timer PWM. Due to the nature of the timers, this is a Highlander,
@@ -31,6 +32,15 @@ private:
     ~IrSenderPwm() {}
     static IrSenderPwm *instance;
     void enable(unsigned char khz);
+    void sendSpace(microseconds_t time);
+    void sendMark(microseconds_t time);
+
+#ifdef USE_SOFT_CARRIER
+    void sleepMicros(unsigned long us);
+    void sleepUntilMicros(unsigned long terminateTime);
+    microseconds_t periodTime;
+    microseconds_t periodOnTime;
+#endif
 
 public:
     /**

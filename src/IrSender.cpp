@@ -32,14 +32,12 @@ void IrSender::delayUSecs(microseconds_t T) {
     };
 }
 
-IrSender::IrSender() {
-    outputPin = invalidPin;
+IrSender::IrSender() : outputPin(invalidPin) {
 }
 
-IrSender::IrSender(pin_t pin) {
-    outputPin = pin;
+IrSender::IrSender(pin_t pin) : outputPin(pin), bitMask(digitalPinToBitMask(pin)), outputRegister(digitalPinToPort(pin)) {
     pinMode(pin, OUTPUT);
-    digitalWrite(pin, LOW);
+    mute();
 }
 
 IrSender::~IrSender() {
@@ -47,7 +45,9 @@ IrSender::~IrSender() {
 }
 
 void IrSender::mute() {
-    digitalWrite(outputPin, LOW);
+    noInterrupts();
+    digitalWriteLow();
+    interrupts();
 }
 
 void IrSender::sendIrSignal(const IrSignal& irSignal, unsigned int noSends) {

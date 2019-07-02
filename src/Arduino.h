@@ -48,6 +48,9 @@ inline void pinMode(uint8_t pin, int mode) {
             << ")" << std::endl;
 };
 
+inline uint8_t digitalPinToBitMask(uint8_t pin) { return pin; }
+inline uint8_t* digitalPinToPort(uint8_t pin UNUSED) { return NULL; }
+
 inline void delayMicroseconds(unsigned int t) { usleep(t); };
 
 inline void delay(unsigned long t) {

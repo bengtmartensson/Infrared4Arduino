@@ -26,16 +26,20 @@ IrSenderPwm::IrSenderPwm() : IrSender(SEND_PIN) {
 
 void IrSenderPwm::send(const IrSequence& irSequence, frequency_t frequency) {
     enable(frequency/1000);
-    for (unsigned int i = 0; i < irSequence.getLength(); i++) {
-        digitalWrite(getOutputPin(), (i & 1) ? LOW : HIGH);
-        if (i & 1) {
-            TIMER_DISABLE_PWM;
-        } else {
-            TIMER_ENABLE_PWM;
-        }
+    unsigned long targetTime = micros();
+    for (unsigned int i = 0; i < irSequence.getLength(); i += 2) {
+        noInterrupts();
+        digitalWriteHigh();
+        TIMER_ENABLE_PWM;
+        interrupts();
         delayUSecs(irSequence.getDurations()[i]);
+        noInterrupts();
+        TIMER_DISABLE_PWM;
+        digitalWriteLow();
+        interrupts();
+        targetTime += irSequence.getDurations()[i] + irSequence.getDurations()[i+1];
+        delayUSecs((microseconds_t) (targetTime - micros()));
     }
-    digitalWrite(getOutputPin(), LOW);
 }
 
 IrSenderPwm *IrSenderPwm::newInstance() {
@@ -59,6 +63,6 @@ IrSenderPwm *IrSenderPwm::getInstance(bool create) {
 void IrSenderPwm::enable(unsigned char khz UNUSED) {
     TIMER_DISABLE_INTR;
     pinMode(SEND_PIN, OUTPUT);
-    digitalWrite(SEND_PIN, LOW);
+    digitalWriteLow();
     TIMER_CONFIG_KHZ(khz);
 }

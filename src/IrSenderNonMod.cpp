@@ -21,9 +21,14 @@ IrSenderNonMod::IrSenderNonMod(pin_t pin) : IrSender(pin) {
 }
 
 void IrSenderNonMod::sendNonModulated(const IrSequence &irSequence) {
-    for (unsigned int i = 0; i < irSequence.getLength(); i++) {
-        digitalWrite(getOutputPin(), (i & 1) ? LOW : HIGH);
+    for (unsigned int i = 0; i < irSequence.getLength(); i += 2) {
+        noInterrupts();
+        digitalWriteHigh();
+        interrupts();
         delayUSecs(irSequence.getDurations()[i]);
+        noInterrupts();
+        digitalWriteLow();
+        interrupts();
+        delayUSecs(irSequence.getDurations()[i+1]);
     }
-    digitalWrite(getOutputPin(), LOW);
 }

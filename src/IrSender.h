@@ -26,11 +26,30 @@ this program. If not, see http://www.gnu.org/licenses/.
 class IrSender {
 private:
     pin_t outputPin;
+    uint8_t bitMask;
+    volatile uint8_t* outputRegister;
 
 protected:
-    pin_t getOutputPin() const {
-        return outputPin;
+//    pin_t getOutputPin() const {
+//        return outputPin;
+//    }
+
+    void digitalWriteLow() const {
+#ifdef ARDUINO
+        *outputRegister &= ~bitMask;
+#else
+        digitalWrite(outputPin, LOW);
+#endif
     }
+    
+    void digitalWriteHigh() const {
+#ifdef ARDUINO
+        *outputRegister |= bitMask;
+#else
+        digitalWrite(outputPin, HIGH);
+#endif
+    }
+
     void delayUSecs(microseconds_t T);
     IrSender();
     IrSender(pin_t pin);

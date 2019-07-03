@@ -91,6 +91,7 @@ public:
     void print(const char *c) { stream << c; };
     void print(const std::string& string) { stream << string; };
     void print(int x) { stream << x; };
+    void print(uint32_t  x) { stream << x; };
     void print(int x, std::ios_base& manipulator(std::ios_base&)) { stream << manipulator << x; };
     void println() { stream << std::endl; };
     void println(const std::string& string) { stream << string << std::endl; };

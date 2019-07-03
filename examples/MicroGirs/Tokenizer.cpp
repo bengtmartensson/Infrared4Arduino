@@ -55,5 +55,5 @@ microseconds_t Tokenizer::getMicroseconds() {
 
 frequency_t Tokenizer::getFrequency() {
     long t = getToken().toInt();
-    return (frequency_t) ((t < FREQUENCY_T_MAX) ? t : FREQUENCY_T_MAX);
+    return (frequency_t) t;
 }

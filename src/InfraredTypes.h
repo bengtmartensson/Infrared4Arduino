@@ -29,9 +29,7 @@ typedef uint16_t milliseconds_t;
 /**
  * Type for modulation frequency in Hz.
  */
-typedef uint16_t frequency_t;
-/** Largest frequency_t number possible */
-#define FREQUENCY_T_MAX 65535
+typedef uint32_t frequency_t;
 
 /**
  * Type for GPIO pin, compatible with Arduino libs.

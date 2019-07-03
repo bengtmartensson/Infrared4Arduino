@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['has_5favr_5finterrupt_5fh',['HAS_AVR_INTERRUPT_H',['../boarddefs_8h.html#af45ce2af1863b48c0b3008a13112528b',1,'boarddefs.h']]]
+  ['ir_5fuse_5ftimer2',['IR_USE_TIMER2',['../boarddefs_8h.html#a318b99f761283ca3b5d483269cf99217',1,'boarddefs.h']]]
 ];

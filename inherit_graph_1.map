@@ -1,9 +1,9 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classIrReader.html" title="Abstract base class for all IR readers, capturing or receiving. " alt="" coords="5,81,83,108"/>
-<area shape="rect" id="node2" href="$classIrReceiver.html" title="Abstract base class for demodulating IR receivers. " alt="" coords="157,31,245,57"/>
-<area shape="rect" id="node5" href="$classIrSequenceReader.html" title="This class packs an IrSequence into a dummy, immutable IrReader. " alt="" coords="131,81,271,108"/>
-<area shape="rect" id="node6" href="$classIrWidget.html" title="Base class for classes based upon ICP pins capture. " alt="" coords="162,132,239,159"/>
-<area shape="rect" id="node3" href="$classIrReceiverPoll.html" title="An implementation of IrReceiver using polling of the input pin. " alt="" coords="341,5,453,32"/>
-<area shape="rect" id="node4" href="$classIrReceiverSampler.html" title="This receiving class samples the input pin every 50 microseconds using a timer interrupt. " alt="" coords="325,56,468,83"/>
-<area shape="rect" id="node7" href="$classIrWidgetAggregating.html" title="This class implements the IrWidget. " alt="" coords="319,132,475,159"/>
+<area shape="rect" id="node1" href="$classIrReader.html" title="Abstract base class for all IR readers, capturing or receiving." alt="" coords="5,81,81,108"/>
+<area shape="rect" id="node2" href="$classIrReceiver.html" title="Abstract base class for demodulating IR receivers." alt="" coords="155,31,242,57"/>
+<area shape="rect" id="node5" href="$classIrSequenceReader.html" title="This class packs an IrSequence into a dummy, immutable IrReader." alt="" coords="129,81,268,108"/>
+<area shape="rect" id="node6" href="$classIrWidget.html" title="Base class for classes based upon ICP pins capture." alt="" coords="160,132,237,159"/>
+<area shape="rect" id="node3" href="$classIrReceiverPoll.html" title="An implementation of IrReceiver using polling of the input pin." alt="" coords="339,5,449,32"/>
+<area shape="rect" id="node4" href="$classIrReceiverSampler.html" title="This receiving class samples the input pin every 50 microseconds using a timer interrupt." alt="" coords="323,56,465,83"/>
+<area shape="rect" id="node7" href="$classIrWidgetAggregating.html" title="This class implements the IrWidget." alt="" coords="316,132,472,159"/>
 </map>

@@ -1,10 +1,11 @@
 <map id="src/IrSender.h" name="src/IrSender.h">
-<area shape="rect" id="node2" href="$IrSender_8cpp.html" title="src/IrSender.cpp" alt="" coords="5,80,132,107"/>
-<area shape="rect" id="node3" href="$IrSenderNonMod_8h.html" title="src/IrSenderNonMod.h" alt="" coords="156,80,320,107"/>
-<area shape="rect" id="node5" href="$IrSenderPwm_8h.html" title="src/IrSenderPwm.h" alt="" coords="344,80,487,107"/>
-<area shape="rect" id="node7" href="$IrSenderSimulator_8h.html" title="src/IrSenderSimulator.h" alt="" coords="511,80,685,107"/>
-<area shape="rect" id="node9" href="$IrSignal_8cpp.html" title="src/IrSignal.cpp" alt="" coords="709,80,831,107"/>
-<area shape="rect" id="node4" href="$IrSenderNonMod_8cpp.html" title="src/IrSenderNonMod.cpp" alt="" coords="133,155,311,181"/>
-<area shape="rect" id="node6" href="$IrSenderPwm_8cpp.html" title="src/IrSenderPwm.cpp" alt="" coords="336,155,495,181"/>
-<area shape="rect" id="node8" href="$IrSenderSimulator_8cpp.html" title="src/IrSenderSimulator.cpp" alt="" coords="519,155,709,181"/>
+<area shape="rect" id="node1" title=" " alt="" coords="359,5,470,32"/>
+<area shape="rect" id="node2" href="$IrSender_8cpp.html" title=" " alt="" coords="5,80,131,107"/>
+<area shape="rect" id="node3" href="$IrSenderNonMod_8h.html" title=" " alt="" coords="155,80,319,107"/>
+<area shape="rect" id="node5" href="$IrSenderPwm_8h.html" title=" " alt="" coords="343,80,486,107"/>
+<area shape="rect" id="node7" href="$IrSenderSimulator_8h.html" title=" " alt="" coords="511,80,684,107"/>
+<area shape="rect" id="node9" href="$IrSignal_8cpp.html" title=" " alt="" coords="709,80,830,107"/>
+<area shape="rect" id="node4" href="$IrSenderNonMod_8cpp.html" title=" " alt="" coords="132,155,311,181"/>
+<area shape="rect" id="node6" href="$IrSenderPwm_8cpp.html" title=" " alt="" coords="335,155,494,181"/>
+<area shape="rect" id="node8" href="$IrSenderSimulator_8cpp.html" title=" " alt="" coords="518,155,706,181"/>
 </map>

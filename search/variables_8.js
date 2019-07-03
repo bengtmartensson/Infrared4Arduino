@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['period',['period',['../classIrWidget.html#acdacf96dbf5ffe8dda6a85237b495a57',1,'IrWidget']]]
+  ['range_5fextension_5fbits',['RANGE_EXTENSION_BITS',['../classIrWidget.html#a081b8f6220cbfccc0bc67f463e5078e3',1,'IrWidget']]],
+  ['receiverstate',['receiverState',['../classIrReceiverSampler.html#a7448c6d1718106a3df236968f53d290e',1,'IrReceiverSampler']]]
 ];

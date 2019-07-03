@@ -1,6 +1,6 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classIrDecoder.html" title="Abstract base class for all decoder classes. " alt="" coords="5,56,91,83"/>
-<area shape="rect" id="node2" href="$classMultiDecoder.html" title="A preliminary multi protocol decoder. " alt="" coords="139,5,247,32"/>
-<area shape="rect" id="node3" href="$classNec1Decoder.html" title="A decoder class for NEC1 signals. " alt="" coords="139,56,248,83"/>
-<area shape="rect" id="node4" href="$classRc5Decoder.html" title="A decoder class for RC5 signals. " alt="" coords="143,107,243,133"/>
+<area shape="rect" id="node1" href="$classIrDecoder.html" title="Abstract base class for all decoder classes." alt="" coords="5,56,91,83"/>
+<area shape="rect" id="node2" href="$classMultiDecoder.html" title="A preliminary multi protocol decoder." alt="" coords="139,5,247,32"/>
+<area shape="rect" id="node3" href="$classNec1Decoder.html" title="A decoder class for NEC1 signals." alt="" coords="139,56,248,83"/>
+<area shape="rect" id="node4" href="$classRc5Decoder.html" title="A decoder class for RC5 signals." alt="" coords="143,107,243,133"/>
 </map>

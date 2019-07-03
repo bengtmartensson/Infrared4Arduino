@@ -1,4 +1,5 @@
 <map id="IrWidget" name="IrWidget">
-<area shape="rect" id="node3" href="$classIrWidgetAggregating.html" title="This class implements the IrWidget. " alt="" coords="5,155,161,181"/>
-<area shape="rect" id="node2" href="$classIrReader.html" title="Abstract base class for all IR readers, capturing or receiving. " alt="" coords="45,5,122,32"/>
+<area shape="rect" id="node1" title="Base class for classes based upon ICP pins capture." alt="" coords="45,80,122,107"/>
+<area shape="rect" id="node3" href="$classIrWidgetAggregating.html" title="This class implements the IrWidget." alt="" coords="5,155,161,181"/>
+<area shape="rect" id="node2" href="$classIrReader.html" title="Abstract base class for all IR readers, capturing or receiving." alt="" coords="45,5,121,32"/>
 </map>

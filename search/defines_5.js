@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['frequency_5ft_5fmax',['FREQUENCY_T_MAX',['../InfraredTypes_8h.html#ab02ef1722e5a5a9b9f24347e00718342',1,'InfraredTypes.h']]]
+  ['has_5favr_5finterrupt_5fh',['HAS_AVR_INTERRUPT_H',['../boarddefs_8h.html#af45ce2af1863b48c0b3008a13112528b',1,'boarddefs.h']]]
 ];

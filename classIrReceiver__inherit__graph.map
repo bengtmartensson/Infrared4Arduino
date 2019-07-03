@@ -1,5 +1,6 @@
 <map id="IrReceiver" name="IrReceiver">
-<area shape="rect" id="node3" href="$classIrReceiverPoll.html" title="An implementation of IrReceiver using polling of the input pin. " alt="" coords="5,155,117,181"/>
-<area shape="rect" id="node4" href="$classIrReceiverSampler.html" title="This receiving class samples the input pin every 50 microseconds using a timer interrupt. " alt="" coords="142,155,285,181"/>
-<area shape="rect" id="node2" href="$classIrReader.html" title="Abstract base class for all IR readers, capturing or receiving. " alt="" coords="99,5,176,32"/>
+<area shape="rect" id="node1" title="Abstract base class for demodulating IR receivers." alt="" coords="92,80,179,107"/>
+<area shape="rect" id="node3" href="$classIrReceiverPoll.html" title="An implementation of IrReceiver using polling of the input pin." alt="" coords="5,155,116,181"/>
+<area shape="rect" id="node4" href="$classIrReceiverSampler.html" title="This receiving class samples the input pin every 50 microseconds using a timer interrupt." alt="" coords="141,155,282,181"/>
+<area shape="rect" id="node2" href="$classIrReader.html" title="Abstract base class for all IR readers, capturing or receiving." alt="" coords="97,5,173,32"/>
 </map>

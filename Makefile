@@ -22,6 +22,9 @@ WARNINGFLAGS=-Wall -Werror -Wextra
 
 VPATH=tests src
 
+# Get VERSION from the version in library.properties
+VERSION=$(subst version=,,$(shell grep version= library.properties))
+
 .PRECIOUS: test1
 
 OBJS=\
@@ -47,6 +50,12 @@ doc:
 
 gh-pages:
 	tools/update-gh-pages.sh
+
+tag:
+	git checkout master
+	git status
+	git tag -a Version-$(VERSION) -m "Tagging Version-$(VERSION)"
+	git push origin Version-$(VERSION)
 
 clean:
 	rm -rf *.a *.o api-doc xml test1 gh-pages

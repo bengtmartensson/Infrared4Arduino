@@ -9,10 +9,14 @@
 #include <IrSenderPwm.h>
 
 // where the switch is connected
-const pin_t button = 12;
+const pin_t button = 4;
 
 const IrSignal *irSignal;
-IrSender *irSender;
+const IrSender *irSender;
+
+bool buttonIsPressed() {
+    return digitalRead(button) == LOW;
+}
 
 void setup() {
     // Define switch as input, using pullup to Vcc
@@ -22,23 +26,11 @@ void setup() {
     irSender = IrSenderPwm::getInstance(true);
     
     // Set up the signal
-    irSignal = Nec1Renderer::newIrSignal(122, 27); // volume_down for Yahama receivers
+    irSignal = Nec1Renderer::newIrSignal(122, 27); // volume_down for Yamaha receivers
 }
 
 void loop() {
-    if (digitalRead(button) == LOW) {
-        // Button is pressed, send
-        
-        // Send the main signal,...
-        irSender->sendIrSignal(*irSignal);
-        
-        // ... then, for as long as the button is held,
-        // send the repeat sequence
-        while (digitalRead(button) == LOW) {
-            irSender->send(irSignal->getRepeat());
-            delay(30); // Make up for deficiency in implementation
-        }
-    } else {
-        // Button is not pressed, do nothing.
-    }
+    // Send the signal when and while button is pressed,
+    // according to IrSender::sendWhile.
+    irSender->sendWhile(*irSignal, buttonIsPressed);
 }

@@ -105,6 +105,7 @@ IrSender	KEYWORD2
 ~IrSender	KEYWORD2
 send	KEYWORD2
 sendIrSignal	KEYWORD2
+sendWhile	KEYWORD2
 mute	KEYWORD2
 IrSenderNonMod	KEYWORD2
 send	KEYWORD2

@@ -79,4 +79,8 @@ public:
     void dumpWithSigns(Stream& stream) const {
         dump(stream, true);
     };
+
+#ifdef ARDUINO
+    static IrSequence* readFlash(const microseconds_t *flashData, size_t length);
+#endif
 };

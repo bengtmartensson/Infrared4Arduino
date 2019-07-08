@@ -132,6 +132,7 @@ getDurations	KEYWORD2
 clone	KEYWORD2
 dump	KEYWORD2
 dumpWithSigns	KEYWORD2
+readFlash	KEYWORD2
 IrSequenceReader	KEYWORD2
 IrSequenceReader	KEYWORD2
 IrSequenceReader	KEYWORD2
@@ -222,8 +223,6 @@ parse	KEYWORD2
 toProntoHex	KEYWORD2
 toProntoHex	KEYWORD2
 toProntoHex	KEYWORD2
-lsbByte	KEYWORD2
-transmitBit	KEYWORD2
 Rc5Decoder	KEYWORD2
 ~Rc5Decoder	KEYWORD2
 getF	KEYWORD2
@@ -241,7 +240,6 @@ emit	KEYWORD2
 emitMsb	KEYWORD2
 emitEnd	KEYWORD2
 timeSince	KEYWORD2
-ISR	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)

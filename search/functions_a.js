@@ -1,6 +1,11 @@
 var searchData=
 [
-  ['rc5decoder',['Rc5Decoder',['../classRc5Decoder.html#abd312c15a9235ae16ec56e2d970c011d',1,'Rc5Decoder']]],
-  ['receive',['receive',['../classIrReader.html#a15f1d4bd27db84e399869bb4ebbd6e9e',1,'IrReader::receive()'],['../classIrReceiver.html#aae1216200e7313aef3cb2298d06fc37e',1,'IrReceiver::receive()'],['../classIrSequenceReader.html#abe0c5164e14aafebc025b953cd8a1f46',1,'IrSequenceReader::receive()'],['../classIrWidget.html#ad05e90c6f30a7a8073a2a6042189bd15',1,'IrWidget::receive()']]],
-  ['reset',['reset',['../classIrReader.html#aa9d596dc32892c76cd25024da4bca688',1,'IrReader::reset()'],['../classIrReceiverPoll.html#aab8279b6b945639b0dbcbb2bd0608c25',1,'IrReceiverPoll::reset()'],['../classIrReceiverSampler.html#a56734517291c8209651d8a2308f81d51',1,'IrReceiverSampler::reset()'],['../classIrWidget.html#a09ca5209cface3e0121609b5c957a545',1,'IrWidget::reset()']]]
+  ['send',['send',['../classIrSender.html#a968752fe39b86cbdec16168a353b0ecb',1,'IrSender::send()'],['../classIrSenderNonMod.html#af5af9d6291aaf87b965795c77b30abbd',1,'IrSenderNonMod::send()'],['../classIrSenderPwm.html#ad58382fa6dbb11befeca3e534abdad84',1,'IrSenderPwm::send()'],['../classIrSenderSimulator.html#a8063e844623486ac6e3be347494a8b8c',1,'IrSenderSimulator::send()']]],
+  ['sendirsignal',['sendIrSignal',['../classIrSender.html#ad172264fa246b306832e75a162679eac',1,'IrSender']]],
+  ['sendnonmodulated',['sendNonModulated',['../classIrSenderNonMod.html#ae65191daf918ba201d2d85b4f3706599',1,'IrSenderNonMod']]],
+  ['sendwhile',['sendWhile',['../classIrSender.html#afb3e86bd8f7f16e9fc84d4c7f72993c9',1,'IrSender']]],
+  ['setbeginningtimeout',['setBeginningTimeout',['../classIrReader.html#a16c564724d31eaa90f72de3e803e0316',1,'IrReader::setBeginningTimeout()'],['../classIrReceiverPoll.html#a9d8d2b2c7e991dea2f4d05dbca91e692',1,'IrReceiverPoll::setBeginningTimeout()'],['../classIrReceiverSampler.html#aa43f4a04f51e3d65fc2f2d9f4d4d3b58',1,'IrReceiverSampler::setBeginningTimeout()']]],
+  ['setendingtimeout',['setEndingTimeout',['../classIrReader.html#add2963a17c26882c38a015e84ec44e9c',1,'IrReader::setEndingTimeout()'],['../classIrReceiverPoll.html#afb37da8323c5c11cd0d1d4606772d335',1,'IrReceiverPoll::setEndingTimeout()'],['../classIrReceiverSampler.html#aed65891a886946964c2e31cb3eab6293',1,'IrReceiverSampler::setEndingTimeout()'],['../classIrWidget.html#a6fd29fbdb2188444cc75e142045c85d5',1,'IrWidget::setEndingTimeout()']]],
+  ['setmarkexcess',['setMarkExcess',['../classIrReader.html#adc84220ea337fc219bb3ccfd094f5b50',1,'IrReader']]],
+  ['setvalid',['setValid',['../classIrDecoder.html#a1a6b109d835184dde64382371bc5bca9',1,'IrDecoder']]]
 ];

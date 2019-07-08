@@ -15,7 +15,6 @@ var searchData=
   ['isditto',['isDitto',['../classNec1Decoder.html#a936d8bd04a81f4527340fca6afda5286',1,'Nec1Decoder']]],
   ['isempty',['isEmpty',['../classIrReader.html#acb87b34a742322ab3202ab41a4a6945d',1,'IrReader::isEmpty()'],['../classIrSequence.html#a4233ad9a625fd27e72d2f86b7931f7e8',1,'IrSequence::isEmpty()']]],
   ['isending',['isEnding',['../classIrDecoder.html#a88773ef1d068ca41b5ac506b3386b37d',1,'IrDecoder']]],
-  ['isr',['ISR',['../IrReceiverSampler_8cpp.html#a5e8655996e279dd6a57e68e9fc651131',1,'IrReceiverSampler.cpp']]],
   ['isready',['isReady',['../classIrReader.html#a0d5310fbb90701b54b00542fbd60356a',1,'IrReader::isReady()'],['../classIrReceiverPoll.html#a012b70c50c7736a8514c5ae9bba4c50c',1,'IrReceiverPoll::isReady()'],['../classIrReceiverSampler.html#ac275f87c7cd921459a4879278921a4d1',1,'IrReceiverSampler::isReady()'],['../classIrSequenceReader.html#a74c7aee4de462ebcc2f140e4da72004a',1,'IrSequenceReader::isReady()'],['../classIrWidget.html#a78328d308ce6ff122810c96060d77fa6',1,'IrWidget::isReady()']]],
   ['isvalid',['isValid',['../classIrDecoder.html#a0afca7f90358419b4bb17b339bc36e57',1,'IrDecoder']]]
 ];

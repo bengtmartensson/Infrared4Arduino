@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['lsbbyte',['lsbByte',['../classPwm2Renderer.html#a5bb463cdffbb2e5dafda8eab2c269f3f',1,'Pwm2Renderer']]]
+  ['multidecoder',['MultiDecoder',['../classMultiDecoder.html#ae7431efdbec58c96cb0a72a50d7a874c',1,'MultiDecoder']]],
+  ['mute',['mute',['../classIrSender.html#aeabe36f0344f58ee68d63eb9c9821fbe',1,'IrSender']]]
 ];

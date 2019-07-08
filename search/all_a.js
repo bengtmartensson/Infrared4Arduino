@@ -1,15 +1,18 @@
 var searchData=
 [
-  ['markexcess',['markExcess',['../classIrReader.html#a5ed55a23db0dd9ae2f6ccfe107802e54',1,'IrReader']]],
-  ['microseconds_5ft',['microseconds_t',['../InfraredTypes_8h.html#a5a4323547cf58895464e841b9b424384',1,'InfraredTypes.h']]],
-  ['microseconds_5ft_5fmax',['MICROSECONDS_T_MAX',['../InfraredTypes_8h.html#a0e6f273fff8c6836fa89e105b28bc78c',1,'InfraredTypes.h']]],
-  ['microspertick',['microsPerTick',['../classIrReceiverSampler.html#a101c57c7b19136854f16d1326169bc8f',1,'IrReceiverSampler']]],
-  ['milliseconds_5ft',['milliseconds_t',['../InfraredTypes_8h.html#ace35cfd2245c700198afb856211d7bcd',1,'InfraredTypes.h']]],
-  ['milliseconds_5ft_5fmax',['MILLISECONDS_T_MAX',['../InfraredTypes_8h.html#a56e92001382b50e1b88baa4d600be78e',1,'InfraredTypes.h']]],
-  ['min',['MIN',['../Nec1Renderer_8cpp.html#a3acffbd305ee72dcd4593c0d8af64a4f',1,'MIN():&#160;Nec1Renderer.cpp'],['../Rc5Renderer_8cpp.html#a3acffbd305ee72dcd4593c0d8af64a4f',1,'MIN():&#160;Rc5Renderer.cpp']]],
-  ['min_5ffrequency',['min_frequency',['../IrWidgetAggregating_8cpp.html#a45094e421ad940b71be9d0bf6756d101',1,'IrWidgetAggregating.cpp']]],
-  ['multidecoder',['MultiDecoder',['../classMultiDecoder.html',1,'MultiDecoder'],['../classMultiDecoder.html#ae7431efdbec58c96cb0a72a50d7a874c',1,'MultiDecoder::MultiDecoder()']]],
-  ['multidecoder_2ecpp',['MultiDecoder.cpp',['../MultiDecoder_8cpp.html',1,'']]],
-  ['multidecoder_2eh',['MultiDecoder.h',['../MultiDecoder_8h.html',1,'']]],
-  ['mute',['mute',['../classIrSender.html#aeabe36f0344f58ee68d63eb9c9821fbe',1,'IrSender']]]
+  ['nec',['nec',['../classMultiDecoder.html#a6b119d114e11f2fd74a74f0c8524a2a6a3ff4574eae7a36953c54470e731934a9',1,'MultiDecoder']]],
+  ['nec1decoder',['Nec1Decoder',['../classNec1Decoder.html',1,'Nec1Decoder'],['../classNec1Decoder.html#a256a78a769f2c7da7ec34c9741105cf3',1,'Nec1Decoder::Nec1Decoder()'],['../classNec1Decoder.html#ae98563b937f54bae6333c9c5c4f26f73',1,'Nec1Decoder::Nec1Decoder(const IrReader &amp;irReader)']]],
+  ['nec1decoder_2ecpp',['Nec1Decoder.cpp',['../Nec1Decoder_8cpp.html',1,'']]],
+  ['nec1decoder_2eh',['Nec1Decoder.h',['../Nec1Decoder_8h.html',1,'']]],
+  ['nec1dittoliteral',['nec1DittoLiteral',['../Nec1Decoder_8cpp.html#a34f5116caced5935a5f5a4201d51959f',1,'Nec1Decoder.cpp']]],
+  ['nec1renderer',['Nec1Renderer',['../classNec1Renderer.html',1,'']]],
+  ['nec1renderer_2ecpp',['Nec1Renderer.cpp',['../Nec1Renderer_8cpp.html',1,'']]],
+  ['nec1renderer_2eh',['Nec1Renderer.h',['../Nec1Renderer_8h.html',1,'']]],
+  ['nec_5fditto',['nec_ditto',['../classMultiDecoder.html#a6b119d114e11f2fd74a74f0c8524a2a6aad36ae0f6707fa68d2f4deeb25e15620',1,'MultiDecoder']]],
+  ['newinstance',['newInstance',['../classIrSenderPwm.html#ac8ba48ebc81514ce264cbe9618d18238',1,'IrSenderPwm']]],
+  ['newirreceiversampler',['newIrReceiverSampler',['../classIrReceiverSampler.html#aa188297e07e923a9cbe4c22a09866973',1,'IrReceiverSampler']]],
+  ['newirsignal',['newIrSignal',['../classNec1Renderer.html#a2eefe1e9c94e56dfa5d94bc83fe8b9e9',1,'Nec1Renderer::newIrSignal(unsigned int D, unsigned int S, unsigned int F)'],['../classNec1Renderer.html#af8e68486151b97c5e1535b2c0b37ab44',1,'Nec1Renderer::newIrSignal(unsigned int D, unsigned int F)'],['../classRc5Renderer.html#a91d6f5cd78ccf97bdb22c60f45dfe5df',1,'Rc5Renderer::newIrSignal(unsigned int D, unsigned int F, unsigned int T)'],['../classRc5Renderer.html#aed8d8a1bb349504ef5e8dd86f144ee58',1,'Rc5Renderer::newIrSignal(unsigned int D, unsigned int F)']]],
+  ['newirwidgetaggregating',['newIrWidgetAggregating',['../classIrWidgetAggregating.html#aadb3b90c136b9af1356ce3a373f463a4',1,'IrWidgetAggregating']]],
+  ['noise',['noise',['../classMultiDecoder.html#a6b119d114e11f2fd74a74f0c8524a2a6a9b3f98c05c29d29bea1d9b898e01dc6f',1,'MultiDecoder']]],
+  ['norepetitions',['noRepetitions',['../classIrSignal.html#a77fcdb70aacad9d41f79a978c2025df0',1,'IrSignal']]]
 ];

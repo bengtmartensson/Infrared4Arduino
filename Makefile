@@ -44,9 +44,11 @@ test%: test%.o libInfrared.a
 	$(CXX) -o $@ $< -L. -lInfrared
 	./$@
 
-doc:
+api-doc/index.html:
 	doxygen
-	$(BROWSER) api-doc/index.html
+
+doc: api-doc/html
+	$(BROWSER) $<
 
 gh-pages:
 	tools/update-gh-pages.sh
@@ -75,4 +77,4 @@ keywords.txt: xml/index.xml
 
 all: test doc keywords.txt
 
-.PHONY: clean spotless
+.PHONY: clean spotless doc

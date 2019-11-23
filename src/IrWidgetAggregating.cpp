@@ -59,7 +59,7 @@ void IrWidgetAggregating::capture() {
     uint8_t calShiftM1 = 1;
     uint8_t calCount = 1 << (calShiftM1 + 1);
     uint8_t aggCount = 0;
-    ovlBitsDataType ovlCnt = 0;
+    unsigned int ovlCnt = 0;
     uint16_t val;
     uint16_t prevVal = 0;
     uint16_t *pCapDat = captureData; // pointer to current item in captureData[]
@@ -92,7 +92,7 @@ void IrWidgetAggregating::capture() {
 
     /////////////////////////////////////////
     // wait for all following edges
-    for (; pCapDat <= &captureData[bufferSize - sampleSize];) // 2 values are stored in each loop, TODO: change to 3 when adding the aggCount
+    for (; pCapDat <= &captureData[bufferSize - numberSavesPerPeriod];) // 2 values are stored in each loop, TODO: change to 3 when adding the aggCount
     {
         debugPinToggle();
         // wait for edge or overflow (output compare match)

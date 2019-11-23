@@ -51,7 +51,7 @@ IrWidget::~IrWidget() {
 }
 
 void IrWidget::setEndingTimeout(milliseconds_t timeOut) {
-    endingTimeout = (ovlBitsDataType) ((timeOut/* /1000*/ + 16)/32);
+    endingTimeout = (unsigned int) ((timeOut/* /1000*/ + 16)/32);
 }
 
 milliseconds_t IrWidget::getEndingTimeout() const {

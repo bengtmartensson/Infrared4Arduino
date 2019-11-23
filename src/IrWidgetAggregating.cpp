@@ -78,7 +78,7 @@ void IrWidgetAggregating::capture() {
         uint8_t tifr = waitForEdgeOrOverflow(); // cache the result of reading TIFR1 (masked with ICF1 and OCF1A)
         val = CAT2(ICR, CAP_TIM);
         CAT3(OCR, CAP_TIM, CAP_TIM_OC) = val; // timeout based on previous trigger time
-
+        clearInputCaptureOutputCompare();
         if (isOverflow(tifr)) {
             // check for overflow bit
             if (ovlCnt >= endingTimeout) {
@@ -88,13 +88,10 @@ void IrWidgetAggregating::capture() {
                 break; // maximum value reached, treat this as timeout and abort capture
             }
             ovlCnt++;
-            // clear input capture and output compare flag bit
-            CAT2(TIFR, CAP_TIM) = _BV(CAT2(ICF, CAP_TIM)) | _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC));
-        } else {
-            // clear input capture and output compare flag bit
-            CAT2(TIFR, CAP_TIM) = _BV(CAT2(ICF, CAP_TIM)) | _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC));
-
-            uint32_t diffVal = ((val - prevVal) & 0xffff) | ((uint32_t) ovlCnt << 16UL);
+        }
+        // NOTE: no else or continue
+        if (isInputCaptureEvent(tifr)) {
+            uint32_t diffVal = (uint32_t) ovlCnt << 16UL | (uint32_t) (val - prevVal);
             ovlCnt = 0U;
             prevVal = val;
 
@@ -150,7 +147,7 @@ void IrWidgetAggregating::restoreTimerIrq() {
     SREG = sreg; // enable IRQs
 }
 
-uint8_t IrWidgetAggregating::computeTccrnb() {
+uint8_t IrWidgetAggregating::computeTccrnb() const {
     uint8_t icesn_val = _BV(CAT2(ICES, CAP_TIM));
     uint8_t tccrnb = CAT3(TCCR, CAP_TIM, B);
     if (invertingSensor)
@@ -168,8 +165,16 @@ void IrWidgetAggregating::storePulse(uint32_t onTime, uint32_t offTime) {
     captureCount++;
 }
 
-bool IrWidgetAggregating::isOverflow(uint8_t tifr) {
+bool IrWidgetAggregating::isOverflow(uint8_t tifr) const {
     return tifr & _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC));
+}
+
+bool IrWidgetAggregating::isInputCaptureEvent(uint8_t tifr) const {
+    return tifr & _BV(CAT2(ICF, CAP_TIM));
+}
+
+void IrWidgetAggregating::clearInputCaptureOutputCompare() {
+    CAT2(TIFR, CAP_TIM) = _BV(CAT2(ICF, CAP_TIM)) | _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC));
 }
 
 void IrWidgetAggregating::FrequencyCalculator::init() {

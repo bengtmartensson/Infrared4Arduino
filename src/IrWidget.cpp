@@ -72,7 +72,6 @@ void IrWidget::dump(Stream &stream) const {
 
 // initialize Timer and IO pins, needs to be called once
 void IrWidget::setup(bool pullup) {
-#ifdef ARDUINO
     // configure signal capture ICP pin as input
     cbi(CAT2(DDR, CAP_PORT), CAP_PIN);
     if (pullup)
@@ -95,7 +94,8 @@ void IrWidget::setup(bool pullup) {
 
     CAT3(TCCR, CAP_TIM, A) = 0; // Timer mode 0 = normal
     CAT3(TCCR, CAP_TIM, B) = _BV(CAT2(ICNC, CAP_TIM)) | CAPTURE_PRESCALER_SETTING; // prescaler according to setting, enable noise canceler
-#else
+
+#ifndef ARDUINO
     std::cout << "pinMode(CAPTURE_PIN_1, " << (pullup ? "INPUT_PULLUP)" : "INPUT)") << std::endl;
 #endif
 }

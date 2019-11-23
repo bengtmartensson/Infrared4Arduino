@@ -36,6 +36,28 @@
 #define A7 107
 #define  LED_BUILTIN 13
 
+extern uint8_t CS00;
+extern uint8_t CS01;
+extern uint8_t CS02;
+extern uint8_t CS11;
+extern uint8_t DDRB;
+extern uint8_t ICES1;
+extern uint8_t ICF1;
+extern uint8_t ICNC1;
+extern uint8_t ICR1;
+extern uint8_t OCF1A;
+extern uint8_t OCR1A;
+extern uint8_t PORTB;
+extern uint8_t PRR;
+extern uint8_t PRTIM1;
+extern uint8_t SREG;
+extern uint8_t TCCR0B;
+extern uint8_t TCCR1A;
+extern uint8_t TCCR1B;
+extern uint8_t TCNT1;
+extern uint8_t TIFR1;
+extern uint8_t TOV1;
+
 inline uint8_t digitalRead(uint8_t pin UNUSED) { return 0; };
 inline void digitalWrite(uint8_t pin, uint8_t value) {
     std::cout << "digitalWrite(" << (int) pin << ", "
@@ -79,6 +101,12 @@ inline unsigned long millis() {
 #define INPUT_PULLUP 0x2
 
 #define F_CPU 16000000
+
+#define _BV(bit) (1 << (bit))
+#define _SFR_MEM_ADDR(sfr) (/*(uint16_t)*/ &(sfr))
+#define _SFR_ADDR(sfr) _SFR_MEM_ADDR(sfr)
+#define _SFR_BYTE(sfr) _MMIO_BYTE(_SFR_ADDR(sfr))
+#define _MMIO_BYTE(mem_addr) (*(volatile uint8_t *)(mem_addr))
 
 // Stream
 

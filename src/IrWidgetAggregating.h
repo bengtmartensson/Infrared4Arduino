@@ -25,6 +25,7 @@ private:
     void restoreTimerIrq();
     uint8_t computeTccrnb();
     void storePulse(uint32_t onTime, uint32_t offTime);
+    bool isOverflow(uint8_t tifr);
 
     uint8_t tccr0b;
     uint8_t sreg;

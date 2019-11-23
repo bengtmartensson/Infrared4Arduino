@@ -82,7 +82,7 @@ void IrWidgetAggregating::capture() {
         val = CAT2(ICR, CAP_TIM);
         CAT3(OCR, CAP_TIM, CAP_TIM_OC) = val; // timeout based on previous trigger time
 
-        if (tifr & _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC))) {
+        if (isOverflow(tifr)) {
             // check for overflow bit
             if (ovlCnt >= endingTimeout) {
                 // TODO: handle this check together with the check for the pulse length (if packTimeValNormal can handle the value)
@@ -99,22 +99,22 @@ void IrWidgetAggregating::capture() {
         // clear input capture and output compare flag bit
         CAT2(TIFR, CAP_TIM) = _BV(CAT2(ICF, CAP_TIM)) | _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC));
 
-        uint32_t diffVal = ((val - prevVal) & 0xffff) | ((uint32_t) ovlCnt << 16);
-        ovlCnt = 0;
+        uint32_t diffVal = ((val - prevVal) & 0xffff) | ((uint32_t) ovlCnt << 16UL);
+        ovlCnt = 0U;
         prevVal = val;
 
         if (diffVal < aggThreshold) {
             aggVal += diffVal;
 
             // calculate the carrier frequency only within the first burst (often a preamble)
-            if (calCount) {
+            if (calCount > 0U) {
                 aggCount++; // only used to calculate the period
                 // do a calibration on every aggCount which is a power of two because then dividing by calShiftM1
                 // (shiftcount - 1) can simply be performed by shifting right
                 if (aggCount == calCount) {
                     aggThreshold = aggVal >> calShiftM1;
                     calShiftM1++;
-                    calCount = calCount << 1; // this will automatically terminate calibrating when calCount is 128 because then (128 << 1) & 0xff = 0
+                    calCount = calCount << 1U; // this will automatically terminate calibrating when calCount is 128 because then (128 << 1) & 0xff = 0
                 }
             }
         } else {
@@ -185,4 +185,8 @@ void IrWidgetAggregating::storePulse(uint32_t onTime, uint32_t offTime) {
     captureCount++;
     captureData[captureCount] = packTimeVal(offTime);
     captureCount++;
+}
+
+bool IrWidgetAggregating::isOverflow(uint8_t tifr) {
+    return tifr & _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC));
 }

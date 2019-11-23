@@ -21,9 +21,10 @@ private:
     void endCapture();
     bool waitForFirstEdge();
     uint8_t waitForEdgeOrOverflow();
-
     void saveTimerIrq();
     void restoreTimerIrq();
+    uint8_t computeTccrnb();
+    void storePulse(uint32_t onTime, uint32_t offTime);
 
     uint8_t tccr0b;
     uint8_t sreg;

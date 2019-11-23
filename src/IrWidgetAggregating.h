@@ -22,6 +22,9 @@ private:
     bool waitForFirstEdge();
     uint8_t waitForEdgeOrOverflow();
 
+    void saveTimerIrq();
+    void restoreTimerIrq();
+
     uint8_t tccr0b;
     uint8_t sreg;
     uint16_t aggThreshold;

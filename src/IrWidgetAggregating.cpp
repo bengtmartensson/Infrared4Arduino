@@ -34,7 +34,6 @@ void IrWidgetAggregating::deleteInstance() {
 
 // Wait for a signal on pin ICP1 and store the captured time values in the array 'captureData'
 void IrWidgetAggregating::capture() {
-    tccr0b = TCCR0B;
     //TCCR0B &= ~(_BV(CS02) | _BV(CS01) | _BV(CS00)); // stop timer0 (disables timer IRQs)
 
     //uint16_t aggThreshold = (period * 10UL) / 8UL; // 65 us = (1/20kHz * 130%) might be a good starting point
@@ -61,7 +60,7 @@ void IrWidgetAggregating::capture() {
 
     // disabling IRQs for a long time will disconnect the USB connection of the ATmega32U4, therefore we
     // defer the sbi() instruction until we got the starting edge and only stop the Timer0 in the meanwhile
-    sreg = SREG;
+    saveTimerIrq();
     debugPinClear();
     captureCount = 0U;
 
@@ -150,10 +149,7 @@ void IrWidgetAggregating::capture() {
 
 void IrWidgetAggregating::endCapture() {
     debugPinClear();
-
-    TCCR0B = tccr0b; // re-enable Timer0
-    SREG = sreg; // enable IRQs
-
+    restoreTimerIrq();
     if (aggThreshold == period * 2U) {
         frequency = 0U;
     } else {
@@ -182,4 +178,14 @@ uint8_t IrWidgetAggregating::waitForEdgeOrOverflow() {
     debugPinToggle();
 
     return tifr;
+}
+
+void IrWidgetAggregating::saveTimerIrq() {
+    tccr0b = TCCR0B;
+    sreg = SREG;
+}
+
+void IrWidgetAggregating::restoreTimerIrq() {
+    TCCR0B = tccr0b; // re-enable Timer0
+    SREG = sreg; // enable IRQs
 }

@@ -18,6 +18,15 @@ private:
     IrWidgetAggregating() {
     }
 
+    void endCapture();
+
+    uint8_t tccr0b;
+    uint8_t sreg;
+    uint16_t aggThreshold;
+
+    static const frequency_t min_frequency = 20000U;
+    static const uint16_t period = (F_CPU / min_frequency) >> CAPTURE_PRESCALER_BITS; // the time of one period in CPU clocks
+
 public:
     void capture();
     static void deleteInstance();

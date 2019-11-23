@@ -5,8 +5,6 @@
 
 #include "IrWidgetAggregating.h"
 
-static const frequency_t min_frequency = 20000U;
-
 IrWidgetAggregating::IrWidgetAggregating(size_t captureLength,
         bool pullup,
         int16_t markExcess,
@@ -37,12 +35,11 @@ void IrWidgetAggregating::deleteInstance() {
 // Wait for a signal on pin ICP1 and store the captured time values in the array 'captureData'
 void IrWidgetAggregating::capture() {
     uint32_t timeForBeginTimeout = millis() + beginningTimeout;
-    uint8_t tccr0b = TCCR0B;
+    tccr0b = TCCR0B;
     //TCCR0B &= ~(_BV(CS02) | _BV(CS01) | _BV(CS00)); // stop timer0 (disables timer IRQs)
 
-    uint16_t period = (F_CPU / min_frequency) >> CAPTURE_PRESCALER_BITS; // the time of one period in CPU clocks
     //uint16_t aggThreshold = (period * 10UL) / 8UL; // 65 us = (1/20kHz * 130%) might be a good starting point
-    uint16_t aggThreshold = period * 2U;
+    aggThreshold = period * 2U;
     uint8_t icesn_val = _BV(CAT2(ICES, CAP_TIM));
     uint8_t tccrnb = CAT3(TCCR, CAP_TIM, B);
     if (invertingSensor)
@@ -66,7 +63,7 @@ void IrWidgetAggregating::capture() {
 
     // disabling IRQs for a long time will disconnect the USB connection of the ATmega32U4, therefore we
     // defer the sbi() instruction until we got the starting edge and only stop the Timer0 in the meanwhile
-    uint8_t sreg = SREG;
+    sreg = SREG;
     debugPinClear();
     captureCount = 0U;
 
@@ -75,7 +72,8 @@ void IrWidgetAggregating::capture() {
     while (!(tifr = (CAT2(TIFR, CAP_TIM) & (_BV(CAT2(ICF, CAP_TIM)))))) {
         if (millis() >= timeForBeginTimeout) {
             timeouted = true;
-            goto endCapture;
+            endCapture();
+            return;
         }
     }
     TCCR0B &= ~(_BV(CS02) | _BV(CS01) | _BV(CS00)); // stop timer0 (disables timer IRQs)
@@ -153,8 +151,10 @@ void IrWidgetAggregating::capture() {
             calCount = 0; // avoid further period calculation and calibration
         }
     }
+    endCapture();
+}
 
-endCapture:
+void IrWidgetAggregating::endCapture() {
     debugPinClear();
 
     TCCR0B = tccr0b; // re-enable Timer0
@@ -164,6 +164,6 @@ endCapture:
         frequency = 0U;
     } else {
         uint32_t mediumPeriod = timerValueToNanoSeconds(aggThreshold / 2U);
-        frequency = (frequency_t) (1000000000L / mediumPeriod);
+        frequency = (frequency_t) (1000000000UL / mediumPeriod);
     }
 }

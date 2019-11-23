@@ -34,7 +34,6 @@ void IrWidgetAggregating::deleteInstance() {
 
 // Wait for a signal on pin ICP1 and store the captured time values in the array 'captureData'
 void IrWidgetAggregating::capture() {
-    uint32_t timeForBeginTimeout = millis() + beginningTimeout;
     tccr0b = TCCR0B;
     //TCCR0B &= ~(_BV(CS02) | _BV(CS01) | _BV(CS00)); // stop timer0 (disables timer IRQs)
 
@@ -51,7 +50,6 @@ void IrWidgetAggregating::capture() {
     OCR1A = CAT2(TCNT, CAP_TIM) - 1;
     CAT2(TIFR, CAP_TIM) = _BV(CAT2(ICF, CAP_TIM))
             | _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC)) | _BV(CAT2(TOV, CAP_TIM)); // clear all timer flags
-    uint8_t tifr; // cache the result of reading TIFR1 (masked with ICF1 and OCF1A)
     uint8_t calShiftM1 = 1;
     uint8_t calCount = 1 << (calShiftM1 + 1);
     uint8_t aggCount = 0;
@@ -69,13 +67,12 @@ void IrWidgetAggregating::capture() {
 
     /////////////////////////////////////////
     // wait for first edge
-    while (!(tifr = (CAT2(TIFR, CAP_TIM) & (_BV(CAT2(ICF, CAP_TIM)))))) {
-        if (millis() >= timeForBeginTimeout) {
-            timeouted = true;
-            endCapture();
-            return;
-        }
+    timeouted = !waitForFirstEdge();
+    if (timeouted) {
+        endCapture();
+        return;
     }
+
     TCCR0B &= ~(_BV(CS02) | _BV(CS01) | _BV(CS00)); // stop timer0 (disables timer IRQs)
     debugPinToggle();
     val = CAT2(ICR, CAP_TIM);
@@ -93,10 +90,7 @@ void IrWidgetAggregating::capture() {
     {
         debugPinToggle();
         // wait for edge or overflow (output compare match)
-        while (!(tifr =
-                (CAT2(TIFR, CAP_TIM) & (_BV(CAT2(ICF, CAP_TIM)) | _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC)))))) {
-        }
-        debugPinToggle();
+        uint8_t tifr = waitForEdgeOrOverflow(); // cache the result of reading TIFR1 (masked with ICF1 and OCF1A)
         val = CAT2(ICR, CAP_TIM);
         CAT3(OCR, CAP_TIM, CAP_TIM_OC) = val; // timeout based on previous trigger time
 
@@ -166,4 +160,26 @@ void IrWidgetAggregating::endCapture() {
         uint32_t mediumPeriod = timerValueToNanoSeconds(aggThreshold / 2U);
         frequency = (frequency_t) (1000000000UL / mediumPeriod);
     }
+}
+
+bool IrWidgetAggregating::waitForFirstEdge() {
+    uint32_t timeForBeginTimeout = millis() + beginningTimeout;
+    while (!(CAT2(TIFR, CAP_TIM) & (_BV(CAT2(ICF, CAP_TIM))))) {
+        if (millis() >= timeForBeginTimeout)
+            return false;
+    }
+    return true;
+}
+
+// wait for edge or overflow (output compare match)
+uint8_t IrWidgetAggregating::waitForEdgeOrOverflow() {
+    uint8_t tifr; // cache the result of reading TIFR1 (masked with ICF1 and OCF1A)
+    do {
+        // Get the input capture and output compare flags.
+        tifr = CAT2(TIFR, CAP_TIM) & (_BV(CAT2(ICF, CAP_TIM)) | _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC)));
+    } while (!tifr);
+
+    debugPinToggle();
+
+    return tifr;
 }

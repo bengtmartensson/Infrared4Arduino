@@ -19,6 +19,8 @@ private:
     }
 
     void endCapture();
+    bool waitForFirstEdge();
+    uint8_t waitForEdgeOrOverflow();
 
     uint8_t tccr0b;
     uint8_t sreg;

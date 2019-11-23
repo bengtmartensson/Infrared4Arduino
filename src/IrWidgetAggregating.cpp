@@ -62,7 +62,6 @@ void IrWidgetAggregating::capture() {
     unsigned int ovlCnt = 0;
     uint16_t val;
     uint16_t prevVal = 0;
-    uint16_t *pCapDat = captureData; // pointer to current item in captureData[]
     uint32_t aggVal = 0;
     uint32_t diffVal;
 
@@ -70,6 +69,7 @@ void IrWidgetAggregating::capture() {
     // defer the sbi() instruction until we got the starting edge and only stop the Timer0 in the meanwhile
     uint8_t sreg = SREG;
     debugPinClear();
+    captureCount = 0U;
 
     /////////////////////////////////////////
     // wait for first edge
@@ -92,7 +92,7 @@ void IrWidgetAggregating::capture() {
 
     /////////////////////////////////////////
     // wait for all following edges
-    while (pCapDat <= &captureData[bufferSize - numberSavesPerPeriod]) // 2 values are stored in each loop, TODO: change to 3 when adding the aggCount
+    while (captureCount <= bufferSize - numberSavesPerPeriod) // 2 values are stored in each loop, TODO: change to 3 when adding the aggCount
     {
         debugPinToggle();
         // wait for edge or overflow (output compare match)
@@ -109,10 +109,10 @@ void IrWidgetAggregating::capture() {
             {
                 if (aggVal > 0) {
                     // TODO check is to value is small enough to be stored
-                    *pCapDat = packTimeVal/*Normal*/(aggVal); // store the pulse length
-                    pCapDat++;
-                    *pCapDat = packTimeVal/*Normal*/((uint32_t) endingTimeout << 16);
-                    pCapDat++;
+                    captureData[captureCount] = packTimeVal/*Normal*/(aggVal); // store the pulse length
+                    captureCount++;
+                    captureData[captureCount] = packTimeVal/*Normal*/((uint32_t) endingTimeout << 16);
+                    captureCount++;
                 }
                 break; // maximum value reached, treat this as timeout and abort capture
             }
@@ -144,11 +144,11 @@ void IrWidgetAggregating::capture() {
                 }
             }
         } else {
-            *pCapDat = packTimeVal/*Normal*/(aggVal); // store the pulse length
-            pCapDat++;
+            captureData[captureCount] = packTimeVal/*Normal*/(aggVal); // store the pulse length
+            captureCount++;
             // TODO check if value is small enough to be stored
-            *pCapDat = packTimeVal/*Normal*/(diffVal); // store the pause length
-            pCapDat++;
+            captureData[captureCount] = packTimeVal/*Normal*/(diffVal); // store the pause length
+            captureCount++;
 
             aggVal = 0;
             calCount = 0; // avoid further period calculation and calibration
@@ -161,7 +161,6 @@ endCapture:
     TCCR0B = tccr0b; // re-enable Timer0
     SREG = sreg; // enable IRQs
 
-    captureCount = pCapDat - captureData;
     if (aggThreshold == period * 2U) {
         frequency = 0U;
     } else {

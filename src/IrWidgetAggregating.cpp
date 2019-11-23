@@ -66,12 +66,9 @@ void IrWidgetAggregating::capture() {
     // clear input capture and output compare flag bit
     CAT2(TIFR, CAP_TIM) = _BV(CAT2(ICF, CAP_TIM)) | _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC));
     uint16_t prevVal = val;
-    aggThreshold = period * 2U;
     uint32_t aggVal = 0;
     unsigned int ovlCnt = 0;
-    uint8_t calShiftM1 = 1;
-    uint8_t calCount = 1 << (calShiftM1 + 1);
-    uint8_t aggCount = 0;
+    frequencyCalculator.init();
 
     /////////////////////////////////////////
     // wait for all following edges
@@ -93,48 +90,32 @@ void IrWidgetAggregating::capture() {
             ovlCnt++;
             // clear input capture and output compare flag bit
             CAT2(TIFR, CAP_TIM) = _BV(CAT2(ICF, CAP_TIM)) | _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC));
-            continue;
-        }
-
-        // clear input capture and output compare flag bit
-        CAT2(TIFR, CAP_TIM) = _BV(CAT2(ICF, CAP_TIM)) | _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC));
-
-        uint32_t diffVal = ((val - prevVal) & 0xffff) | ((uint32_t) ovlCnt << 16UL);
-        ovlCnt = 0U;
-        prevVal = val;
-
-        if (diffVal < aggThreshold) {
-            aggVal += diffVal;
-
-            // calculate the carrier frequency only within the first burst (often a preamble)
-            if (calCount > 0U) {
-                aggCount++; // only used to calculate the period
-                // do a calibration on every aggCount which is a power of two because then dividing by calShiftM1
-                // (shiftcount - 1) can simply be performed by shifting right
-                if (aggCount == calCount) {
-                    aggThreshold = aggVal >> calShiftM1;
-                    calShiftM1++;
-                    calCount = calCount << 1U; // this will automatically terminate calibrating when calCount is 128 because then (128 << 1) & 0xff = 0
-                }
-            }
         } else {
-            storePulse(aggVal, diffVal);
-            aggVal = 0;
-            calCount = 0; // avoid further period calculation and calibration
+            // clear input capture and output compare flag bit
+            CAT2(TIFR, CAP_TIM) = _BV(CAT2(ICF, CAP_TIM)) | _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC));
+
+            uint32_t diffVal = ((val - prevVal) & 0xffff) | ((uint32_t) ovlCnt << 16UL);
+            ovlCnt = 0U;
+            prevVal = val;
+
+            if (diffVal < frequencyCalculator.getAggThreshold()) {
+                aggVal += diffVal;
+                frequencyCalculator.compute(aggVal);
+            } else {
+                storePulse(aggVal, diffVal);
+                aggVal = 0;
+                frequencyCalculator.disable();
+            }
         }
     }
+
     endCapture();
 }
 
 void IrWidgetAggregating::endCapture() {
     debugPinClear();
     restoreTimerIrq();
-    if (aggThreshold == period * 2U) {
-        frequency = 0U;
-    } else {
-        uint32_t mediumPeriod = timerValueToNanoSeconds(aggThreshold / 2U);
-        frequency = (frequency_t) (1000000000UL / mediumPeriod);
-    }
+    frequency = frequencyCalculator.getFrequency();
 }
 
 bool IrWidgetAggregating::waitForFirstEdge() {
@@ -189,4 +170,30 @@ void IrWidgetAggregating::storePulse(uint32_t onTime, uint32_t offTime) {
 
 bool IrWidgetAggregating::isOverflow(uint8_t tifr) {
     return tifr & _BV(CAT3(OCF, CAP_TIM, CAP_TIM_OC));
+}
+
+void IrWidgetAggregating::FrequencyCalculator::init() {
+    aggThreshold = 2 * period;
+    calShiftM1 = 1;
+    calCount = 1 << (calShiftM1 + 1);
+    aggCount = 0;
+}
+
+uint32_t IrWidgetAggregating::FrequencyCalculator::compute(uint32_t aggVal) {
+    // = frequencyCalculator.getAggThreshold();
+    if (calCount > 0U) {
+        aggCount++; // only used to calculate the period
+        // do a calibration on every aggCount which is a power of two because then dividing by calShiftM1
+        // (shiftcount - 1) can simply be performed by shifting right
+        if (aggCount == calCount) {
+            aggThreshold = aggVal >> calShiftM1;
+            calShiftM1++;
+            calCount = calCount << 1U; // this will automatically terminate calibrating when calCount is 128 because then (128 << 1) & 0xff = 0
+        }
+    }
+    return aggThreshold;
+}
+
+frequency_t IrWidgetAggregating::FrequencyCalculator::getFrequency() const {
+    return aggThreshold == period * 2U ? 0U : (frequency_t) (1000000000UL / timerValueToNanoSeconds(aggThreshold / 2U));
 }

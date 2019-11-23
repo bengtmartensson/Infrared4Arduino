@@ -29,7 +29,7 @@ private:
 
     uint8_t tccr0b;
     uint8_t sreg;
-    uint16_t aggThreshold;
+    //uint16_t aggThreshold;
 
     static const frequency_t min_frequency = 20000U;
     static const uint16_t period = (F_CPU / min_frequency) >> CAPTURE_PRESCALER_BITS; // the time of one period in CPU clocks
@@ -72,4 +72,21 @@ private:
 
         return val;
     }
+
+    class FrequencyCalculator {
+    private:
+        uint8_t calShiftM1;// = 1;
+        uint8_t calCount;// = 1 << (calShiftM1 + 1);
+        uint8_t aggCount;// = 0;
+        uint16_t aggThreshold;
+    public:
+        frequency_t getFrequency() const;
+        FrequencyCalculator() { init(); };
+        void disable() { calCount = 0U; }
+        uint32_t compute(uint32_t aggVal);
+        void init();
+        uint16_t getAggThreshold() const { return aggThreshold ; }
+    };
+
+    FrequencyCalculator frequencyCalculator;
 };

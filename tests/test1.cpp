@@ -131,6 +131,18 @@ static bool testProntoParse(bool verbose __attribute__((unused))) {
     return std::string(s) == std::string(prontoHex);
 }
 
+// Test 9
+static bool testRecs80(bool verbose __attribute__ ((unused))) {
+    microseconds_t recs80Array[] = {158, 7426, 158, 7426, 158, 7426, 158, 4898, 158, 7426, 158, 4898, 158, 4898, 158, 7426, 158, 7426, 158, 4898, 158, 4898, 158, 45000};
+    IrSequence recs80Sequence(recs80Array, sizeof (recs80Array) / sizeof (recs80Array[0]));
+    IrSequenceReader recs80Reader(recs80Sequence);
+    Recs80Decoder recs80Decoder(recs80Reader);
+    bool ok = checkDecoderDump(verbose, recs80Decoder, "RECS80 5 12 1\n");
+    if (verbose)
+        std::cout << recs80Decoder.getDecode() << std::endl;
+    return ok;
+}
+
 #define TEST(f) if (f(verbose)) {successes++;} else {std::cout << #f << " failed!" << std::endl; fails++;}
 
 int main(int argc, const char *args[] __attribute__((unused))) {
@@ -138,23 +150,16 @@ int main(int argc, const char *args[] __attribute__((unused))) {
     unsigned int fails = 0;
     unsigned int successes = 0;
 
-    (testNec1Renderer()         ? successes : fails)++;
-    (testNec1Decoder()          ? successes : fails)++;
-    (testIrSenderSimulator()    ? successes : fails)++;
-    (testPronto()               ? successes : fails)++;
-    (testRc5Renderer()          ? successes : fails)++;
-    (testRc5Decoder()           ? successes : fails)++;
-    (testToProntoHex()          ? successes : fails)++;
-    (testProntoParse()          ? successes : fails)++;
-
-    // Test 9
-    microseconds_t recs80Array[] = { 158, 7426, 158, 7426, 158, 7426, 158, 4898, 158, 7426, 158, 4898, 158, 4898, 158, 7426, 158, 7426, 158, 4898, 158, 4898, 158, 45000 };
-    IrSequence recs80Sequence(recs80Array, sizeof(recs80Array)/sizeof(recs80Array[0]));
-    IrSequenceReader recs80Reader(recs80Sequence);
-    Recs80Decoder recs80Decoder(recs80Reader);
-    ok = checkDecoderDump(recs80Decoder, "RECS80 5 12 1\n");
-    (ok ? successes : fails)++;
-    std::cout << recs80Decoder.getDecode() << std::endl;
+    TEST(testNec1Renderer);
+    TEST(testRc5Renderer);
+    TEST(testNec1Decoder);
+    TEST(testRc5Decoder);
+    TEST(testIrSenderSimulator);
+    TEST(testPronto);
+    TEST(testToProntoHex);
+    TEST(testProntoParse);
+    TEST(testPanasonicRenderer);
+    TEST(testRecs80);
 
     // Report
     std::cout << "Successes: " << successes << std::endl;

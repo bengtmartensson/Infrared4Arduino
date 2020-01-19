@@ -17,7 +17,8 @@ public:
         undecoded,      ///< decoding failed
         nec,            ///< NEC1 intro
         nec_ditto,      ///< NEC1 repeat
-        rc5             ///< RC5 signal (= repeat sequence)
+        rc5,            ///< RC5 signal (= repeat sequence)
+        recs80          ///< RECS80 signal (= repeat sequence)
     };
 
 private:

@@ -47,6 +47,15 @@ IrSignal *Pronto::parse(const char *str) {
     return parse(data, index);
 }
 
+#ifdef ARDUINO
+IrSignal *Pronto::parse(const __FlashStringHelper *str) {
+    size_t length = strlen_PF((uint_farptr_t)str);
+    char copy[length + 1]; // can be made more memory efficient.
+    strcpy_PF(copy, (uint_farptr_t)str);
+    return parse(copy);
+}
+#endif
+
 IrSequence *Pronto::mkSequence(const uint16_t* data, size_t noPairs, double timebase) {
     microseconds_t *durations = new microseconds_t[2*noPairs];
     for (unsigned int i = 0; i < 2*noPairs; i++) {

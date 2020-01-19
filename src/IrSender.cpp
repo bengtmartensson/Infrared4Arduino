@@ -58,3 +58,23 @@ void IrSender::sendIrSignal(const IrSignal& irSignal, unsigned int noSends) {
     if (!irSignal.getEnding().isEmpty())
         send(irSignal.getEnding(), irSignal.getFrequency());
 }
+
+void IrSender::sendWhile(const IrSignal& irSignal, bool(*trigger)()) {
+    if (trigger()) {
+        // "Button is pressed", send
+
+        // Send the intro sequence,...
+        sendIrSignal(irSignal, 1);
+
+        // ... then, for as long as the button is held,
+        // send the repeat sequence
+        while (trigger()) {
+            send(irSignal.getRepeat());
+        }
+
+        // finally, the ending sequence (normally empty)
+        send(irSignal.getEnding());
+    } else {
+        // Button is not pressed, do nothing.
+    }
+}

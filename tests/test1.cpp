@@ -138,15 +138,14 @@ int main(int argc, const char *args[] __attribute__((unused))) {
     unsigned int fails = 0;
     unsigned int successes = 0;
 
-    TEST(testPanasonicRenderer);
-    TEST(testNec1Renderer);
-    TEST(testRc5Renderer);   
-    TEST(testNec1Decoder);
-    TEST(testRc5Decoder);                  
-    TEST(testIrSenderSimulator);     
-    TEST(testPronto);                
-    TEST(testToProntoHex);
-    TEST(testProntoParse);           
+    (testNec1Renderer()         ? successes : fails)++;
+    (testNec1Decoder()          ? successes : fails)++;
+    (testIrSenderSimulator()    ? successes : fails)++;
+    (testPronto()               ? successes : fails)++;
+    (testRc5Renderer()          ? successes : fails)++;
+    (testRc5Decoder()           ? successes : fails)++;
+    (testToProntoHex()          ? successes : fails)++;
+    (testProntoParse()          ? successes : fails)++;
 
     // Test 9
     microseconds_t recs80Array[] = { 158, 7426, 158, 7426, 158, 7426, 158, 4898, 158, 7426, 158, 4898, 158, 4898, 158, 7426, 158, 7426, 158, 4898, 158, 4898, 158, 45000 };

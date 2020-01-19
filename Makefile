@@ -22,6 +22,9 @@ WARNINGFLAGS=-Wall -Werror -Wextra
 
 VPATH=tests src
 
+# Get VERSION from the version in library.properties
+VERSION=$(subst version=,,$(shell grep version= library.properties))
+
 .PRECIOUS: test1
 
 OBJS=\
@@ -42,12 +45,20 @@ test%: test%.o libInfrared.a
 	$(CXX) -o $@ $< -L. -lInfrared
 	./$@
 
-doc:
+api-doc/index.html:
 	doxygen
-	$(BROWSER) api-doc/index.html
+
+doc: api-doc/html
+	$(BROWSER) $<
 
 gh-pages:
 	tools/update-gh-pages.sh
+
+tag:
+	git checkout master
+	git status
+	git tag -a Version-$(VERSION) -m "Tagging Version-$(VERSION)"
+	git push origin Version-$(VERSION)
 
 clean:
 	rm -rf *.a *.o api-doc xml test1 gh-pages
@@ -67,4 +78,4 @@ keywords.txt: xml/index.xml
 
 all: test doc keywords.txt
 
-.PHONY: clean spotless
+.PHONY: clean spotless doc

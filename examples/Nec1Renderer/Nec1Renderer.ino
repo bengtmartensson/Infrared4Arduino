@@ -11,7 +11,12 @@ void setup() {
 }
 
 void loop() {
+    // Print a textual representation to Serial.
     irSignal->dump(Serial, true);
+
+    // Send it 11 times (payload followed by 10 repeats).
     IrSenderPwm::getInstance(true)->sendIrSignal(*irSignal, 11);
+
+    // Wait 10 seconds.
     delay(10000);
 }

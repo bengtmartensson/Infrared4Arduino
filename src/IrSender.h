@@ -55,6 +55,21 @@ public:
      */
     void sendIrSignal(const IrSignal& irSignal, unsigned int noSends = 1);
 
+    /**
+     * Send an IrSignal, when and as long as trigger() returns true.
+     * @param irSignal
+     * @param trigger Function returning bool.
+     */
+    void sendWhile(const IrSignal& irSignal, bool(*trigger)());
+
+// TODO:
+//    /**
+//     * Send an IrSignal, when and as long as buttonPin is LOW.
+//     * @param irSignal
+//     * @param buttonPin
+//     */
+//    void sendWhilePinLow(const IrSignal& irSignal, pin_t buttonPin);
+
     /** Force output pin inactive. */
     virtual void mute();
 };

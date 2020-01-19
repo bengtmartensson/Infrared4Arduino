@@ -1,0 +1,6 @@
+This branch contains new Protocols in the form of
+src/*Renderer.[cpp,h] and src/*Decoder.[cpp,h].
+
+Since this branch conflicts with the longer time goal of
+https://github.com/bengtmartensson/Infrared4Arduino/issues/1 , merging
+is not planned.

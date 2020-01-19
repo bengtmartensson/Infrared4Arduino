@@ -220,6 +220,7 @@ appendSequence	KEYWORD2
 appendSequence	KEYWORD2
 parse	KEYWORD2
 parse	KEYWORD2
+parse	KEYWORD2
 toProntoHex	KEYWORD2
 toProntoHex	KEYWORD2
 toProntoHex	KEYWORD2
@@ -240,6 +241,7 @@ emit	KEYWORD2
 emitMsb	KEYWORD2
 emitEnd	KEYWORD2
 timeSince	KEYWORD2
+ISR	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
@@ -303,3 +305,4 @@ __CAT3	LITERAL1
 CAT3	LITERAL1
 MIN	LITERAL1
 MIN	LITERAL1
+VERSION	LITERAL1

@@ -1,9 +1,9 @@
 <map id="src/IrDecoder.h" name="src/IrDecoder.h">
-<area shape="rect" id="node1" title=" " alt="" coords="208,5,327,32"/>
-<area shape="rect" id="node2" href="$MultiDecoder_8h.html" title=" " alt="" coords="196,80,339,107"/>
-<area shape="rect" id="node4" href="$Nec1Decoder_8h.html" title=" " alt="" coords="29,80,172,107"/>
-<area shape="rect" id="node6" href="$Rc5Decoder_8h.html" title=" " alt="" coords="363,80,497,107"/>
-<area shape="rect" id="node3" href="$MultiDecoder_8cpp.html" title=" " alt="" coords="189,155,346,181"/>
+<area shape="rect" id="node1" title=" " alt="" coords="207,5,327,32"/>
+<area shape="rect" id="node2" href="$MultiDecoder_8h.html" title=" " alt="" coords="195,80,339,107"/>
+<area shape="rect" id="node4" href="$Nec1Decoder_8h.html" title=" " alt="" coords="27,80,171,107"/>
+<area shape="rect" id="node6" href="$Rc5Decoder_8h.html" title=" " alt="" coords="364,80,499,107"/>
+<area shape="rect" id="node3" href="$MultiDecoder_8cpp.html" title=" " alt="" coords="188,155,347,181"/>
 <area shape="rect" id="node5" href="$Nec1Decoder_8cpp.html" title=" " alt="" coords="5,155,164,181"/>
-<area shape="rect" id="node7" href="$Rc5Decoder_8cpp.html" title=" " alt="" coords="370,155,519,181"/>
+<area shape="rect" id="node7" href="$Rc5Decoder_8cpp.html" title=" " alt="" coords="371,155,521,181"/>
 </map>

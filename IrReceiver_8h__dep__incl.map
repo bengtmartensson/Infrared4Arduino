@@ -1,7 +1,8 @@
 <map id="src/IrReceiver.h" name="src/IrReceiver.h">
-<area shape="rect" id="node1" title=" " alt="" coords="178,5,299,32"/>
-<area shape="rect" id="node2" href="$IrReceiver_8cpp.html" title=" " alt="" coords="5,80,141,107"/>
-<area shape="rect" id="node3" href="$IrReceiverPoll_8h.html" title=" " alt="" coords="165,80,312,107"/>
-<area shape="rect" id="node5" href="$IrReceiverSampler_8h.html" title=" " alt="" coords="337,80,511,107"/>
-<area shape="rect" id="node4" href="$IrReceiverPoll_8cpp.html" title=" " alt="" coords="158,155,319,181"/>
+<area shape="rect" id="node1" title=" " alt="" coords="180,5,303,32"/>
+<area shape="rect" id="node2" href="$IrReceiver_8cpp.html" title=" " alt="" coords="5,80,144,107"/>
+<area shape="rect" id="node3" href="$IrReceiverPoll_8h.html" title=" " alt="" coords="168,80,315,107"/>
+<area shape="rect" id="node5" href="$IrReceiverSampler_8h.html" title=" " alt="" coords="346,80,523,107"/>
+<area shape="rect" id="node4" href="$IrReceiverPoll_8cpp.html" title=" " alt="" coords="156,155,319,181"/>
+<area shape="rect" id="node6" href="$IrReceiverSampler_8cpp.html" title=" " alt="" coords="343,155,535,181"/>
 </map>

@@ -22,6 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Infrared4Arduino
+   &#160;<span id="projectnumber">1.0.6</span>
    </div>
   </td>
  </tr>
@@ -82,6 +83,9 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a3de0ddd8fefbcf13730f9f795ae25f24"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classIrSignal.html">IrSignal</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPronto.html#a3de0ddd8fefbcf13730f9f795ae25f24">parse</a> (const char *str)</td></tr>
 <tr class="memdesc:a3de0ddd8fefbcf13730f9f795ae25f24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function for parsing its input data into an <a class="el" href="classIrSignal.html" title="This class models an IR signal with intro-, repeat-, and ending sequences.">IrSignal</a>.  <a href="#a3de0ddd8fefbcf13730f9f795ae25f24">More...</a><br /></td></tr>
 <tr class="separator:a3de0ddd8fefbcf13730f9f795ae25f24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf4bfd57eaecc03bdca73cf66ef33262"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classIrSignal.html">IrSignal</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPronto.html#aaf4bfd57eaecc03bdca73cf66ef33262">parse</a> (const __FlashStringHelper *str)</td></tr>
+<tr class="memdesc:aaf4bfd57eaecc03bdca73cf66ef33262"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function for parsing its input data into an <a class="el" href="classIrSignal.html" title="This class models an IR signal with intro-, repeat-, and ending sequences.">IrSignal</a>.  <a href="#aaf4bfd57eaecc03bdca73cf66ef33262">More...</a><br /></td></tr>
+<tr class="separator:aaf4bfd57eaecc03bdca73cf66ef33262"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a95abb2bc5ac634a351a34b5341b0867c"><td class="memItemLeft" align="right" valign="top">static char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPronto.html#a95abb2bc5ac634a351a34b5341b0867c">toProntoHex</a> (const <a class="el" href="classIrSignal.html">IrSignal</a> &amp;irSignal)</td></tr>
 <tr class="memdesc:a95abb2bc5ac634a351a34b5341b0867c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function for generating a <a class="el" href="classPronto.html" title="Static class consisting of functions for parsing a Pronto Hex string (like 0000 006C 0022 0002 015B 0...">Pronto</a> Hex string from the argument.  <a href="#a95abb2bc5ac634a351a34b5341b0867c">More...</a><br /></td></tr>
 <tr class="separator:a95abb2bc5ac634a351a34b5341b0867c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -99,7 +103,7 @@ Static Public Member Functions</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="Pronto_8h_source.html#l00012">12</a> of file <a class="el" href="Pronto_8h_source.html">Pronto.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a8fe7116de9a7fae3950f6c59da905519"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8fe7116de9a7fae3950f6c59da905519">&#9670;&nbsp;</a></span>parse() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a8fe7116de9a7fae3950f6c59da905519">&#9670;&nbsp;</a></span>parse() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -142,12 +146,12 @@ Static Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classIrSignal.html" title="This class models an IR signal with intro-, repeat-, and ending sequences.">IrSignal</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Pronto_8cpp_source.html#l00007">7</a> of file <a class="el" href="Pronto_8cpp_source.html">Pronto.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Pronto_8cpp_source.html#l00005">5</a> of file <a class="el" href="Pronto_8cpp_source.html">Pronto.cpp</a>.</p>
 
 </div>
 </div>
 <a id="a3de0ddd8fefbcf13730f9f795ae25f24"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3de0ddd8fefbcf13730f9f795ae25f24">&#9670;&nbsp;</a></span>parse() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a3de0ddd8fefbcf13730f9f795ae25f24">&#9670;&nbsp;</a></span>parse() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -179,7 +183,44 @@ Static Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="classIrSignal.html" title="This class models an IR signal with intro-, repeat-, and ending sequences.">IrSignal</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Pronto_8cpp_source.html#l00038">38</a> of file <a class="el" href="Pronto_8cpp_source.html">Pronto.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Pronto_8cpp_source.html#l00036">36</a> of file <a class="el" href="Pronto_8cpp_source.html">Pronto.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aaf4bfd57eaecc03bdca73cf66ef33262"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf4bfd57eaecc03bdca73cf66ef33262">&#9670;&nbsp;</a></span>parse() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classIrSignal.html">IrSignal</a> * Pronto::parse </td>
+          <td>(</td>
+          <td class="paramtype">const __FlashStringHelper *&#160;</td>
+          <td class="paramname"><em>str</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function for parsing its input data into an <a class="el" href="classIrSignal.html" title="This class models an IR signal with intro-, repeat-, and ending sequences.">IrSignal</a>. </p>
+<p>The ending sequence will always be empty. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">str</td><td>Text string containing a <a class="el" href="classPronto.html" title="Static class consisting of functions for parsing a Pronto Hex string (like 0000 006C 0022 0002 015B 0...">Pronto</a> form signal. This form handles the F(...) form. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classIrSignal.html" title="This class models an IR signal with intro-, repeat-, and ending sequences.">IrSignal</a> </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="Pronto_8cpp_source.html#l00051">51</a> of file <a class="el" href="Pronto_8cpp_source.html">Pronto.cpp</a>.</p>
 
 </div>
 </div>
@@ -216,7 +257,7 @@ Static Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Zero terminated string. Has been generated by new[], and must be manually delete[]-d by the user. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Pronto_8cpp_source.html#l00142">142</a> of file <a class="el" href="Pronto_8cpp_source.html">Pronto.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Pronto_8cpp_source.html#l00139">139</a> of file <a class="el" href="Pronto_8cpp_source.html">Pronto.cpp</a>.</p>
 
 </div>
 </div>
@@ -271,7 +312,7 @@ Static Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Zero terminated string. Has been generated by new[], and must be manually delete[]-d by the user. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Pronto_8cpp_source.html#l00130">130</a> of file <a class="el" href="Pronto_8cpp_source.html">Pronto.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Pronto_8cpp_source.html#l00127">127</a> of file <a class="el" href="Pronto_8cpp_source.html">Pronto.cpp</a>.</p>
 
 </div>
 </div>
@@ -319,7 +360,7 @@ Static Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Zero terminated string. Has been generated by new[], and must be manually delete[]-d by the user. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Pronto_8cpp_source.html#l00138">138</a> of file <a class="el" href="Pronto_8cpp_source.html">Pronto.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Pronto_8cpp_source.html#l00135">135</a> of file <a class="el" href="Pronto_8cpp_source.html">Pronto.cpp</a>.</p>
 
 </div>
 </div>
@@ -330,7 +371,7 @@ Static Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jul 8 2019 12:13:41 for Infrared4Arduino by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jan 19 2020 16:08:10 for Infrared4Arduino by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.15
 </small></address>

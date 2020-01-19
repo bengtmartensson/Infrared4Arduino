@@ -1,7 +1,7 @@
 <map id="src/Nec1Renderer.h" name="src/Nec1Renderer.h">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,152,32"/>
-<area shape="rect" id="node2" href="$IrSignal_8h.html" title=" " alt="" coords="37,80,120,107"/>
-<area shape="rect" id="node3" href="$InfraredTypes_8h.html" title="This file defines some general data types that are used in the library." alt="" coords="17,229,140,256"/>
-<area shape="rect" id="node5" href="$IrSequence_8h.html" title=" " alt="" coords="71,155,177,181"/>
-<area shape="rect" id="node4" title=" " alt="" coords="37,304,121,331"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,5,155,32"/>
+<area shape="rect" id="node2" href="$IrSignal_8h.html" title=" " alt="" coords="39,80,121,107"/>
+<area shape="rect" id="node3" href="$InfraredTypes_8h.html" title="This file defines some general data types that are used in the library." alt="" coords="19,229,141,256"/>
+<area shape="rect" id="node5" href="$IrSequence_8h.html" title=" " alt="" coords="72,155,179,181"/>
+<area shape="rect" id="node4" title=" " alt="" coords="38,304,122,331"/>
 </map>

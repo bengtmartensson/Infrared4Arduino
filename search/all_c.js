@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['parse',['parse',['../classPronto.html#a8fe7116de9a7fae3950f6c59da905519',1,'Pronto::parse(const uint16_t *data, size_t size)'],['../classPronto.html#a3de0ddd8fefbcf13730f9f795ae25f24',1,'Pronto::parse(const char *str)']]],
+  ['parse',['parse',['../classPronto.html#a8fe7116de9a7fae3950f6c59da905519',1,'Pronto::parse(const uint16_t *data, size_t size)'],['../classPronto.html#a3de0ddd8fefbcf13730f9f795ae25f24',1,'Pronto::parse(const char *str)'],['../classPronto.html#aaf4bfd57eaecc03bdca73cf66ef33262',1,'Pronto::parse(const __FlashStringHelper *str)']]],
   ['pin_5ft',['pin_t',['../InfraredTypes_8h.html#aede467d93ddeb5fdeff6023236aa4ad6',1,'InfraredTypes.h']]],
   ['pin_5ft_5fmax',['PIN_T_MAX',['../InfraredTypes_8h.html#a6a4d2578a2f93a96bcb007661f27a762',1,'InfraredTypes.h']]],
   ['printdecode',['printDecode',['../classIrDecoder.html#a8d2f495021a39a74dadb32bc6d9a0eb9',1,'IrDecoder']]],

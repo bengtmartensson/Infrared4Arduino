@@ -4,7 +4,7 @@ var searchData=
   ['_7eirreader',['~IrReader',['../classIrReader.html#ab900741df5618d09af01fbc3df351d58',1,'IrReader']]],
   ['_7eirreceiver',['~IrReceiver',['../classIrReceiver.html#ac536014f68efeca1b7c2883f04d5967c',1,'IrReceiver']]],
   ['_7eirreceiverpoll',['~IrReceiverPoll',['../classIrReceiverPoll.html#a2e7be549d50df8bd90063748d1984f9a',1,'IrReceiverPoll']]],
-  ['_7eirreceiversampler',['~IrReceiverSampler',['../classIrReceiverSampler.html#a743cc45e3a142ae347617f5116343aae',1,'IrReceiverSampler']]],
+  ['_7eirreceiversampler',['~IrReceiverSampler',['../classIrReceiverSampler.html#a2b2c060a0a6e7bef996fb9f701138af3',1,'IrReceiverSampler']]],
   ['_7eirsender',['~IrSender',['../classIrSender.html#ab8d8c02fb29d39985a8bec6c210d6aaf',1,'IrSender']]],
   ['_7eirsendersimulator',['~IrSenderSimulator',['../classIrSenderSimulator.html#a2a017d9d85c05b20a2fcf603984b24cc',1,'IrSenderSimulator']]],
   ['_7eirsequence',['~IrSequence',['../classIrSequence.html#a7f005ca00f63f25956234173a87ba0bc',1,'IrSequence']]],

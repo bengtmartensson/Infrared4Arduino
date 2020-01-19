@@ -13,6 +13,5 @@ var searchData=
   ['_7eirwidget',['~IrWidget',['../classIrWidget.html#a701340cafc4e3554d9d6f73981352a82',1,'IrWidget']]],
   ['_7emultidecoder',['~MultiDecoder',['../classMultiDecoder.html#a564ba17f3eb6697f71f18ec0adff7d68',1,'MultiDecoder']]],
   ['_7enec1decoder',['~Nec1Decoder',['../classNec1Decoder.html#ab77724a34751cfc18e688314a0acde7b',1,'Nec1Decoder']]],
-  ['_7epwm2renderer',['~Pwm2Renderer',['../classPwm2Renderer.html#a0c5ceff9d55fb81d45f6c50176555fa3',1,'Pwm2Renderer']]],
   ['_7erc5decoder',['~Rc5Decoder',['../classRc5Decoder.html#a819a969c60380037c524c3b89529d3f3',1,'Rc5Decoder']]]
 ];

@@ -3,7 +3,7 @@
 <area shape="rect" id="node2" title=" " alt="" coords="14,453,98,480"/>
 <area shape="rect" id="node3" href="$IrSenderPwm_8h.html" title=" " alt="" coords="48,80,168,107"/>
 <area shape="rect" id="node8" href="$IrTimerDefs_8h.html" title="Definition of timers etc is encapsulated in this file." alt="" coords="195,80,306,107"/>
-<area shape="rect" id="node4" href="$IrSender_8h.html" title=" " alt="" coords="94,155,181,181"/>
+<area shape="rect" id="node4" href="$IrSender_8h.html" title=" " alt="" coords="93,155,181,181"/>
 <area shape="rect" id="node5" href="$InfraredTypes_8h.html" title="This file defines some general data types that are used in the library." alt="" coords="95,379,217,405"/>
 <area shape="rect" id="node6" href="$IrSignal_8h.html" title=" " alt="" coords="144,229,227,256"/>
 <area shape="rect" id="node7" href="$IrSequence_8h.html" title=" " alt="" coords="195,304,301,331"/>

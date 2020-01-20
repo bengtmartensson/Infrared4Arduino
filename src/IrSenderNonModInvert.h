@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2015 Bengt Martensson.
+Copyright (C) 2019 Bengt Martensson.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -22,14 +22,21 @@ this program. If not, see http://www.gnu.org/licenses/.
 #include "IrSender.h"
 
 /**
- * IrSender implementation without modulation.
+ * IrSender implementation without modulation with inverted output.
+ * For example, for emulating an IR receiver with active low output.
  */
-class IrSenderNonMod : public IrSender {
-    private:
-        inline void writeHigh() { digitalWrite(getOutputPin(), HIGH); }
-        inline void writeLow()  { digitalWrite(getOutputPin(), LOW);  }
+class IrSenderNonModInvert : public IrSender {
+private:
+
+    inline void writeHigh() {
+        digitalWrite(getOutputPin(), LOW);
+    }
+
+    inline void writeLow() {
+        digitalWrite(getOutputPin(), HIGH);
+    }
 public:
-    IrSenderNonMod(pin_t pin);
+    IrSenderNonModInvert(pin_t pin);
 
     /**
      * Two parameter form just to be compatible with the super class.

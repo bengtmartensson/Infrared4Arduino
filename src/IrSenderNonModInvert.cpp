@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2015 Bengt Martensson.
+Copyright (C) 2019 Bengt Martensson.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -15,12 +15,13 @@ You should have received a copy of the GNU General Public License along with
 this program. If not, see http://www.gnu.org/licenses/.
 */
 
-#include "IrSenderNonMod.h"
+#include "IrSenderNonModInvert.h"
 
-IrSenderNonMod::IrSenderNonMod(pin_t pin) : IrSender(pin) {
+IrSenderNonModInvert::IrSenderNonModInvert(pin_t pin) : IrSender(pin) {
+    writeLow();
 }
 
-void IrSenderNonMod::sendNonModulated(const IrSequence &irSequence) {
+void IrSenderNonModInvert::sendNonModulated(const IrSequence &irSequence) {
     for (unsigned int i = 0; i < irSequence.getLength(); i += 2) {
         writeHigh();
         delayUSecs(irSequence.getDurations()[i]);

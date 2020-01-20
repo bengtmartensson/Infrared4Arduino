@@ -1,9 +1,15 @@
 #pragma once
 
-#ifdef ARDUINO
-#include_next <Arduino.h>
+/**
+ * @file SIL.h
+ *
+ * @brief Stuff for allowing most of the classes to be executed on a normal host,
+ * instead of an Arduino.
+ */
 
-#else // ! ARDUINO
+#ifdef ARDUINO
+#error This file is not for compiling for the Arduino
+#endif //  ARDUINO
 
 #include <stdint.h>
 #include <stdio.h>
@@ -39,7 +45,8 @@
 #define A7 107
 #define  LED_BUILTIN 13
 
-extern uint8_t currentWritePin; // SIL.cpp
+// SIL.cpp
+extern uint8_t currentWritePin;
 extern struct timeval simulatedTime;
 
 static timeval getTimeOfDay() {
@@ -157,5 +164,3 @@ public:
 };
 
 #define DEC std::dec
-
-#endif // ! ARDUINO

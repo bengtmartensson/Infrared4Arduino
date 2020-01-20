@@ -5,6 +5,8 @@
 
 #include "IrWidgetAggregating.h"
 
+#ifdef TCCR0B
+
 static const frequency_t min_frequency = 20000U;
 
 IrWidgetAggregating::IrWidgetAggregating(size_t captureLength,
@@ -170,3 +172,4 @@ endCapture:
     }
 #endif // ARDUINO
 }
+#endif // TCCR0B

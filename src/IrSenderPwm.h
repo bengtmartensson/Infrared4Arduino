@@ -19,7 +19,6 @@ this program. If not, see http://www.gnu.org/licenses/.
 
 #include <Arduino.h>
 #include "IrSender.h"
-#include "boarddefs.h" // for USE_SOFT_CARRIER
 
 /**
  * Sending function using timer PWM. Due to the nature of the timers, this is a Highlander,

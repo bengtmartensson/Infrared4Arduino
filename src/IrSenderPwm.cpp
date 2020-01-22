@@ -17,7 +17,7 @@ this program. If not, see http://www.gnu.org/licenses/.
 
 #include <Arduino.h>
 #include "IrSenderPwm.h"
-#include <IrTimerDefs.h>
+#include "boarddefs.h" // for USE_SOFT_CARRIER
 
 IrSenderPwm *IrSenderPwm::instance = NULL;
 

@@ -39,8 +39,11 @@ IrReceiverPoll.o \
 IrReceiverSampler.o \
 IrSender.o \
 IrSender.o \
+IrSenderNonMod.o \
+IrSenderNonModInvert.o \
 IrSenderPwm.o \
 IrSenderSimulator.o \
+IrSenderSoftCarrier.o \
 IrSequence.o \
 IrSignal.o \
 IrWidget.o \
@@ -50,7 +53,8 @@ Nec1Decoder.o \
 Nec1Renderer.o \
 Pronto.o \
 Rc5Decoder.o \
-Rc5Renderer.o
+Rc5Renderer.o \
+SIL.o
 
 EXTRA_INCLUDES=\
 InfraredTypes.h \

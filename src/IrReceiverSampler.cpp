@@ -88,6 +88,7 @@ milliseconds_t IrReceiverSampler::getBeginningTimeout() const {
 #ifdef ISR
 /** Interrupt routine. It collects data into the data buffer. */
 ISR(TIMER_INTR_NAME) {
+    TIMER_RESET;
     IrReceiverSampler *recv = IrReceiverSampler::getInstance();
     IrReceiver::irdata_t irdata = recv->readIr();
     recv->timer++; // One more 50us tick

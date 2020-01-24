@@ -75,70 +75,6 @@
 #endif // DOXYGEN
 
 ///////////////////////////////////////////////////////////////////////////////
-#if 0
-//------------------------------------------------------------------------------
-// Defines for blinking the LED
-//
-
-#if defined(CORE_LED0_PIN)
-#	define BLINKLED        CORE_LED0_PIN
-#	define BLINKLED_ON()   (digitalWrite(CORE_LED0_PIN, HIGH))
-#	define BLINKLED_OFF()  (digitalWrite(CORE_LED0_PIN, LOW))
-
-#elif defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
-#	define BLINKLED        13
-#	define BLINKLED_ON()   (PORTB |= B10000000)
-#	define BLINKLED_OFF()  (PORTB &= B01111111)
-
-#elif defined(__AVR_ATmega644P__) || defined(__AVR_ATmega644__)
-#	define BLINKLED        0
-#	define BLINKLED_ON()   (PORTD |= B00000001)
-#	define BLINKLED_OFF()  (PORTD &= B11111110)
-
-#elif defined(ARDUINO_ARCH_SAM) || defined(ARDUINO_ARCH_SAMD)
-#	define BLINKLED        LED_BUILTIN
-#	define BLINKLED_ON()   (digitalWrite(LED_BUILTIN, HIGH))
-#	define BLINKLED_OFF()  (digitalWrite(LED_BUILTIN, LOW))
-
-#	define USE_SOFT_CARRIER
-	// Define to use spin wait instead of delayMicros()
-#	define USE_SPIN_WAIT
-#       undef USE_DEFAULT_ENABLE_IR_IN
-
-        // The default pin used used for sending.
-#	define SEND_PIN 9
-
-#elif defined(ESP32)
-        // No system LED on ESP32, disable blinking by NOT defining BLINKLED
-
-        // avr/interrupt.h is not present
-#       undef HAS_AVR_INTERRUPT_H
-
-        // Sending not implemented
-#       undef SENDING_SUPPORTED#
-
-        // Supply own enbleIRIn
-#       undef USE_DEFAULT_ENABLE_IR_IN
-
-#elif defined(ESP8266)
-
-// avr/interrupt.h is not present
-#       undef HAS_AVR_INTERRUPT_H
-
-#	define USE_SOFT_CARRIER
-
-	// Supply own enbleIRIn
-#       undef USE_DEFAULT_ENABLE_IR_IN
-
-	// The default pin used used for sending.
-#	define SEND_PIN 4 // pin 4 = D2 on board
-
-#else
-#	define BLINKLED        13
-#	define BLINKLED_ON()  (PORTB |= B00100000)
-#	define BLINKLED_OFF()  (PORTB &= B11011111)
-#endif
-#endif
 //------------------------------------------------------------------------------
 // CPU Frequency
 //
@@ -156,32 +92,19 @@
  */
 #define USECPERTICK    50
 
-//------------------------------------------------------------------------------
-// Define which timer to use
-//
-// Uncomment the timer you wish to use on your board.
-// If you are using another library which uses timer2, you have options to
-// switch IRremote to use a different timer.
-//
-
 #if ! defined(ARDUINO)
 
 // Assume that we compile a test version, to be executed on the host, not on a board.
 #include "boards/sil.h"
 
 #elif defined(__AVR_ATmega328P__) || defined(__AVR_ATmega168__)
-
 /////////////////// Arduino Uno, Nano etc (previously default clause)
-// Arduino Duemilanove, Diecimila, LilyPad, Mini, Fio, Nano, etc
-// ATmega48, ATmega88, ATmega168, ATmega328
 //#define IR_USE_TIMER1   // tx = pin 9
 #define IR_USE_TIMER2     // tx = pin 3
 
 #include "boards/ATmega328P.h"
 
 #elif defined(__AVR_ATmega2560__)
-// defined(__AVR_ATmega1280__) ||
-
 /////////////////// Mega 2560 etc //////////////////////////////////
 //#define IR_USE_TIMER1   // tx = pin 11
 #define IR_USE_TIMER2     // tx = pin 9
@@ -191,15 +114,7 @@
 
 #include "boards/ATmega2560.h"
 
-//#elif defined(__AVR_AT90USB162__)
-//
-//// Teensy 1.0
-//#define IR_USE_TIMER1     // tx = pin 17
-//
-//#include "boards/teensy10.h"
-
 #elif defined(__AVR_ATmega32U4__)
-
 // Can be either Leonardo, Micro, or Teensy 2.
 #if defined(ARDUINO_AVR_LEONARDO) || defined(ARDUINO_AVR_MICRO)
 #define IR_USE_TIMER1     // tx = 9
@@ -208,85 +123,16 @@
 #include "boards/ATmega32U4.h"
 
 #else
-//// Teensy 2.0
-////#define IR_USE_TIMER1   // tx = pin 14
-////#define IR_USE_TIMER3   // tx = pin 9
-//#define IR_USE_TIMER4_HS  // tx = pin 10
-//
-//#include "boards/teensy20.h"
-
+//// Teensy 2.0 ?
 #error Unsupported board. Please fix boarddefs.h.
-
 #endif
 
 // Teensy 3.0 / Teensy 3.1
 #elif defined(__MK20DX128__) || defined(__MK20DX256__) || defined(__MK64FX512__) || defined(__MK66FX1M0__)
-//#define IR_USE_TIMER_CMT  // tx = pin 5
+// Teensy 3.0 / Teensy 3.1 / 3.2
 
 #include "boards/teensy3x.h"
 
-// Teensy-LC
-//#elif defined(__MKL26Z64__)
-//#define IR_USE_TIMER_TPM1 // tx = pin 16
-//
-//#include "boards/teensyLC.h"
-//
-//// Teensy++ 1.0 & 2.0
-//#elif defined(__AVR_AT90USB646__) || defined(__AVR_AT90USB1286__)
-//
-////#define IR_USE_TIMER1   // tx = pin 25
-//#define IR_USE_TIMER2     // tx = pin 1
-////#define IR_USE_TIMER3   // tx = pin 16
-//
-//#include "boards/teensy++.h"
-//
-//// MightyCore - ATmega1284
-//#elif defined(__AVR_ATmega1284__) || defined(__AVR_ATmega1284P__)
-////#define IR_USE_TIMER1   // tx = pin 13
-//#define IR_USE_TIMER2     // tx = pin 14
-////#define IR_USE_TIMER3   // tx = pin 6
-//
-//#include "boards/mightycore_1284.h"
-//
-//// MightyCore - ATmega164, ATmega324, ATmega644
-/* /#elif defined(__AVR_ATmega644__) || defined(__AVR_ATmega644P__) \
-//|| defined(__AVR_ATmega324P__) || defined(__AVR_ATmega324A__) \
-//|| defined(__AVR_ATmega324PA__) || defined(__AVR_ATmega164A__) \
-//|| defined(__AVR_ATmega164P__) */
-////#define IR_USE_TIMER1   // tx = pin 13
-//#define IR_USE_TIMER2     // tx = pin 14
-//
-//#include "boards/mightycore.h"
-//
-////MegaCore - ATmega64, ATmega128
-//#elif defined(__AVR_ATmega64__) || defined(__AVR_ATmega128__)
-// #define IR_USE_TIMER1     // tx = pin 13
-//
-//#include "boards/mightycore_64.h"
-//
-//// MightyCore - ATmega8535, ATmega16, ATmega32
-//#elif defined(__AVR_ATmega8535__) || defined(__AVR_ATmega16__) || defined(__AVR_ATmega32__)
-// #define IR_USE_TIMER1     // tx = pin 13
-//
-//#include "boards/mightcore_32.h"
-//
-//#elif defined(__AVR_ATmega8__)
-//// Atmega8
-//#define IR_USE_TIMER1     // tx = pin 9
-//#include "boards/atmega8.h"
-//
-//// ATtiny84
-//#elif defined(__AVR_ATtiny84__)
-//#define IR_USE_TIMER1     // tx = pin 6
-//
-//#include "boards/attiny84.h"
-//
-////ATtiny85
-//#elif defined(__AVR_ATtiny85__)
-//#define IR_USE_TIMER_TINY0   // tx = pin 1
-//#include "boards/attiny84.h"
-//
-//
 #elif defined(ARDUINO_ARCH_SAM) || defined(ARDUINO_ARCH_SAMD)
 #define TIMER_PRESCALER_DIV 64
 

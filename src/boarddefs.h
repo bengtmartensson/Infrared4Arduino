@@ -129,7 +129,27 @@ static const uint16_t dutyCyclePercent = 40;
 #error Unsupported board. Please fix boarddefs.h.
 #endif
 
-// Teensy 3.0 / Teensy 3.1
+#elif defined(__SAM3X8E__) || defined(__SAM3X8H__)
+// Arduino Due
+
+  //#define IR_USE_PWM0   // tx = pin 34
+  //#define IR_USE_PWM1   // tx = pin 36
+  //#define IR_USE_PWM2   // tx = pin 38
+  //#define IR_USE_PWM3   // tx = pin 40
+  //#define IR_USE_PWM4   // tx = pin 9
+  //#define IR_USE_PWM5   // tx = pin 8
+  #define IR_USE_PWM6   // tx = pin 7
+  //#define IR_USE_PWM7   // tx = pin 6
+
+  #define IR_USE_TC3    // Use timer clock 3.
+  //#define IR_USE_TC4    // Use timer clock 4.
+  //#define IR_USE_TC5    // Use timer clock 5.
+
+//  #define IR_USE_SAM // Used to correct code where needed to be compatible with the Due.
+//  #define IR_USE_DUE // Used to correctly map pins. (The idea being there might be more than one Arduino model based on SAM cores.)
+
+#include "boards/due.h"
+
 #elif defined(__MK20DX128__) || defined(__MK20DX256__) || defined(__MK64FX512__) || defined(__MK66FX1M0__)
 // Teensy 3.0 / Teensy 3.1 / 3.2
 

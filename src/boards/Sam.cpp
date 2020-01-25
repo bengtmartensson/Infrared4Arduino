@@ -1,9 +1,12 @@
 // Support routines for SAM processor boards
 
+// Largely based on https://forum.arduino.cc/index.php?topic=346731.0
+
+
 #include "IrReceiverSampler.h"
 #include "boarddefs.h" // includes sam.h
 
-#if defined(ARDUINO_ARCH_SAM) || defined(ARDUINO_ARCH_SAMD)
+#if (defined(ARDUINO_ARCH_SAM) || defined(ARDUINO_ARCH_SAMD)) & ! defined(ARDUINO_SAM_DUE)
 
 // "Idiot check"
 #ifdef USE_DEFAULT_ENABLE_IR_IN

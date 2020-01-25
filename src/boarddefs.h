@@ -92,6 +92,8 @@
  */
 #define USECPERTICK    50
 
+static const uint16_t dutyCyclePercent = 40;
+
 #if ! defined(ARDUINO)
 
 // Assume that we compile a test version, to be executed on the host, not on a board.
@@ -134,14 +136,8 @@
 #include "boards/teensy3x.h"
 
 #elif defined(ARDUINO_ARCH_SAM) || defined(ARDUINO_ARCH_SAMD)
-#define TIMER_PRESCALER_DIV 64
 
-//#define USE_SOFT_CARRIER
-// Define to use spin wait instead of delayMicros()
-//#define USE_SPIN_WAIT
-#undef USE_DEFAULT_ENABLE_IR_IN
-
-#include "boards/sam32.h"
+#include "boards/Sam.h"
 
 ///////////////////// ESP32
 #elif defined(ESP32)

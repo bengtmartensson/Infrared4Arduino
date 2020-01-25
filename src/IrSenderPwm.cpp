@@ -60,8 +60,9 @@ void inline IrSenderPwm::sendMark(milliseconds_t time) {
 }
 
 void inline IrSenderPwm::sendSpace(milliseconds_t time) {
+#ifdef USE_SOFT_CARRIER
     SENDPIN_OFF(getOutputPin());
-#ifndef USE_SOFT_CARRIER
+#else
     TIMER_DISABLE_PWM;
 #endif
     delayUSecs(time);

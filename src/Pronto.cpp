@@ -47,7 +47,7 @@ IrSignal *Pronto::parse(const char *str) {
     return parse(data, index);
 }
 
-#ifdef ARDUINO
+#ifdef HAS_FLASH_READ
 IrSignal *Pronto::parse(const __FlashStringHelper *str) {
     size_t length = strlen_PF((uint_farptr_t)str);
     char copy[length + 1]; // can be made more memory efficient.

@@ -36,7 +36,7 @@ void IrSequence::dump(Stream& stream, bool usingSigns) const {
     stream.println();
 }
 
-#ifdef ARDUINO
+#ifdef HAS_FLASH_READ
 IrSequence* IrSequence::readFlash(const microseconds_t *flashData, size_t length) {
     microseconds_t* data = new microseconds_t[length];
     memcpy_PF(data, (uint_farptr_t) flashData, sizeof(microseconds_t) * length);

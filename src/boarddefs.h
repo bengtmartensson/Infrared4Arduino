@@ -129,6 +129,13 @@ static const uint16_t dutyCyclePercent = 40;
 #error Unsupported board. Please fix boarddefs.h.
 #endif
 
+#elif defined(__AVR_ATmega4809__)
+// ATMega4809, like Uno WiFi Rev 2, Nano Every
+#define IR_USE_TIMER1     //  tx = pin 6
+//#define IR_USE_TIMER2     // Not yet implemented tx = ?
+
+#include "boards/ATmega4809.h"
+
 #elif defined(__SAM3X8E__) || defined(__SAM3X8H__)
 // Arduino Due
 
@@ -188,7 +195,7 @@ static const uint16_t dutyCyclePercent = 40;
 #include "boards/esp8266.h"
 #else
 
-#error Unsupported board. Please fix boarddefs.h.
+#error Your board is currently not supported. Please add it to boarddefs.h.
 
 #endif
 

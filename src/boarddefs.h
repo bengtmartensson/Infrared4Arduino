@@ -168,16 +168,8 @@ static const uint16_t dutyCyclePercent = 40;
 
 ///////////////////// ESP32
 #elif defined(ESP32)
-#define IR_TIMER_USE_ESP32
-// avr/interrupt.h is not present
-#undef HAS_AVR_INTERRUPT_H
 
-// Sending not implemented
-#undef SENDING_SUPPORTED
-
-// Supply own enbleIRIn
-#undef USE_DEFAULT_ENABLE_IR_IN
-#include "boards/esp32.h"
+#include "boards/Esp32.h"
 
 ///////////////////// ESP8266
 #elif defined(ESP8266)

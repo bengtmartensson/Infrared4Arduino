@@ -52,21 +52,43 @@ IrReceiverSampler::~IrReceiverSampler() {
 void IrReceiverSampler::reset() {
     receiverState = STATE_IDLE;
     dataLength = 0;
+    timer = 0U;
 }
 
-#ifdef USE_DEFAULT_ENABLE_IR_IN
+#if defined(USE_DEFAULT_ENABLE_IR_IN) | defined(ESP32)
 void IrReceiverSampler::enable() {
+    // Initialize state machine variables
     reset();
+#ifdef ESP32 // FIXME
+        // Interrupt Service Routine - Fires every 50uS
+    // ESP32 has a proper API to setup timers, no weird chip macros needed
+    // simply call the readable API versions :)
+    // 3 timers, choose #1, 80 divider nanosecond precision, 1 to count up
+    Xtimer = timerBegin(1, 80, 1);
+    timerAttachInterrupt(Xtimer, &IRTimer, true);
+    // every 50ns, autoreload = true
+    timerAlarmWrite(Xtimer, 50, true);
+    timerAlarmEnable(Xtimer);
+
+#else
     noInterrupts();
     TIMER_CONFIG_NORMAL();
     TIMER_ENABLE_INTR;
     TIMER_RESET;
     interrupts();
+#endif
 }
 #endif
 
 void IrReceiverSampler::disable() {
+#ifdef ESP32 // FIXME
+    if (Xtimer != NULL) {
+        timerEnd(Xtimer);
+        timerDetachInterrupt(Xtimer);
+    }
+#else
     TIMER_DISABLE_INTR;
+#endif
 }
 
 void IrReceiverSampler::setEndingTimeout(milliseconds_t timeOut) {
@@ -130,7 +152,7 @@ ISR(TIMER_INTR_NAME) {
                 if (recv->timer > recv->endingTimeoutInTicks) {
                     // big SPACE, indicates gap between codes
                     recv->durationData[recv->dataLength++] = recv->timer;
-                    //recv->timer = 0;
+//                    recv->timer = 0;
                     recv->receiverState = IrReceiverSampler::STATE_STOP;
                 }
             }

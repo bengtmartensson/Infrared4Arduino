@@ -3,6 +3,7 @@
 #include "IrReceiver.h"
 
 /**
+ * @class IrReceiverSampler
  * This receiving class samples the input pin every 50 microseconds using a timer
  * interrupt. Due to the ISP, this is a singleton class;
  * it can only be instantiated once.
@@ -39,6 +40,12 @@ public:
 
     /** state timer, counts 50uS ticks. */
     volatile uint32_t timer;
+
+#ifdef ESP32 // FIXME
+    hw_timer_t *Xtimer = NULL;
+
+    static void IRTimer();
+#endif
 
     /** Data buffer */
     volatile microseconds_t *durationData; // previously rawbuf;

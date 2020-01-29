@@ -21,7 +21,10 @@ this program. If not, see http://www.gnu.org/licenses/.
 #include "IrSender.h"
 
 /**
+ * @class IrSenderSoftCarrier
  *
+ * This sender class generates the modulation in software.
+ * It will therefore run on all sufficiently powerful hardware.
  */
 class IrSenderSoftCarrier : public IrSender {
 private:

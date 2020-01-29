@@ -3,7 +3,10 @@
 #include "IrReceiver.h"
 
 /**
- * An implementation of IrReceiver using polling of the input pin. Thus uses no timer.
+ * @class IrReceiverPoll
+ * An implementation of IrReceiver using polling of the input pin.
+ * It uses no timer or other hardware resources, and should thus run
+ * on all platforms.
  */
 class IrReceiverPoll : public IrReceiver {
 private:

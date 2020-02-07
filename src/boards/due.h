@@ -17,6 +17,7 @@ this program. If not, see http://www.gnu.org/licenses/.
 
 // This is basically copyied from
 // https://github.com/enternoescape/Arduino-IRremote-Due
+// (License: LGPL 2.1)
 // with minimal adjustments.
 
 #pragma once
@@ -90,13 +91,15 @@ this program. If not, see http://www.gnu.org/licenses/.
 #define TIMER_INTR_NAME TC5_Handler
 #endif
 
-#define TIMER_RESET          (IR_USE_TC->TC_CHANNEL[IR_USE_CH].TC_SR) //Clears the interrupt.
-#define TIMER_ENABLE_PWM     (PWMC_EnableChannel(PWM_INTERFACE, IR_USE_PWM_CH))
-#define TIMER_DISABLE_PWM    (PWMC_DisableChannel(PWM_INTERFACE, IR_USE_PWM_CH))
-#define TIMER_ENABLE_INTR    (NVIC_EnableIRQ(IR_USE_TC_IRQ))
-#define TIMER_DISABLE_INTR   (NVIC_DisableIRQ(IR_USE_TC_IRQ))
+#define TIMER_RESET          do { IR_USE_TC->TC_CHANNEL[IR_USE_CH].TC_SR; } while (false) //Clears the interrupt.
+#define TIMER_ENABLE_PWM     do { PWMC_EnableChannel(PWM_INTERFACE, IR_USE_PWM_CH); } while (false)
+#define TIMER_DISABLE_PWM    do {PWMC_DisableChannel(PWM_INTERFACE, IR_USE_PWM_CH);SENDPIN_OFF(getOutputPin());} while (false)
+#define TIMER_ENABLE_INTR    NVIC_EnableIRQ(IR_USE_TC_IRQ)
+#define TIMER_DISABLE_INTR   NVIC_DisableIRQ(IR_USE_TC_IRQ)
+
 //#define TIMER_INTR_NAME      TC3_Handler
-#define TIMER_CONFIG_KHZ(val) ({ \
+
+#define TIMER_CONFIG_KHZ(val) do { \
   pmc_enable_periph_clk(PWM_INTERFACE_ID); \
   const uint32_t pwmval = (val) * 2000; \
   PWMC_ConfigureClocks(PWM_FREQUENCY * PWM_MAX_DUTY_CYCLE, pwmval, F_CPU); \
@@ -104,8 +107,9 @@ this program. If not, see http://www.gnu.org/licenses/.
   PWMC_ConfigureChannel(PWM_INTERFACE, IR_USE_PWM_CH, PWM_CMR_CPRE_CLKB, 0, 0); \
   PWMC_SetPeriod(PWM_INTERFACE, IR_USE_PWM_CH, 2); \
   PWMC_SetDutyCycle(PWM_INTERFACE, IR_USE_PWM_CH, 1); \
-})
-#define TIMER_CONFIG_NORMAL() ({ \
+} while (false)
+
+#define TIMER_CONFIG_NORMAL() do { \
   pmc_enable_periph_clk((uint32_t)IR_USE_TC_IRQ); \
   TC_Configure(IR_USE_TC, IR_USE_CH, TC_CMR_WAVE | TC_CMR_WAVSEL_UP_RC | TC_CMR_TCCLKS_TIMER_CLOCK1); \
   const uint32_t rc = (F_CPU / 2) * USECPERTICK / 1000000; \
@@ -114,4 +118,4 @@ this program. If not, see http://www.gnu.org/licenses/.
   TC_Start(IR_USE_TC, IR_USE_CH); \
   IR_USE_TC->TC_CHANNEL[IR_USE_CH].TC_IER=TC_IER_CPCS; \
   IR_USE_TC->TC_CHANNEL[IR_USE_CH].TC_IDR=~TC_IER_CPCS; \
-})
+} while (false)

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "InfraredTypes.h"
+#include "boarddefs.h" // for HAS_FLASH_READ
 
 /**
  * This class consists of a vector of durations. The even entries denotes spaces,
@@ -80,7 +81,7 @@ public:
         dump(stream, true);
     };
 
-#ifdef ARDUINO
+#ifdef HAS_FLASH_READ
     static IrSequence* readFlash(const microseconds_t *flashData, size_t length);
 #endif
 };

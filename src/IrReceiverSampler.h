@@ -41,12 +41,6 @@ public:
     /** state timer, counts 50uS ticks. */
     volatile uint32_t timer;
 
-#ifdef ESP32 // FIXME
-    hw_timer_t *Xtimer = NULL;
-
-    static void IRTimer();
-#endif
-
     /** Data buffer */
     volatile microseconds_t *durationData; // previously rawbuf;
 

@@ -1,30 +1,39 @@
-#ifdef ESP32
+#ifdef ESP8266
 
+#include "Esp8266.h"
 #include "IrReceiverSampler.h"
-#if 1
-//hw_timer_t *Xtimer;
-//void IRTimer(); // defined in IrReceiverSampler.cpp, masqueraded as ISR(TIMER_INTR_NAME)
+
+// "Idiot check"
+#ifdef USE_DEFAULT_ENABLE_IR_IN
+#error Must undef USE_DEFAULT_ENABLE_IR_IN
 #endif
-//+=============================================================================
-// initialization
-//
-//
-//void IrReceiverSampler::enable() {
-//    // Interrupt Service Routine - Fires every 50uS
-//    // ESP32 has a proper API to setup timers, no weird chip macros needed
-//    // simply call the readable API versions :)
-//    // 3 timers, choose #1, 80 divider nanosecond precision, 1 to count up
-//    Xtimer = timerBegin(1, 80, 1);
-//    timerAttachInterrupt(Xtimer, &IRTimer, true);
-//    // every 50ns, autoreload = true
-//    timerAlarmWrite(Xtimer, 50, true);
-//    timerAlarmEnable(Xtimer);
-//
-//    // Initialize state machine variables
-//    reset();
-//
-//    // Set pin modes
-//    pinMode(getPin(), INPUT);
+
+
+//extern "C" {
+//#include "user_interface.h"
+//#include "osapi.h"
+//#define os_timer_arm_us(a, b, c) ets_timer_arm_new(a, b, c, 0)
+////#include "gpio.h"
 //}
 
-#endif // ESP32
+os_timer_t Esp8266::timer;
+
+void IrReceiverSampler::enable() {
+    // Let the timers speak micros seconds
+    system_timer_reinit();
+
+    os_intr_lock();
+    os_timer_setfn(&Esp8266::timer, IRTimer, NULL);
+
+    os_timer_arm_us(&Esp8266::timer, IrReceiverSampler::microsPerTick, true);
+
+    // Initialize state machine variables
+    reset();
+
+    os_intr_unlock();
+
+    // Set pin modes
+    pinMode(getPin(), INPUT);
+}
+
+#endif // ESP8266

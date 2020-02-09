@@ -1,30 +1,30 @@
 #ifdef ESP32
 
 #include "IrReceiverSampler.h"
-#if 1
-//hw_timer_t *Xtimer;
-//void IRTimer(); // defined in IrReceiverSampler.cpp, masqueraded as ISR(TIMER_INTR_NAME)
+
+// "Idiot check"
+#ifdef USE_DEFAULT_ENABLE_IR_IN
+#error Must undef USE_DEFAULT_ENABLE_IR_IN
 #endif
-//+=============================================================================
-// initialization
-//
-//
-//void IrReceiverSampler::enable() {
-//    // Interrupt Service Routine - Fires every 50uS
-//    // ESP32 has a proper API to setup timers, no weird chip macros needed
-//    // simply call the readable API versions :)
-//    // 3 timers, choose #1, 80 divider nanosecond precision, 1 to count up
-//    Xtimer = timerBegin(1, 80, 1);
-//    timerAttachInterrupt(Xtimer, &IRTimer, true);
-//    // every 50ns, autoreload = true
-//    timerAlarmWrite(Xtimer, 50, true);
-//    timerAlarmEnable(Xtimer);
-//
-//    // Initialize state machine variables
-//    reset();
-//
-//    // Set pin modes
-//    pinMode(getPin(), INPUT);
-//}
+
+hw_timer_t* Esp32::timer = NULL;
+
+void IrReceiverSampler::enable() {
+    // Interrupt Service Routine - Fires every 50uS
+    // ESP32 has a proper API to setup timers, no weird chip macros needed
+    // simply call the readable API versions :)
+    // 3 timers, choose #1, 80 divider nanosecond precision, 1 to count up
+    Esp32::timer = timerBegin(1, 80, 1);
+    timerAttachInterrupt(Esp32::timer, IRTimer, true);
+    // every 50 microseconds, autoreload = true
+    timerAlarmWrite(Esp32::timer, IrReceiverSampler::microsPerTick, true);
+    timerAlarmEnable(Esp32::timer);
+
+    // Initialize state machine variables
+    reset();
+
+    // Set pin modes
+    pinMode(getPin(), INPUT);
+}
 
 #endif // ESP32

@@ -43,6 +43,10 @@ this program. If not, see http://www.gnu.org/licenses/.
 #define TIMER_DISABLE_INTR  NVIC_DISABLE_IRQ(IRQ_CMT)
 #define TIMER_INTR_NAME     cmt_isr
 
+#ifndef LED_BUILTIN
+#define LED_BUILTIN 13
+#endif
+
 //-----------------
 #ifdef ISR
 #undef ISR

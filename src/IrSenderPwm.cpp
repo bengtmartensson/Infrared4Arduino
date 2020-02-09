@@ -16,8 +16,11 @@ this program. If not, see http://www.gnu.org/licenses/.
 */
 
 #include <Arduino.h>
-#include "IrSenderPwm.h"
 #include "boarddefs.h" // for USE_SOFT_CARRIER
+
+#ifdef HAS_HARDWARE_PWM
+
+#include "IrSenderPwm.h"
 
 IrSenderPwm *IrSenderPwm::instance = NULL;
 
@@ -123,3 +126,5 @@ void IrSenderPwm::enable(unsigned char khz
 
 #endif
 }
+
+#endif // HAS_HARDWARE_PWM

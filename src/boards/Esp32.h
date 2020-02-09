@@ -29,7 +29,12 @@ this program. If not, see http://www.gnu.org/licenses/.
 
 #define TIMER_SIZE 8
 #define TIMER_RESET
-#define TIMER_DISABLE_INTR /* empty */
+#define TIMER_DISABLE_INTR do { \
+    if (Esp32::timer != NULL) { \
+        timerEnd(Esp32::timer); \
+        timerDetachInterrupt(Esp32::timer); \
+    } \
+} while(false)
 
 #define SEND_PIN 5
 
@@ -46,8 +51,11 @@ this program. If not, see http://www.gnu.org/licenses/.
 #ifdef ISR
 #undef ISR
 #endif
-#define ISR(f)  void IrReceiverSampler::IRTimer()
+#define ISR(f) void ICACHE_RAM_ATTR IRTimer()
+
+void IRTimer(); // defined in IrReceiverSampler.cpp, masqueraded as ISR(TIMER_INTR_NAME)
 
 class Esp32 {
-
+public:
+    static hw_timer_t* timer;
 };

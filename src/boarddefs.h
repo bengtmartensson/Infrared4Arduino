@@ -94,6 +94,10 @@
 
 static const uint16_t dutyCyclePercent = 40;
 
+// Default value
+
+#define HAS_HARDWARE_PWM
+
 #if ! defined(ARDUINO)
 
 // Assume that we compile a test version, to be executed on the host, not on a board.
@@ -174,17 +178,8 @@ static const uint16_t dutyCyclePercent = 40;
 ///////////////////// ESP8266
 #elif defined(ESP8266)
 
-// avr/interrupt.h is not present
-#undef HAS_AVR_INTERRUPT_H
+#include "boards/Esp8266.h"
 
-#define USE_SOFT_CARRIER
-
-// Supply own enbleIRIn
-#undef USE_DEFAULT_ENABLE_IR_IN
-
-// The default pin used used for sending.
-#define SEND_PIN 4 // pin 4 = D2 on board
-#include "boards/esp8266.h"
 #else
 
 #error Your board is currently not supported. Please add it to boarddefs.h.

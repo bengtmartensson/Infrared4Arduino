@@ -16,7 +16,7 @@ this program. If not, see http://www.gnu.org/licenses/.
 */
 
 #include <Arduino.h>
-#include "boarddefs.h" // for USE_SOFT_CARRIER
+#include "boards/boarddefs.h" // for USE_SOFT_CARRIER
 
 #ifdef HAS_HARDWARE_PWM
 

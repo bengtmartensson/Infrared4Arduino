@@ -1,5 +1,5 @@
 #include "IrReceiverSampler.h"
-#include "boarddefs.h"
+#include "boards/boarddefs.h"
 
 uint32_t IrReceiverSampler::millisecs2ticks(milliseconds_t ms) {
     return (1000UL * (uint32_t) ms) / microsPerTick;

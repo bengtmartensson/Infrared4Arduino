@@ -1,7 +1,7 @@
 #pragma once
 
 #include "InfraredTypes.h"
-#include "boarddefs.h" // for HAS_FLASH_READ
+#include "boards/boarddefs.h" // for HAS_FLASH_READ
 
 /**
  * This class consists of a vector of durations. The even entries denotes spaces,

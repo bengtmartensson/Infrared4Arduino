@@ -19,7 +19,7 @@ this program. If not, see http://www.gnu.org/licenses/.
 
 #include <Arduino.h>
 #include "IrSender.h"
-#include "boarddefs.h" // For HAS_HARDWARE_PWM
+#include "boards/boarddefs.h" // For HAS_HARDWARE_PWM
 
 #ifndef HAS_HARDWARE_PWM
 #error Current board does not support hardware PWM and thus not the class IrSendPwm. Consider using IrSenderSoftPwm or IrSenderSpin instead.

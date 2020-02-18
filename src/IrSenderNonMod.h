@@ -22,28 +22,23 @@ this program. If not, see http://www.gnu.org/licenses/.
 #include "IrSender.h"
 
 /**
- * IrSender implementation without modulation.
+ * IrSender implementation without modulation, selectively with inverted output.
+ * Usage is, for example, controlling an RF transmitter (non-inverting),
+ * or for emulating an IR receiver with active low output (inverting).
  */
 class IrSenderNonMod : public IrSender {
-    private:
-        inline void writeHigh() { digitalWrite(getOutputPin(), HIGH); }
-        inline void writeLow()  { digitalWrite(getOutputPin(), LOW);  }
-public:
-    IrSenderNonMod(pin_t pin);
+private:
+    bool const invert;
+    void enable(frequency_t frequency __attribute__((unused))) {};
+    void sendSpace(microseconds_t time);
+    void sendMark(microseconds_t time);
 
-    /**
-     * Two parameter form just to be compatible with the super class.
-     * @param irSequence IrSequence to be sent
-     * @param frequency MUST be 0
-     */
-    void send(const IrSequence& irSequence, frequency_t frequency = IrSignal::defaultFrequency) {
-        if (frequency == 0U)
-            sendNonModulated(irSequence);
-    }
+public:
+    IrSenderNonMod(pin_t pin, bool invert = false);
 
     /**
      * Sends the IrSequence as argument.
      * @param irSequence
      */
-    void sendNonModulated(const IrSequence& irSequence);
+    void sendNonModulated(const IrSequence& irSequence) { send(irSequence); }
 };

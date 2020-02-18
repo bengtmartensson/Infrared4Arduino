@@ -17,15 +17,21 @@ this program. If not, see http://www.gnu.org/licenses/.
 
 #include "IrSenderNonMod.h"
 
-IrSenderNonMod::IrSenderNonMod(pin_t pin) : IrSender(pin) {
+IrSenderNonMod::IrSenderNonMod(pin_t pin, bool _invert) : IrSender(pin),invert(_invert) {
 }
 
-void IrSenderNonMod::sendNonModulated(const IrSequence &irSequence) {
-    for (unsigned int i = 0; i < irSequence.getLength(); i += 2) {
+void IrSenderNonMod::sendSpace(microseconds_t time) {
+    if (invert)
         writeHigh();
-        delayUSecs(irSequence.getDurations()[i]);
+    else
         writeLow();
-        delayUSecs(irSequence.getDurations()[i+1]);
-    }
-    //digitalWrite(getOutputPin(), LOW);
+    delayUSecs(time);
+}
+
+void IrSenderNonMod::sendMark(microseconds_t time) {
+    if (invert)
+        writeLow();
+    else
+        writeHigh();
+    delayUSecs(time);
 }

@@ -15,4 +15,7 @@ public:
     IrSenderSimulator(const IrSenderSimulator& orig) : IrSender(),stream(orig.stream) {};
     virtual ~IrSenderSimulator() {};
     void send(const IrSequence& irSequence, frequency_t frequency = IrSignal::defaultFrequency);
+    void enable(frequency_t) {};
+    void sendSpace(microseconds_t) {};
+    void sendMark(microseconds_t) {};
 };

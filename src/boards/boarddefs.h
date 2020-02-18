@@ -193,14 +193,14 @@ static const uint16_t dutyCyclePercent = 40;
 // If defining new versions, feel free to ignore the pin argument if it
 // is not configurable on the current board.
 
-#ifndef SENDPIN_ON
-/** Board dependent macro to turn on the pin given as argument. */
-#define SENDPIN_ON(pin)  digitalWrite(pin, HIGH)
-#endif
-
-#ifndef SENDPIN_OFF
-/**
- * Board dependent macro to turn off the pin given as argument.
- */
-#define SENDPIN_OFF(pin) digitalWrite(pin, LOW)
-#endif
+//#ifndef SENDPIN_ON
+///** Board dependent macro to turn on the pin given as argument. */
+//#define SENDPIN_ON(pin)  digitalWrite(pin, HIGH)
+//#endif
+//
+//#ifndef SENDPIN_OFF
+///**
+// * Board dependent macro to turn off the pin given as argument.
+// */
+//#define SENDPIN_OFF(pin) digitalWrite(pin, LOW)
+//#endif

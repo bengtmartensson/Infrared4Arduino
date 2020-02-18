@@ -40,10 +40,12 @@ IrReceiverSampler.o \
 IrSender.o \
 IrSender.o \
 IrSenderNonMod.o \
-IrSenderNonModInvert.o \
 IrSenderPwm.o \
+IrSenderPwmSoft.o \
+IrSenderPwmSoftDelay.o \
+IrSenderPwmHard.o \
 IrSenderSimulator.o \
-IrSenderSoftCarrier.o \
+IrSenderPwmSpinWait.o \
 IrSequence.o \
 IrSignal.o \
 IrWidget.o \

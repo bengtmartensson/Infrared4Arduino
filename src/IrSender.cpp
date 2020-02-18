@@ -32,22 +32,14 @@ void IrSender::delayUSecs(microseconds_t T) {
     };
 }
 
-IrSender::IrSender() {
-    outputPin = invalidPin;
-}
-
-IrSender::IrSender(pin_t pin) {
-    outputPin = pin;
+IrSender::IrSender(pin_t pin) : sendPin(pin) {
+    barfForInvalidPin(pin);
     pinMode(pin, OUTPUT);
     digitalWrite(pin, LOW);
 }
 
 IrSender::~IrSender() {
     mute();
-}
-
-void IrSender::mute() {
-    digitalWrite(outputPin, LOW);
 }
 
 void IrSender::sendIrSignal(const IrSignal& irSignal, unsigned int noSends) {
@@ -76,5 +68,28 @@ void IrSender::sendWhile(const IrSignal& irSignal, bool(*trigger)()) {
         send(irSignal.getEnding());
     } else {
         // Button is not pressed, do nothing.
+    }
+}
+
+void IrSender::send(const IrSequence& irSequence, frequency_t frequency) {
+    enable(frequency);
+#ifdef CONSIDER_COMPUTATIONAL_DELAYS
+    uint32_t refTime = micros();
+#endif
+    for (unsigned int i = 0U; i < irSequence.getLength(); i++) {
+#ifdef CONSIDER_COMPUTATIONAL_DELAYS
+#error dssdfsdfsdf
+        microseconds_t duration = irSequence.getDurations()[i];
+        refTime += duration;
+        int32_t delay = refTime - micros(); // TODO verify overflow
+        if (delay <= 0)
+            return;
+#else
+        microseconds_t delay = irSequence.getDurations()[i];
+#endif
+        if (i & 1)
+            sendSpace(delay);
+        else
+            sendMark(delay);
     }
 }

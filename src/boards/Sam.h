@@ -17,6 +17,8 @@ this program. If not, see http://www.gnu.org/licenses/.
 
 #pragma once
 
+#include "InfraredTypes.h"
+
 #ifdef USE_DEFAULT_ENABLE_IR_IN
 #undef USE_DEFAULT_ENABLE_IR_IN
 #endif
@@ -28,7 +30,7 @@ class Sam {
 //#define TIMER_ENABLE_INTR    NVIC_EnableIRQ(TC3_IRQn) // Not presently used
 #define TIMER_DISABLE_INTR   NVIC_DisableIRQ(TC3_IRQn)
 //#define TIMER_INTR_NAME      TC3_Handler // Not presently used
-#define TIMER_CONFIG_KHZ(f)  Sam::pwm_init(1000U * f)
+#define TIMER_CONFIG_KHZ(f)  Sam::pwm_init(f)
 
 #ifdef ISR
 #undef ISR

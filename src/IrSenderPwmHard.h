@@ -18,44 +18,44 @@ this program. If not, see http://www.gnu.org/licenses/.
 #pragma once
 
 #include <Arduino.h>
-#include "IrSender.h"
+#include "IrSenderPwm.h"
 #include "boards/boarddefs.h" // For HAS_HARDWARE_PWM
+
+#ifndef HAS_HARDWARE_PWM
+#error Current board does not support hardware PWM and thus not the class IrSendPwm. Consider using IrSenderSoftPwm or IrSenderSpin instead.
+#endif
 
 /**
  * Sending function using timer PWM. Due to the nature of the timers, this is a Highlander,
  * ("There can only be one"), so the class is a singleton class, with private constructor,
  * a factory method that enforces the "highlander property".
  */
-class IrSenderPwm : public IrSender {
-private:
-    static const unsigned int defaultDutyCycle = 50U;
-    static IrSenderPwm *instance;
+/*final*/
+class IrSenderPwmHard : public IrSenderPwm {
+public:
+    IrSenderPwmHard(pin_t outputPin = SEND_PIN);
+    virtual ~IrSenderPwmHard();
 
-protected:
-    IrSenderPwm(pin_t sendPin);
-    virtual ~IrSenderPwm() {}
+private:
+    static IrSenderPwmHard *instance;
+    void enable(frequency_t frequency);
+    //void sendSpace(microseconds_t time);
+    void sendMark(microseconds_t time);
+
+    static void barfForInvalidPin(pin_t outputPin) { if (outputPin != SEND_PIN) {/*error("Silly pin")*/};};
 
 public:
-    unsigned int getDutyCycle() const { return defaultDutyCycle; };
-
-    static const bool hasHardwarePwm =
-#ifdef HAS_HARDWARE_PWM
-            true;
-#else
-            false;
-#endif
-
     /**
      * Returns a pointer to the instance, or NULL if not initialized.
      * If argument true, in the latter case creates a new instance and returns it.
      */
-    static IrSenderPwm *getInstance(bool create = false, pin_t outputPin = SEND_PIN);
+    static IrSenderPwmHard *getInstance(bool create = false, pin_t ouputPin = SEND_PIN);
 
     /**
      *  Creates a new instance (if not existing) and returns it.
      *  Returns NULL if an instance already exists.
      */
-    static IrSenderPwm *newInstance(pin_t outputPin = SEND_PIN);
+    static IrSenderPwmHard *newInstance(pin_t ouputPin = SEND_PIN);
 
     static void deleteInstance() {
         delete instance;

@@ -17,6 +17,7 @@ this program. If not, see http://www.gnu.org/licenses/.
 
 #pragma once
 
+#include <Arduino.h>
 #include "InfraredTypes.h"
 #include "IrSignal.h"
 
@@ -25,15 +26,26 @@ this program. If not, see http://www.gnu.org/licenses/.
  */
 class IrSender {
 private:
-    pin_t outputPin;
+    pin_t sendPin;
 
 protected:
-    pin_t getOutputPin() const {
-        return outputPin;
+    inline pin_t getSendPin() const {
+        return sendPin;
     }
+
+    // TODO: Rewrite for efficiency
+    inline void writeHigh() { digitalWrite(sendPin, HIGH); };
+    inline void writeLow()  { digitalWrite(sendPin, LOW); };
+
     void delayUSecs(microseconds_t T);
-    IrSender();
-    IrSender(pin_t pin);
+    IrSender(pin_t pin = SEND_PIN);
+
+    // TODO: something sensible...
+    /*virtual*/ static void barfForInvalidPin(pin_t sendPin) { (void) sendPin; };
+
+    virtual void enable(frequency_t frequency) = 0;
+    virtual void sendSpace(microseconds_t time) { delayUSecs(time); };
+    virtual void sendMark(microseconds_t time) = 0;
 
 public:
     virtual ~IrSender();
@@ -43,7 +55,7 @@ public:
      * @param irSequence
      * @param frequency frequency in Hz
      */
-    virtual void send(const IrSequence& irSequence, frequency_t frequency = IrSignal::defaultFrequency) = 0;
+    virtual void send(const IrSequence& irSequence, frequency_t frequency = IrSignal::defaultFrequency);
 
     /**
      * Sends the IrSignal given as argument the prescribed number of times.
@@ -62,14 +74,6 @@ public:
      */
     void sendWhile(const IrSignal& irSignal, bool(*trigger)());
 
-// TODO:
-//    /**
-//     * Send an IrSignal, when and as long as buttonPin is LOW.
-//     * @param irSignal
-//     * @param buttonPin
-//     */
-//    void sendWhilePinLow(const IrSignal& irSignal, pin_t buttonPin);
-
     /** Force output pin inactive. */
-    virtual void mute();
+    void mute() { writeLow(); };
 };

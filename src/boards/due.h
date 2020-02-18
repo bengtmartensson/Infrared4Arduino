@@ -93,7 +93,7 @@ this program. If not, see http://www.gnu.org/licenses/.
 
 #define TIMER_RESET          do { IR_USE_TC->TC_CHANNEL[IR_USE_CH].TC_SR; } while (false) //Clears the interrupt.
 #define TIMER_ENABLE_PWM     do { PWMC_EnableChannel(PWM_INTERFACE, IR_USE_PWM_CH); } while (false)
-#define TIMER_DISABLE_PWM    do {PWMC_DisableChannel(PWM_INTERFACE, IR_USE_PWM_CH);SENDPIN_OFF(getOutputPin());} while (false)
+#define TIMER_DISABLE_PWM    do {PWMC_DisableChannel(PWM_INTERFACE, IR_USE_PWM_CH);writeLow();} while (false)
 #define TIMER_ENABLE_INTR    NVIC_EnableIRQ(IR_USE_TC_IRQ)
 #define TIMER_DISABLE_INTR   NVIC_DisableIRQ(IR_USE_TC_IRQ)
 

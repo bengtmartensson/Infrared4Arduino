@@ -20,34 +20,47 @@ this program. If not, see http://www.gnu.org/licenses/.
 
 #ifdef HAS_HARDWARE_PWM
 
-#include "IrSenderPwm.h"
-#ifdef HAS_HARDWARE_PWM
 #include "IrSenderPwmHard.h"
-#else
-#include "IrSenderPwmSoft.h"
-#endif
+#include "IrReceiver.h"
 
-IrSenderPwm *IrSenderPwm::instance = NULL;
+IrSenderPwmHard *IrSenderPwmHard::instance = NULL;
 
-IrSenderPwm::IrSenderPwm(pin_t outputPin) : IrSender(outputPin) {
-}
+IrSenderPwmHard::IrSenderPwmHard(pin_t outputPin) : IrSenderPwm(outputPin) {
+};
 
-IrSenderPwm *IrSenderPwm::newInstance(pin_t outputPin) {
+IrSenderPwmHard::~IrSenderPwmHard() {
+};
+
+IrSenderPwmHard *IrSenderPwmHard::newInstance(pin_t outputPin) {
     if (instance != NULL)
         return NULL;
-    instance =
-#ifdef HAS_HARDWARE_PWM
-            IrSenderPwmHard::newInstance(outputPin);
-#else
-            new IrSenderPwmSoftDelay(outputPin);
-#endif
+    instance = new IrSenderPwmHard(outputPin);
     return instance;
 }
 
-IrSenderPwm *IrSenderPwm::getInstance(bool create, pin_t outputPin) {
+IrSenderPwmHard *IrSenderPwmHard::getInstance(bool create, pin_t outputPin) {
     if (instance == NULL && create)
-        instance = newInstance(outputPin);
+        instance = new IrSenderPwmHard(outputPin);
     return instance;
+}
+
+#ifndef UNUSED
+/// @cond false
+#define UNUSED
+/// @endcond
+#endif
+
+void IrSenderPwmHard::enable(frequency_t frequency UNUSED) {
+    TIMER_DISABLE_INTR;
+    //pinMode(getPin(), OUTPUT);
+    writeLow();
+    TIMER_CONFIG_KHZ(frequency);
+}
+
+void inline IrSenderPwmHard::sendMark(milliseconds_t time) {
+    TIMER_ENABLE_PWM; // supposed to turn on
+    delayUSecs(time);
+    TIMER_DISABLE_PWM;
 }
 
 #endif // HAS_HARDWARE_PWM

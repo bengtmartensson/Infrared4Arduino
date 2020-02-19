@@ -19,7 +19,7 @@ class IrReceiverSampler : public IrReceiver {
 public:
 
     /** microseconds per clock interrupt */
-    static const unsigned long microsPerTick = 50; // was USECPERTICK
+    static const unsigned long microsPerTick = 50UL; // was USECPERTICK
 
     /** State space for the receiver state machine. */
     enum ReceiverState_t {

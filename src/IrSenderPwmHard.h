@@ -19,7 +19,7 @@ this program. If not, see http://www.gnu.org/licenses/.
 
 #include <Arduino.h>
 #include "IrSenderPwm.h"
-#include "boards/boarddefs.h" // For HAS_HARDWARE_PWM
+#include "Board.h"
 
 #ifndef HAS_HARDWARE_PWM
 #error Current board does not support hardware PWM and thus not the class IrSendPwm. Consider using IrSenderSoftPwm or IrSenderSpin instead.
@@ -30,32 +30,31 @@ this program. If not, see http://www.gnu.org/licenses/.
  * ("There can only be one"), so the class is a singleton class, with private constructor,
  * a factory method that enforces the "highlander property".
  */
-/*final*/
 class IrSenderPwmHard : public IrSenderPwm {
 public:
-    IrSenderPwmHard(pin_t outputPin = SEND_PIN);
+    IrSenderPwmHard(pin_t outputPin = Board::getInstance()->defaultPwmPin());
     virtual ~IrSenderPwmHard();
 
 private:
     static IrSenderPwmHard *instance;
-    void enable(frequency_t frequency);
+    void enable(frequency_t frequency, dutycycle_t dutyCycle = Board::defaultDutyCycle);
     //void sendSpace(microseconds_t time);
     void sendMark(microseconds_t time);
 
-    static void barfForInvalidPin(pin_t outputPin) { if (outputPin != SEND_PIN) {/*error("Silly pin")*/};};
+    static void barfForInvalidPin(pin_t outputPin) { if (outputPin != Board::getInstance()->defaultPwmPin()) {/*error("Silly pin")*/};};
 
 public:
     /**
      * Returns a pointer to the instance, or NULL if not initialized.
      * If argument true, in the latter case creates a new instance and returns it.
      */
-    static IrSenderPwmHard *getInstance(bool create = false, pin_t ouputPin = SEND_PIN);
+    static IrSenderPwmHard *getInstance(bool create = false, pin_t ouputPin = Board::getInstance()->defaultPwmPin());
 
     /**
      *  Creates a new instance (if not existing) and returns it.
      *  Returns NULL if an instance already exists.
      */
-    static IrSenderPwmHard *newInstance(pin_t ouputPin = SEND_PIN);
+    static IrSenderPwmHard *newInstance(pin_t ouputPin = Board::getInstance()->defaultPwmPin());
 
     static void deleteInstance() {
         delete instance;

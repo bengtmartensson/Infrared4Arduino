@@ -32,6 +32,11 @@ typedef uint16_t milliseconds_t;
 typedef uint32_t frequency_t;
 
 /**
+ * Type for duty cycle in percent. Less than 0 means no information/don't care.
+ */
+typedef int8_t dutycycle_t;
+
+/**
  * Type for GPIO pin, compatible with Arduino libs.
  */
 typedef uint8_t pin_t;

@@ -16,12 +16,10 @@ this program. If not, see http://www.gnu.org/licenses/.
 */
 
 #include <Arduino.h>
-#include "boards/boarddefs.h" // for HAS_HARDWARE_PWM
+#include "Board.h"
 
 #ifdef HAS_HARDWARE_PWM
-
 #include "IrSenderPwmHard.h"
-#include "IrReceiver.h"
 
 IrSenderPwmHard *IrSenderPwmHard::instance = NULL;
 
@@ -44,23 +42,12 @@ IrSenderPwmHard *IrSenderPwmHard::getInstance(bool create, pin_t outputPin) {
     return instance;
 }
 
-#ifndef UNUSED
-/// @cond false
-#define UNUSED
-/// @endcond
-#endif
-
-void IrSenderPwmHard::enable(frequency_t frequency UNUSED) {
-    TIMER_DISABLE_INTR;
-    //pinMode(getPin(), OUTPUT);
-    writeLow();
-    TIMER_CONFIG_KHZ(frequency);
+void IrSenderPwmHard::enable(frequency_t frequency, dutycycle_t dutyCycle) {
+    Board::getInstance()->enablePwm(getPin(), frequency, dutyCycle);
 }
 
 void inline IrSenderPwmHard::sendMark(milliseconds_t time) {
-    TIMER_ENABLE_PWM; // supposed to turn on
-    delayUSecs(time);
-    TIMER_DISABLE_PWM;
+    Board::getInstance()->sendPwmMark(time);
 }
 
 #endif // HAS_HARDWARE_PWM

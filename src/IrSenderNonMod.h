@@ -29,7 +29,7 @@ this program. If not, see http://www.gnu.org/licenses/.
 class IrSenderNonMod : public IrSender {
 private:
     bool const invert;
-    void enable(frequency_t frequency __attribute__((unused))) {};
+    void enable(frequency_t frequency __attribute__((unused)), dutycycle_t d __attribute__((unused)) = Board::defaultDutyCycle) {};
     void sendSpace(microseconds_t time);
     void sendMark(microseconds_t time);
 

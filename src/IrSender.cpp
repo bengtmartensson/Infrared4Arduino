@@ -18,20 +18,6 @@ this program. If not, see http://www.gnu.org/licenses/.
 #include "IrSender.h"
 #include "IrSignal.h"
 
-// From IRLib.cpp, renamed from My_delay_uSecs.
-
-//The Arduino built in function delayMicroseconds has limits we wish to exceed
-//Therefore we have created this alternative
-void IrSender::delayUSecs(microseconds_t T) {
-    if (T) {
-        if (T > 16000) {
-            delayMicroseconds(T % 1000);
-            delay(T / 1000);
-        } else
-            delayMicroseconds(T);
-    };
-}
-
 IrSender::IrSender(pin_t pin) : sendPin(pin) {
     barfForInvalidPin(pin);
     pinMode(pin, OUTPUT);
@@ -71,8 +57,8 @@ void IrSender::sendWhile(const IrSignal& irSignal, bool(*trigger)()) {
     }
 }
 
-void IrSender::send(const IrSequence& irSequence, frequency_t frequency) {
-    enable(frequency);
+void IrSender::send(const IrSequence& irSequence, frequency_t frequency, dutycycle_t dutyCycle) {
+    enable(frequency, dutyCycle);
 #ifdef CONSIDER_COMPUTATIONAL_DELAYS
     uint32_t refTime = micros();
 #endif

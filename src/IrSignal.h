@@ -11,7 +11,10 @@ class IrSignal {
 public:
     static const frequency_t defaultFrequency = 38000U;
     static const frequency_t invalidFrequency = (frequency_t) -1;
-
+    static const dutycycle_t noDutyCycle = -1;
+    private:
+    static const dutycycle_t defaultDutyCycle = noDutyCycle;
+    public:
     IrSignal();
     IrSignal(const IrSignal& orig);
 
@@ -20,21 +23,24 @@ public:
             const microseconds_t *repeat, size_t lengthRepeat,
             const microseconds_t *ending, size_t lengthEnding,
             frequency_t frequency = defaultFrequency,
+            dutycycle_t dutyCycle = defaultDutyCycle,
             bool toBeFreed = false);
 
     IrSignal(const microseconds_t *intro, size_t lengthIntro,
             const microseconds_t *repeat, size_t lengthRepeat,
             frequency_t frequency = defaultFrequency,
+            dutycycle_t dutyCycle = defaultDutyCycle,
             bool toBeFreed = false);
 
     IrSignal(const IrSequence& intro, const IrSequence& repeat, const IrSequence& ending,
-            frequency_t frequency, bool toBeFreed);
+            frequency_t frequency, dutycycle_t dutyCycle, bool toBeFreed);
 
     IrSignal(const IrSequence& intro, const IrSequence& repeat, const IrSequence& ending,
-            frequency_t frequency = defaultFrequency);
+            frequency_t frequency = defaultFrequency, dutycycle_t dutyCycle = defaultDutyCycle);
 
 private:
     const frequency_t frequency;
+    const dutycycle_t dutyCycle;
     const IrSequence intro;
     const IrSequence repeat;
     const IrSequence ending;
@@ -50,6 +56,10 @@ public:
 
     frequency_t getFrequency() const {
         return frequency;
+    }
+
+    dutycycle_t getDutyCycle() const {
+        return dutyCycle;
     }
 
     const IrSequence& getEnding() const {
@@ -96,6 +106,24 @@ public:
     static bool dumpFrequency(Stream& stream, frequency_t frequency);
 
     /**
+     * If the duty cycle is sensible, print it to the stream and return true.
+     * Otherwise do nothing and return false.
+     * No extra spaces or line feeds are generated.
+     * @param stream Stream onto the output is printed.
+     * @param frequency modulation frequency
+     */
+    bool dumpDutyCycle(Stream& stream) const {
+        return dumpDutyCycle(stream, dutyCycle);
+    }
+
+    /**
+     * Static version of dumpDutyCycle.
+     * @param stream Stream onto the output is printed.
+     * @param frequency modulation frequency
+     */
+    static bool dumpDutyCycle(Stream& stream, dutycycle_t dutyCycle);
+
+    /**
      * Implementation of the count semantics, i.e.,
      * how many repetitions should be sent if the signal is sent noSend times.
      * @param noSends number of times to "send signal".
@@ -104,6 +132,4 @@ public:
         return noSends == 0 ? 0
                 : getIntro().isEmpty() ? noSends : noSends - 1;
     }
-
-
 };

@@ -44,16 +44,10 @@ IrSenderPwmSoft::IrSenderPwmSoft(pin_t outputPin) : IrSenderPwm(outputPin) {
 //#endif
 //}
 
-//#ifndef UNUSED
-///// @cond false
-//#define UNUSED
-///// @endcond
-//#endif
-
-void IrSenderPwmSoft::enable(frequency_t hz) {
+void IrSenderPwmSoft::enable(frequency_t hz, dutycycle_t dutyCycle) {
     writeLow();
     periodTime = (1000000UL + hz / 2L) / hz; // = 1000000/hz + 1/2 = round(1000000.0/hz)
-    periodOnTime = periodTime * getDutyCycle() / 100U /*- pulseCorrection*/;
+    periodOnTime = periodTime * dutyCycle / 100U /*- pulseCorrection*/;
     periodOffTime = periodTime - periodOnTime;
 }
 

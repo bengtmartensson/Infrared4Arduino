@@ -27,7 +27,7 @@ this program. If not, see http://www.gnu.org/licenses/.
  */
 class IrSenderPwmSoftDelay : public IrSenderPwmSoft {
 public:
-    IrSenderPwmSoftDelay(pin_t outpitPin = SEND_PIN);
+    IrSenderPwmSoftDelay(pin_t outpitPin); // default is not meaningful!!
     virtual ~IrSenderPwmSoftDelay() {}
     //void enable(unsigned char khz);
     //void sendSpace(microseconds_t time);

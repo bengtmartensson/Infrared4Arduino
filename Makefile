@@ -20,7 +20,7 @@ BROWSER:=firefox
 DEBUGFLAGS:=-g
 WARNINGFLAGS:=-Wall -Werror -Wextra
 
-VPATH=tests src
+VPATH=tests src src/boards
 
 GH_PAGES := gh-pages
 VERSION_H := src/version.h
@@ -33,6 +33,7 @@ ORIGINURL := $(shell git remote get-url origin)
 .PRECIOUS: test1
 
 OBJS=\
+Board.o \
 IrReader.o \
 IrReceiver.o \
 IrReceiverPoll.o \

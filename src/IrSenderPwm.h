@@ -19,7 +19,7 @@ this program. If not, see http://www.gnu.org/licenses/.
 
 #include <Arduino.h>
 #include "IrSender.h"
-#include "boards/boarddefs.h" // For HAS_HARDWARE_PWM
+#include "Board.h"
 
 /**
  * Sending function using timer PWM. Due to the nature of the timers, this is a Highlander,
@@ -36,26 +36,19 @@ protected:
     virtual ~IrSenderPwm() {}
 
 public:
-    unsigned int getDutyCycle() const { return defaultDutyCycle; };
-
-    static const bool hasHardwarePwm =
-#ifdef HAS_HARDWARE_PWM
-            true;
-#else
-            false;
-#endif
+    static unsigned int getDutyCycle() { return defaultDutyCycle; };
 
     /**
      * Returns a pointer to the instance, or NULL if not initialized.
      * If argument true, in the latter case creates a new instance and returns it.
      */
-    static IrSenderPwm *getInstance(bool create = false, pin_t outputPin = SEND_PIN);
+    static IrSenderPwm *getInstance(bool create = false, pin_t outputPin = Board::getInstance()->defaultPwmPin());
 
     /**
      *  Creates a new instance (if not existing) and returns it.
      *  Returns NULL if an instance already exists.
      */
-    static IrSenderPwm *newInstance(pin_t outputPin = SEND_PIN);
+    static IrSenderPwm *newInstance(pin_t outputPin);
 
     static void deleteInstance() {
         delete instance;

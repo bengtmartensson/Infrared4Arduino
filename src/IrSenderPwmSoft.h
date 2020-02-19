@@ -27,9 +27,9 @@ this program. If not, see http://www.gnu.org/licenses/.
  */
 class IrSenderPwmSoft : public IrSenderPwm {
 protected:
-    IrSenderPwmSoft(pin_t outputPin);
+    IrSenderPwmSoft(pin_t outputPin); // no default!
     virtual ~IrSenderPwmSoft() {}
-    void enable(frequency_t hz);
+    void enable(frequency_t hz, dutycycle_t dutyCycle = Board::defaultDutyCycle);
     void sendMark(microseconds_t time);
     static const unsigned int PULSE_CORRECTION = 3U;
 

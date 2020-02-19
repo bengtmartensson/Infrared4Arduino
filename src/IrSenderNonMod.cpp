@@ -25,7 +25,7 @@ void IrSenderNonMod::sendSpace(microseconds_t time) {
         writeHigh();
     else
         writeLow();
-    delayUSecs(time);
+    Board::delayMicroseconds(time);
 }
 
 void IrSenderNonMod::sendMark(microseconds_t time) {
@@ -33,5 +33,5 @@ void IrSenderNonMod::sendMark(microseconds_t time) {
         writeLow();
     else
         writeHigh();
-    delayUSecs(time);
+    Board::delayMicroseconds(time);
 }

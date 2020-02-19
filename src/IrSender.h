@@ -18,8 +18,8 @@ this program. If not, see http://www.gnu.org/licenses/.
 #pragma once
 
 #include <Arduino.h>
-#include "InfraredTypes.h"
 #include "IrSignal.h"
+#include "Board.h"
 
 /**
  * Abstract base class for all sending classes.
@@ -28,23 +28,23 @@ class IrSender {
 private:
     pin_t sendPin;
 
-protected:
-    inline pin_t getSendPin() const {
+public:
+    inline pin_t getPin() const {
         return sendPin;
     }
 
+protected:
     // TODO: Rewrite for efficiency
-    inline void writeHigh() { digitalWrite(sendPin, HIGH); };
-    inline void writeLow()  { digitalWrite(sendPin, LOW); };
+    inline void writeHigh() { Board::getInstance()->writeHigh(sendPin); };
+    inline void writeLow()  { Board::getInstance()->writeLow(sendPin); };
 
-    void delayUSecs(microseconds_t T);
-    IrSender(pin_t pin = SEND_PIN);
+    IrSender(pin_t pin);
 
     // TODO: something sensible...
-    /*virtual*/ static void barfForInvalidPin(pin_t sendPin) { (void) sendPin; };
+    /*virtual*/ static void barfForInvalidPin(pin_t sendPin __attribute__((unused))) {};
 
-    virtual void enable(frequency_t frequency) = 0;
-    virtual void sendSpace(microseconds_t time) { delayUSecs(time); };
+    virtual void enable(frequency_t frequency, dutycycle_t dutyCycle = Board::defaultDutyCycle) = 0;
+    virtual void sendSpace(microseconds_t time) { Board::delayMicroseconds(time); };
     virtual void sendMark(microseconds_t time) = 0;
 
 public:
@@ -55,7 +55,7 @@ public:
      * @param irSequence
      * @param frequency frequency in Hz
      */
-    virtual void send(const IrSequence& irSequence, frequency_t frequency = IrSignal::defaultFrequency);
+    virtual void send(const IrSequence& irSequence, frequency_t frequency = IrSignal::defaultFrequency, dutycycle_t dutyCycle = Board::defaultDutyCycle);
 
     /**
      * Sends the IrSignal given as argument the prescribed number of times.

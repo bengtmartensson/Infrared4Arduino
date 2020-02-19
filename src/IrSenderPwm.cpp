@@ -15,16 +15,15 @@ You should have received a copy of the GNU General Public License along with
 this program. If not, see http://www.gnu.org/licenses/.
 */
 
-#include <Arduino.h>
-#include "boards/boarddefs.h" // for HAS_HARDWARE_PWM
-
-#ifdef HAS_HARDWARE_PWM
-
 #include "IrSenderPwm.h"
+//#include "boards/boarddefs.h" // for HAS_HARDWARE_PWM
+
+//#ifdef HAS_HARDWARE_PWM
+
 #ifdef HAS_HARDWARE_PWM
 #include "IrSenderPwmHard.h"
 #else
-#include "IrSenderPwmSoft.h"
+#include "IrSenderPwmSoftDelay.h"
 #endif
 
 IrSenderPwm *IrSenderPwm::instance = NULL;
@@ -50,4 +49,4 @@ IrSenderPwm *IrSenderPwm::getInstance(bool create, pin_t outputPin) {
     return instance;
 }
 
-#endif // HAS_HARDWARE_PWM
+//#endif // HAS_HARDWARE_PWM

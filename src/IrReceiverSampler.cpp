@@ -1,5 +1,5 @@
 #include "IrReceiverSampler.h"
-#include "boards/boarddefs.h"
+#include "Board.h"
 
 uint32_t IrReceiverSampler::millisecs2ticks(milliseconds_t ms) {
     return (1000UL * (uint32_t) ms) / microsPerTick;
@@ -55,20 +55,16 @@ void IrReceiverSampler::reset() {
     timer = 0U;
 }
 
-#if defined(USE_DEFAULT_ENABLE_IR_IN)
 void IrReceiverSampler::enable() {
     // Initialize state machine variables
     reset();
     noInterrupts();
-    TIMER_CONFIG_NORMAL();
-    TIMER_ENABLE_INTR;
-    TIMER_RESET;
+    Board::getInstance()->enableSampler(getPin());
     interrupts();
 }
-#endif
 
 void IrReceiverSampler::disable() {
-    TIMER_DISABLE_INTR;
+    Board::getInstance()->disableSampler();
 }
 
 void IrReceiverSampler::setEndingTimeout(milliseconds_t timeOut) {
@@ -90,7 +86,7 @@ milliseconds_t IrReceiverSampler::getBeginningTimeout() const {
 #ifdef ISR
 /** Interrupt routine. It collects data into the data buffer. */
 ISR(TIMER_INTR_NAME) {
-    TIMER_RESET;
+    Board::getInstance()->TIMER_RESET();
     IrReceiverSampler *recv = IrReceiverSampler::getInstance();
     IrReceiver::irdata_t irdata = recv->readIr();
     recv->timer++; // One more 50us tick

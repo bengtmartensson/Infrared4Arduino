@@ -6,8 +6,10 @@
 
 #ifdef ESP32
 #define RECEIVE_PIN 4U
-#elif ESP8266
+#elif defined(ESP8266)
 #define RECEIVE_PIN 4U // D2
+#elif defined(ARDUINO_AVR_MICRO)
+#define RECEIVE_PIN    10
 #else
 #define RECEIVE_PIN 5U
 #endif
@@ -20,6 +22,10 @@
 #ifdef ARDUINO_AVR_NANO
 #define IRRECEIVER_1_GND 6U
 #define IRRECEIVER_1_VCC 7U
+#endif
+#ifdef ARDUINO_AVR_MICRO
+#define IRRECEIVER_1_GND    16
+#define IRRECEIVER_1_VCC    14
 #endif
 
 IrReceiver *receiver;

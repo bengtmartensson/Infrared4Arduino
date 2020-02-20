@@ -15,6 +15,16 @@ You should have received a copy of the GNU General Public License along with
 this program. If not, see http://www.gnu.org/licenses/.
  */
 
+/**
+ * This class serves as an HAL (Hardware Abstraction Layer).
+ * All access to the hardware should go through this class.
+ * (In particular, using digital[Read,Write] and ::pinMode is prohibited
+ * (exception: code that runs exclusively on the host).
+ *
+ * It is a singleton class (since there is only one board), instantiated
+ * automatically to one of its subclasses.
+ */
+
 #pragma once
 
 #include "IrSignal.h"
@@ -32,9 +42,16 @@ public:
     virtual void writeLow(pin_t pin) { digitalWrite(pin, LOW); };
     virtual void writeHigh(pin_t pin) { digitalWrite(pin, HIGH); };
 
+    void setPinMode(pin_t pin, uint8_t mode) { pinMode(pin, mode); };
+    bool readDigital(pin_t pin) { return digitalRead(pin) == HIGH; };
+
+    virtual pin_t getPwmPin() const;
+
     static Board* getInstance() {
         return instance;
     };
+
+    static const unsigned long microsPerTick = 50UL; // was USECPERTICK
 
     virtual void checkValidSendPin(pin_t pin __attribute__((unused))) {/* TODO */};
 
@@ -236,21 +253,22 @@ private:
 
 #endif
 
-#if HAS_HARDWARE_PWM == 1
+#ifdef HAS_HARDWARE_PWM
+
 inline constexpr bool Board::hasHardwarePwm() {
     return true;
 }
 inline constexpr pin_t Board::defaultPwmPin() { return PWM_PIN; };
-inline void Board::writeLow() { digitalWrite(PWM_PIN, LOW); };
-inline void Board::writeHigh() { digitalWrite(PWM_PIN, HIGH); };
+inline pin_t Board::getPwmPin() const { return PWM_PIN; };
+inline void Board::writeLow() { digitalWrite(getPwmPin(), LOW); };
+inline void Board::writeHigh() { digitalWrite(getPwmPin(), HIGH); };
 
 #else
 
-inline constexpr bool Board::hasHardwarePwm() {
-    return false;
-}
-
+inline constexpr bool Board::hasHardwarePwm() { return false; };
 inline constexpr pin_t Board::defaultPwmPin() { return NO_PIN; };
-inline void Board::writeLow() { digitalWrite(PWM_PIN, LOW); };
-inline void Board::writeHigh() { digitalWrite(PWM_PIN, HIGH); };
+;inline pin_t Board::getPwmPin() const { return PWM_PIN; };
+inline void Board::writeLow() { digitalWrite(getPwmPin(), LOW); };
+inline void Board::writeHigh() { digitalWrite(getPwmPin(), HIGH); };
+
 #endif

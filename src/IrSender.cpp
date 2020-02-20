@@ -19,9 +19,8 @@ this program. If not, see http://www.gnu.org/licenses/.
 #include "IrSignal.h"
 
 IrSender::IrSender(pin_t pin) : sendPin(pin) {
-    barfForInvalidPin(pin);
-    pinMode(pin, OUTPUT);
-    digitalWrite(pin, LOW);
+    Board::getInstance()->setPinMode(pin, OUTPUT);
+    Board::getInstance()->writeLow(pin);
 }
 
 IrSender::~IrSender() {

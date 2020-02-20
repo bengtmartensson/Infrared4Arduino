@@ -15,6 +15,8 @@
 #define BUFFERSIZE 200U
 #define BAUD 115200
 
+//#define DEBUG
+
 #ifdef ARDUINO_AVR_NANO
 #define IRRECEIVER_1_GND 6U
 #define IRRECEIVER_1_VCC 7U
@@ -35,9 +37,10 @@ void setup() {
     Serial.begin(BAUD);
     while (!Serial)
         ;
-    Serial.println("plork");
 
     receiver = IrReceiverSampler::newIrReceiverSampler(BUFFERSIZE, RECEIVE_PIN);
+    Serial.print("Listening on pin ");
+    Serial.println(receiver->getPin(), DEC);
     receiver->enable();
 }
 
@@ -48,5 +51,10 @@ void loop() {
         else
             receiver->dump(Serial);
         receiver->reset();
+    } else {
+#ifdef DEBUG
+        Serial.println("listening");
+        delay(2000);
+#endif
     }
 }

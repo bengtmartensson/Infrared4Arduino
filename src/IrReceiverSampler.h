@@ -18,9 +18,6 @@
 class IrReceiverSampler : public IrReceiver {
 public:
 
-    /** microseconds per clock interrupt */
-    static const unsigned long microsPerTick = 50UL; // was USECPERTICK
-
     /** State space for the receiver state machine. */
     enum ReceiverState_t {
         STATE_IDLE, /**< Between signals; waiting for first mark */
@@ -116,7 +113,7 @@ public:
     }
 
     microseconds_t getDuration(unsigned int i) const {
-        uint32_t bigvalue = microsPerTick * (uint32_t) durationData[i] + (i & 1 ? markExcess : -markExcess);
+        uint32_t bigvalue = Board::microsPerTick * (uint32_t) durationData[i] + (i & 1 ? markExcess : -markExcess);
         return bigvalue <=  MICROSECONDS_T_MAX ? (microseconds_t) bigvalue : MICROSECONDS_T_MAX;
     }
 

@@ -4,6 +4,7 @@
 #include "InfraredTypes.h"
 #include "IrReader.h"
 #include "IrSignal.h"
+#include "Board.h"
 
 /**
  * Abstract base class for demodulating IR receivers.
@@ -56,7 +57,7 @@ public:
     // Needs to be public since used in ISP. Therefore hide it from Doxygen
     /// @cond false
     irdata_t readIr() {
-        return ((digitalRead(getPin()) == HIGH) ^ invertingSensor) ? IR_MARK : IR_SPACE;
+        return (Board::getInstance()->readDigital(getPin()) ^ invertingSensor) ? IR_MARK : IR_SPACE;
     }
     /// @endcond
 };

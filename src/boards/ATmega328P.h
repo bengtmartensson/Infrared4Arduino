@@ -24,8 +24,6 @@ this program. If not, see http://www.gnu.org/licenses/.
 
 #pragma once
 
-#include "../IrReceiverSampler.h" // For IrReceiverSampler::microsPerTick
-
 #define HAS_FLASH_READ 1
 #define HAS_HARDWARE_PWM 1
 #define CURRENT_CLASS ATmega328P
@@ -48,22 +46,24 @@ public:
         TIMSK1 = _BV(OCIE1A);
     };
 
-    void TIMER_DISABLE_INTR{TIMSK1 = 0;}
+    void TIMER_DISABLE_INTR() {
+        TIMSK1 = 0;
+    };
 
 #define TIMER_INTR_NAME       TIMER1_COMPA_vect
 
-    void TIMER_CONFIG_KHZ(val) {
+    void TIMER_CONFIG_HZ(frequency_t val, dutycycle_t dutyCycle) {
         const uint16_t pwmval = F_CPU / 2 / val;
         TCCR1A = _BV(WGM11);
         TCCR1B = _BV(WGM13) | _BV(CS10);
         ICR1 = pwmval;
-        OCR1A = pwmval / 3;
+        OCR1A = pwmval * dutyCycle / 100U;
     };
 
     void TIMER_CONFIG_NORMAL() {
         TCCR1A = 0;
         TCCR1B = _BV(WGM12) | _BV(CS10);
-        OCR1A = F_CPU * USECPERTICK / 1000000;
+        OCR1A = F_CPU * microsPerTick / 1000000;
         TCNT1 = 0;
     };
 
@@ -108,7 +108,7 @@ public:
 //#else // ! (TIMER_COUNT_TOP < 256)
         TCCR2A = _BV(WGM21);
         TCCR2B = _BV(CS21);
-        OCR2A = F_CPU * IrReceiverSampler::microsPerTick / 1000000 / 8;
+        OCR2A = F_CPU * microsPerTick / 1000000 / 8;
         TCNT2 = 0;
 //#endif
     }

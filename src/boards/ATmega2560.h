@@ -23,159 +23,228 @@ this program. If not, see http://www.gnu.org/licenses/.
 
 #pragma once
 
-#include "avr.h"
+#include "Board.h"
 
-#define USE_DEFAULT_ENABLE_IR_IN
-#define TIMER_RESET
+#define CURRENT_CLASS ATmega2560
 
+#define HAS_HARDWARE_PWM 1
+
+class ATmega2560 : public Board {
+public:
+
+    ATmega2560() {
+    };
+
+private:
+///////////////////////////////////////////////////////////////////////////////
 #if defined(IR_USE_TIMER1)
 // Timer1 (16 bits)
-
-#define TIMER_ENABLE_PWM   (TCCR1A |= _BV(COM1A1))
-#define TIMER_DISABLE_PWM  (TCCR1A &= ~(_BV(COM1A1)))
-
-#define TIMER_ENABLE_INTR   (TIMSK1 = _BV(OCIE1A))
-#define TIMER_DISABLE_INTR  (TIMSK1 = 0)
-
 #define TIMER_INTR_NAME       TIMER1_COMPA_vect
 
-#define TIMER_CONFIG_KHZ(val) ({ \
-    const uint16_t pwmval = F_CPU / 2000 / (val); \
-    TCCR1A                = _BV(WGM11); \
-    TCCR1B                = _BV(WGM13) | _BV(CS10); \
-    ICR1                  = pwmval; \
-    OCR1A                 = pwmval / 3; \
-})
+    void TIMER_ENABLE_PWM() {
+        TCCR1A |= _BV(COM1A1);
+    };
 
-#define TIMER_CONFIG_NORMAL() ({ \
-    TCCR1A = 0; \
-    TCCR1B = _BV(WGM12) | _BV(CS10); \
-    OCR1A  = F_CPU * USECPERTICK / 1000000; \
-    TCNT1  = 0; \
-})
+    void TIMER_DISABLE_PWM() {
+        TCCR1A &= ~(_BV(COM1A1));
+    };
 
-#define SEND_PIN  11
+    void TIMER_ENABLE_INTR() {
+        TIMSK1 = _BV(OCIE1A);
+    }
 
+    void TIMER_DISABLE_INTR() {
+        TIMSK1 = 0;
+    };
+
+
+
+    void TIMER_CONFIG_HZ(frequency_t frequency, dutycycle_t dutyCycle) {
+        const uint16_t pwmval = F_CPU / 2 / frequency;
+        TCCR1A = _BV(WGM11);
+        TCCR1B = _BV(WGM13) | _BV(CS10);
+        ICR1 = pwmval;
+        OCR1A = pwmval * dutyCycle / 100;
+    };
+
+    void TIMER_CONFIG_NORMAL() {
+        TCCR1A = 0;
+        TCCR1B = _BV(WGM12) | _BV(CS10);
+        OCR1A = F_CPU * microsPerTick / 1000000;
+        TCNT1 = 0;
+    };
+
+#define PWM_PIN 11
+
+///////////////////////////////////////////////////////////////////////////////
 #elif defined(IR_USE_TIMER2)
 // Timer2 (8 bits)
 
-#define TIMER_ENABLE_PWM    (TCCR2A |= _BV(COM2B1))
-#define TIMER_DISABLE_PWM   (TCCR2A &= ~(_BV(COM2B1)))
-#define TIMER_ENABLE_INTR   (TIMSK2 = _BV(OCIE2A))
-#define TIMER_DISABLE_INTR  (TIMSK2 = 0)
 #define TIMER_INTR_NAME     TIMER2_COMPA_vect
 
-#define TIMER_CONFIG_KHZ(val) ({ \
-    const uint8_t pwmval = F_CPU / 2000 / (val); \
-    TCCR2A               = _BV(WGM20); \
-    TCCR2B               = _BV(WGM22) | _BV(CS20); \
-    OCR2A                = pwmval; \
-    OCR2B                = pwmval / 3; \
-})
+    void TIMER_ENABLE_PWM() {
+        TCCR2A |= _BV(COM2B1);
+    }
 
-#define TIMER_COUNT_TOP  (F_CPU * USECPERTICK / 1000000)
+    void TIMER_DISABLE_PWM() {
+        TCCR2A &= ~(_BV(COM2B1));
+    }
 
-#if (TIMER_COUNT_TOP < 256)
-#define TIMER_CONFIG_NORMAL() ({ \
-    TCCR2A = _BV(WGM21); \
-    TCCR2B = _BV(CS20); \
-    OCR2A  = TIMER_COUNT_TOP; \
-    TCNT2  = 0; \
-})
-#else
-#define TIMER_CONFIG_NORMAL() ({ \
-    TCCR2A = _BV(WGM21); \
-    TCCR2B = _BV(CS21); \
-    OCR2A  = TIMER_COUNT_TOP / 8; \
-    TCNT2  = 0; \
-})
-#endif
+    void TIMER_ENABLE_INTR() {
+        TIMSK2 = _BV(OCIE2A);
+    }
 
-#define SEND_PIN  9
+    void TIMER_DISABLE_INTR() {
+        TIMSK2 = 0;
+    }
 
+    void TIMER_CONFIG_HZ(frequency_t frequency, dutycycle_t dutyCycle) {
+        const uint8_t pwmval = F_CPU / 2 / frequency;
+        TCCR2A = _BV(WGM20);
+        TCCR2B = _BV(WGM22) | _BV(CS20);
+        OCR2A = pwmval;
+        OCR2B = pwmval * dutyCycle / 100;
+    };
+
+#define TIMER_COUNT_TOP  (F_CPU * microsPerTick / 1000000UL)
+
+    void TIMER_CONFIG_NORMAL() {
+        //#if (TIMER_COUNT_TOP < 256)
+        //    TCCR2A = _BV(WGM21);
+        //    TCCR2B = _BV(CS20);
+        //    OCR2A  = TIMER_COUNT_TOP;
+        //    TCNT2  = 0;
+        //#else
+        TCCR2A = _BV(WGM21);
+        TCCR2B = _BV(CS21);
+        OCR2A = TIMER_COUNT_TOP / 8;
+        TCNT2 = 0;
+        //#endif
+    };
+
+#define PWM_PIN  9
+
+//////////////////////////////////////////////////////////////////////////////
 #elif defined(IR_USE_TIMER3)
 // Timer3 (16 bits)
-
-#define TIMER_ENABLE_PWM     (TCCR3A |= _BV(COM3A1))
-#define TIMER_DISABLE_PWM    (TCCR3A &= ~(_BV(COM3A1)))
-#define TIMER_ENABLE_INTR    (TIMSK3 = _BV(OCIE3A))
-#define TIMER_DISABLE_INTR   (TIMSK3 = 0)
 #define TIMER_INTR_NAME      TIMER3_COMPA_vect
 
-#define TIMER_CONFIG_KHZ(val) ({ \
-  const uint16_t pwmval = F_CPU / 2000 / (val); \
-  TCCR3A = _BV(WGM31); \
-  TCCR3B = _BV(WGM33) | _BV(CS30); \
-  ICR3 = pwmval; \
-  OCR3A = pwmval / 3; \
-})
+    void TIMER_ENABLE_PWM() {
+        TCCR3A |= _BV(COM3A1);
+    };
 
-#define TIMER_CONFIG_NORMAL() ({ \
-  TCCR3A = 0; \
-  TCCR3B = _BV(WGM32) | _BV(CS30); \
-  OCR3A = F_CPU * USECPERTICK / 1000000; \
-  TCNT3 = 0; \
-})
+    void TIMER_DISABLE_PWM() {
+        TCCR3A &= ~(_BV(COM3A1));
+    };
 
-#define SEND_PIN  5
+    void TIMER_ENABLE_INTR() {
+        TIMSK3 = _BV(OCIE3A);
+    };
 
+    void TIMER_DISABLE_INTR() {
+        TIMSK3 = 0;
+    };
+
+    void TIMER_CONFIG_HZ(frequency_t frequency, dutycycle_t dutyCycle) {
+        const uint16_t pwmval = F_CPU / 2 / frequency;
+        TCCR3A = _BV(WGM31);
+        TCCR3B = _BV(WGM33) | _BV(CS30);
+        ICR3 = pwmval;
+        OCR3A = pwmval * dutyCycle / 100;
+    };
+
+    void TIMER_CONFIG_NORMAL() {
+        TCCR3A = 0;
+        TCCR3B = _BV(WGM32) | _BV(CS30);
+        OCR3A = F_CPU * microsPerTick / 1000000;
+        TCNT3 = 0;
+    };
+
+#define PWM_PIN 5
+
+///////////////////////////////////////////////////////////////////////////////
 #elif defined(IR_USE_TIMER4)
 // Timer4 (16 bits)
-
-#define TIMER_ENABLE_PWM    (TCCR4A |= _BV(COM4A1))
-#define TIMER_DISABLE_PWM   (TCCR4A &= ~(_BV(COM4A1)))
-#define TIMER_ENABLE_INTR   (TIMSK4 = _BV(OCIE4A))
-#define TIMER_DISABLE_INTR  (TIMSK4 = 0)
 #define TIMER_INTR_NAME     TIMER4_COMPA_vect
 
-#define TIMER_CONFIG_KHZ(val) ({ \
-    const uint16_t pwmval = F_CPU / 2000 / (val); \
-    TCCR4A = _BV(WGM41); \
-    TCCR4B = _BV(WGM43) | _BV(CS40); \
-    ICR4 = pwmval; \
-    OCR4A = pwmval / 3; \
-})
+    void TIMER_ENABLE_PWM() {
+        TCCR4A |= _BV(COM4A1);
+    };
 
-#define TIMER_CONFIG_NORMAL() ({ \
-    TCCR4A = 0; \
-    TCCR4B = _BV(WGM42) | _BV(CS40); \
-    OCR4A = F_CPU * USECPERTICK / 1000000; \
-    TCNT4 = 0; \
-})
+    void TIMER_DISABLE_PWM() {
+        TCCR4A &= ~(_BV(COM4A1));
+    };
 
-#define SEND_PIN  6
+    void TIMER_ENABLE_INTR() {
+        TIMSK4 = _BV(OCIE4A);
+    };
 
+    void TIMER_DISABLE_INTR() {
+        TIMSK4 = 0;
+    };
+
+    void TIMER_CONFIG_HZ(frequency_t frequency, dutycycle_t dutyCycle) {
+        const uint16_t pwmval = F_CPU / 2 / frequency;
+        TCCR4A = _BV(WGM41);
+        TCCR4B = _BV(WGM43) | _BV(CS40);
+        ICR4 = pwmval;
+        OCR4A = pwmval * dutyCycle / 100;
+    };
+
+    void TIMER_CONFIG_NORMAL() {
+        TCCR4A = 0;
+        TCCR4B = _BV(WGM42) | _BV(CS40);
+        OCR4A = F_CPU * microsPerTick / 1000000;
+        TCNT4 = 0;
+    };
+
+#define PWM_PIN 6
+
+///////////////////////////////////////////////////////////////////////////////
 #elif defined(IR_USE_TIMER5)
 // Timer5 (16 bits)
-
-#define TIMER_ENABLE_PWM    (TCCR5A |= _BV(COM5A1))
-#define TIMER_DISABLE_PWM   (TCCR5A &= ~(_BV(COM5A1)))
-#define TIMER_ENABLE_INTR   (TIMSK5 = _BV(OCIE5A))
-#define TIMER_DISABLE_INTR  (TIMSK5 = 0)
 #define TIMER_INTR_NAME     TIMER5_COMPA_vect
 
-#define TIMER_CONFIG_KHZ(val) ({ \
-    const uint16_t pwmval = F_CPU / 2000 / (val); \
-    TCCR5A = _BV(WGM51); \
-    TCCR5B = _BV(WGM53) | _BV(CS50); \
-    ICR5 = pwmval; \
-    OCR5A = pwmval / 3; \
-})
+    void TIMER_ENABLE_PWM() {
+        TCCR5A |= _BV(COM5A1);
+    };
 
-#define TIMER_CONFIG_NORMAL() ({ \
-    TCCR5A = 0; \
-    TCCR5B = _BV(WGM52) | _BV(CS50); \
-    OCR5A = F_CPU * USECPERTICK / 1000000; \
-    TCNT5 = 0; \
-})
+    void TIMER_DISABLE_PWM() {
+        TCCR5A &= ~(_BV(COM5A1));
+    };
 
-#define SEND_PIN  46
+    void TIMER_ENABLE_INTR() {
+        TIMSK5 = _BV(OCIE5A);
+    };
 
+    void TIMER_DISABLE_INTR() {
+        TIMSK5 = 0;
+    };
+
+    void TIMER_CONFIG_HZ(frequency_t frequency, dutycycle_t dutyCycle) {
+        const uint16_t pwmval = F_CPU / 2 / frequency;
+        TCCR5A = _BV(WGM51);
+        TCCR5B = _BV(WGM53) | _BV(CS50);
+        ICR5 = pwmval;
+        OCR5A = pwmval * dutyCycle / 100;
+    };
+
+    void TIMER_CONFIG_NORMAL() {
+        TCCR5A = 0;
+        TCCR5B = _BV(WGM52) | _BV(CS50);
+        OCR5A = F_CPU * microsPerTick / 1000000;
+        TCNT5 = 0;
+    };
+
+#define PWM_PIN 46
+
+///////////////////////////////////////////////////////////////////////////////
 #else // ! defined(IR_USE_TIMER2)
 
 #error Config error, either IR_USE_TIMER1, IR_USE_TIMER2, IR_USE_TIMER3, IR_USE_TIMER4, or IR_USE_TIMER5 must be defined.
 
 #endif
+};
 
 /* From http://busyducks.com/ascii-art-arduinos                              +-----+
 

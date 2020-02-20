@@ -176,7 +176,7 @@ private:
 #define IR_USE_TIMER2     // tx = pin 3
 
 #include "boards/ATmega328P.h"
-#if 0
+
 #elif defined(__AVR_ATmega2560__)
 /////////////////// Mega 2560 etc //////////////////////////////////
 //#define IR_USE_TIMER1   // tx = pin 11
@@ -246,7 +246,7 @@ private:
 #elif defined(ESP8266)
 
 #include "boards/Esp8266.h"
-#endif
+
 #else
 
 #error Your board is currently not supported. Please add it to boarddefs.h.

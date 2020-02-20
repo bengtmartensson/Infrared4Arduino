@@ -19,38 +19,57 @@ this program. If not, see http://www.gnu.org/licenses/.
 
 #include "InfraredTypes.h"
 
-#ifdef USE_DEFAULT_ENABLE_IR_IN
-#undef USE_DEFAULT_ENABLE_IR_IN
-#endif
+#define CURRENT_CLASS Sam
 
-class Sam {
-#define TIMER_RESET
-#define TIMER_ENABLE_PWM     Sam::enable_pwm()
-#define TIMER_DISABLE_PWM    Sam::disable_pwm()
-//#define TIMER_ENABLE_INTR    NVIC_EnableIRQ(TC3_IRQn) // Not presently used
-#define TIMER_DISABLE_INTR   NVIC_DisableIRQ(TC3_IRQn)
-//#define TIMER_INTR_NAME      TC3_Handler // Not presently used
-#define TIMER_CONFIG_KHZ(f)  Sam::pwm_init(f)
+#define HAS_HARDWARE_PWM 1
+
+//  Default PWM pin
+#define PWM_PIN 3
 
 #ifdef ISR
 #undef ISR
 #endif
 #define ISR(f)  void interruptServiceRoutine()
 
-#define SEND_PIN 12 // 3
+class Sam : public Board {
+public:
 
-    static const unsigned int timer_prescale = 1U;
+    Sam() {
+    };
+
+private:
+    pin_t pwmPin;
+    static constexpr bool invert = false;
+    uint16_t maxValue;
+    uint16_t onLength;
+    bool timerTCC0;
+    bool timerTCC1;
+    bool timerTCC2;
+    Tcc* TCCx;
+
+    void TIMER_CONFIG_NORMAL();
+
+    void TIMER_ENABLE_INTR();
+
+    void TIMER_DISABLE_INTR();
+
+    void TIMER_CONFIG_HZ(frequency_t hz __attribute__ ((unused)), dutycycle_t dutyCycle __attribute__ ((unused))) {
+        TIMER_CONFIG_HZ(PWM_PIN, hz, dutyCycle);
+    };
+
+    void TIMER_CONFIG_HZ(pin_t pin, frequency_t hz, dutycycle_t dutyCycle);
+
+    void TIMER_ENABLE_PWM() {
+        setValue(onLength);
+    };
+
+    void TIMER_DISABLE_PWM() {
+        setValue(0U);
+    }
 
     static const unsigned int TIMER_PRESCALER_DIV = 64U;
 
-    static void setTimerFrequency(frequency_t hz);
+    void setTimerFrequency(frequency_t hz);
 
-public:
-    static void startTimer();
-
-    static void enable_pwm();
-
-    static void disable_pwm();
-
-    static void pwm_init(frequency_t f);
+    void setValue(uint16_t value);
 };

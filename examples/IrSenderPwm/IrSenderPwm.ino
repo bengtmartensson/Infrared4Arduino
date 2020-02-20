@@ -5,7 +5,6 @@
 #include <IrSenderPwm.h>
 
 static const frequency_t necFrequency = 38400U;
-static const dutycycle_t dutyCycle = 30U;
 static const unsigned long BAUD = 115200U;
 
 // NEC(1) 122 29 with no repetition; powers on many Yamaha receivers
@@ -19,6 +18,7 @@ static const microseconds_t array[] = {
 };
 
 static const IrSequence irSequence(array, sizeof(array) / sizeof(microseconds_t));
+static dutycycle_t dutyCycle;
 
 void setup() {
     Serial.begin(BAUD);
@@ -30,6 +30,8 @@ void setup() {
         Serial.println(F("Hardware PWM available!"));
     else
         Serial.println(F("Hardware PWM NOT available, will be emulated in software."));
+    randomSeed(analogRead(A0));
+    dutyCycle = (dutycycle_t) random(20,80);
 }
 
 void loop() {

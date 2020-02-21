@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include "IrReceiverPoll.h"
+#include "IrReceiverSampler.h"
 
 IrReceiverPoll::IrReceiverPoll(size_t captureLength,
         pin_t pin_,
@@ -55,7 +56,7 @@ void IrReceiverPoll::collectData() {
             recordDuration(now - lastTime);
             lastDataRead = data;
             lastTime = now;
-        } else if (data == HIGH && (now - lastTime > endingTimeoutInMicros)) {
+        } else if (data == IrReceiver::IR_SPACE && (now - lastTime > endingTimeoutInMicros)) {
             recordDuration(now - lastTime);
             return; // normal exit
         }

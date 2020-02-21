@@ -12,14 +12,11 @@
 #include <sys/time.h>
 #include <unistd.h>
 
+#include "InfraredTypes.h"
+#include "PinModeStatus.h"
+
 #define REPORT_TIMES
 //#define REAL_TIME
-
-#ifdef __GNUC__
-#define UNUSED __attribute__ ((unused))
-#else
-#define UNUSED
-#endif
 
 #define String std::string
 
@@ -39,6 +36,7 @@
 #define A7 107
 #define  LED_BUILTIN 13
 
+// Can't use pin_t yet
 extern uint8_t currentWritePin; // SIL.cpp
 extern struct timeval simulatedTime;
 
@@ -53,15 +51,15 @@ static timeval getTimeOfDay() {
 }
 
 static struct timeval last = getTimeOfDay();
-static int lastValue = -1;
+static PinStatus lastValue = LOW;
 
-inline void pinMode(uint8_t pin, int mode) {
+inline void pinMode(uint8_t pin, PinMode mode) {
     std::cout << "pinMode(" << (int) pin << ", "
-            << (mode == 0 ? "INPUT" : mode == 1 ? "OUTPUT" : "INPUT_PULLUP")
+            << (mode == INPUT ? "INPUT" : mode == OUTPUT ? "OUTPUT" : mode == INPUT_PULLUP ? "INPUT_PULLUP" : "INPUT_PULLDOWN")
             << ")" << std::endl;
-    if (mode == 1) {
+    if (mode == OUTPUT) {
         currentWritePin = pin;
-        lastValue = -1;
+        lastValue = LOW;
     }
 };
 
@@ -98,44 +96,38 @@ inline unsigned long millis() {
     return 1000*tv.tv_sec + tv.tv_usec/1000;
 }
 
-inline uint8_t digitalRead(uint8_t pin UNUSED) {
+inline uint8_t digitalRead(uint8_t pin __attribute__((unused))) {
     return 0;
 };
 
-inline void digitalWrite(uint8_t pin UNUSED, uint8_t value) {
+inline void digitalWrite(uint8_t pin __attribute__((unused)), PinStatus value) {
 #ifdef REPORT_TIMES
 //    if (pin != currentPin)
 //        return;
     struct timeval now = getTimeOfDay();
     if (lastValue == -1)
-        if (value == 0)
+        if (value == LOW)
             return;
         else {
             lastValue = value;
             last = now;
         }
-    else if (lastValue == (value != 0))
+    else if (lastValue == (value != LOW))
         return;
     else {
         char sign = value ? '-' : '+';
         std::cout << sign << 1000000UL * (now.tv_sec - last.tv_sec) + (now.tv_usec - last.tv_usec) << " ";
         last = now;
-        lastValue = (bool) value;
+        lastValue = value;
     }
 #else
     std::cout << "digitalWrite(" << (int) pin << ", "
-            << (value == 0 ? "LOW" : "HIGH") << ")" << std::endl;
+            << (value == LOW ? "LOW" : "HIGH") << ")" << std::endl;
 #endif
 };
 
-#define HIGH 1
-#define LOW 0
 
-#define INPUT 0x0
-#define OUTPUT 0x1
-#define INPUT_PULLUP 0x2
-
-#define F_CPU 16000000
+#define F_CPU 16000000 // Good default, correct for Unu etc
 
 // Stream
 

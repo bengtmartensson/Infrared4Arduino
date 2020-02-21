@@ -34,6 +34,9 @@ this program. If not, see http://www.gnu.org/licenses/.
 
 class ATmega32U4 : public Board {
 public:
+    ATmega32U4() {};
+
+private:
 
 ///////////////////////////////////////////////////////////////////////////////
 #if defined(IR_USE_TIMER1)

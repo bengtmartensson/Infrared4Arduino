@@ -28,6 +28,7 @@ this program. If not, see http://www.gnu.org/licenses/.
 #pragma once
 
 #include "IrSignal.h"
+#include "PinModeStatus.h"
 
 class Board {
 protected:
@@ -42,8 +43,8 @@ public:
     virtual void writeLow(pin_t pin) { digitalWrite(pin, LOW); };
     virtual void writeHigh(pin_t pin) { digitalWrite(pin, HIGH); };
 
-    void setPinMode(pin_t pin, uint8_t mode) { pinMode(pin, mode); };
-    bool readDigital(pin_t pin) { return digitalRead(pin) == HIGH; };
+    void setPinMode(pin_t pin, PinMode mode) { pinMode(pin, mode); };
+    bool readDigital(pin_t pin) { return digitalRead(pin); };
 
     virtual pin_t getPwmPin() const;
 
@@ -267,7 +268,7 @@ inline void Board::writeHigh() { digitalWrite(getPwmPin(), HIGH); };
 
 inline constexpr bool Board::hasHardwarePwm() { return false; };
 inline constexpr pin_t Board::defaultPwmPin() { return NO_PIN; };
-;inline pin_t Board::getPwmPin() const { return PWM_PIN; };
+inline pin_t Board::getPwmPin() const { return PWM_PIN; };
 inline void Board::writeLow() { digitalWrite(getPwmPin(), LOW); };
 inline void Board::writeHigh() { digitalWrite(getPwmPin(), HIGH); };
 

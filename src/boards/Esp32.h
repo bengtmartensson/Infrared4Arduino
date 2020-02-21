@@ -15,38 +15,27 @@ You should have received a copy of the GNU General Public License along with
 this program. If not, see http://www.gnu.org/licenses/.
  */
 
+/**
+ * @file Esp.h
+ *
+ * @brief Hardware dependent definitions for Esp32 boards.
+ * Based upon https://github.com/z3t0/Arduino-IRremote/pull/540/files
+ * by Sensorslot (Andreas Spiess), as well as
+ * https://github.com/anothermist/LIBRARIES/blob/master/IRremote/esp32.cpp
+ */
+
 #pragma once
 
-#include "boarddefs.h"
-
-#ifdef USE_DEFAULT_ENABLE_IR_IN
-#undef USE_DEFAULT_ENABLE_IR_IN
-#endif
+//#define HAS_FLASH_READ // ??
+#define HAS_HARDWARE_PWM 1
+#define CURRENT_CLASS Esp32
 
 #ifndef LED_BUILTIN
 #define LED_BUILTIN 2
 #endif
 
-#define TIMER_SIZE 8
-#define TIMER_RESET
-#define TIMER_DISABLE_INTR do { \
-    if (Esp32::timer != NULL) { \
-        timerEnd(Esp32::timer); \
-        timerDetachInterrupt(Esp32::timer); \
-    } \
-} while(false)
-
-#define SEND_PIN 5
-
-#define TIMER_ENABLE_PWM        ledcWrite(LEDCHANNEL, 50)
-#define TIMER_DISABLE_PWM       ledcWrite(LEDCHANNEL, 0)
-#define TIMER_CONFIG_KHZ(khz)   do { \
-    ledcSetup(LEDCHANNEL, khz*1000, TIMER_SIZE); \
-    ledcAttachPin(SEND_PIN, LEDCHANNEL); \
-} while (0)
-
-#define TIMER_INTR_NAME
 #define LEDCHANNEL 0
+#define TIMER_SIZE 8
 
 #ifdef ISR
 #undef ISR
@@ -55,7 +44,52 @@ this program. If not, see http://www.gnu.org/licenses/.
 
 void IRTimer(); // defined in IrReceiverSampler.cpp, masqueraded as ISR(TIMER_INTR_NAME)
 
-class Esp32 {
+#define PWM_PIN 5
+
+class Esp32 : public Board {
 public:
+
+    Esp32() {
+    };
+
+private:
+
     static hw_timer_t* timer;
+    uint8_t onValue;
+
+    void TIMER_ENABLE_INTR() {
+        // Interrupt Service Routine - Fires every 50uS
+        // ESP32 has a proper API to setup timers, no weird chip macros needed
+        // simply call the readable API versions :)
+        // 3 timers, choose #1, 80 divider nanosecond precision, 1 to count up
+        Esp32::timer = timerBegin(1, 80, 1);
+        timerAttachInterrupt(Esp32::timer, IRTimer, true);
+        // every 50 microseconds, autoreload = true
+        timerAlarmWrite(Esp32::timer, microsPerTick, true);
+        timerAlarmEnable(Esp32::timer);
+    };
+
+    void TIMER_DISABLE_INTR() {
+        if (Esp32::timer != NULL) {
+            timerEnd(Esp32::timer);
+            timerDetachInterrupt(Esp32::timer);
+        }
+    };
+
+    void TIMER_ENABLE_PWM() {
+        ledcWrite(LEDCHANNEL, onValue);
+    };
+
+    void TIMER_DISABLE_PWM() {
+        ledcWrite(LEDCHANNEL, 0);
+    };
+
+    void TIMER_CONFIG_HZ(frequency_t frequency, dutycycle_t dutyCycle) {
+        onValue = (uint8_t) (256U * dutyCycle / 100U);
+        ledcSetup(LEDCHANNEL, frequency, TIMER_SIZE);
+        ledcAttachPin(PWM_PIN, LEDCHANNEL);
+    };
+
+    void TIMER_CONFIG_NORMAL() {
+    }
 };

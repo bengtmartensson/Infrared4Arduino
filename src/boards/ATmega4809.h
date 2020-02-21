@@ -29,44 +29,69 @@ this program. If not, see http://www.gnu.org/licenses/.
 
 #pragma once
 
-#include "avr.h"
+#define HAS_FLASH_READ
+#define HAS_HARDWARE_PWM
+#define CURRENT_CLASS ATmega4809
 
-#define USE_DEFAULT_ENABLE_IR_IN
+class ATmega4809 : public Board {
+public:
+    ATmega4809() {
+    };
+
+private:
 
 #ifdef IR_USE_TIMER1
-
-#define TIMER_RESET          TCB0.INTFLAGS = TCB_CAPT_bm
-//#define TIMER_ENABLE_PWM     (TCB0.CTRLB = TCB_CNTMODE_PWM8_gc)
-//#define TIMER_DISABLE_PWM    (TCB0.CTRLB &= ~(TCB_CNTMODE_PWM8_gc))
-#define TIMER_ENABLE_PWM     (TCB0.CTRLB |= TCB_CCMPEN_bm)
-#define TIMER_DISABLE_PWM    (TCB0.CTRLB &= ~(TCB_CCMPEN_bm))
-#define TIMER_ENABLE_INTR    (TCB0.INTCTRL = TCB_CAPT_bm)
-#define TIMER_DISABLE_INTR   (TCB0.INTCTRL &= ~(TCB_CAPT_bm))
-
+///////////////////////////////////////////////////////////////////////////////
 #define TIMER_INTR_NAME      TCB0_INT_vect
-#define TIMER_CONFIG_KHZ(val) ({ \
-  const uint8_t pwmval = F_CPU / 2000 / (val); \
-  TCB0.CTRLB = TCB_CNTMODE_PWM8_gc; \
-  TCB0.CCMPL = pwmval; \
-  TCB0.CCMPH = pwmval / 3; \
-  TCB0.CTRLA = (TCB_CLKSEL_CLKDIV2_gc) | (TCB_ENABLE_bm); \
-})
-#define TIMER_COUNT_TOP      ((F_CPU * USECPERTICK / 1000000))
-#define TIMER_CONFIG_NORMAL() ({ \
-  TCB0.CTRLB = (TCB_CNTMODE_INT_gc); \
-  TCB0.CCMP = TIMER_COUNT_TOP; \
-  TCB0.INTCTRL = TCB_CAPT_bm; \
-  TCB0.CTRLA = (TCB_CLKSEL_CLKDIV1_gc) | (TCB_ENABLE_bm); \
-})
 
-#define SEND_PIN  6
+    void TIMER_RESET() {
+        TCB0.INTFLAGS = TCB_CAPT_bm;
+    };
+    //#define TIMER_ENABLE_PWM     (TCB0.CTRLB = TCB_CNTMODE_PWM8_gc)
+    //#define TIMER_DISABLE_PWM    (TCB0.CTRLB &= ~(TCB_CNTMODE_PWM8_gc))
 
+    void TIMER_ENABLE_PWM() {
+        TCB0.CTRLB |= TCB_CCMPEN_bm;
+    };
+
+    void TIMER_DISABLE_PWM() {
+        TCB0.CTRLB &= ~(TCB_CCMPEN_bm);
+    };
+
+    void TIMER_ENABLE_INTR() {
+        TCB0.INTCTRL = TCB_CAPT_bm;
+    };
+
+    void TIMER_DISABLE_INTR() {
+        TCB0.INTCTRL &= ~TCB_CAPT_bm;
+    };
+
+    void TIMER_CONFIG_HZ(frequency_t frequency, dutycycle_t dutyCycle) {
+        const uint8_t pwmval = F_CPU / 2U / frequency;
+        TCB0.CTRLB = TCB_CNTMODE_PWM8_gc;
+        TCB0.CCMPL = pwmval;
+        TCB0.CCMPH = pwmval * dutyCycle / 100UL;
+        TCB0.CTRLA = TCB_CLKSEL_CLKDIV2_gc | TCB_ENABLE_bm;
+    };
+
+    void TIMER_CONFIG_NORMAL() {
+        TCB0.CTRLB = TCB_CNTMODE_INT_gc;
+        TCB0.CCMP = F_CPU * microsPerTick / 1000000UL;
+        TCB0.INTCTRL = TCB_CAPT_bm;
+        TCB0.CTRLA = TCB_CLKSEL_CLKDIV1_gc | TCB_ENABLE_bm;
+    };
+
+#define PWM_PIN  6
+
+///////////////////////////////////////////////////////////////////////////////
 #elif defined(IR_USE_TIMER2) // ! defined(IR_USE_TIMER1)
+
 // TODO... ;-)
-#error IR_USE_TIMER2 is not yet implemented
+#error IR_USE_TIMER2 for this architecture is not yet implemented, sorry.
 
 #else // ! defined(IR_USE_TIMER2)
 
 #error Config error, either IR_USE_TIMER1 or IR_USE_TIMER2 must be defined.
 
 #endif
+};

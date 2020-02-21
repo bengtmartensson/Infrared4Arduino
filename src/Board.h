@@ -227,7 +227,7 @@ private:
 //  #define IR_USE_SAM // Used to correct code where needed to be compatible with the Due.
 //  #define IR_USE_DUE // Used to correctly map pins. (The idea being there might be more than one Arduino model based on SAM cores.)
 
-#include "boards/due.h"
+#include "boards/Due.h"
 
 #elif defined(__MK20DX128__) || defined(__MK20DX256__) || defined(__MK64FX512__) || defined(__MK66FX1M0__)
 // Teensy 3.0 / Teensy 3.1 / 3.2

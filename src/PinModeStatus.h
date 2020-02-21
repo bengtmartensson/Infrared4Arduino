@@ -21,7 +21,8 @@ this program. If not, see http://www.gnu.org/licenses/.
 
 #pragma once
 
-#if !defined(ARDUINO) || defined(ARDUINO_ARCH_AVR) || defined(ARDUINO_ARCH_SAMD) || defined(ARDUINO_ARCH_SAM)
+#if !defined(ARDUINO) || defined(ARDUINO_ARCH_AVR) || defined(ARDUINO_ARCH_SAMD) \
+ || defined(ARDUINO_ARCH_SAM) || defined(TEENSYDUINO)
 
 #ifdef LOW
 #undef LOW

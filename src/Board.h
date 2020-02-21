@@ -232,7 +232,7 @@ private:
 #elif defined(__MK20DX128__) || defined(__MK20DX256__) || defined(__MK64FX512__) || defined(__MK66FX1M0__)
 // Teensy 3.0 / Teensy 3.1 / 3.2
 
-#include "boards/teensy3x.h"
+#include "boards/Teensy3x.h"
 
 #elif defined(ARDUINO_ARCH_SAM) || defined(ARDUINO_ARCH_SAMD)
 

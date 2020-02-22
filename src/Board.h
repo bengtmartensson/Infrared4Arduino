@@ -32,7 +32,9 @@ this program. If not, see http://www.gnu.org/licenses/.
 
 class Board {
 protected:
-    Board() {};
+    Board() {
+        setupDebugPin();
+    };
 
 public:
     static void delayMicroseconds(microseconds_t);
@@ -150,9 +152,16 @@ protected:
     virtual void TIMER_DISABLE_PWM() = 0;
 
 public:
+    // Function defined later in this file
     static constexpr pin_t defaultPwmPin();
 
     static constexpr bool hasHardwarePwm();
+
+    static void debugPinHigh();
+
+    static void debugPinLow();
+
+    static void setupDebugPin();
 
 private:
     static Board* instance;
@@ -253,6 +262,26 @@ private:
 #error Your board is currently not supported. Please add it to boarddefs.h.
 
 #endif
+
+//#define DEBUG_PIN 2
+
+inline void Board::setupDebugPin() {
+#ifdef DEBUG_PIN
+    instance->setPinMode(DEBUG_PIN, OUTPUT);
+#endif
+}
+
+inline void Board::debugPinHigh() {
+#ifdef DEBUG_PIN
+    digitalWrite(DEBUG_PIN, HIGH);
+#endif
+}
+
+inline void Board::debugPinLow() {
+#ifdef DEBUG_PIN
+    digitalWrite(DEBUG_PIN, LOW);
+#endif
+}
 
 #ifdef HAS_HARDWARE_PWM
 

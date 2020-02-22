@@ -86,6 +86,7 @@ milliseconds_t IrReceiverSampler::getBeginningTimeout() const {
 #ifdef ISR
 /** Interrupt routine. It collects data into the data buffer. */
 ISR(TIMER_INTR_NAME) {
+    Board::debugPinHigh();
     Board::getInstance()->TIMER_RESET();
     IrReceiverSampler *recv = IrReceiverSampler::getInstance();
     IrReceiver::irdata_t irdata = recv->readIr();
@@ -139,5 +140,11 @@ ISR(TIMER_INTR_NAME) {
             // should not happen
             break;
     }
+    Board::debugPinLow();
+    //os_timer_disarm(&Esp8266::timer);
+    //os_intr_lock();
+    //os_timer_setfn(&Esp8266::timer, IRTimer, NULL);
+
+    //os_timer_arm_us(&Esp8266::timer, Board::microsPerTick, false);
 }
 #endif // ISR

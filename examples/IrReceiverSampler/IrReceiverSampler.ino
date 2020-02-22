@@ -46,6 +46,10 @@ void setup() {
     Serial.print("Listening on pin ");
     Serial.println(receiver->getPin(), DEC);
     receiver->enable();
+#ifdef DEBUG_PIN
+    Serial.print(F("Debug pin = "));
+    Serial.println(DEBUG_PIN, DEC);
+#endif
 }
 
 void loop() {

@@ -6,8 +6,6 @@
 
 #ifdef ESP32
 #define RECEIVE_PIN 4U
-#elif defined(ESP8266)
-#define RECEIVE_PIN 4U // D2
 #elif defined(ARDUINO_AVR_MICRO)
 #define RECEIVE_PIN    10
 #else

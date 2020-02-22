@@ -253,9 +253,9 @@ private:
 #include "boards/Esp32.h"
 
 ///////////////////// ESP8266
-#elif defined(ESP8266)
-
-#include "boards/Esp8266.h"
+// This board is not supported, see
+// https://github.com/bengtmartensson/Infrared4Arduino/issues/5
+// for the reasons.
 
 #else
 

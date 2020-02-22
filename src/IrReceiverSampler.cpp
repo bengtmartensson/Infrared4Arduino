@@ -141,10 +141,5 @@ ISR(TIMER_INTR_NAME) {
             break;
     }
     Board::debugPinLow();
-    //os_timer_disarm(&Esp8266::timer);
-    //os_intr_lock();
-    //os_timer_setfn(&Esp8266::timer, IRTimer, NULL);
-
-    //os_timer_arm_us(&Esp8266::timer, Board::microsPerTick, false);
 }
 #endif // ISR

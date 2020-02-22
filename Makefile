@@ -65,7 +65,9 @@ IrDecoder.h \
 IrSenderNonMod.h \
 IrSequenceReader.h \
 
-EXPORTED_INCLUDES := $(sort $(EXTRA_INCLUDES) $(subst .o,.h,$(OBJS)))
+NOT_EXPORTED_INCLUDE  = SIL.h Board.h
+
+EXPORTED_INCLUDES := $(sort $(filter-out $(NOT_EXPORTED_INCLUDE), $(EXTRA_INCLUDES) $(subst .o,.h,$(OBJS))))
 
 all: test doc keywords.txt library.properties
 
@@ -89,7 +91,7 @@ $(VERSION_H): library.properties Makefile
 	echo " */"                                                           >> $@
 	echo "#define VERSION \"$(VERSION)\""                                >> $@
 
-api-doc/index.html xml/index.xml: $(wildcard src/*) $(VERSION_H) $(DOXYFILE)
+api-doc/index.html xml/index.xml: $(wildcard src/*) $(VERSION_H) $(DOXYFILE) README.md
 	GIT_VERSION=$(VERSION) $(DOXYGEN) $(DOXYFILE)
 
 doc: api-doc/index.html

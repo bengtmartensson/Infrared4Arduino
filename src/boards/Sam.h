@@ -21,7 +21,10 @@ this program. If not, see http://www.gnu.org/licenses/.
 
 #define CURRENT_CLASS Sam
 
-#define HAS_HARDWARE_PWM 1
+#define HAS_FLASH_READ      1
+#define HAS_HARDWARE_PWM    1
+#define HAS_SAMPLING        1
+#define HAS_INPUT_CAPTURE   0
 
 //  Default PWM pin
 #define PWM_PIN 3

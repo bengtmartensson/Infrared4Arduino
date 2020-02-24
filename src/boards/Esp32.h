@@ -26,9 +26,12 @@ this program. If not, see http://www.gnu.org/licenses/.
 
 #pragma once
 
-//#define HAS_FLASH_READ // ??
-#define HAS_HARDWARE_PWM 1
 #define CURRENT_CLASS Esp32
+
+#define HAS_FLASH_READ      0
+#define HAS_HARDWARE_PWM    1
+#define HAS_SAMPLING        1
+#define HAS_INPUT_CAPTURE   0
 
 #ifndef LED_BUILTIN
 #define LED_BUILTIN 2

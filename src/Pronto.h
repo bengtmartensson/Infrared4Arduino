@@ -68,10 +68,11 @@ public:
     static IrSignal *parse(const char *str);
 
 #ifdef ARDUINO
-   /**
+    /**
      * Function for parsing its input data into an IrSignal. The ending sequence will always be empty.
      * @param str Text string containing a Pronto form signal.
      * This form handles the F(...) form.
+     * Available only on platforms implementing the str*_PF functions.
      * @return IrSignal
      */
     static IrSignal *parse(const __FlashStringHelper *str);

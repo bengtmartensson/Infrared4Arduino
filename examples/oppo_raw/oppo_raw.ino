@@ -8,6 +8,10 @@
 
 #include <IrSenderPwm.h>
 
+#if ! HAS_FLASH_READ
+#error This example will not run on your board, since it lacks the flash reading functions.
+#endif
+
 // Constants
 static const long BAUD = 115200UL; // Change if desired
 

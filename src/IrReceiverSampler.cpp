@@ -1,6 +1,8 @@
 #include "IrReceiverSampler.h"
 #include "Board.h"
 
+#if HAS_SAMPLING
+
 uint32_t IrReceiverSampler::millisecs2ticks(milliseconds_t ms) {
     return (1000UL * (uint32_t) ms) / Board::microsPerTick;
 }
@@ -143,3 +145,5 @@ ISR(TIMER_INTR_NAME) {
     Board::debugPinLow();
 }
 #endif // ISR
+
+#endif

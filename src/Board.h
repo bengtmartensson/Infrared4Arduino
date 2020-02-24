@@ -259,7 +259,12 @@ private:
 
 #else
 
-#error Your board is currently not supported. Please add it to boarddefs.h.
+//#error Your board is currently not supported. Please add it to boarddefs.h.
+#warning The present board is either unknow, or does not support (Hardware) PWM \
+or equidistant timer sampling. The classes IrReceiverSampler and \
+IrSenderPwmHard will not be available.
+
+#include "boards/NoBoard.h"
 
 #endif
 
@@ -297,7 +302,7 @@ inline void Board::writeHigh() { digitalWrite(getPwmPin(), HIGH); };
 
 inline constexpr bool Board::hasHardwarePwm() { return false; };
 inline constexpr pin_t Board::defaultPwmPin() { return NO_PIN; };
-inline pin_t Board::getPwmPin() const { return PWM_PIN; };
+inline pin_t Board::getPwmPin() const { return NO_PIN; };
 inline void Board::writeLow() { digitalWrite(getPwmPin(), LOW); };
 inline void Board::writeHigh() { digitalWrite(getPwmPin(), HIGH); };
 

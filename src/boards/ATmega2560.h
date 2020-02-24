@@ -27,7 +27,10 @@ this program. If not, see http://www.gnu.org/licenses/.
 
 #define CURRENT_CLASS ATmega2560
 
-#define HAS_HARDWARE_PWM 1
+#define HAS_FLASH_READ      1
+#define HAS_HARDWARE_PWM    1
+#define HAS_SAMPLING        1
+#define HAS_INPUT_CAPTURE   1
 
 class ATmega2560 : public Board {
 public:

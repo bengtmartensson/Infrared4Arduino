@@ -5,7 +5,7 @@
 
 #include "IrWidgetAggregating.h"
 
-#ifdef TCCR0B
+#if HAS_INPUT_CAPTURE
 
 static const frequency_t min_frequency = 20000U;
 

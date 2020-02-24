@@ -20,7 +20,11 @@ this program. If not, see http://www.gnu.org/licenses/.
 #include "Board.h"
 
 #define CURRENT_CLASS NoBoard
-//#define HAS_HARDWARE_PWM 0
+
+#define HAS_FLASH_READ      0
+#define HAS_HARDWARE_PWM    0
+#define HAS_SAMPLING        0
+#define HAS_INPUT_CAPTURE   0
 
 class NoBoard : public Board {
 #define PWM_PIN Board::NO_PIN

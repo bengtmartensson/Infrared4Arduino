@@ -1,4 +1,5 @@
 #include "IrSequence.h"
+#include "Board.h"
 #include <string.h>
 
 IrSequence::IrSequence() : durations(NULL), length(0U), toBeFreed(false) {
@@ -36,7 +37,8 @@ void IrSequence::dump(Stream& stream, bool usingSigns) const {
     stream.println();
 }
 
-#ifdef HAS_FLASH_READ
+// If ! HAS_FLASH_READ, allow compiling, but let linking bail out, if using it.
+#if HAS_FLASH_READ
 IrSequence* IrSequence::readFlash(const microseconds_t *flashData, size_t length) {
     microseconds_t* data = new microseconds_t[length];
     memcpy_PF(data, (uint_farptr_t) flashData, sizeof(microseconds_t) * length);

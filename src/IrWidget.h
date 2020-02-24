@@ -28,6 +28,7 @@ http://arduino.cc/en/Hacking/PinMapping2560
 
 #include <Arduino.h>
 #include "IrReader.h"
+#include "Board.h"
 
 #define ENABLE_PULL_UP
 //#define DEBUG_PORT D

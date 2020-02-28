@@ -6,6 +6,7 @@
 
 static const frequency_t necFrequency = 38400U;
 static const unsigned long BAUD = 115200U;
+static const pin_t PIN = 3U;
 
 // NEC(1) 122 29 with no repetition; powers on many Yamaha receivers
 static const microseconds_t array[] = {
@@ -19,27 +20,27 @@ static const microseconds_t array[] = {
 
 static const IrSequence irSequence(array, sizeof(array) / sizeof(microseconds_t));
 static dutycycle_t dutyCycle;
+IrSender* irSender;
 
 void setup() {
     Serial.begin(BAUD);
     while (!Serial)
         ;
-    //Serial.print("Output on pin ");
-    //Serial.println(Board::getInstance()->getPwmPin(), DEC);
     if (Board::getInstance()->hasHardwarePwm())
         Serial.println(F("Hardware PWM available!"));
     else
         Serial.println(F("Hardware PWM NOT available, will be emulated in software."));
     randomSeed(analogRead(A0));
     dutyCycle = (dutycycle_t) random(20,80);
+    irSender = IrSenderPwm::getInstance(true, PIN);
 }
 
 void loop() {
     Serial.print(F("Shooting @ pin "));
-    Serial.print(IrSenderPwm::getInstance(true)->getPin(), DEC);
+    Serial.print(irSender->getPin(), DEC);
     Serial.print(F(" with duty cycle "));
     Serial.print(dutyCycle, DEC);
     Serial.println("%");
-    IrSenderPwm::getInstance(true)->send(irSequence, necFrequency, dutyCycle);
+    irSender->send(irSequence, necFrequency, dutyCycle);
     delay(5000);
 }

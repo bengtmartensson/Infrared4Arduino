@@ -34,7 +34,7 @@ protected:
     static const unsigned int PULSE_CORRECTION = 3U;
 
     virtual void sleepMicros(microseconds_t us) = 0;
-    virtual void sleepUntilMicros(unsigned long terminateTime) = 0;
+    virtual void sleepUntilMicros(uint32_t terminateTime) = 0;
     microseconds_t periodTime;
     microseconds_t periodOnTime;
     microseconds_t periodOffTime;

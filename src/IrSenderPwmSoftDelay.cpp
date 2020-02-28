@@ -22,31 +22,13 @@ this program. If not, see http://www.gnu.org/licenses/.
 IrSenderPwmSoftDelay::IrSenderPwmSoftDelay(pin_t outputPin) : IrSenderPwmSoft(outputPin) {
 }
 
-//void IrSenderPwmSoftDelay::sendMark(milliseconds_t time) {
-//    unsigned long start = micros();
-//    unsigned long stop = start + time;
-//    if (stop + (unsigned long) periodTime < start)
-//        // Counter wrap-around, happens very seldomly, but CAN happen.
-//        // Just give up instead of possibly damaging the hardware.
-//        return;
-//
-//    unsigned long nextPeriodEnding = start;
-//    unsigned long now = micros();
-//    while (now < stop) {
-//        writeHigh();
-//        sleepMicros(periodOnTime);
-//        writeLow();
-//        nextPeriodEnding += periodTime;
-//        sleepUntilMicros(nextPeriodEnding);
-//        now = micros();
-//    }
-//}
-
 void IrSenderPwmSoftDelay::sleepMicros(microseconds_t us) {
     if (us > 0U) // Is this necessary? (Official docu https://www.arduino.cc/en/Reference/DelayMicroseconds does not tell.)
-        delayMicroseconds((unsigned int) us);
+        Board::delayMicroseconds(us);
 }
 
-void IrSenderPwmSoftDelay::sleepUntilMicros(unsigned long targetTime) {
-    sleepMicros(targetTime - micros());
+void IrSenderPwmSoftDelay::sleepUntilMicros(uint32_t targetTime) {
+    uint32_t time = targetTime - micros();
+    delay(time/1000UL);
+    ::delayMicroseconds((microseconds_t) (time % 1000UL));
 }

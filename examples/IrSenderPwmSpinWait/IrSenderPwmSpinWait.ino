@@ -1,11 +1,11 @@
-// This sketch sends a raw signal using the PWM sender every 5 seconds.
+// This sketch sends a raw signal using the soft PWM sender every 5 seconds.
 // It requires an IR-Led connected to the sending pin
-// (3 on Uno/Nano, 9 on Leonardo/Uno, 9 on Mega2560 etc...)
 
 #include <IrSenderPwmSpinWait.h>
 
 static const frequency_t necFrequency = 38400U;
-static const pin_t pin = 5;
+static const pin_t pin = 3U;
+static const unsigned long BAUD = 115200UL;
 
 // NEC(1) 122 29 with no repetition; powers on many Yamaha receivers
 static const microseconds_t array[] = {
@@ -18,12 +18,18 @@ static const microseconds_t array[] = {
 };
 
 static const IrSequence irSequence(array, sizeof(array) / sizeof(microseconds_t));
-IrSender* irSender = new IrSenderPwmSpinWait(pin);
+IrSender* irSender;
 
 void setup() {
+    Serial.begin(BAUD);
+    while (!Serial)
+        ;
+    irSender = new IrSenderPwmSpinWait(pin);
 }
 
 void loop() {
-    irSender->send(irSequence, necFrequency);
+    Serial.print("sending on pin ");
+    Serial.println(pin, DEC);
+    irSender->send(irSequence, necFrequency, 33U);
     delay(5000);
 }

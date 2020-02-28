@@ -29,32 +29,10 @@ this program. If not, see http://www.gnu.org/licenses/.
  */
 class IrSenderPwmSpinWait : public IrSenderPwmSoft {
 private:
-
-//    inline void writeHigh() {
-//        digitalWrite(getOutputPin(), HIGH);
-//    }
-//
-//    inline void writeLow() {
-//        digitalWrite(getOutputPin(), LOW);
-//    }
-
-    //void enable(frequency_t khz);
-//    void mark(microseconds_t duration);
-
-//    microseconds_t periodTime;
-//    microseconds_t periodOnTime;
-//    microseconds_t periodOffTime;
-
-    //static const unsigned int dutyCycle = 40;
-    //static const int pulseCorrection = 3;
-
-    //void sendSpace(microseconds_t t);
-    //void sendMark(microseconds_t t);
     void sleepMicros(microseconds_t t);
-    void sleepUntilMicros(unsigned long t);
+    void sleepUntilMicros(uint32_t t);
 
 public:
-
     IrSenderPwmSpinWait(pin_t sendPin);
     virtual ~IrSenderPwmSpinWait() {};
 };

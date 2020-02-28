@@ -23,7 +23,7 @@ this program. If not, see http://www.gnu.org/licenses/.
 
 IrSenderPwmHard *IrSenderPwmHard::instance = NULL;
 
-IrSenderPwmHard::IrSenderPwmHard(pin_t outputPin) : IrSenderPwm(outputPin) {
+IrSenderPwmHard::IrSenderPwmHard(pin_t outputPin __attribute__((unused))) : IrSenderPwm(PWM_PIN) {
 };
 
 IrSenderPwmHard::~IrSenderPwmHard() {

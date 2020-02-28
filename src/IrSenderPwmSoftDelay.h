@@ -29,16 +29,6 @@ class IrSenderPwmSoftDelay : public IrSenderPwmSoft {
 public:
     IrSenderPwmSoftDelay(pin_t outpitPin); // default is not meaningful!!
     virtual ~IrSenderPwmSoftDelay() {}
-    //void enable(unsigned char khz);
-    //void sendSpace(microseconds_t time);
-    //void sendMark(microseconds_t time);
-    //static const unsigned int PULSE_CORRECTION = 3U;
-
     void sleepMicros(microseconds_t us);
-    void sleepUntilMicros(unsigned long terminateTime);
-//    microseconds_t periodTime;
-//    microseconds_t periodOnTime;
-
-//public:
-//    void send(const IrSequence& sequence, frequency_t frequency = IrSignal::defaultFrequency);
+    void sleepUntilMicros(uint32_t terminateTime);
 };

@@ -288,6 +288,11 @@ inline void Board::debugPinLow() {
 #endif
 }
 
+#if !HAS_FLASH_READ
+// Dummy definition for allowing compiling some stuff
+typedef void *  uint_farptr_t;
+#endif
+
 #ifdef HAS_HARDWARE_PWM
 
 inline constexpr bool Board::hasHardwarePwm() {

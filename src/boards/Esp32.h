@@ -33,6 +33,8 @@ this program. If not, see http://www.gnu.org/licenses/.
 #define HAS_SAMPLING        1
 #define HAS_INPUT_CAPTURE   0
 
+#define STRCPY_PF_CAST(x) (x)
+
 #ifndef LED_BUILTIN
 #define LED_BUILTIN 2
 #endif

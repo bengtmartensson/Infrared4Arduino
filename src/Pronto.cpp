@@ -1,5 +1,6 @@
 #include "Pronto.h"
 #include "IrSignal.h"
+#include "Board.h" // for HAS_FLASH_READ
 #include <string.h>
 
 IrSignal *Pronto::parse(const uint16_t *data, size_t size) {
@@ -10,7 +11,7 @@ IrSignal *Pronto::parse(const uint16_t *data, size_t size) {
              frequency = toFrequency(data[1]);
              break;
         case learnedNonModulatedToken: // non-demodulated, "learned"
-            frequency = (frequency_t) 0;
+            frequency = static_cast<frequency_t>(0U);
             break;
         default:
             return NULL;
@@ -34,25 +35,50 @@ IrSignal *Pronto::parse(const uint16_t *data, size_t size) {
 }
 
 IrSignal *Pronto::parse(const char *str) {
+    Serial.println("no collusion");
     size_t len = strlen(str)/(digitsInProntoNumber + 1) + 1;
+    Serial.println(strlen(str), DEC);
+    Serial.println(len, DEC);
+
     uint16_t data[len];
-    unsigned int index = 0;
     const char *p = str;
-    char *endptr[1] = { NULL };
-    while (*p) {
+    char *endptr[1];
+    for (unsigned int i = 0; i < len; i++) {
         long x = strtol(p, endptr, 16);
-        data[index++] = (uint16_t) x; // If input is conforming, there can be no overflow!
+        if (x == 0 && i >= numbersInPreamble) {
+            // Alignment error?, bail immediately (often right result).
+            len = i;
+            break;
+        }
+        Serial.print(i, DEC);
+        Serial.print("\t");
+        Serial.println(x, HEX);
+        data[i] = static_cast<uint16_t>(x); // If input is conforming, there can be no overflow!
         p = *endptr;
     }
-    return parse(data, index);
+    return parse(data, len);
 }
 
 #if HAS_FLASH_READ
+IrSignal *Pronto::parse_PF(uint_farptr_t str) {
+    Serial.println("walton");
+    size_t len = strlen_PF(STRCPY_PF_CAST(str));
+    Serial.println(len, DEC);
+    char work[len + 1];
+    strncpy_PF(work, STRCPY_PF_CAST(str), len);
+    Serial.println(work);
+    return parse(work);
+}
+
+IrSignal *Pronto::parse_PF(const char *str) {
+    Serial.println("covfefe");
+    //Serial.println(strlen_PF(reinterpret_cast<uint_farptr_t>(str)), DEC);
+    return parse_PF(reinterpret_cast<uint_farptr_t>(str)); // to aviod infinite recursion
+};
+
 IrSignal *Pronto::parse(const __FlashStringHelper *str) {
-    size_t length = strlen_PF((uint_farptr_t)str);
-    char copy[length + 1]; // can be made more memory efficient.
-    strcpy_PF(copy, (uint_farptr_t)str);
-    return parse(copy);
+    Serial.println("very stable genius");
+    return parse_PF(reinterpret_cast<uint_farptr_t>(str));
 }
 #endif
 

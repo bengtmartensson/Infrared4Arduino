@@ -36,6 +36,8 @@ this program. If not, see http://www.gnu.org/licenses/.
 #define HAS_SAMPLING        1
 #define HAS_INPUT_CAPTURE   0
 
+#define STRCPY_PF_CAST(x) (x)
+
 class ATmega4809 : public Board {
 public:
     ATmega4809() {

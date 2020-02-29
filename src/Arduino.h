@@ -15,6 +15,9 @@
 #include "InfraredTypes.h"
 #include "PinModeStatus.h"
 
+typedef void *uint_farptr_t;
+typedef void __FlashStringHelper;
+
 #define REPORT_TIMES
 //#define REAL_TIME
 

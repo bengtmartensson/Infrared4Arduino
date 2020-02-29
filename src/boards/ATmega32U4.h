@@ -24,16 +24,13 @@ this program. If not, see http://www.gnu.org/licenses/.
 
 #pragma once
 
+#include "avr.h"
+
 #if !defined(ARDUINO_AVR_LEONARDO) && !defined(ARDUINO_AVR_MICRO)
 #error Board not supported
 #endif
 
 #define CURRENT_CLASS ATmega32U4
-
-#define HAS_FLASH_READ      1
-#define HAS_HARDWARE_PWM    1
-#define HAS_SAMPLING        1
-#define HAS_INPUT_CAPTURE   1
 
 class ATmega32U4 : public Board {
 public:

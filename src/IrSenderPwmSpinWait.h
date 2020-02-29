@@ -28,11 +28,13 @@ this program. If not, see http://www.gnu.org/licenses/.
  * It will therefore run on all sufficiently powerful hardware.
  */
 class IrSenderPwmSpinWait : public IrSenderPwmSoft {
+public:
+    IrSenderPwmSpinWait(pin_t sendPin);
+
+    virtual ~IrSenderPwmSpinWait() {
+    };
+
 private:
     void sleepMicros(microseconds_t t);
     void sleepUntilMicros(uint32_t t);
-
-public:
-    IrSenderPwmSpinWait(pin_t sendPin);
-    virtual ~IrSenderPwmSpinWait() {};
 };

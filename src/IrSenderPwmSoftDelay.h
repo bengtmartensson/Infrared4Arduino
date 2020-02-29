@@ -28,7 +28,11 @@ this program. If not, see http://www.gnu.org/licenses/.
 class IrSenderPwmSoftDelay : public IrSenderPwmSoft {
 public:
     IrSenderPwmSoftDelay(pin_t outpitPin); // default is not meaningful!!
-    virtual ~IrSenderPwmSoftDelay() {}
+
+    virtual ~IrSenderPwmSoftDelay() {
+    }
+
+private:
     void sleepMicros(microseconds_t us);
     void sleepUntilMicros(uint32_t terminateTime);
 };

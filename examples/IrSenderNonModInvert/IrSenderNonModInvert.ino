@@ -1,5 +1,5 @@
 // This sketch demonstrates the usage of the non-modulating sender in inverting
-// mode. It thus emulates an inverting IR demodulator, like TSOP-*.
+// mode. It can thus be used to emulate an inverting IR demodulator, like TSOP-*.
 
 #include <IrSenderNonMod.h>
 

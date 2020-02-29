@@ -22,13 +22,17 @@ this program. If not, see http://www.gnu.org/licenses/.
 IrSenderPwmSoftDelay::IrSenderPwmSoftDelay(pin_t outputPin) : IrSenderPwmSoft(outputPin) {
 }
 
-void IrSenderPwmSoftDelay::sleepMicros(microseconds_t us) {
+void inline IrSenderPwmSoftDelay::sleepMicros(microseconds_t us) {
     if (us > 0U) // Is this necessary? (Official docu https://www.arduino.cc/en/Reference/DelayMicroseconds does not tell.)
         Board::delayMicroseconds(us);
 }
 
-void IrSenderPwmSoftDelay::sleepUntilMicros(uint32_t targetTime) {
-    uint32_t time = targetTime - micros();
+void inline IrSenderPwmSoftDelay::sleepUntilMicros(uint32_t targetTime) {
+    int32_t time = targetTime - micros();
+    if (time < 0)
+        return;
     delay(time/1000UL);
-    ::delayMicroseconds((microseconds_t) (time % 1000UL));
+    int32_t rest = targetTime - micros();
+    if (rest >= 4)
+    ::delayMicroseconds(rest);
 }

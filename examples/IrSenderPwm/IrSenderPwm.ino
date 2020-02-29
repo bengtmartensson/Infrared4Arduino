@@ -1,6 +1,7 @@
 // This sketch sends a raw signal using the PWM sender every 5 seconds.
 // It requires an IR-Led connected to the sending pin
 // (3 on Uno/Nano, 9 on Leonardo/Uno, 9 on Mega2560 etc...)
+// Just for the fun of it, the duty cycle is selected randomly.
 
 #include <IrSenderPwm.h>
 

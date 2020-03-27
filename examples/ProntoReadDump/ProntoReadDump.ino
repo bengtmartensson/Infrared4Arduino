@@ -30,5 +30,6 @@ void loop() {
         const char* hex = Pronto::toProntoHex(*irSequence);
         Serial.println(hex);
         delete[] hex;
+        delete irSequence;
     }
 }

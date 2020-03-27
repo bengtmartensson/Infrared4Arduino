@@ -54,23 +54,17 @@ IrSignal *Pronto::parse(const char *str) {
 
 #if HAS_FLASH_READ
 IrSignal *Pronto::parse_PF(uint_farptr_t str) {
-    Serial.println("walton");
     size_t len = strlen_PF(STRCPY_PF_CAST(str));
-    Serial.println(len, DEC);
     char work[len + 1];
     strncpy_PF(work, STRCPY_PF_CAST(str), len);
-    Serial.println(work);
     return parse(work);
 }
 
 IrSignal *Pronto::parse_PF(const char *str) {
-    Serial.println("covfefe");
-    //Serial.println(strlen_PF(reinterpret_cast<uint_farptr_t>(str)), DEC);
-    return parse_PF(reinterpret_cast<uint_farptr_t>(str)); // to aviod infinite recursion
+    return parse_PF(reinterpret_cast<uint_farptr_t>(str)); // to avoid infinite recursion
 };
 
 IrSignal *Pronto::parse(const __FlashStringHelper *str) {
-    Serial.println("very stable genius");
     return parse_PF(reinterpret_cast<uint_farptr_t>(str));
 }
 #endif

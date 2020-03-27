@@ -35,11 +35,7 @@ IrSignal *Pronto::parse(const uint16_t *data, size_t size) {
 }
 
 IrSignal *Pronto::parse(const char *str) {
-    Serial.println("no collusion");
     size_t len = strlen(str)/(digitsInProntoNumber + 1) + 1;
-    Serial.println(strlen(str), DEC);
-    Serial.println(len, DEC);
-
     uint16_t data[len];
     const char *p = str;
     char *endptr[1];
@@ -50,9 +46,6 @@ IrSignal *Pronto::parse(const char *str) {
             len = i;
             break;
         }
-        Serial.print(i, DEC);
-        Serial.print("\t");
-        Serial.println(x, HEX);
         data[i] = static_cast<uint16_t>(x); // If input is conforming, there can be no overflow!
         p = *endptr;
     }

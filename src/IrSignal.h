@@ -12,9 +12,9 @@ public:
     static const frequency_t defaultFrequency = 38000U;
     static const frequency_t invalidFrequency = (frequency_t) -1;
     static const dutycycle_t noDutyCycle = -1;
-    private:
+private:
     static const dutycycle_t defaultDutyCycle = noDutyCycle;
-    public:
+public:
     IrSignal();
     IrSignal(const IrSignal& orig);
 
@@ -33,11 +33,22 @@ public:
             bool toBeFreed = false);
 
     IrSignal(const IrSequence& intro, const IrSequence& repeat, const IrSequence& ending,
-            frequency_t frequency, dutycycle_t dutyCycle, bool toBeFreed);
+            frequency_t frequency = defaultFrequency, dutycycle_t dutyCycle = defaultDutyCycle, bool toBeFreed = true);
 
-    IrSignal(const IrSequence& intro, const IrSequence& repeat, const IrSequence& ending,
-            frequency_t frequency = defaultFrequency, dutycycle_t dutyCycle = defaultDutyCycle);
+    IrSignal(const IrSequence& intro, const IrSequence& repeat,
+            frequency_t frequency = defaultFrequency, dutycycle_t dutyCycle = defaultDutyCycle, bool toBeFreed = true);
 
+    static IrSignal* readFlash(const microseconds_t *intro, size_t lengthIntro,
+            const microseconds_t *repeat, size_t lengthRepeat,
+            const microseconds_t *ending, size_t lengthEnding,
+            frequency_t frequency = defaultFrequency,
+            dutycycle_t dutyCycle = defaultDutyCycle);
+
+    static IrSignal* readFlash(const microseconds_t *intro, size_t lengthIntro,
+            const microseconds_t *repeat, size_t lengthRepeat,
+            frequency_t frequency = defaultFrequency,
+            dutycycle_t dutyCycle = defaultDutyCycle);
+ 
 private:
     const frequency_t frequency;
     const dutycycle_t dutyCycle;

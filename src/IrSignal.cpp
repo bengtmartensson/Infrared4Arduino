@@ -6,14 +6,10 @@ IrSignal::IrSignal(const IrSequence& intro_, const IrSequence& repeat_, const Ir
 : frequency(frequency_),dutyCycle(dutyCycle_),intro(intro_, toBeFreed),repeat(repeat_, toBeFreed),ending(ending_, toBeFreed) {
 }
 
-IrSignal::IrSignal(const IrSequence& intro_, const IrSequence& repeat_, const IrSequence& ending_,
-        frequency_t frequency_, dutycycle_t dutyCycle_)
-: frequency(frequency_),dutyCycle(dutyCycle_),intro(intro_),repeat(repeat_),ending(ending_) {
+IrSignal::IrSignal(const IrSequence& intro_, const IrSequence& repeat_,
+        frequency_t frequency_, dutycycle_t dutyCycle_, bool toBeFreed)
+: frequency(frequency_), dutyCycle(dutyCycle_), intro(intro_, toBeFreed), repeat(repeat_, toBeFreed), ending(NULL, 0, false) {
 }
-
-//IrSignal::IrSignal(const IrSignal& orig, bool toBeFreed)
-//: frequency(orig.frequency),intro(orig.intro,toBeFreed),repeat(orig.repeat,toBeFreed),ending(orig.ending,toBeFreed) {
-//}
 
 IrSignal::IrSignal(const IrSignal& orig)
 : frequency(orig.frequency),dutyCycle(orig.dutyCycle),intro(orig.intro),repeat(orig.repeat),ending(orig.ending) {
@@ -46,8 +42,31 @@ IrSignal::~IrSignal() {
     //delete ending;
 }
 
+#if HAS_FLASH_READ
+
+IrSignal* IrSignal::readFlash(const microseconds_t *intro, size_t lengthIntro,
+        const microseconds_t *repeat, size_t lengthRepeat,
+        const microseconds_t *ending, size_t lengthEnding,
+        frequency_t frequency_,
+        dutycycle_t dutyCycle_) {
+    return new IrSignal(*IrSequence::readFlash(intro, lengthIntro),
+            *IrSequence::readFlash(repeat, lengthRepeat),
+            *IrSequence::readFlash(ending, lengthEnding),
+            frequency_, dutyCycle_);
+}
+
+IrSignal* IrSignal::readFlash(const microseconds_t *intro, size_t lengthIntro,
+        const microseconds_t *repeat, size_t lengthRepeat,
+        frequency_t frequency_,
+        dutycycle_t dutyCycle_) {
+    return new IrSignal(*IrSequence::readFlash(intro, lengthIntro),
+            *IrSequence::readFlash(repeat, lengthRepeat),
+             frequency_, dutyCycle_);
+}
+#endif
+
 IrSignal *IrSignal::clone() const {
-    return new IrSignal(*intro.clone(), *repeat.clone(), *ending.clone(), frequency, dutyCycle, true);
+    return new IrSignal(*intro.clone(), *repeat.clone(), *ending.clone(), frequency, dutyCycle);
 }
 
 void IrSignal::dump(Stream& stream, bool usingSigns) const {

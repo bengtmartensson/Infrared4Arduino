@@ -27,8 +27,8 @@ communicating over a serial line, likely in USB disguise.
 // All configurations are found in this file.
 #include "config.h"
 
-// Same version as Infrared4Arduino.
-#define VERSION "1.0.3"
+// Pick up version from the library version
+#include "version.h"
 
 #ifdef RECEIVE
 #include <IrReceiverSampler.h>
@@ -241,6 +241,7 @@ void setup() {
         ; // wait for serial port to connect. "Needed for Leonardo only"
 #endif
     Serial.println(F(PROGNAME " " VERSION));
+    Serial.println(F("covfefe"));
     Serial.setTimeout(SERIAL_TIMEOUT);
 }
 
@@ -252,13 +253,15 @@ static inline bool isPrefix(const char *string, const String& cmd) {
     return strncmp(cmd.c_str(), string, strlen(string)) == 0;
 }
 
+/*
 bool isPrefix(const String& cmd, const __FlashStringHelper *pstring) {
-    return strncmp_PF(cmd.c_str(), (uint_farptr_t) pstring, cmd.length()) == 0;
+    return strncmp_PF(cmd.c_str(), static_cast<const char*>(pstring), cmd.length()) == 0;
 }
 
 bool isPrefix(const __FlashStringHelper *pstring, const String& cmd) {
-    return strncmp_PF(cmd.c_str(), (uint_farptr_t) pstring, strlen_PF((uint_farptr_t) pstring)) == 0;
+    return strncmp_PF(cmd.c_str(), pstring, strlen_PF(pstring)) == 0;
 }
+*/
 
 static String readCommand(Stream& stream) {
     //flushIn(stream);
@@ -286,7 +289,7 @@ static bool processCommand(const String& line, Stream& stream) {
     } else
 #endif // CAPTURE
 
-        if (isPrefix(cmd, F("modules"))) {
+        if (isPrefix(cmd, "modules")) {
         stream.println(F(modulesSupported));
     } else
 
@@ -298,21 +301,21 @@ static bool processCommand(const String& line, Stream& stream) {
         uint16_t *variable16 = NULL;
         uint8_t *variable8 = NULL;
 #if defined(RECEIVE) || defined(CAPTURE)
-           if (isPrefix(F("beg"), variableName))
+           if (isPrefix("beg", variableName))
             variable32 = &beginTimeout;
         else
 #endif
 #ifdef CAPTURE
-            if (isPrefix(F("capturee"), variableName))
+            if (isPrefix("capturee", variableName))
             variable32 = &captureEndingTimeout;
 #endif
 #ifdef RECEIVE
-           if (isPrefix(F("receivee"), variableName))
+           if (isPrefix("receivee", variableName))
             variable32 = &receiveEndingTimeout;
         else
 #endif
 #ifdef CAPTURE
-        if (isPrefix(F("captures"), variableName)) {
+        if (isPrefix("captures", variableName)) {
         // TODO: check evenness of value
         variable16 = &captureSize;
         } else
@@ -339,7 +342,7 @@ static bool processCommand(const String& line, Stream& stream) {
 
 #ifdef RECEIVE
         // TODO: option for force decoding off
-        if (isPrefix(cmd, F("receive"))) { // receive
+        if (isPrefix(cmd, "receive")) { // receive
         bool status = receive(stream);
         if (!status)
             stream.println(F(errorString));
@@ -370,7 +373,7 @@ static bool processCommand(const String& line, Stream& stream) {
 #endif // TRANSMIT
 
 #ifdef PRONTO
-        if (isPrefix(cmd, F("hex"))) { // pronto hex send
+        if (isPrefix(cmd, "hex")) { // pronto hex send
         uint16_t noSends = (uint16_t) tokenizer.getInt();
         String rest = tokenizer.getRest();
         IrSignal *irSignal = Pronto::parse(rest.c_str());
@@ -389,14 +392,14 @@ static bool processCommand(const String& line, Stream& stream) {
         uint16_t noSends = (uint16_t) tokenizer.getInt();
         String protocol = tokenizer.getToken();
         const IrSignal *irSignal = NULL;
-        if (isPrefix(protocol, F("nec1"))) {
+        if (isPrefix(protocol, "nec1")) {
             unsigned int D = (unsigned) tokenizer.getInt();
             unsigned int S = (unsigned) tokenizer.getInt();
             unsigned int F = (unsigned) tokenizer.getInt();
             irSignal = (F == Tokenizer::invalid)
                     ? Nec1Renderer::newIrSignal(D, S)
                     : Nec1Renderer::newIrSignal(D, S, F);
-        } else if (isPrefix(protocol, F("rc5"))) {
+        } else if (isPrefix(protocol, "rc5")) {
             unsigned int D = (unsigned) tokenizer.getInt();
             unsigned int F = (unsigned) tokenizer.getInt();
             unsigned int T = (unsigned) tokenizer.getInt();

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Board.h"
 // Configuration options for MicroGirs.
 
 // Define Girs modules to implement, see http://www.harctoolbox.org/Girs.html
@@ -14,7 +15,9 @@
 #define RENDERER
 
 // Capture IR signals, requires non-demodulating IR sensor (TSMP58000, QSE159, etc)
+#if HAS_INPUT_CAPTURE
 #define CAPTURE
+#endif
 
 // Receive demodulated IR signals, require demodulating IR sensor (TSMP* or equivalent)
 #define RECEIVE

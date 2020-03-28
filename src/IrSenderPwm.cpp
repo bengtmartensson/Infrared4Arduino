@@ -16,9 +16,6 @@ this program. If not, see http://www.gnu.org/licenses/.
 */
 
 #include "IrSenderPwm.h"
-//#include "boards/boarddefs.h" // for HAS_HARDWARE_PWM
-
-//#ifdef HAS_HARDWARE_PWM
 
 #ifdef HAS_HARDWARE_PWM
 #include "IrSenderPwmHard.h"
@@ -49,4 +46,12 @@ IrSenderPwm *IrSenderPwm::getInstance(bool create, pin_t outputPin) {
     return instance;
 }
 
-//#endif // HAS_HARDWARE_PWM
+void IrSenderPwm::deleteInstance() {
+    if (instance != NULL)
+#ifdef HAS_HARDWARE_PWM
+            IrSenderPwmHard::deleteInstance();
+#else
+            delete instance;
+#endif
+    instance = NULL;
+}

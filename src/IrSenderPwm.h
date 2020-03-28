@@ -50,8 +50,5 @@ public:
      */
     static IrSenderPwm *newInstance(pin_t outputPin);
 
-    static void deleteInstance() {
-        delete instance;
-        instance = NULL;
-    }
+    static void deleteInstance();
 };

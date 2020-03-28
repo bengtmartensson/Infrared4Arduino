@@ -1,6 +1,7 @@
 #include "IrSignal.h"
+#include "Board.h" // for HAS_INPUT_CAPTURE
 
-#ifdef PRR
+#if HAS_INPUT_CAPTURE
 
 /* IR Widget: capture a raw IR signal and dump the timing of the non-demodulated signal
 

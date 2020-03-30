@@ -113,7 +113,7 @@ tag:
 	git push origin Version-$(VERSION)
 
 clean:
-	rm -rf *.a *.o api-doc xml test1 $(GH_PAGES) library.properties.tmp
+	rm -rf *.a *.o api-doc xml test1 $(GH_PAGES) library.properties.tmp keywords.txt
 
 spotless: clean
 	rm -rf keywords.txt

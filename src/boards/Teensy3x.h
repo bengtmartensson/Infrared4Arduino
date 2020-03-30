@@ -27,6 +27,11 @@ this program. If not, see http://www.gnu.org/licenses/.
 
 #define CURRENT_CLASS Teensy3x
 
+// https://www.pjrc.com/teensy/troubleshoot.html says:
+// Teensy LC, 3.0, 3.1 do not have this problem.
+// Variables defined with "const" are placed only in flash memory, but can be accessed normally.
+// Only the older 8 bit AVR-based boards require these special steps to prevent strings
+// and read-only variables from consuming limited RAM.
 #define HAS_FLASH_READ      0
 #define HAS_HARDWARE_PWM    1
 #define HAS_SAMPLING        1
@@ -51,6 +56,12 @@ public:
 
     Teensy3x() {
     };
+
+    // not tested yet
+    reset() {
+        // https://forum.pjrc.com/threads/52512-External-RESET-button-Teensy-3-2?p=180363&viewfull=1#post180363
+        SCB_AIRCR = 0x05FA0004;
+    }
 
 private:
 

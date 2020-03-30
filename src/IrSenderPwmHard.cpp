@@ -27,6 +27,7 @@ IrSenderPwmHard::IrSenderPwmHard(pin_t outputPin __attribute__((unused))) : IrSe
 };
 
 IrSenderPwmHard::~IrSenderPwmHard() {
+    disable();
 };
 
 IrSenderPwmHard *IrSenderPwmHard::newInstance(pin_t outputPin) {
@@ -44,6 +45,10 @@ IrSenderPwmHard *IrSenderPwmHard::getInstance(bool create, pin_t outputPin) {
 
 void IrSenderPwmHard::enable(frequency_t frequency, dutycycle_t dutyCycle) {
     Board::getInstance()->enablePwm(getPin(), frequency, dutyCycle);
+}
+
+void IrSenderPwmHard::disable() {
+    Board::getInstance()->disablePwm();
 }
 
 void inline IrSenderPwmHard::sendMark(milliseconds_t time) {

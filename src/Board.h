@@ -72,7 +72,6 @@ public:
      * Start the periodic ISR sampler routine. Called from IrReceiveSampler.
      */
     virtual void enableSampler(pin_t pin __attribute__((unused))) {
-        TIMER_CONFIG_NORMAL();
         TIMER_ENABLE_INTR();
         TIMER_RESET();
     }
@@ -102,6 +101,7 @@ public:
      * Turn off PWM.
      */
     void disablePwm() {
+        TIMER_CONFIG_NORMAL();
     }
 
     void sendPwmMark(microseconds_t time) {

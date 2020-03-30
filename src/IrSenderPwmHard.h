@@ -38,6 +38,7 @@ public:
 private:
     static IrSenderPwmHard *instance;
     void enable(frequency_t frequency, dutycycle_t dutyCycle = Board::defaultDutyCycle);
+    void disable();
     //void sendSpace(microseconds_t time);
     void sendMark(microseconds_t time);
 

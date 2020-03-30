@@ -91,7 +91,6 @@ public:
      */
     void enablePwm(pin_t pin, frequency_t frequency, dutycycle_t dutyCycle) {
         checkValidSendPin(pin);
-        TIMER_DISABLE_INTR();
         //pinMode(getPin(), OUTPUT);
         //writeLow();
         TIMER_CONFIG_HZ(frequency, dutyCycle);

@@ -35,7 +35,7 @@ void Sam::setTimerFrequency(frequency_t frequencyHz) {
     while (TC->STATUS.bit.SYNCBUSY == 1);
 }
 
-void Sam::TIMER_ENABLE_INTR() {
+void Sam::timerEnableIntr() {
     REG_GCLK_CLKCTRL = (uint16_t) (GCLK_CLKCTRL_CLKEN | GCLK_CLKCTRL_GEN_GCLK0 | GCLK_CLKCTRL_ID_TCC2_TC3);
     while (GCLK->STATUS.bit.SYNCBUSY == 1); // wait for sync
 
@@ -69,7 +69,7 @@ void Sam::TIMER_ENABLE_INTR() {
     while (TC->STATUS.bit.SYNCBUSY == 1); // wait for sync
 }
 
-void Sam::TIMER_DISABLE_INTR() {
+void Sam::timerDisableIntr() {
     TcCount16* TC = (TcCount16*) TC3;
     NVIC_DisableIRQ(TC3_IRQn);
     TC->CTRLA.reg &= ~TC_CTRLA_ENABLE;
@@ -90,7 +90,7 @@ void TC3_Handler() {
     }
 }
 
-void Sam::TIMER_CONFIG_HZ(pin_t pin, frequency_t frequency, dutycycle_t dutyCycle) {
+void Sam::timerConfigHz(pin_t pin, frequency_t frequency, dutycycle_t dutyCycle) {
     pwmPin = pin;
     maxValue = F_CPU / 2 / frequency;
     onLength = maxValue * dutyCycle / 100;
@@ -342,7 +342,7 @@ void Sam::setValue(uint16_t value) {
 //REG_TCC0_CTRLBSET = TCC_CTRLBSET_CMD_RETRIGGER;
 //while(TCC0->SYNCBUSY.bit.CTRLB);
 
-void Sam::TIMER_CONFIG_NORMAL() {
+void Sam::timerConfigNormal() {
    TCCx->CTRLA.bit.ENABLE = 0;                     // Disable TCC1 timer
    while (TCCx->SYNCBUSY.bit.ENABLE);              // Wait for synchronization
 }

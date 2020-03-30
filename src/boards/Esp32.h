@@ -62,7 +62,7 @@ private:
     static hw_timer_t* timer;
     uint8_t onValue;
 
-    void TIMER_ENABLE_INTR() {
+    void timerEnableIntr() {
         // Interrupt Service Routine - Fires every 50uS
         // ESP32 has a proper API to setup timers, no weird chip macros needed
         // simply call the readable API versions :)
@@ -74,27 +74,27 @@ private:
         timerAlarmEnable(Esp32::timer);
     };
 
-    void TIMER_DISABLE_INTR() {
+    void timerDisableIntr() {
         if (Esp32::timer != NULL) {
             timerEnd(Esp32::timer);
             timerDetachInterrupt(Esp32::timer);
         }
     };
 
-    void TIMER_ENABLE_PWM() {
+    void timerEnablePwm() {
         ledcWrite(LEDCHANNEL, onValue);
     };
 
-    void TIMER_DISABLE_PWM() {
+    void timerDisablePwm() {
         ledcWrite(LEDCHANNEL, 0);
     };
 
-    void TIMER_CONFIG_HZ(frequency_t frequency, dutycycle_t dutyCycle) {
+    void timerConfigHz(frequency_t frequency, dutycycle_t dutyCycle) {
         onValue = (uint8_t) (256U * dutyCycle / 100U);
         ledcSetup(LEDCHANNEL, frequency, TIMER_SIZE);
         ledcAttachPin(PWM_PIN, LEDCHANNEL);
     };
 
-    void TIMER_CONFIG_NORMAL() {
+    void timerConfigNormal() {
     }
 };

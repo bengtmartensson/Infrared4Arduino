@@ -49,29 +49,29 @@ private:
 ///////////////////////////////////////////////////////////////////////////////
 #define TIMER_INTR_NAME      TCB0_INT_vect
 
-    void TIMER_RESET() {
+    void timerReset() {
         TCB0.INTFLAGS = TCB_CAPT_bm;
     };
     //#define TIMER_ENABLE_PWM     (TCB0.CTRLB = TCB_CNTMODE_PWM8_gc)
     //#define TIMER_DISABLE_PWM    (TCB0.CTRLB &= ~(TCB_CNTMODE_PWM8_gc))
 
-    void TIMER_ENABLE_PWM() {
+    void timerEnablePwm() {
         TCB0.CTRLB |= TCB_CCMPEN_bm;
     };
 
-    void TIMER_DISABLE_PWM() {
+    void timerDisablePwm() {
         TCB0.CTRLB &= ~(TCB_CCMPEN_bm);
     };
 
-    void TIMER_ENABLE_INTR() {
+    void timerEnableIntr() {
         TCB0.INTCTRL = TCB_CAPT_bm;
     };
 
-    void TIMER_DISABLE_INTR() {
+    void timerDisableIntr() {
         TCB0.INTCTRL &= ~TCB_CAPT_bm;
     };
 
-    void TIMER_CONFIG_HZ(frequency_t frequency, dutycycle_t dutyCycle) {
+    void timerConfigHz(frequency_t frequency, dutycycle_t dutyCycle) {
         const uint8_t pwmval = F_CPU / 2U / frequency;
         TCB0.CTRLB = TCB_CNTMODE_PWM8_gc;
         TCB0.CCMPL = pwmval;
@@ -79,7 +79,7 @@ private:
         TCB0.CTRLA = TCB_CLKSEL_CLKDIV2_gc | TCB_ENABLE_bm;
     };
 
-    void TIMER_CONFIG_NORMAL() {
+    void timerConfigNormal() {
         TCB0.CTRLB = TCB_CNTMODE_INT_gc;
         TCB0.CCMP = F_CPU * microsPerTick / 1000000UL;
         TCB0.INTCTRL = TCB_CAPT_bm;

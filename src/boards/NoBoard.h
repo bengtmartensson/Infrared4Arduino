@@ -32,10 +32,21 @@ public:
     NoBoard() {};
 
 private:
-    void TIMER_CONFIG_NORMAL() {};
-    void TIMER_ENABLE_INTR() {};
-    void TIMER_DISABLE_INTR() {};
-    void TIMER_CONFIG_HZ(frequency_t hz __attribute__((unused)), dutycycle_t dutyCycle __attribute__((unused))) {};
-    void TIMER_ENABLE_PWM() {};
-    void TIMER_DISABLE_PWM() {};
+    void timerEnableIntr() {
+    };
+
+    void timerDisableIntr() {
+    };
+
+    void timerEnablePwm() {
+    };
+
+    void timerDisablePwm() {
+    };
+
+    void timerConfigHz(frequency_t hz __attribute__ ((unused)), dutycycle_t dutyCycle __attribute__ ((unused))) {
+    };
+
+    void timerConfigNormal() {
+    };
 };

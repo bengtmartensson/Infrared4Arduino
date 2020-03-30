@@ -34,25 +34,25 @@ public:
 /////////////////////////////////////////////////////////////
 #ifdef IR_USE_TIMER1
 
-    void TIMER_ENABLE_PWM() {
+    void timerEnablePwm() {
         TCCR1A |= _BV(COM1A1);
     };
 
-    void TIMER_DISABLE_PWM() {
+    void timerDisablePwm() {
         TCCR1A &= ~(_BV(COM1A1));
     };
 
-    void TIMER_ENABLE_INTR() {
+    void timerEnableIntr() {
         TIMSK1 = _BV(OCIE1A);
     };
 
-    void TIMER_DISABLE_INTR() {
+    void timerDisableIntr() {
         TIMSK1 = 0U;
     };
 
 #define TIMER_INTR_NAME       TIMER1_COMPA_vect
 
-    void TIMER_CONFIG_HZ(frequency_t val, dutycycle_t dutyCycle) {
+    void timerConfigHz(frequency_t val, dutycycle_t dutyCycle) {
         const uint16_t pwmval = F_CPU / 2U / val;
         TCCR1A = _BV(WGM11);
         TCCR1B = _BV(WGM13) | _BV(CS10);
@@ -60,7 +60,7 @@ public:
         OCR1A = pwmval * dutyCycle / 100U;
     };
 
-    void TIMER_CONFIG_NORMAL() {
+    void timerConfigNormal() {
         TCCR1A = 0U;
         TCCR1B = _BV(WGM12) | _BV(CS10);
         OCR1A = F_CPU * microsPerTick / 1000000UL;
@@ -71,25 +71,25 @@ public:
     //////////////////////////////////////////////////////////////////////////
 #elif defined(IR_USE_TIMER2) || defined(DOXYGEN) // ! defined(IR_USE_TIMER1)
 
-    void TIMER_ENABLE_PWM() {
+    void timerEnablePwm() {
         TCCR2A |= _BV(COM2B1);
     }
 
-    void TIMER_DISABLE_PWM() {
+    void timerDisablePwm() {
         TCCR2A &= ~(_BV(COM2B1));
     }
 
-    void TIMER_ENABLE_INTR() {
+    void timerEnableIntr() {
         TIMSK2 = _BV(OCIE2A);
     };
 
-    void TIMER_DISABLE_INTR() {
+    void timerDisableIntr() {
         TIMSK2 = 0U;
     };
 
 #define TIMER_INTR_NAME     TIMER2_COMPA_vect
 
-    void TIMER_CONFIG_HZ(frequency_t val, dutycycle_t dutyCycle) {
+    void timerConfigHz(frequency_t val, dutycycle_t dutyCycle) {
         const uint8_t pwmval = F_CPU / 2U / val;
         TCCR2A = _BV(WGM20);
         TCCR2B = _BV(WGM22) | _BV(CS20);
@@ -97,7 +97,7 @@ public:
         OCR2B = pwmval * dutyCycle / 100U;
     };
 
-    void TIMER_CONFIG_NORMAL() {
+    void timerConfigNormal() {
         TCCR2A = _BV(WGM21);
         TCCR2B = _BV(CS21);
         OCR2A = F_CPU * microsPerTick / 1000000UL / 8U;

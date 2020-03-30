@@ -43,23 +43,23 @@ private:
 // Timer1 (16 bits)
 #define TIMER_INTR_NAME       TIMER1_COMPA_vect
 
-    void TIMER_ENABLE_PWM() {
+    void timerEnablePwm() {
         TCCR1A |= _BV(COM1A1);
     };
 
-    void TIMER_DISABLE_PWM() {
+    void timerDisablePwm() {
         TCCR1A &= ~(_BV(COM1A1));
     };
 
-    void TIMER_ENABLE_INTR() {
+    void timerEnableIntr() {
         TIMSK1 = _BV(OCIE1A);
     };
 
-    void TIMER_DISABLE_INTR() {
+    void timerDisableIntr() {
         TIMSK1 = 0U;
     };
 
-    void TIMER_CONFIG_HZ(frequency_t frequency, dutycycle_t dutyCycle) {
+    void timerConfigHz(frequency_t frequency, dutycycle_t dutyCycle) {
         const uint16_t pwmval = F_CPU / 2UL / frequency;
         TCCR1A = _BV(WGM11);
         TCCR1B = _BV(WGM13) | _BV(CS10);
@@ -67,7 +67,7 @@ private:
         OCR1A = pwmval * dutyCycle / 100UL;
     };
 
-    void TIMER_CONFIG_NORMAL() {
+    void timerConfigNormal() {
         TCCR1A = 0;
         TCCR1B = _BV(WGM12) | _BV(CS10);
         OCR1A = F_CPU * microsPerTick / 1000000UL;
@@ -82,22 +82,22 @@ private:
 
 #error IR_USE_TIMER2 in Leonardo currently broken.
 
-void TIMER_ENABLE_PWM() {TCCR2A |= _BV(COM2B1);};
-void TIMER_DISABLE_PWM() { TCCR2A &= ~(_BV(COM2B1));};
-void TIMER_ENABLE_INTR() {TIMSK2 = _BV(OCIE2A);};
-void TIMER_DISABLE_INTR() {TIMSK2 = 0;};
+void timerEnablePwm() {TCCR2A |= _BV(COM2B1);};
+void timerDisablePwm() { TCCR2A &= ~(_BV(COM2B1));};
+void timerEnableIntr() {TIMSK2 = _BV(OCIE2A);};
+void timerDisableIntr() {TIMSK2 = 0;};
 
-void TIMER_CONFIG_KHZ(frequency_t frequency, dutycycle_t dutyCycle) {
+void timerConfigHz(frequency_t frequency, dutycycle_t dutyCycle) {
     const uint8_t pwmval = F_CPU / 2U / frequency;
     TCCR2A               = _BV(WGM20);
     TCCR2B               = _BV(WGM22) | _BV(CS20);
     OCR2A                = pwmval;
-    OCR2B                = pwmval * dutyCycle / 100; \
+    OCR2B                = pwmval * dutyCycle / 100UL; \
 })
 
 #define TIMER_COUNT_TOP  (F_CPU * microsPerTick / 1000000)
 
-void TIMER_CONFIG_NORMAL() {
+void timerConfigNormal() {
     TCCR2A = _BV(WGM21);
     TCCR2B = _BV(CS21);
     OCR2A  = TIMER_COUNT_TOP / 8U;

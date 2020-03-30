@@ -39,25 +39,25 @@ private:
 // Timer1 (16 bits)
 #define TIMER_INTR_NAME       TIMER1_COMPA_vect
 
-    void TIMER_ENABLE_PWM() {
+    void timerEnablePwm() {
         TCCR1A |= _BV(COM1A1);
     };
 
-    void TIMER_DISABLE_PWM() {
+    void timerDisablePwm() {
         TCCR1A &= ~(_BV(COM1A1));
     };
 
-    void TIMER_ENABLE_INTR() {
+    void timerEnableIntr() {
         TIMSK1 = _BV(OCIE1A);
     }
 
-    void TIMER_DISABLE_INTR() {
+    void timerDisableIntr() {
         TIMSK1 = 0;
     };
 
 
 
-    void TIMER_CONFIG_HZ(frequency_t frequency, dutycycle_t dutyCycle) {
+    void timerConfigHz(frequency_t frequency, dutycycle_t dutyCycle) {
         const uint16_t pwmval = F_CPU / 2 / frequency;
         TCCR1A = _BV(WGM11);
         TCCR1B = _BV(WGM13) | _BV(CS10);
@@ -65,7 +65,7 @@ private:
         OCR1A = pwmval * dutyCycle / 100;
     };
 
-    void TIMER_CONFIG_NORMAL() {
+    void timerConfigNormal() {
         TCCR1A = 0;
         TCCR1B = _BV(WGM12) | _BV(CS10);
         OCR1A = F_CPU * microsPerTick / 1000000;
@@ -80,23 +80,23 @@ private:
 
 #define TIMER_INTR_NAME     TIMER2_COMPA_vect
 
-    void TIMER_ENABLE_PWM() {
+    void timerEnablePwm() {
         TCCR2A |= _BV(COM2B1);
     }
 
-    void TIMER_DISABLE_PWM() {
+    void timerDisablePwm() {
         TCCR2A &= ~(_BV(COM2B1));
     }
 
-    void TIMER_ENABLE_INTR() {
+    void timerEnableIntr() {
         TIMSK2 = _BV(OCIE2A);
     }
 
-    void TIMER_DISABLE_INTR() {
+    void timerDisableIntr() {
         TIMSK2 = 0;
     }
 
-    void TIMER_CONFIG_HZ(frequency_t frequency, dutycycle_t dutyCycle) {
+    void timerConfigHz(frequency_t frequency, dutycycle_t dutyCycle) {
         const uint8_t pwmval = F_CPU / 2 / frequency;
         TCCR2A = _BV(WGM20);
         TCCR2B = _BV(WGM22) | _BV(CS20);
@@ -106,7 +106,7 @@ private:
 
 #define TIMER_COUNT_TOP  (F_CPU * microsPerTick / 1000000UL)
 
-    void TIMER_CONFIG_NORMAL() {
+    void timerConfigNormal() {
         //#if (TIMER_COUNT_TOP < 256)
         //    TCCR2A = _BV(WGM21);
         //    TCCR2B = _BV(CS20);
@@ -127,23 +127,23 @@ private:
 // Timer3 (16 bits)
 #define TIMER_INTR_NAME      TIMER3_COMPA_vect
 
-    void TIMER_ENABLE_PWM() {
+    void timerEnablePwm() {
         TCCR3A |= _BV(COM3A1);
     };
 
-    void TIMER_DISABLE_PWM() {
+    void timerDisablePwm() {
         TCCR3A &= ~(_BV(COM3A1));
     };
 
-    void TIMER_ENABLE_INTR() {
+    void timerEnableIntr() {
         TIMSK3 = _BV(OCIE3A);
     };
 
-    void TIMER_DISABLE_INTR() {
+    void timerDisableIntr() {
         TIMSK3 = 0;
     };
 
-    void TIMER_CONFIG_HZ(frequency_t frequency, dutycycle_t dutyCycle) {
+    void timerConfigHz(frequency_t frequency, dutycycle_t dutyCycle) {
         const uint16_t pwmval = F_CPU / 2 / frequency;
         TCCR3A = _BV(WGM31);
         TCCR3B = _BV(WGM33) | _BV(CS30);
@@ -151,7 +151,7 @@ private:
         OCR3A = pwmval * dutyCycle / 100;
     };
 
-    void TIMER_CONFIG_NORMAL() {
+    void timerConfigNormal() {
         TCCR3A = 0;
         TCCR3B = _BV(WGM32) | _BV(CS30);
         OCR3A = F_CPU * microsPerTick / 1000000;
@@ -165,23 +165,23 @@ private:
 // Timer4 (16 bits)
 #define TIMER_INTR_NAME     TIMER4_COMPA_vect
 
-    void TIMER_ENABLE_PWM() {
+    void timerEnablePwm() {
         TCCR4A |= _BV(COM4A1);
     };
 
-    void TIMER_DISABLE_PWM() {
+    void timerDisablePwm() {
         TCCR4A &= ~(_BV(COM4A1));
     };
 
-    void TIMER_ENABLE_INTR() {
+    void timerEnableIntr() {
         TIMSK4 = _BV(OCIE4A);
     };
 
-    void TIMER_DISABLE_INTR() {
+    void timerDisableIntr() {
         TIMSK4 = 0;
     };
 
-    void TIMER_CONFIG_HZ(frequency_t frequency, dutycycle_t dutyCycle) {
+    void timerConfigHz(frequency_t frequency, dutycycle_t dutyCycle) {
         const uint16_t pwmval = F_CPU / 2 / frequency;
         TCCR4A = _BV(WGM41);
         TCCR4B = _BV(WGM43) | _BV(CS40);
@@ -189,7 +189,7 @@ private:
         OCR4A = pwmval * dutyCycle / 100;
     };
 
-    void TIMER_CONFIG_NORMAL() {
+    void timerConfigNormal() {
         TCCR4A = 0;
         TCCR4B = _BV(WGM42) | _BV(CS40);
         OCR4A = F_CPU * microsPerTick / 1000000;
@@ -203,23 +203,23 @@ private:
 // Timer5 (16 bits)
 #define TIMER_INTR_NAME     TIMER5_COMPA_vect
 
-    void TIMER_ENABLE_PWM() {
+    void timerEnablePwm() {
         TCCR5A |= _BV(COM5A1);
     };
 
-    void TIMER_DISABLE_PWM() {
+    void timerDisablePwm() {
         TCCR5A &= ~(_BV(COM5A1));
     };
 
-    void TIMER_ENABLE_INTR() {
+    void timerEnableIntr() {
         TIMSK5 = _BV(OCIE5A);
     };
 
-    void TIMER_DISABLE_INTR() {
+    void timerDisableIntr() {
         TIMSK5 = 0;
     };
 
-    void TIMER_CONFIG_HZ(frequency_t frequency, dutycycle_t dutyCycle) {
+    void timerConfigHz(frequency_t frequency, dutycycle_t dutyCycle) {
         const uint16_t pwmval = F_CPU / 2 / frequency;
         TCCR5A = _BV(WGM51);
         TCCR5B = _BV(WGM53) | _BV(CS50);
@@ -227,7 +227,7 @@ private:
         OCR5A = pwmval * dutyCycle / 100;
     };
 
-    void TIMER_CONFIG_NORMAL() {
+    void timerConfigNormal() {
         TCCR5A = 0;
         TCCR5B = _BV(WGM52) | _BV(CS50);
         OCR5A = F_CPU * microsPerTick / 1000000;

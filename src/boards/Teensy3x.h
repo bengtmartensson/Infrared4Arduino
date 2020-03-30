@@ -65,30 +65,30 @@ public:
 
 private:
 
-    void TIMER_RESET() {
+    void timerReset() {
         uint8_t tmp __attribute__((unused)) = CMT_MSC;
         CMT_CMD2 = 30U;
     };
 
-    void TIMER_ENABLE_PWM() {
+    void timerEnablePwm() {
         CORE_PIN5_CONFIG = PORT_PCR_MUX(2) | PORT_PCR_DSE | PORT_PCR_SRE;
     };
 
-    void TIMER_DISABLE_PWM() {
+    void timerDisablePwm() {
         CORE_PIN5_CONFIG = PORT_PCR_MUX(1) | PORT_PCR_DSE | PORT_PCR_SRE;
     };
 
-    void TIMER_ENABLE_INTR() {
+    void timerEnableIntr() {
         NVIC_ENABLE_IRQ(IRQ_CMT);
     };
 
-    void TIMER_DISABLE_INTR() {
+    void timerDisableIntr() {
         NVIC_DISABLE_IRQ(IRQ_CMT);
     };
 
     static const uint32_t CMT_PPS_DIV = (F_BUS + 7999999U) / 8000000U; // = 5
 
-    void TIMER_CONFIG_HZ(frequency_t frequency, dutycycle_t dutyCycle) {
+    void timerConfigHz(frequency_t frequency, dutycycle_t dutyCycle) {
         SIM_SCGC4 |= SIM_SCGC4_CMT;
         SIM_SOPT2 |= SIM_SOPT2_PTD7PAD;
 
@@ -103,7 +103,7 @@ private:
         CMT_MSC = 0x01U;
     };
 
-    void TIMER_CONFIG_NORMAL() {
+    void timerConfigNormal() {
         SIM_SCGC4 |= SIM_SCGC4_CMT;
         CMT_PPS = CMT_PPS_DIV - 1U;
         CMT_CGH1 = 1U;

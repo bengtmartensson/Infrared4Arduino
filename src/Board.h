@@ -72,15 +72,15 @@ public:
      * Start the periodic ISR sampler routine. Called from IrReceiveSampler.
      */
     virtual void enableSampler(pin_t pin __attribute__((unused))) {
-        TIMER_ENABLE_INTR();
-        TIMER_RESET();
+        timerEnableIntr();
+        timerReset();
     }
 
     /**
      * Turn off sampler routine.
      */
     virtual void disableSampler() {
-        TIMER_DISABLE_INTR();
+        timerDisableIntr();
     }
 
     /**
@@ -93,62 +93,62 @@ public:
         checkValidSendPin(pin);
         //pinMode(getPin(), OUTPUT);
         //writeLow();
-        TIMER_CONFIG_HZ(frequency, dutyCycle);
+        timerConfigHz(frequency, dutyCycle);
     }
 
     /**
      * Turn off PWM.
      */
     void disablePwm() {
-        TIMER_CONFIG_NORMAL();
+        timerConfigNormal();
     }
 
     void sendPwmMark(microseconds_t time) {
-        TIMER_ENABLE_PWM(); // supposed to turn on
+        timerEnablePwm(); // supposed to turn on
         delayMicroseconds(time);
-        TIMER_DISABLE_PWM();
+        timerDisablePwm();
     }
 
     /**
      * TODO
      */
-    virtual void TIMER_RESET() {};
+    virtual void timerReset() {};
 
 protected:
     /**
      * Start periodic sampling routine.
      */
-    virtual void TIMER_ENABLE_INTR() = 0;
+    virtual void timerEnableIntr() = 0;
 
     /**
      * Turn off periodic interrupts.
      * @return
      */
-    virtual void TIMER_DISABLE_INTR() = 0;
+    virtual void timerDisableIntr() = 0;
 
     /**
      * Configure hardware PWM, but do not enable it.
      * @return
      */
-    virtual void TIMER_CONFIG_HZ(frequency_t hz, dutycycle_t dutyCycle = defaultDutyCycle) = 0;
+    virtual void timerConfigHz(frequency_t hz, dutycycle_t dutyCycle = defaultDutyCycle) = 0;
 
     /**
      * Disables the PWM configuration.
      * @return
      */
-    virtual void TIMER_CONFIG_NORMAL() = 0;
+    virtual void timerConfigNormal() = 0;
 
     /**
      * Start PWM output.
      * @return
      */
-    virtual void TIMER_ENABLE_PWM() = 0;
+    virtual void timerEnablePwm() = 0;
 
     /**
      * Turn off PWM output.
      * @return
      */
-    virtual void TIMER_DISABLE_PWM() = 0;
+    virtual void timerDisablePwm() = 0;
 
 public:
     // Function defined later in this file

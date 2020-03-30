@@ -52,23 +52,23 @@ private:
     bool timerTCC2;
     Tcc* TCCx;
 
-    void TIMER_CONFIG_NORMAL();
+    void timerConfigNormal();
 
-    void TIMER_ENABLE_INTR();
+    void timerEnableIntr();
 
-    void TIMER_DISABLE_INTR();
+    void timerDisableIntr();
 
-    void TIMER_CONFIG_HZ(frequency_t hz __attribute__ ((unused)), dutycycle_t dutyCycle __attribute__ ((unused))) {
-        TIMER_CONFIG_HZ(PWM_PIN, hz, dutyCycle);
+    void timerConfigHz(frequency_t hz __attribute__ ((unused)), dutycycle_t dutyCycle __attribute__ ((unused))) {
+        timerConfigHz(PWM_PIN, hz, dutyCycle);
     };
 
-    void TIMER_CONFIG_HZ(pin_t pin, frequency_t hz, dutycycle_t dutyCycle);
+    void timerConfigHz(pin_t pin, frequency_t hz, dutycycle_t dutyCycle);
 
-    void TIMER_ENABLE_PWM() {
+    void timerEnablePwm() {
         setValue(onLength);
     };
 
-    void TIMER_DISABLE_PWM() {
+    void timerDisablePwm() {
         setValue(0U);
     }
 

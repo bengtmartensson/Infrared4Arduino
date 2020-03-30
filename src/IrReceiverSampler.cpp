@@ -89,7 +89,7 @@ milliseconds_t IrReceiverSampler::getBeginningTimeout() const {
 /** Interrupt routine. It collects data into the data buffer. */
 ISR(TIMER_INTR_NAME) {
     Board::debugPinHigh();
-    Board::getInstance()->TIMER_RESET();
+    Board::getInstance()->timerReset();
     IrReceiverSampler *recv = IrReceiverSampler::getInstance();
     IrReceiver::irdata_t irdata = recv->readIr();
     recv->timer++; // One more 50us tick

@@ -106,30 +106,30 @@ private:
 #endif
 
     //Clears the interrupt.
-    void TIMER_RESET() {
+    void timerReset() {
         IR_USE_TC->TC_CHANNEL[IR_USE_CH].TC_SR;
     }
 
-    void TIMER_ENABLE_PWM() {
+    void timerEnablePwm() {
         PWMC_EnableChannel(PWM_INTERFACE, IR_USE_PWM_CH);
     };
 
-    void TIMER_DISABLE_PWM() {
+    void timerDisablePwm() {
         PWMC_DisableChannel(PWM_INTERFACE, IR_USE_PWM_CH);
         writeLow();
     };
 
-    void TIMER_ENABLE_INTR() {
+    void timerEnableIntr() {
         NVIC_EnableIRQ(IR_USE_TC_IRQ);
     };
 
-    void TIMER_DISABLE_INTR() {
+    void timerDisableIntr() {
         NVIC_DisableIRQ(IR_USE_TC_IRQ);
     };
 
     static const unsigned multiplicator = 20U; // was 2U;
 
-    void TIMER_CONFIG_HZ(frequency_t frequency, dutycycle_t dutyCycle) {
+    void timerConfigHz(frequency_t frequency, dutycycle_t dutyCycle) {
         pmc_enable_periph_clk(PWM_INTERFACE_ID);
         const uint32_t pwmval = frequency * multiplicator;
         PWMC_ConfigureClocks(PWM_FREQUENCY * PWM_MAX_DUTY_CYCLE, pwmval, F_CPU);
@@ -139,7 +139,7 @@ private:
         PWMC_SetDutyCycle(PWM_INTERFACE, IR_USE_PWM_CH, (uint16_t) ((multiplicator * dutyCycle + 50U) / 100U));
     };
 
-    void TIMER_CONFIG_NORMAL() {
+    void timerConfigNormal() {
         pmc_enable_periph_clk((uint32_t) IR_USE_TC_IRQ);
         TC_Configure(IR_USE_TC, IR_USE_CH, TC_CMR_WAVE | TC_CMR_WAVSEL_UP_RC | TC_CMR_TCCLKS_TIMER_CLOCK1);
         const uint32_t rc = F_CPU / 2U * microsPerTick / 1000000U;

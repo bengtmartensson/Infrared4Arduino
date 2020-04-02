@@ -15,50 +15,43 @@ You should have received a copy of the GNU General Public License along with
 this program. If not, see http://www.gnu.org/licenses/.
 */
 
-#include <Arduino.h>
 #include "IrSenderPwm.h"
-#include <IrTimerDefs.h>
+
+#ifdef HAS_HARDWARE_PWM
+#include "IrSenderPwmHard.h"
+#else
+#include "IrSenderPwmSoftDelay.h"
+#endif
 
 IrSenderPwm *IrSenderPwm::instance = NULL;
 
-IrSenderPwm::IrSenderPwm() : IrSender(SEND_PIN) {
+IrSenderPwm::IrSenderPwm(pin_t outputPin) : IrSender(outputPin) {
 }
 
-void IrSenderPwm::send(const IrSequence& irSequence, frequency_t frequency) {
-    enable(frequency/1000);
-    for (unsigned int i = 0; i < irSequence.getLength(); i++) {
-        digitalWrite(getOutputPin(), (i & 1) ? LOW : HIGH);
-        if (i & 1) {
-            TIMER_DISABLE_PWM;
-        } else {
-            TIMER_ENABLE_PWM;
-        }
-        delayUSecs(irSequence.getDurations()[i]);
-    }
-    digitalWrite(getOutputPin(), LOW);
-}
-
-IrSenderPwm *IrSenderPwm::newInstance() {
+IrSenderPwm *IrSenderPwm::newInstance(pin_t outputPin) {
     if (instance != NULL)
         return NULL;
-    instance = new IrSenderPwm();
-    return instance;
-}
-
-IrSenderPwm *IrSenderPwm::getInstance(bool create) {
-    if (instance == NULL && create)
-        instance = new IrSenderPwm();
-    return instance;
-}
-
-#ifndef UNUSED
-/// @cond false
-#define UNUSED
-/// @endcond
+    instance =
+#ifdef HAS_HARDWARE_PWM
+            IrSenderPwmHard::newInstance(outputPin);
+#else
+            new IrSenderPwmSoftDelay(outputPin);
 #endif
-void IrSenderPwm::enable(unsigned char khz UNUSED) {
-    TIMER_DISABLE_INTR;
-    pinMode(SEND_PIN, OUTPUT);
-    digitalWrite(SEND_PIN, LOW);
-    TIMER_CONFIG_KHZ(khz);
+    return instance;
+}
+
+IrSenderPwm *IrSenderPwm::getInstance(bool create, pin_t outputPin) {
+    if (instance == NULL && create)
+        instance = newInstance(outputPin);
+    return instance;
+}
+
+void IrSenderPwm::deleteInstance() {
+    if (instance != NULL)
+#ifdef HAS_HARDWARE_PWM
+            IrSenderPwmHard::deleteInstance();
+#else
+            delete instance;
+#endif
+    instance = NULL;
 }

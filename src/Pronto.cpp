@@ -1,5 +1,6 @@
 #include "Pronto.h"
 #include "IrSignal.h"
+#include "Board.h" // for HAS_FLASH_READ
 #include <string.h>
 
 IrSignal *Pronto::parse(const uint16_t *data, size_t size) {
@@ -10,7 +11,7 @@ IrSignal *Pronto::parse(const uint16_t *data, size_t size) {
              frequency = toFrequency(data[1]);
              break;
         case learnedNonModulatedToken: // non-demodulated, "learned"
-            frequency = (frequency_t) 0;
+            frequency = static_cast<frequency_t>(0U);
             break;
         default:
             return NULL;
@@ -24,7 +25,7 @@ IrSignal *Pronto::parse(const uint16_t *data, size_t size) {
     IrSequence *repeat = mkSequence(data + numbersInPreamble + 2*introPairs, repetitionPairs, timebase);
     IrSequence *ending = new IrSequence();
 
-    IrSignal *code = new IrSignal(*intro, *repeat, *ending, frequency, true);
+    IrSignal *code = new IrSignal(*intro, *repeat, *ending, frequency, IrSignal::noDutyCycle, true);
 
     delete intro;
     delete repeat;
@@ -36,23 +37,35 @@ IrSignal *Pronto::parse(const uint16_t *data, size_t size) {
 IrSignal *Pronto::parse(const char *str) {
     size_t len = strlen(str)/(digitsInProntoNumber + 1) + 1;
     uint16_t data[len];
-    unsigned int index = 0;
     const char *p = str;
-    char *endptr[1] = { NULL };
-    while (*p) {
+    char *endptr[1];
+    for (unsigned int i = 0; i < len; i++) {
         long x = strtol(p, endptr, 16);
-        data[index++] = (uint16_t) x; // If input is conforming, there can be no overflow!
+        if (x == 0 && i >= numbersInPreamble) {
+            // Alignment error?, bail immediately (often right result).
+            len = i;
+            break;
+        }
+        data[i] = static_cast<uint16_t>(x); // If input is conforming, there can be no overflow!
         p = *endptr;
     }
-    return parse(data, index);
+    return parse(data, len);
 }
 
-#ifdef ARDUINO
+#if HAS_FLASH_READ
+IrSignal *Pronto::parse_PF(uint_farptr_t str) {
+    size_t len = strlen_PF(STRCPY_PF_CAST(str));
+    char work[len + 1];
+    strncpy_PF(work, STRCPY_PF_CAST(str), len);
+    return parse(work);
+}
+
+IrSignal *Pronto::parse_PF(const char *str) {
+    return parse_PF(reinterpret_cast<uint_farptr_t>(str)); // to avoid infinite recursion
+};
+
 IrSignal *Pronto::parse(const __FlashStringHelper *str) {
-    size_t length = strlen_PF((uint_farptr_t)str);
-    char copy[length + 1]; // can be made more memory efficient.
-    strcpy_PF(copy, (uint_farptr_t)str);
-    return parse(copy);
+    return parse_PF(reinterpret_cast<uint_farptr_t>(str));
 }
 #endif
 

@@ -20,7 +20,7 @@ BROWSER:=firefox
 DEBUGFLAGS:=-g
 WARNINGFLAGS:=-Wall -Werror -Wextra
 
-VPATH=tests src
+VPATH=tests src src/boards
 
 GH_PAGES := gh-pages
 VERSION_H := src/version.h
@@ -33,14 +33,20 @@ ORIGINURL := $(shell git remote get-url origin)
 .PRECIOUS: test1
 
 OBJS=\
+Board.o \
 IrReader.o \
 IrReceiver.o \
 IrReceiverPoll.o \
 IrReceiverSampler.o \
 IrSender.o \
 IrSender.o \
+IrSenderNonMod.o \
 IrSenderPwm.o \
+IrSenderPwmSoft.o \
+IrSenderPwmSoftDelay.o \
+IrSenderPwmHard.o \
 IrSenderSimulator.o \
+IrSenderPwmSpinWait.o \
 IrSequence.o \
 IrSignal.o \
 IrWidget.o \
@@ -50,7 +56,8 @@ Nec1Decoder.o \
 Nec1Renderer.o \
 Pronto.o \
 Rc5Decoder.o \
-Rc5Renderer.o
+Rc5Renderer.o \
+SIL.o
 
 EXTRA_INCLUDES=\
 InfraredTypes.h \
@@ -58,7 +65,9 @@ IrDecoder.h \
 IrSenderNonMod.h \
 IrSequenceReader.h \
 
-EXPORTED_INCLUDES := $(sort $(EXTRA_INCLUDES) $(subst .o,.h,$(OBJS)))
+NOT_EXPORTED_INCLUDE  = SIL.h Board.h
+
+EXPORTED_INCLUDES := $(sort $(filter-out $(NOT_EXPORTED_INCLUDE), $(EXTRA_INCLUDES) $(subst .o,.h,$(OBJS))))
 
 all: test doc keywords.txt library.properties
 
@@ -82,7 +91,7 @@ $(VERSION_H): library.properties Makefile
 	echo " */"                                                           >> $@
 	echo "#define VERSION \"$(VERSION)\""                                >> $@
 
-api-doc/index.html xml/index.xml: $(wildcard src/*) $(VERSION_H) $(DOXYFILE)
+api-doc/index.html xml/index.xml: $(wildcard src/*) $(VERSION_H) $(DOXYFILE) README.md
 	GIT_VERSION=$(VERSION) $(DOXYGEN) $(DOXYFILE)
 
 doc: api-doc/index.html
@@ -104,7 +113,7 @@ tag:
 	git push origin Version-$(VERSION)
 
 clean:
-	rm -rf *.a *.o api-doc xml test1 $(GH_PAGES) library.properties.tmp
+	rm -rf *.a *.o api-doc xml test1 $(GH_PAGES) library.properties.tmp keywords.txt
 
 spotless: clean
 	rm -rf keywords.txt

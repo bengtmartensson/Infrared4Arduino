@@ -11,9 +11,13 @@
 #include "Pronto.h"
 #include "Rc5Renderer.h"
 #include "Rc5Decoder.h"
+#include "IrSenderPwmSpinWait.h"
+#include "IrSenderNonMod.h"
 #include <unistd.h>
 #include <iostream>
 #include <sstream>
+
+#pragma GCC diagnostic ignored "-Wunused-function"
 
 bool checkIrSignalDump(const IrSignal& irSignal, const char *ref) {
     std::ostringstream oss;
@@ -49,16 +53,50 @@ static bool testSignalRenderer(bool verbose, const IrSignal *signal, const char*
     return checkIrSignalDump(*signal, str);
 }
 
+static bool testSignalSendNonMod(bool verbose, const IrSignal *signal) {
+    if (verbose) {
+        Stream stdout(std::cout);
+        signal->dump(stdout, true);
+    }
+    IrSenderNonMod irSender(99U, true);
+    irSender.send(signal->getIntro(), 0U);
+    return true;
+}
+
+static bool testSignalSendSoftCarrier(bool verbose, const IrSignal *signal) {
+    if (verbose) {
+        Stream stdout(std::cout);
+        signal->dump(stdout, true);
+    }
+    IrSenderPwmSpinWait irSenderSoftCarrier(Board::NO_PIN);
+    irSenderSoftCarrier.send(signal->getRepeat());
+    return true;
+}
+
+static bool testNec1SendSoftCarrier(bool verbose) {
+    const IrSignal *nec1 = Nec1Renderer::newIrSignal(122, 29); // power_on for Yahama receivers
+    return testSignalSendSoftCarrier(verbose, nec1/*, "f=38400\n"
+            "+9024 -4512 +564 -564 +564 -1692 +564 -564 +564 -1692 +564 -1692 +564 -1692 +564 -1692 +564 -564 +564 -1692 +564 -564 +564 -1692 +564 -564 +564 -564 +564 -564 +564 -564 +564 -1692 +564 -1692 +564 -564 +564 -1692 +564 -1692 +564 -1692 +564 -564 +564 -564 +564 -564 +564 -564 +564 -1692 +564 -564 +564 -564 +564 -564 +564 -1692 +564 -1692 +564 -1692 +564 -39756\n"
+            "+9024 -2256 +564 -65535\n\n"*/);
+}
+
+static bool testNec1SendNonMod(bool verbose) {
+    const IrSignal *nec1 = Nec1Renderer::newIrSignal(122, 29); // power_on for Yahama receivers
+    return testSignalSendNonMod(verbose, nec1/*, "f=38400\n"
+            "+9024 -4512 +564 -564 +564 -1692 +564 -564 +564 -1692 +564 -1692 +564 -1692 +564 -1692 +564 -564 +564 -1692 +564 -564 +564 -1692 +564 -564 +564 -564 +564 -564 +564 -564 +564 -1692 +564 -1692 +564 -564 +564 -1692 +564 -1692 +564 -1692 +564 -564 +564 -564 +564 -564 +564 -564 +564 -1692 +564 -564 +564 -564 +564 -564 +564 -1692 +564 -1692 +564 -1692 +564 -39756\n"
+            "+9024 -2256 +564 -65535\n\n"*/);
+}
+
 static bool testNec1Renderer(bool verbose) {
     const IrSignal *nec1 = Nec1Renderer::newIrSignal(122, 29); // power_on for Yahama receivers
-    return testSignalRenderer(verbose, nec1, "f=38400\n"
+    return testSignalRenderer(verbose, nec1, "f=38400 "
             "+9024 -4512 +564 -564 +564 -1692 +564 -564 +564 -1692 +564 -1692 +564 -1692 +564 -1692 +564 -564 +564 -1692 +564 -564 +564 -1692 +564 -564 +564 -564 +564 -564 +564 -564 +564 -1692 +564 -1692 +564 -564 +564 -1692 +564 -1692 +564 -1692 +564 -564 +564 -564 +564 -564 +564 -564 +564 -1692 +564 -564 +564 -564 +564 -564 +564 -1692 +564 -1692 +564 -1692 +564 -39756\n"
             "+9024 -2256 +564 -65535\n\n");
 }
 
 static bool testRc5Renderer(bool verbose) {
     const IrSignal *sig = Rc5Renderer::newIrSignal(0, 1, 0);
-    return testSignalRenderer(verbose, sig, "f=36000\n\n"
+    return testSignalRenderer(verbose, sig, "f=36000 \n"
             "+889 -889 +1778 -889 +889 -889 +889 -889 +889 -889 +889 -889 +889 -889 +889 -889 +889 -889 +889 -889 +889 -889 +889 -1778 +889 -65535\n\n");
 }
 
@@ -83,9 +121,9 @@ static bool testIrSenderSimulator(bool verbose) {
         IrSenderSimulator sender(stdout);
         sender.sendIrSignal(*nec1, 3);
     }
-    return checkSenderSimulator(*nec1, 3, "IrSenderSimulator: f=38400 +9024 -4512 +564 -564 +564 -1692 +564 -564 +564 -1692 +564 -1692 +564 -1692 +564 -1692 +564 -564 +564 -1692 +564 -564 +564 -1692 +564 -564 +564 -564 +564 -564 +564 -564 +564 -1692 +564 -1692 +564 -564 +564 -1692 +564 -1692 +564 -1692 +564 -564 +564 -564 +564 -564 +564 -564 +564 -1692 +564 -564 +564 -564 +564 -564 +564 -1692 +564 -1692 +564 -1692 +564 -39756\n"
-            "IrSenderSimulator: f=38400 +9024 -2256 +564 -65535\n"
-            "IrSenderSimulator: f=38400 +9024 -2256 +564 -65535\n");
+    return checkSenderSimulator(*nec1, 3, "IrSenderSimulator: f=38400 40% +9024 -4512 +564 -564 +564 -1692 +564 -564 +564 -1692 +564 -1692 +564 -1692 +564 -1692 +564 -564 +564 -1692 +564 -564 +564 -1692 +564 -564 +564 -564 +564 -564 +564 -564 +564 -1692 +564 -1692 +564 -564 +564 -1692 +564 -1692 +564 -1692 +564 -564 +564 -564 +564 -564 +564 -564 +564 -1692 +564 -564 +564 -564 +564 -564 +564 -1692 +564 -1692 +564 -1692 +564 -39756\n"
+            "IrSenderSimulator: f=38400 40% +9024 -2256 +564 -65535\n"
+            "IrSenderSimulator: f=38400 40% +9024 -2256 +564 -65535\n");
 }
 
 static bool testPronto(bool verbose) {
@@ -94,7 +132,7 @@ static bool testPronto(bool verbose) {
         Stream stdout(std::cout);
         sig->dump(stdout, true);
     }
-    return checkIrSignalDump(*sig, "f=38380\n"
+    return checkIrSignalDump(*sig, "f=38380 "
             "+9040 -4507 +573 -573 +573 -1693 +573 -573 +573 -1693 +573 -1693 +573 -1693 +573 -1693 +573 -573 +573 -1693 +573 -573 +573 -1693 +573 -573 +573 -573 +573 -573 +573 -573 +573 -1693 +573 -1693 +573 -573 +573 -1693 +573 -1693 +573 -1693 +573 -573 +573 -573 +573 -573 +573 -573 +573 -1693 +573 -573 +573 -573 +573 -573 +573 -1693 +573 -1693 +573 -1693 +573 -39785\n"
             "+9040 -2266 +573 -65535\n\n");
 }
@@ -129,14 +167,16 @@ int main(int argc, const char *args[] __attribute__((unused))) {
     unsigned int fails = 0;
     unsigned int successes = 0;
 
+    TEST(testNec1SendSoftCarrier);
+    TEST(testNec1SendNonMod);
     TEST(testNec1Renderer);
-    TEST(testRc5Renderer);   
+    TEST(testRc5Renderer);
     TEST(testNec1Decoder);
-    TEST(testRc5Decoder);                  
-    TEST(testIrSenderSimulator);     
-    TEST(testPronto);                
+    TEST(testRc5Decoder);
+    TEST(testIrSenderSimulator);
+    TEST(testPronto);
     TEST(testToProntoHex);
-    TEST(testProntoParse);           
+    TEST(testProntoParse);
 
     // Report
     std::cout << "Successes: " << successes << std::endl;

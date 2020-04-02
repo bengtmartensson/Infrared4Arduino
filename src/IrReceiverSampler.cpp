@@ -1,12 +1,14 @@
 #include "IrReceiverSampler.h"
-#include <IrTimerDefs.h>
+#include "Board.h"
+
+#if HAS_SAMPLING
 
 uint32_t IrReceiverSampler::millisecs2ticks(milliseconds_t ms) {
-    return (1000UL * (uint32_t) ms) / microsPerTick;
+    return (1000UL * (uint32_t) ms) / Board::microsPerTick;
 }
 
 milliseconds_t IrReceiverSampler::ticks2millisecs(uint32_t tix) {
-    return (milliseconds_t) ((tix * microsPerTick)/1000UL);
+    return (milliseconds_t) ((tix * Board::microsPerTick)/1000UL);
 }
 
 IrReceiverSampler *IrReceiverSampler::instance = NULL;
@@ -52,19 +54,19 @@ IrReceiverSampler::~IrReceiverSampler() {
 void IrReceiverSampler::reset() {
     receiverState = STATE_IDLE;
     dataLength = 0;
+    timer = 0U;
 }
 
 void IrReceiverSampler::enable() {
+    // Initialize state machine variables
     reset();
     noInterrupts();
-    TIMER_CONFIG_NORMAL();
-    TIMER_ENABLE_INTR;
-    TIMER_RESET;
+    Board::getInstance()->enableSampler(getPin());
     interrupts();
 }
 
 void IrReceiverSampler::disable() {
-    TIMER_DISABLE_INTR;
+    Board::getInstance()->disableSampler();
 }
 
 void IrReceiverSampler::setEndingTimeout(milliseconds_t timeOut) {
@@ -83,8 +85,11 @@ milliseconds_t IrReceiverSampler::getBeginningTimeout() const {
     return ticks2millisecs(beginningTimeoutInTicks);
 }
 
+#ifdef ISR
 /** Interrupt routine. It collects data into the data buffer. */
 ISR(TIMER_INTR_NAME) {
+    Board::debugPinHigh();
+    Board::getInstance()->timerReset();
     IrReceiverSampler *recv = IrReceiverSampler::getInstance();
     IrReceiver::irdata_t irdata = recv->readIr();
     recv->timer++; // One more 50us tick
@@ -126,7 +131,7 @@ ISR(TIMER_INTR_NAME) {
                 if (recv->timer > recv->endingTimeoutInTicks) {
                     // big SPACE, indicates gap between codes
                     recv->durationData[recv->dataLength++] = recv->timer;
-                    //recv->timer = 0;
+//                    recv->timer = 0;
                     recv->receiverState = IrReceiverSampler::STATE_STOP;
                 }
             }
@@ -137,4 +142,8 @@ ISR(TIMER_INTR_NAME) {
             // should not happen
             break;
     }
+    Board::debugPinLow();
 }
+#endif // ISR
+
+#endif

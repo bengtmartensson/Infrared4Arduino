@@ -19,6 +19,7 @@ this program. If not, see http://www.gnu.org/licenses/.
 
 #include <Arduino.h>
 #include "IrSender.h"
+#include "Board.h"
 
 /**
  * Sending function using timer PWM. Due to the nature of the timers, this is a Highlander,
@@ -27,28 +28,27 @@ this program. If not, see http://www.gnu.org/licenses/.
  */
 class IrSenderPwm : public IrSender {
 private:
-    IrSenderPwm();
-    ~IrSenderPwm() {}
+    static const unsigned int defaultDutyCycle = 50U;
     static IrSenderPwm *instance;
-    void enable(unsigned char khz);
+
+protected:
+    IrSenderPwm(pin_t sendPin);
+    virtual ~IrSenderPwm() {}
 
 public:
+    static unsigned int getDutyCycle() { return defaultDutyCycle; };
+
     /**
      * Returns a pointer to the instance, or NULL if not initialized.
      * If argument true, in the latter case creates a new instance and returns it.
      */
-    static IrSenderPwm *getInstance(bool create = false);
+    static IrSenderPwm *getInstance(bool create = false, pin_t outputPin = Board::getInstance()->defaultPwmPin());
 
     /**
      *  Creates a new instance (if not existing) and returns it.
      *  Returns NULL if an instance already exists.
      */
-    static IrSenderPwm *newInstance();
+    static IrSenderPwm *newInstance(pin_t outputPin);
 
-    static void deleteInstance() {
-        delete instance;
-        instance = NULL;
-    }
-
-    void send(const IrSequence& sequence, frequency_t frequency = IrSignal::defaultFrequency);
+    static void deleteInstance();
 };

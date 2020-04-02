@@ -80,7 +80,15 @@ public:
         dump(stream, true);
     };
 
-#ifdef ARDUINO
+    // Do NOT put #ifdef HAS_FLASH_READ here, leads to circular includes.
+    /**
+     * Create an IrSequence from data in PROGMEM.
+     * This must manually be deleted by the programmer.
+     * The function is available only on platforms implementing the memcpy_PF
+     * call.
+     * @param flashData
+     * @param length
+     * @return Pointer to IrSequence.
+     */
     static IrSequence* readFlash(const microseconds_t *flashData, size_t length);
-#endif
 };

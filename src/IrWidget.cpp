@@ -1,4 +1,7 @@
 #include "IrSignal.h"
+#include "Board.h" // for HAS_INPUT_CAPTURE
+
+#if HAS_INPUT_CAPTURE
 
 /* IR Widget: capture a raw IR signal and dump the timing of the non-demodulated signal
 
@@ -99,3 +102,5 @@ void IrWidget::setup(bool pullup) {
     std::cout << "pinMode(CAPTURE_PIN_1, " << (pullup ? "INPUT_PULLUP)" : "INPUT)") << std::endl;
 #endif
 }
+
+#endif

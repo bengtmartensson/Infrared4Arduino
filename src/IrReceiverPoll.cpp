@@ -38,9 +38,11 @@ unsigned long timeSince(unsigned long then) {
 bool IrReceiverPoll::searchForStart() {
     unsigned long start = micros();
     unsigned long beginningTimeoutInMicros = 1000UL * beginningTimeout;
-    while (readIr() == IrReceiver::IR_SPACE)
+    while (readIr() == IrReceiver::IR_SPACE) {
         if (timeSince(start) > beginningTimeoutInMicros)
             return false;
+        yield();
+    }
     return true;
 }
 
@@ -49,16 +51,20 @@ void IrReceiverPoll::collectData() {
     unsigned long endingTimeoutInMicros = 1000UL * endingTimeout;
     unsigned long lastTime = micros();
     while (dataLength < bufferSize) {
-        unsigned long now = micros();
         IrReceiver::irdata_t data = readIr();
         if (data != lastDataRead) {
+            unsigned long now = micros();
             recordDuration(now - lastTime);
             lastDataRead = data;
             lastTime = now;
-        } else if (data == HIGH && (now - lastTime > endingTimeoutInMicros)) {
-            recordDuration(now - lastTime);
-            return; // normal exit
+        } else if (data == IrReceiver::IR_SPACE) {
+            unsigned long now = micros();
+            if (now - lastTime > endingTimeoutInMicros) {
+                recordDuration(now - lastTime);
+                return; // normal exit
+            }
         }
+        yield();
     }
 }
 

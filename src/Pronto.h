@@ -2,12 +2,17 @@
  * Static class consisting of functions for parsing a Pronto Hex string (like 0000 006C 0022 0002 015B 00AD ...)  into an IrSignal,
  * and vice versa.
  * <a href="http://harctoolbox.org/Glossary.html#ProntoSemantics">Reference</a>.
+ *
+ * Note: Unless you have "infinitely much" memory, it is a very bad idea to put Pronto Hex in your source files.
+ * Better is to use, for example IrScruitinizer to convert the signals offline,
+ * and put the converted version in your source files instead.
  */
 
 #pragma once
 
 #include "InfraredTypes.h"
 #include "IrSignal.h"
+#include "Board.h"
 
 class Pronto {
 private:
@@ -67,15 +72,25 @@ public:
      */
     static IrSignal *parse(const char *str);
 
-#ifdef ARDUINO
-   /**
+    /**
+     * Function for parsing its input data into an IrSignal. The ending sequence will always be empty.
+     * @param str Text string containing a Pronto form signal.
+     * @return IrSignal
+     */
+    static IrSignal *parse_PF(const uint_farptr_t ptr);
+
+    static IrSignal *parse_PF(const char * ptr);
+
+//#if defined(ARDUINO) || defined(DOXYGEN)
+    /**
      * Function for parsing its input data into an IrSignal. The ending sequence will always be empty.
      * @param str Text string containing a Pronto form signal.
      * This form handles the F(...) form.
+     * Available only on platforms implementing the str*_PF functions.
      * @return IrSignal
      */
     static IrSignal *parse(const __FlashStringHelper *str);
-#endif
+//#endif
 
     /**
      * Function for generating a Pronto Hex string from the argument.

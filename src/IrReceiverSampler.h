@@ -3,6 +3,7 @@
 #include "IrReceiver.h"
 
 /**
+ * @class IrReceiverSampler
  * This receiving class samples the input pin every 50 microseconds using a timer
  * interrupt. Due to the ISP, this is a singleton class;
  * it can only be instantiated once.
@@ -16,9 +17,6 @@
 // fumbles with it, volatile.
 class IrReceiverSampler : public IrReceiver {
 public:
-
-    /** microseconds per clock interrupt */
-    static const unsigned long microsPerTick = 50; // was USECPERTICK
 
     /** State space for the receiver state machine. */
     enum ReceiverState_t {
@@ -115,7 +113,7 @@ public:
     }
 
     microseconds_t getDuration(unsigned int i) const {
-        uint32_t bigvalue = microsPerTick * (uint32_t) durationData[i] + (i & 1 ? markExcess : -markExcess);
+        uint32_t bigvalue = Board::microsPerTick * (uint32_t) durationData[i] + (i & 1 ? markExcess : -markExcess);
         return bigvalue <=  MICROSECONDS_T_MAX ? (microseconds_t) bigvalue : MICROSECONDS_T_MAX;
     }
 

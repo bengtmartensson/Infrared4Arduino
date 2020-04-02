@@ -17,23 +17,35 @@ this program. If not, see http://www.gnu.org/licenses/.
 
 #pragma once
 
-#include "InfraredTypes.h"
+#include <Arduino.h>
 #include "IrSignal.h"
+#include "Board.h"
 
 /**
  * Abstract base class for all sending classes.
  */
 class IrSender {
 private:
-    pin_t outputPin;
+    pin_t sendPin;
+
+public:
+    inline pin_t getPin() const {
+        return sendPin;
+    }
 
 protected:
-    pin_t getOutputPin() const {
-        return outputPin;
-    }
-    void delayUSecs(microseconds_t T);
-    IrSender();
+    // TODO: Rewrite for efficiency
+    inline void writeHigh() { Board::getInstance()->writeHigh(sendPin); };
+    inline void writeLow()  { Board::getInstance()->writeLow(sendPin); };
+
     IrSender(pin_t pin);
+
+    // TODO: something sensible...
+    /*virtual*/ static void barfForInvalidPin(pin_t sendPin __attribute__((unused))) {};
+
+    virtual void enable(frequency_t frequency, dutycycle_t dutyCycle = Board::defaultDutyCycle) = 0;
+    virtual void sendSpace(microseconds_t time) { Board::delayMicroseconds(time); };
+    virtual void sendMark(microseconds_t time) = 0;
 
 public:
     virtual ~IrSender();
@@ -43,7 +55,7 @@ public:
      * @param irSequence
      * @param frequency frequency in Hz
      */
-    virtual void send(const IrSequence& irSequence, frequency_t frequency = IrSignal::defaultFrequency) = 0;
+    virtual void send(const IrSequence& irSequence, frequency_t frequency = IrSignal::defaultFrequency, dutycycle_t dutyCycle = Board::defaultDutyCycle);
 
     /**
      * Sends the IrSignal given as argument the prescribed number of times.
@@ -62,14 +74,6 @@ public:
      */
     void sendWhile(const IrSignal& irSignal, bool(*trigger)());
 
-// TODO:
-//    /**
-//     * Send an IrSignal, when and as long as buttonPin is LOW.
-//     * @param irSignal
-//     * @param buttonPin
-//     */
-//    void sendWhilePinLow(const IrSignal& irSignal, pin_t buttonPin);
-
     /** Force output pin inactive. */
-    virtual void mute();
+    void mute() { writeLow(); };
 };

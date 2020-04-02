@@ -18,36 +18,13 @@ this program. If not, see http://www.gnu.org/licenses/.
 #include "IrSender.h"
 #include "IrSignal.h"
 
-// From IRLib.cpp, renamed from My_delay_uSecs.
-
-//The Arduino built in function delayMicroseconds has limits we wish to exceed
-//Therefore we have created this alternative
-void IrSender::delayUSecs(microseconds_t T) {
-    if (T) {
-        if (T > 16000) {
-            delayMicroseconds(T % 1000);
-            delay(T / 1000);
-        } else
-            delayMicroseconds(T);
-    };
-}
-
-IrSender::IrSender() {
-    outputPin = invalidPin;
-}
-
-IrSender::IrSender(pin_t pin) {
-    outputPin = pin;
-    pinMode(pin, OUTPUT);
-    digitalWrite(pin, LOW);
+IrSender::IrSender(pin_t pin) : sendPin(pin) {
+    Board::getInstance()->setPinMode(pin, OUTPUT);
+    Board::getInstance()->writeLow(pin);
 }
 
 IrSender::~IrSender() {
     mute();
-}
-
-void IrSender::mute() {
-    digitalWrite(outputPin, LOW);
 }
 
 void IrSender::sendIrSignal(const IrSignal& irSignal, unsigned int noSends) {
@@ -76,5 +53,28 @@ void IrSender::sendWhile(const IrSignal& irSignal, bool(*trigger)()) {
         send(irSignal.getEnding());
     } else {
         // Button is not pressed, do nothing.
+    }
+}
+
+void IrSender::send(const IrSequence& irSequence, frequency_t frequency, dutycycle_t dutyCycle) {
+    enable(frequency, dutyCycle);
+#ifdef CONSIDER_COMPUTATIONAL_DELAYS
+    uint32_t refTime = micros();
+#endif
+    for (unsigned int i = 0U; i < irSequence.getLength(); i++) {
+#ifdef CONSIDER_COMPUTATIONAL_DELAYS
+#error dssdfsdfsdf
+        microseconds_t duration = irSequence.getDurations()[i];
+        refTime += duration;
+        int32_t delay = refTime - micros(); // TODO verify overflow
+        if (delay <= 0)
+            return;
+#else
+        microseconds_t delay = irSequence.getDurations()[i];
+#endif
+        if (i & 1)
+            sendSpace(delay);
+        else
+            sendMark(delay);
     }
 }

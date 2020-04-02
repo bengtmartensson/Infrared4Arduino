@@ -38,9 +38,11 @@ unsigned long timeSince(unsigned long then) {
 bool IrReceiverPoll::searchForStart() {
     unsigned long start = micros();
     unsigned long beginningTimeoutInMicros = 1000UL * beginningTimeout;
-    while (readIr() == IrReceiver::IR_SPACE)
+    while (readIr() == IrReceiver::IR_SPACE) {
         if (timeSince(start) > beginningTimeoutInMicros)
             return false;
+        yield();
+    }
     return true;
 }
 
@@ -62,6 +64,7 @@ void IrReceiverPoll::collectData() {
                 return; // normal exit
             }
         }
+        yield();
     }
 }
 

@@ -85,6 +85,7 @@ inline void delay(unsigned long t) {
 
 inline void noInterrupts() {};
 inline void interrupts() {};
+inline void yield() {};
 
 inline unsigned long micros() {
     struct timeval tv = getTimeOfDay();

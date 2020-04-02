@@ -26,10 +26,11 @@ void inline IrSenderPwmSpinWait::sleepMicros(microseconds_t us) {
 }
 
 void inline IrSenderPwmSpinWait::sleepUntilMicros(uint32_t targetTime) {
-    while (micros() < targetTime)
+    while (micros() < targetTime) {
 #if ! defined(ARDUINO) && ! defined(REAL_TIME)
         // increment the simulated time, otherwise will loop forever
-        delayMicroseconds(1)
+        delayMicroseconds(1);
 #endif
-        ;
+        yield();
+    }
 }

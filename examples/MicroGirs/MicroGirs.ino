@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2014,2015,2017,2018 Bengt Martensson.
+Copyright (C) 2014, 2015, 2017, 2018, 2020 Bengt Martensson.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -182,19 +182,22 @@ static void decodeOrDump(IrReader *irReader, Stream& stream) {
 
 static bool receive(Stream& stream) {
     IrReceiverSampler *irReceiver = IrReceiverSampler::getInstance();
-    if (irReceiver == NULL)
-        irReceiver = IrReceiverSampler::newIrReceiverSampler(captureSize,
-            IRRECEIVER_PIN, IRRECEIVER_PULLUP);
-    if (irReceiver == NULL)
-        return false;
-    irReceiver->setEndingTimeout(receiveEndingTimeout);
-    irReceiver->setBeginningTimeout(beginTimeout);
-    irReceiver->setMarkExcess(IRRECEIVER_MARK_EXCESS);
     flushIn(stream);
-    irReceiver->enable();
-
+    if (irReceiver == NULL) {
+        irReceiver = IrReceiverSampler::newIrReceiverSampler(captureSize,
+                IRRECEIVER_PIN, IRRECEIVER_PULLUP);
+        if (irReceiver == NULL)
+            return false;
+        irReceiver->setEndingTimeout(receiveEndingTimeout);
+        irReceiver->setBeginningTimeout(beginTimeout);
+        irReceiver->setMarkExcess(IRRECEIVER_MARK_EXCESS);
+        irReceiver->enable();
+    } else {
+        irReceiver->reset();
+    }
+    
     while (!irReceiver->isReady() && stream.available() == 0)
-        ;
+        yield();
     bool ready = irReceiver->isReady();
     irReceiver->disable();
     if (ready)
@@ -230,18 +233,35 @@ static bool capture(Stream& stream) {
 #endif // CAPTURE
 
 void setup() {
+#ifdef IRRECEIVER_1_GND
+    pinMode(IRRECEIVER_1_GND, OUTPUT);
+    digitalWrite(IRRECEIVER_1_GND, LOW);
+#endif
+
+#ifdef IRRECEIVER_1_VCC
+    pinMode(IRRECEIVER_1_VCC, OUTPUT);
+    digitalWrite(IRRECEIVER_1_VCC, HIGH);
+#endif
+
+#ifdef IRSENSOR_1_GND
+    pinMode(IRSENSOR_1_GND, OUTPUT);
+    digitalWrite(IRSENSOR_1_GND, LOW);
+#endif
+
+#ifdef IRSENSOR_1_VCC
+    pinMode(IRSENSOR_1_VCC, OUTPUT);
+    digitalWrite(IRSENSOR_1_VCC, HIGH);
+#endif
+
 #if defined(TRANSMIT)
     // Make sure that sender is quiet (if reset or such)
     IrSenderPwm::getInstance(true)->mute();
 #endif
 
     Serial.begin(BAUD);
-#if defined(ARDUINO_AVR_LEONARDO) | defined(ARDUINO_AVR_MICRO)
     while (!Serial)
         ; // wait for serial port to connect. "Needed for Leonardo only"
-#endif
     Serial.println(F(PROGNAME " " VERSION));
-    Serial.println(F("covfefe"));
     Serial.setTimeout(SERIAL_TIMEOUT);
 }
 
@@ -266,7 +286,7 @@ bool isPrefix(const __FlashStringHelper *pstring, const String& cmd) {
 static String readCommand(Stream& stream) {
     //flushIn(stream);
     while (stream.available() == 0)
-        ;
+        yield();
 
     String line = stream.readStringUntil(EOLCHAR);
     line.trim();

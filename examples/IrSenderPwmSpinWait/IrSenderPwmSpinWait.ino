@@ -4,7 +4,7 @@
 #include <IrSenderPwmSpinWait.h>
 
 static const frequency_t necFrequency = 38400U;
-static const pin_t pin = 3U;
+static const pin_t pin = 4U; // D2 on ESP8266
 static const unsigned long BAUD = 115200UL;
 
 // NEC(1) 122 29 with no repetition; powers on many Yamaha receivers

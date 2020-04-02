@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2019 Bengt Martensson.
+Copyright (C) 2020 Bengt Martensson.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -72,6 +72,7 @@ public:
      * Start the periodic ISR sampler routine. Called from IrReceiveSampler.
      */
     virtual void enableSampler(pin_t pin __attribute__((unused))) {
+        timerConfigNormal();
         timerEnableIntr();
         timerReset();
     }
@@ -100,7 +101,6 @@ public:
      * Turn off PWM.
      */
     void disablePwm() {
-        timerConfigNormal();
     }
 
     void sendPwmMark(microseconds_t time) {
@@ -260,7 +260,7 @@ private:
 #else
 
 //#error Your board is currently not supported. Please add it to boarddefs.h.
-#warning The present board is either unknow, or does not support (Hardware) PWM \
+#warning The present board is either unknown, or does not support (Hardware) PWM \
 or equidistant timer sampling. The classes IrReceiverSampler and \
 IrSenderPwmHard will not be available.
 

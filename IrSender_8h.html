@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Infrared4Arduino
-   &#160;<span id="projectnumber">1.0.6</span>
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -72,18 +72,22 @@ $(function() {
 <div class="title">IrSender.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="InfraredTypes_8h_source.html">InfraredTypes.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;Arduino.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="IrSignal_8h_source.html">IrSignal.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="Board_8h_source.html">Board.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for IrSender.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="IrSender_8h__incl.png" border="0" usemap="#src_2IrSender_8h" alt=""/></div>
 <map name="src_2IrSender_8h" id="src_2IrSender_8h">
-<area shape="rect"  title=" " alt="" coords="5,5,116,32"/>
-<area shape="rect"  href="InfraredTypes_8h.html" title="This file defines some general data types that are used in the library." alt="" coords="11,229,134,256"/>
-<area shape="rect"  href="IrSignal_8h.html" title=" " alt="" coords="59,80,142,107"/>
-<area shape="rect"  title=" " alt="" coords="31,304,115,331"/>
-<area shape="rect"  href="IrSequence_8h.html" title=" " alt="" coords="110,155,217,181"/>
+<area shape="rect"  title=" " alt="" coords="29,5,139,32"/>
+<area shape="rect"  title=" " alt="" coords="13,379,97,405"/>
+<area shape="rect"  href="IrSignal_8h.html" title=" " alt="" coords="43,155,125,181"/>
+<area shape="rect"  href="Board_8h.html" title=" " alt="" coords="179,80,251,107"/>
+<area shape="rect"  href="InfraredTypes_8h.html" title="This file defines some general data types that are used in the library." alt="" coords="43,304,165,331"/>
+<area shape="rect"  href="IrSequence_8h.html" title=" " alt="" coords="107,229,213,256"/>
+<area shape="rect"  href="PinModeStatus_8h.html" title=" " alt="" coords="149,155,280,181"/>
+<area shape="rect"  href="NoBoard_8h.html" title=" " alt="" coords="304,155,443,181"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -97,9 +101,17 @@ This graph shows which files directly or indirectly include this file:</div>
 <area shape="rect"  href="IrSenderPwm_8h.html" title=" " alt="" coords="347,80,489,107"/>
 <area shape="rect"  href="IrSenderSimulator_8h.html" title=" " alt="" coords="513,80,688,107"/>
 <area shape="rect"  href="IrSignal_8cpp.html" title=" " alt="" coords="712,80,833,107"/>
-<area shape="rect"  href="IrSenderNonMod_8cpp.html" title=" " alt="" coords="135,155,315,181"/>
-<area shape="rect"  href="IrSenderPwm_8cpp.html" title=" " alt="" coords="339,155,497,181"/>
-<area shape="rect"  href="IrSenderSimulator_8cpp.html" title=" " alt="" coords="522,155,711,181"/>
+<area shape="rect"  href="IrSenderNonMod_8cpp.html" title=" " alt="" coords="75,155,255,181"/>
+<area shape="rect"  href="IrSenderPwm_8cpp.html" title=" " alt="" coords="140,229,299,256"/>
+<area shape="rect"  href="IrSenderPwmHard_8h.html" title=" " alt="" coords="331,155,505,181"/>
+<area shape="rect"  href="IrSenderPwmSoft_8h.html" title=" " alt="" coords="544,155,713,181"/>
+<area shape="rect"  href="IrSenderPwmHard_8cpp.html" title=" " alt="" coords="323,229,513,256"/>
+<area shape="rect"  href="IrSenderPwmSoft_8cpp.html" title=" " alt="" coords="537,229,721,256"/>
+<area shape="rect"  href="IrSenderPwmSoftDelay_8h.html" title=" " alt="" coords="745,229,950,256"/>
+<area shape="rect"  href="IrSenderPwmSpinWait_8h.html" title=" " alt="" coords="981,229,1183,256"/>
+<area shape="rect"  href="IrSenderPwmSoftDelay_8cpp.html" title=" " alt="" coords="733,304,953,331"/>
+<area shape="rect"  href="IrSenderPwmSpinWait_8cpp.html" title=" " alt="" coords="978,304,1194,331"/>
+<area shape="rect"  href="IrSenderSimulator_8cpp.html" title=" " alt="" coords="738,155,927,181"/>
 </map>
 </div>
 </div>
@@ -114,7 +126,7 @@ Classes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jan 19 2020 16:08:10 for Infrared4Arduino by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Apr 3 2020 13:33:14 for Infrared4Arduino by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.15
 </small></address>

@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Infrared4Arduino
-   &#160;<span id="projectnumber">1.0.6</span>
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -69,19 +69,23 @@ $(function() {
 
 <p>This is the complete list of members for <a class="el" href="classIrSender.html">IrSender</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="classIrSender.html#a9d7648e1f70e1049dd66fa4b7f573f47">delayUSecs</a>(microseconds_t T)</td><td class="entry"><a class="el" href="classIrSender.html">IrSender</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classIrSender.html#a951cecafa7a5ea45670f9bc687020da3">getOutputPin</a>() const</td><td class="entry"><a class="el" href="classIrSender.html">IrSender</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">protected</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classIrSender.html#a98135ab0bf057abfbef86edf8d3b9161">IrSender</a>()</td><td class="entry"><a class="el" href="classIrSender.html">IrSender</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classIrSender.html#a683cf108715a361d3a7672f450f0f5c4">barfForInvalidPin</a>(pin_t sendPin __attribute__((unused)))</td><td class="entry"><a class="el" href="classIrSender.html">IrSender</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">static</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classIrSender.html#ac150d7d894dde6c6eb76c67f3d2ad26f">enable</a>(frequency_t frequency, dutycycle_t dutyCycle=Board::defaultDutyCycle)=0</td><td class="entry"><a class="el" href="classIrSender.html">IrSender</a></td><td class="entry"><span class="mlabel">protected</span><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classIrSender.html#a6f6fab6d5d57cf5ac3028fc1d59eae06">getPin</a>() const</td><td class="entry"><a class="el" href="classIrSender.html">IrSender</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr><td class="entry"><a class="el" href="classIrSender.html#a836b8a6f124aa788f6ce977309eaed04">IrSender</a>(pin_t pin)</td><td class="entry"><a class="el" href="classIrSender.html">IrSender</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classIrSender.html#aeabe36f0344f58ee68d63eb9c9821fbe">mute</a>()</td><td class="entry"><a class="el" href="classIrSender.html">IrSender</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
-  <tr><td class="entry"><a class="el" href="classIrSender.html#a968752fe39b86cbdec16168a353b0ecb">send</a>(const IrSequence &amp;irSequence, frequency_t frequency=IrSignal::defaultFrequency)=0</td><td class="entry"><a class="el" href="classIrSender.html">IrSender</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classIrSender.html#aeabe36f0344f58ee68d63eb9c9821fbe">mute</a>()</td><td class="entry"><a class="el" href="classIrSender.html">IrSender</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classIrSender.html#a723fdbbd8ae77c0ac5a75d07d44ff0dd">send</a>(const IrSequence &amp;irSequence, frequency_t frequency=IrSignal::defaultFrequency, dutycycle_t dutyCycle=Board::defaultDutyCycle)</td><td class="entry"><a class="el" href="classIrSender.html">IrSender</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classIrSender.html#ad172264fa246b306832e75a162679eac">sendIrSignal</a>(const IrSignal &amp;irSignal, unsigned int noSends=1)</td><td class="entry"><a class="el" href="classIrSender.html">IrSender</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="classIrSender.html#a47cf5fa888aadc0920e9adb18a089c30">sendMark</a>(microseconds_t time)=0</td><td class="entry"><a class="el" href="classIrSender.html">IrSender</a></td><td class="entry"><span class="mlabel">protected</span><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classIrSender.html#ac5929c42fc0dc41ad9bc8034ec5a93e1">sendSpace</a>(microseconds_t time)</td><td class="entry"><a class="el" href="classIrSender.html">IrSender</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></td></tr>
   <tr><td class="entry"><a class="el" href="classIrSender.html#afb3e86bd8f7f16e9fc84d4c7f72993c9">sendWhile</a>(const IrSignal &amp;irSignal, bool(*trigger)())</td><td class="entry"><a class="el" href="classIrSender.html">IrSender</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classIrSender.html#a6322b6b5f085e4afa88ca1e3bc039b81">writeHigh</a>()</td><td class="entry"><a class="el" href="classIrSender.html">IrSender</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">protected</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classIrSender.html#a2f5419debb9f106a122c5ba8cd86ba6d">writeLow</a>()</td><td class="entry"><a class="el" href="classIrSender.html">IrSender</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">protected</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classIrSender.html#ab8d8c02fb29d39985a8bec6c210d6aaf">~IrSender</a>()</td><td class="entry"><a class="el" href="classIrSender.html">IrSender</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jan 19 2020 16:08:10 for Infrared4Arduino by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Apr 3 2020 13:33:14 for Infrared4Arduino by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.15
 </small></address>

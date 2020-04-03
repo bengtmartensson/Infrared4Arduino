@@ -1,6 +1,10 @@
 <map id="IrSender" name="IrSender">
 <area shape="rect" id="node1" title="Abstract base class for all sending classes." alt="" coords="177,5,253,32"/>
-<area shape="rect" id="node2" href="$classIrSenderNonMod.html" title="IrSender implementation without modulation." alt="" coords="5,80,136,107"/>
+<area shape="rect" id="node2" href="$classIrSenderNonMod.html" title="IrSender implementation without modulation, selectively with inverted output." alt="" coords="5,80,136,107"/>
 <area shape="rect" id="node3" href="$classIrSenderPwm.html" title="Sending function using timer PWM." alt="" coords="161,80,269,107"/>
-<area shape="rect" id="node4" href="$classIrSenderSimulator.html" title="Simulates sending in the sense that it prints the IrSequences on the Stream given as argument." alt="" coords="293,80,432,107"/>
+<area shape="rect" id="node8" href="$classIrSenderSimulator.html" title="Simulates sending in the sense that it prints the IrSequences on the Stream given as argument." alt="" coords="293,80,432,107"/>
+<area shape="rect" id="node4" href="$classIrSenderPwmHard.html" title="Sending function using timer PWM." alt="" coords="64,155,203,181"/>
+<area shape="rect" id="node5" href="$classIrSenderPwmSoft.html" title="Sending function using timer PWM." alt="" coords="227,155,362,181"/>
+<area shape="rect" id="node6" href="$classIrSenderPwmSoftDelay.html" title="Sending function using timer PWM." alt="" coords="111,229,283,256"/>
+<area shape="rect" id="node7" href="$classIrSenderPwmSpinWait.html" title="This sender class generates the modulation in software, using spin wait." alt="" coords="307,229,474,256"/>
 </map>

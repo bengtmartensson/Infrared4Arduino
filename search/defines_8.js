@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['pin_5ft_5fmax',['PIN_T_MAX',['../InfraredTypes_8h.html#a6a4d2578a2f93a96bcb007661f27a762',1,'InfraredTypes.h']]],
-  ['pulse_5fcorrection',['PULSE_CORRECTION',['../boarddefs_8h.html#a7f4bc5f9c1931f6ee9cb6b166994904f',1,'boarddefs.h']]]
+  ['sbi',['sbi',['../IrWidget_8h.html#ac4a5536d9bf092116f88b94797ddc882',1,'IrWidget.h']]],
+  ['strcpy_5fpf_5fcast',['STRCPY_PF_CAST',['../ATmega4809_8h.html#a4f1cdbdc0bec47930868b29fe8e824d0',1,'STRCPY_PF_CAST():&#160;ATmega4809.h'],['../avr_8h.html#a4f1cdbdc0bec47930868b29fe8e824d0',1,'STRCPY_PF_CAST():&#160;avr.h'],['../Due_8h.html#a4f1cdbdc0bec47930868b29fe8e824d0',1,'STRCPY_PF_CAST():&#160;Due.h'],['../Esp32_8h.html#a4f1cdbdc0bec47930868b29fe8e824d0',1,'STRCPY_PF_CAST():&#160;Esp32.h'],['../Sam_8h.html#a4f1cdbdc0bec47930868b29fe8e824d0',1,'STRCPY_PF_CAST():&#160;Sam.h']]]
 ];

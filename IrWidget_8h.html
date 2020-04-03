@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Infrared4Arduino
-   &#160;<span id="projectnumber">1.0.6</span>
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -75,16 +75,21 @@ $(function() {
 <div class="contents">
 <div class="textblock"><code>#include &lt;Arduino.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="IrReader_8h_source.html">IrReader.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="Board_8h_source.html">Board.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for IrWidget.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="IrWidget_8h__incl.png" border="0" usemap="#src_2IrWidget_8h" alt=""/></div>
 <map name="src_2IrWidget_8h" id="src_2IrWidget_8h">
-<area shape="rect"  title=" " alt="" coords="5,5,117,32"/>
-<area shape="rect"  title=" " alt="" coords="29,304,113,331"/>
-<area shape="rect"  href="IrReader_8h.html" title=" " alt="" coords="67,80,157,107"/>
-<area shape="rect"  href="InfraredTypes_8h.html" title="This file defines some general data types that are used in the library." alt="" coords="108,229,231,256"/>
-<area shape="rect"  href="IrSequence_8h.html" title=" " alt="" coords="159,155,265,181"/>
+<area shape="rect"  title=" " alt="" coords="41,5,153,32"/>
+<area shape="rect"  title=" " alt="" coords="14,379,98,405"/>
+<area shape="rect"  href="IrReader_8h.html" title=" " alt="" coords="53,155,142,181"/>
+<area shape="rect"  href="Board_8h.html" title=" " alt="" coords="303,80,375,107"/>
+<area shape="rect"  href="InfraredTypes_8h.html" title="This file defines some general data types that are used in the library." alt="" coords="115,304,237,331"/>
+<area shape="rect"  href="IrSequence_8h.html" title=" " alt="" coords="144,229,251,256"/>
+<area shape="rect"  href="IrSignal_8h.html" title=" " alt="" coords="167,155,249,181"/>
+<area shape="rect"  href="PinModeStatus_8h.html" title=" " alt="" coords="273,155,404,181"/>
+<area shape="rect"  href="NoBoard_8h.html" title=" " alt="" coords="428,155,567,181"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -92,10 +97,9 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="IrWidget_8h__dep__incl.png" border="0" usemap="#src_2IrWidget_8hdep" alt=""/></div>
 <map name="src_2IrWidget_8hdep" id="src_2IrWidget_8hdep">
-<area shape="rect"  title=" " alt="" coords="103,5,215,32"/>
-<area shape="rect"  href="IrWidget_8cpp.html" title=" " alt="" coords="5,80,132,107"/>
-<area shape="rect"  href="IrWidgetAggregating_8h.html" title=" " alt="" coords="156,80,347,107"/>
-<area shape="rect"  href="IrWidgetAggregating_8cpp.html" title=" " alt="" coords="148,155,355,181"/>
+<area shape="rect"  title=" " alt="" coords="53,5,165,32"/>
+<area shape="rect"  href="IrWidgetAggregating_8h.html" title=" " alt="" coords="13,80,204,107"/>
+<area shape="rect"  href="IrWidgetAggregating_8cpp.html" title=" " alt="" coords="5,155,212,181"/>
 </map>
 </div>
 </div>
@@ -167,7 +171,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="IrWidget_8h_source.html#l00179">179</a> of file <a class="el" href="IrWidget_8h_source.html">IrWidget.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IrWidget_8h_source.html#l00180">180</a> of file <a class="el" href="IrWidget_8h_source.html">IrWidget.h</a>.</p>
 
 </div>
 </div>
@@ -203,7 +207,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="IrWidget_8h_source.html#l00181">181</a> of file <a class="el" href="IrWidget_8h_source.html">IrWidget.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IrWidget_8h_source.html#l00182">182</a> of file <a class="el" href="IrWidget_8h_source.html">IrWidget.h</a>.</p>
 
 </div>
 </div>
@@ -219,7 +223,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="IrWidget_8h_source.html#l00169">169</a> of file <a class="el" href="IrWidget_8h_source.html">IrWidget.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IrWidget_8h_source.html#l00170">170</a> of file <a class="el" href="IrWidget_8h_source.html">IrWidget.h</a>.</p>
 
 </div>
 </div>
@@ -235,7 +239,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="IrWidget_8h_source.html#l00168">168</a> of file <a class="el" href="IrWidget_8h_source.html">IrWidget.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IrWidget_8h_source.html#l00169">169</a> of file <a class="el" href="IrWidget_8h_source.html">IrWidget.h</a>.</p>
 
 </div>
 </div>
@@ -251,7 +255,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="IrWidget_8h_source.html#l00170">170</a> of file <a class="el" href="IrWidget_8h_source.html">IrWidget.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IrWidget_8h_source.html#l00171">171</a> of file <a class="el" href="IrWidget_8h_source.html">IrWidget.h</a>.</p>
 
 </div>
 </div>
@@ -267,7 +271,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="IrWidget_8h_source.html#l00171">171</a> of file <a class="el" href="IrWidget_8h_source.html">IrWidget.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IrWidget_8h_source.html#l00172">172</a> of file <a class="el" href="IrWidget_8h_source.html">IrWidget.h</a>.</p>
 
 </div>
 </div>
@@ -283,7 +287,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="IrWidget_8h_source.html#l00116">116</a> of file <a class="el" href="IrWidget_8h_source.html">IrWidget.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IrWidget_8h_source.html#l00117">117</a> of file <a class="el" href="IrWidget_8h_source.html">IrWidget.h</a>.</p>
 
 </div>
 </div>
@@ -299,7 +303,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="IrWidget_8h_source.html#l00121">121</a> of file <a class="el" href="IrWidget_8h_source.html">IrWidget.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IrWidget_8h_source.html#l00122">122</a> of file <a class="el" href="IrWidget_8h_source.html">IrWidget.h</a>.</p>
 
 </div>
 </div>
@@ -315,7 +319,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="IrWidget_8h_source.html#l00115">115</a> of file <a class="el" href="IrWidget_8h_source.html">IrWidget.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IrWidget_8h_source.html#l00116">116</a> of file <a class="el" href="IrWidget_8h_source.html">IrWidget.h</a>.</p>
 
 </div>
 </div>
@@ -345,7 +349,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="IrWidget_8h_source.html#l00180">180</a> of file <a class="el" href="IrWidget_8h_source.html">IrWidget.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IrWidget_8h_source.html#l00181">181</a> of file <a class="el" href="IrWidget_8h_source.html">IrWidget.h</a>.</p>
 
 </div>
 </div>
@@ -381,7 +385,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="IrWidget_8h_source.html#l00182">182</a> of file <a class="el" href="IrWidget_8h_source.html">IrWidget.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IrWidget_8h_source.html#l00183">183</a> of file <a class="el" href="IrWidget_8h_source.html">IrWidget.h</a>.</p>
 
 </div>
 </div>
@@ -411,7 +415,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="IrWidget_8h_source.html#l00177">177</a> of file <a class="el" href="IrWidget_8h_source.html">IrWidget.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IrWidget_8h_source.html#l00178">178</a> of file <a class="el" href="IrWidget_8h_source.html">IrWidget.h</a>.</p>
 
 </div>
 </div>
@@ -427,7 +431,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="IrWidget_8h_source.html#l00032">32</a> of file <a class="el" href="IrWidget_8h_source.html">IrWidget.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IrWidget_8h_source.html#l00033">33</a> of file <a class="el" href="IrWidget_8h_source.html">IrWidget.h</a>.</p>
 
 </div>
 </div>
@@ -457,7 +461,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="IrWidget_8h_source.html#l00178">178</a> of file <a class="el" href="IrWidget_8h_source.html">IrWidget.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IrWidget_8h_source.html#l00179">179</a> of file <a class="el" href="IrWidget_8h_source.html">IrWidget.h</a>.</p>
 
 </div>
 </div>
@@ -473,14 +477,14 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="IrWidget_8h_source.html#l00037">37</a> of file <a class="el" href="IrWidget_8h_source.html">IrWidget.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IrWidget_8h_source.html#l00038">38</a> of file <a class="el" href="IrWidget_8h_source.html">IrWidget.h</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jan 19 2020 16:08:10 for Infrared4Arduino by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Apr 3 2020 13:33:14 for Infrared4Arduino by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.15
 </small></address>

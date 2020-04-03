@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['ovlbitsdatatype',['ovlBitsDataType',['../classIrWidget.html#a4afe9486ef7f21d095be040f68c50cd4',1,'IrWidget']]]
+  ['microseconds_5ft',['microseconds_t',['../InfraredTypes_8h.html#a5a4323547cf58895464e841b9b424384',1,'InfraredTypes.h']]],
+  ['milliseconds_5ft',['milliseconds_t',['../InfraredTypes_8h.html#ace35cfd2245c700198afb856211d7bcd',1,'InfraredTypes.h']]]
 ];

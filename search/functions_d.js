@@ -1,17 +1,19 @@
 var searchData=
 [
-  ['_7eirdecoder',['~IrDecoder',['../classIrDecoder.html#a8a7a0b6eda1097f0bcfe9b18cb6e1aa5',1,'IrDecoder']]],
-  ['_7eirreader',['~IrReader',['../classIrReader.html#ab900741df5618d09af01fbc3df351d58',1,'IrReader']]],
-  ['_7eirreceiver',['~IrReceiver',['../classIrReceiver.html#ac536014f68efeca1b7c2883f04d5967c',1,'IrReceiver']]],
-  ['_7eirreceiverpoll',['~IrReceiverPoll',['../classIrReceiverPoll.html#a2e7be549d50df8bd90063748d1984f9a',1,'IrReceiverPoll']]],
-  ['_7eirreceiversampler',['~IrReceiverSampler',['../classIrReceiverSampler.html#a2b2c060a0a6e7bef996fb9f701138af3',1,'IrReceiverSampler']]],
-  ['_7eirsender',['~IrSender',['../classIrSender.html#ab8d8c02fb29d39985a8bec6c210d6aaf',1,'IrSender']]],
-  ['_7eirsendersimulator',['~IrSenderSimulator',['../classIrSenderSimulator.html#a2a017d9d85c05b20a2fcf603984b24cc',1,'IrSenderSimulator']]],
-  ['_7eirsequence',['~IrSequence',['../classIrSequence.html#a7f005ca00f63f25956234173a87ba0bc',1,'IrSequence']]],
-  ['_7eirsequencereader',['~IrSequenceReader',['../classIrSequenceReader.html#a21080b7980b2c120843048641056a483',1,'IrSequenceReader']]],
-  ['_7eirsignal',['~IrSignal',['../classIrSignal.html#ab94b1b10fc29af1d44720fc79881e9bb',1,'IrSignal']]],
-  ['_7eirwidget',['~IrWidget',['../classIrWidget.html#a701340cafc4e3554d9d6f73981352a82',1,'IrWidget']]],
-  ['_7emultidecoder',['~MultiDecoder',['../classMultiDecoder.html#a564ba17f3eb6697f71f18ec0adff7d68',1,'MultiDecoder']]],
-  ['_7enec1decoder',['~Nec1Decoder',['../classNec1Decoder.html#ab77724a34751cfc18e688314a0acde7b',1,'Nec1Decoder']]],
-  ['_7erc5decoder',['~Rc5Decoder',['../classRc5Decoder.html#a819a969c60380037c524c3b89529d3f3',1,'Rc5Decoder']]]
+  ['sam',['Sam',['../classSam.html#afd6d665491358bb9879e9b91071d935c',1,'Sam']]],
+  ['send',['send',['../classIrSender.html#a723fdbbd8ae77c0ac5a75d07d44ff0dd',1,'IrSender::send()'],['../classIrSenderSimulator.html#a75ebe0fc49c9801a36ff790f12ad83eb',1,'IrSenderSimulator::send()']]],
+  ['sendirsignal',['sendIrSignal',['../classIrSender.html#ad172264fa246b306832e75a162679eac',1,'IrSender']]],
+  ['sendmark',['sendMark',['../classIrSender.html#a47cf5fa888aadc0920e9adb18a089c30',1,'IrSender::sendMark()'],['../classIrSenderPwmSoft.html#a72419641591c0a594d40b3ccda57da01',1,'IrSenderPwmSoft::sendMark()'],['../classIrSenderSimulator.html#a51adcc0bc74061c78a8458db0809624c',1,'IrSenderSimulator::sendMark()']]],
+  ['sendnonmodulated',['sendNonModulated',['../classIrSenderNonMod.html#ae65191daf918ba201d2d85b4f3706599',1,'IrSenderNonMod']]],
+  ['sendpwmmark',['sendPwmMark',['../classBoard.html#a1fb283a928c2d31f88c57586e5b5dbb3',1,'Board']]],
+  ['sendspace',['sendSpace',['../classIrSender.html#ac5929c42fc0dc41ad9bc8034ec5a93e1',1,'IrSender::sendSpace()'],['../classIrSenderSimulator.html#a83ca1302c603d17d11eebd8a88cc3686',1,'IrSenderSimulator::sendSpace()']]],
+  ['sendwhile',['sendWhile',['../classIrSender.html#afb3e86bd8f7f16e9fc84d4c7f72993c9',1,'IrSender']]],
+  ['setbeginningtimeout',['setBeginningTimeout',['../classIrReader.html#a16c564724d31eaa90f72de3e803e0316',1,'IrReader::setBeginningTimeout()'],['../classIrReceiverPoll.html#a9d8d2b2c7e991dea2f4d05dbca91e692',1,'IrReceiverPoll::setBeginningTimeout()'],['../classIrReceiverSampler.html#aa43f4a04f51e3d65fc2f2d9f4d4d3b58',1,'IrReceiverSampler::setBeginningTimeout()']]],
+  ['setendingtimeout',['setEndingTimeout',['../classIrReader.html#add2963a17c26882c38a015e84ec44e9c',1,'IrReader::setEndingTimeout()'],['../classIrReceiverPoll.html#afb37da8323c5c11cd0d1d4606772d335',1,'IrReceiverPoll::setEndingTimeout()'],['../classIrReceiverSampler.html#aed65891a886946964c2e31cb3eab6293',1,'IrReceiverSampler::setEndingTimeout()'],['../classIrWidget.html#a6fd29fbdb2188444cc75e142045c85d5',1,'IrWidget::setEndingTimeout()']]],
+  ['setmarkexcess',['setMarkExcess',['../classIrReader.html#adc84220ea337fc219bb3ccfd094f5b50',1,'IrReader']]],
+  ['setpinmode',['setPinMode',['../classBoard.html#a775e6a2983b8be2a0095d1103c141af7',1,'Board']]],
+  ['setupdebugpin',['setupDebugPin',['../classBoard.html#a42b5532f87259199a24b4b8374aa623b',1,'Board']]],
+  ['setvalid',['setValid',['../classIrDecoder.html#a1a6b109d835184dde64382371bc5bca9',1,'IrDecoder']]],
+  ['sleepmicros',['sleepMicros',['../classIrSenderPwmSoft.html#a3a11fd254e70f8e98a08c213ddbbf11c',1,'IrSenderPwmSoft']]],
+  ['sleepuntilmicros',['sleepUntilMicros',['../classIrSenderPwmSoft.html#a492fbb72328dbc622b92923345e25c03',1,'IrSenderPwmSoft']]]
 ];

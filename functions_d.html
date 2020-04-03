@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Infrared4Arduino
-   &#160;<span id="projectnumber">1.0.6</span>
+   &#160;<span id="projectnumber">1.1.0</span>
    </div>
   </td>
  </tr>
@@ -71,6 +71,12 @@ $(function() {
 <li>debugPinClear()
 : <a class="el" href="classIrWidget.html#aadab5427648c55b803127537c8c4e661">IrWidget</a>
 </li>
+<li>debugPinHigh()
+: <a class="el" href="classBoard.html#a2e2dbce2febc38d022e41f5fa1b2c543">Board</a>
+</li>
+<li>debugPinLow()
+: <a class="el" href="classBoard.html#a4351446b465f634299d67200e0462953">Board</a>
+</li>
 <li>debugPinToggle()
 : <a class="el" href="classIrWidget.html#a6c7ef05e586f5d8e35c2da0369016691">IrWidget</a>
 </li>
@@ -79,6 +85,9 @@ $(function() {
 </li>
 <li>defaultCaptureLength
 : <a class="el" href="classIrReader.html#a1d436bfbd3cbca9ab834f0a6398c377d">IrReader</a>
+</li>
+<li>defaultDutyCycle
+: <a class="el" href="classBoard.html#ac142427d3fa45ff5e95832da2ef36803">Board</a>
 </li>
 <li>defaultEndingTimeout
 : <a class="el" href="classIrReader.html#abc38b9273f11c962ee7091bb14a7c53d">IrReader</a>
@@ -93,18 +102,31 @@ $(function() {
 <li>defaultPin
 : <a class="el" href="classIrReceiver.html#a0193e518d3254f388a844786018e881a">IrReceiver</a>
 </li>
-<li>delayUSecs()
-: <a class="el" href="classIrSender.html#a9d7648e1f70e1049dd66fa4b7f573f47">IrSender</a>
+<li>defaultPwmPin()
+: <a class="el" href="classBoard.html#a615174896987aa02456552fa74cf885e">Board</a>
+</li>
+<li>delayMicroseconds()
+: <a class="el" href="classBoard.html#aaaa6622c8f3d3e08e96a452487ed5a8f">Board</a>
 </li>
 <li>deleteInstance()
-: <a class="el" href="classIrReceiverSampler.html#ad49ec28943fd2e3c0e8b601e0e294262">IrReceiverSampler</a>
-, <a class="el" href="classIrSenderPwm.html#a5474633ef252a94394d0e74a19ff3f27">IrSenderPwm</a>
-, <a class="el" href="classIrWidgetAggregating.html#a2ead537ca6aaa6f0b26ff0a339286a87">IrWidgetAggregating</a>
+: <a class="el" href="classIrReceiverSampler.html#ac0eaf44632304390ee47d761bf50374a">IrReceiverSampler</a>
+, <a class="el" href="classIrSenderPwm.html#a26fa3e67c6f8ffec82bfb5a3d97e365b">IrSenderPwm</a>
+, <a class="el" href="classIrSenderPwmHard.html#a00f493959904aaae8864f8659e0cf2f1">IrSenderPwmHard</a>
+, <a class="el" href="classIrWidgetAggregating.html#a68248c69fcae1962860c8b0c227703ca">IrWidgetAggregating</a>
 </li>
 <li>disable()
 : <a class="el" href="classIrReader.html#a03cc6f1b99d8aafce2e5a44375b57145">IrReader</a>
 , <a class="el" href="classIrReceiverPoll.html#a7d6eb76e85aaa439099db86ea76d8114">IrReceiverPoll</a>
 , <a class="el" href="classIrReceiverSampler.html#ac7d764583bcfd89e8f49d23d06e955f5">IrReceiverSampler</a>
+</li>
+<li>disablePwm()
+: <a class="el" href="classBoard.html#a6f286e9286b7b56d295cb5dda6f12e1f">Board</a>
+</li>
+<li>disableSampler()
+: <a class="el" href="classBoard.html#a296d1c7eab0a072bdcc47df239919a2c">Board</a>
+</li>
+<li>Due()
+: <a class="el" href="classDue.html#ae244e4a94e809bb9d428aac8bff104e6">Due</a>
 </li>
 <li>dump()
 : <a class="el" href="classIrReader.html#aee73fac321e6682eb8df2a9316a707c3">IrReader</a>
@@ -112,8 +134,11 @@ $(function() {
 , <a class="el" href="classIrSignal.html#a20dd7b3854f2f2f427a0985b02bcc942">IrSignal</a>
 , <a class="el" href="classIrWidget.html#aa8bb29845ad2933c1c957d1f088f3835">IrWidget</a>
 </li>
+<li>dumpDutyCycle()
+: <a class="el" href="classIrSignal.html#a3007b7199fd3da2fd91216bd94f36db3">IrSignal</a>
+</li>
 <li>dumpFrequency()
-: <a class="el" href="classIrSignal.html#a9a0adcf5134a6d5c1932069745031299">IrSignal</a>
+: <a class="el" href="classIrSignal.html#a3c1b88a72c0678c7e987f579ec66c4e5">IrSignal</a>
 </li>
 <li>dumpWithSigns()
 : <a class="el" href="classIrSequence.html#a162f9bdce2450acc67339f855c4abded">IrSequence</a>
@@ -126,7 +151,7 @@ $(function() {
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jan 19 2020 16:08:10 for Infrared4Arduino by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Apr 3 2020 13:33:14 for Infrared4Arduino by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.15
 </small></address>

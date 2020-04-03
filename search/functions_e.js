@@ -1,18 +1,16 @@
 var searchData=
 [
-  ['_7eirdecoder',['~IrDecoder',['../classIrDecoder.html#a8a7a0b6eda1097f0bcfe9b18cb6e1aa5',1,'IrDecoder']]],
-  ['_7eirreader',['~IrReader',['../classIrReader.html#ab900741df5618d09af01fbc3df351d58',1,'IrReader']]],
-  ['_7eirreceiver',['~IrReceiver',['../classIrReceiver.html#ac536014f68efeca1b7c2883f04d5967c',1,'IrReceiver']]],
-  ['_7eirreceiverpoll',['~IrReceiverPoll',['../classIrReceiverPoll.html#a2e7be549d50df8bd90063748d1984f9a',1,'IrReceiverPoll']]],
-  ['_7eirreceiversampler',['~IrReceiverSampler',['../classIrReceiverSampler.html#a2b2c060a0a6e7bef996fb9f701138af3',1,'IrReceiverSampler']]],
-  ['_7eirsender',['~IrSender',['../classIrSender.html#ab8d8c02fb29d39985a8bec6c210d6aaf',1,'IrSender']]],
-  ['_7eirsendersimulator',['~IrSenderSimulator',['../classIrSenderSimulator.html#a2a017d9d85c05b20a2fcf603984b24cc',1,'IrSenderSimulator']]],
-  ['_7eirsequence',['~IrSequence',['../classIrSequence.html#a7f005ca00f63f25956234173a87ba0bc',1,'IrSequence']]],
-  ['_7eirsequencereader',['~IrSequenceReader',['../classIrSequenceReader.html#a21080b7980b2c120843048641056a483',1,'IrSequenceReader']]],
-  ['_7eirsignal',['~IrSignal',['../classIrSignal.html#ab94b1b10fc29af1d44720fc79881e9bb',1,'IrSignal']]],
-  ['_7eirwidget',['~IrWidget',['../classIrWidget.html#a701340cafc4e3554d9d6f73981352a82',1,'IrWidget']]],
-  ['_7emultidecoder',['~MultiDecoder',['../classMultiDecoder.html#a564ba17f3eb6697f71f18ec0adff7d68',1,'MultiDecoder']]],
-  ['_7enec1decoder',['~Nec1Decoder',['../classNec1Decoder.html#ab77724a34751cfc18e688314a0acde7b',1,'Nec1Decoder']]],
-  ['_7epwm2renderer',['~Pwm2Renderer',['../classPwm2Renderer.html#a0c5ceff9d55fb81d45f6c50176555fa3',1,'Pwm2Renderer']]],
-  ['_7erc5decoder',['~Rc5Decoder',['../classRc5Decoder.html#a819a969c60380037c524c3b89529d3f3',1,'Rc5Decoder']]]
+  ['teensy3x',['Teensy3x',['../classTeensy3x.html#a930779d6ab178d4c93393b3f7d56b6b4',1,'Teensy3x']]],
+  ['timerconfighz',['timerConfigHz',['../classBoard.html#a49997b901297edc6f54c9ea17c749691',1,'Board::timerConfigHz()'],['../classATmega328P.html#a2e0d018a9b6f25f0e21646d82af85733',1,'ATmega328P::timerConfigHz()']]],
+  ['timerconfignormal',['timerConfigNormal',['../classBoard.html#ab744e2151e24d807dcb8fd6a6297152b',1,'Board::timerConfigNormal()'],['../classATmega328P.html#a8fe6539050866195558e55ec49ea5507',1,'ATmega328P::timerConfigNormal()']]],
+  ['timerdisableintr',['timerDisableIntr',['../classBoard.html#a67553ac6518539fc30ec5e844a4aff2b',1,'Board::timerDisableIntr()'],['../classATmega328P.html#aaba7ee622d7b32893f52692675fb9869',1,'ATmega328P::timerDisableIntr()']]],
+  ['timerdisablepwm',['timerDisablePwm',['../classBoard.html#a48845c3692a846f9edaac318aefb5d4e',1,'Board::timerDisablePwm()'],['../classATmega328P.html#a40562a370b0ab99c84852adcb5896a2b',1,'ATmega328P::timerDisablePwm()']]],
+  ['timerenableintr',['timerEnableIntr',['../classBoard.html#a13915d28b65a67c4d28630293b04598a',1,'Board::timerEnableIntr()'],['../classATmega328P.html#a745683512e5ed911d6025840e300ffcc',1,'ATmega328P::timerEnableIntr()']]],
+  ['timerenablepwm',['timerEnablePwm',['../classBoard.html#a90ed30d8f53f8fe698050b2c86c0f5ad',1,'Board::timerEnablePwm()'],['../classATmega328P.html#ad1354dd5910227707aa57ce9d5ceed79',1,'ATmega328P::timerEnablePwm()']]],
+  ['timerreset',['timerReset',['../classBoard.html#ae8bf560b46003c783fe2b6cbc8cd2b16',1,'Board']]],
+  ['timervaluetonanoseconds',['timerValueToNanoSeconds',['../classIrWidget.html#a8b09fff5460ce629ebd40f363d2450fd',1,'IrWidget']]],
+  ['timesince',['timeSince',['../IrReceiverPoll_8cpp.html#a835436c679a41d525f0be6272d708a20',1,'IrReceiverPoll.cpp']]],
+  ['toirsequence',['toIrSequence',['../classIrReader.html#abc437af677c211cf7961d5f5e810ef21',1,'IrReader']]],
+  ['toprontohex',['toProntoHex',['../classPronto.html#a95abb2bc5ac634a351a34b5341b0867c',1,'Pronto::toProntoHex(const IrSignal &amp;irSignal)'],['../classPronto.html#a89e7fb52a4028517be7f46adfa913a05',1,'Pronto::toProntoHex(const microseconds_t *data, size_t length, frequency_t frequency=IrSignal::defaultFrequency)'],['../classPronto.html#a38eb76e0185bdf594fcfec94d1acd869',1,'Pronto::toProntoHex(const IrSequence &amp;irSequence, frequency_t frequency=IrSignal::defaultFrequency)']]],
+  ['trydecode',['tryDecode',['../classNec1Decoder.html#a23aba73fc1229950ca7ea5e1581673fd',1,'Nec1Decoder::tryDecode()'],['../classRc5Decoder.html#a1ba9c0ad97d7bbec861baca097071515',1,'Rc5Decoder::tryDecode()']]]
 ];

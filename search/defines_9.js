@@ -1,9 +1,5 @@
 var searchData=
 [
-  ['sbi',['sbi',['../IrWidget_8h.html#ac4a5536d9bf092116f88b94797ddc882',1,'IrWidget.h']]],
-  ['send_5fpin',['SEND_PIN',['../boarddefs_8h.html#adc95df1c4564254e64864b56dceba525',1,'boarddefs.h']]],
-  ['sending_5fsupported',['SENDING_SUPPORTED',['../boarddefs_8h.html#ab6c97f178d1ef50f98f049bb1a8290ee',1,'boarddefs.h']]],
-  ['sendpin_5foff',['SENDPIN_OFF',['../boarddefs_8h.html#a058d23ff9c4bcaa3a394e34ec814f88d',1,'boarddefs.h']]],
-  ['sendpin_5fon',['SENDPIN_ON',['../boarddefs_8h.html#a354766f50d78e66eac8ff085e92fad22',1,'boarddefs.h']]],
-  ['sysclock',['SYSCLOCK',['../boarddefs_8h.html#a5ddef41d8d83c63205c5fd0dff9b0ab3',1,'boarddefs.h']]]
+  ['timer_5fintr_5fname',['TIMER_INTR_NAME',['../ATmega328P_8h.html#a7c2448c6431d83ee924446bc7386f5d5',1,'TIMER_INTR_NAME():&#160;ATmega328P.h'],['../Teensy3x_8h.html#a7c2448c6431d83ee924446bc7386f5d5',1,'TIMER_INTR_NAME():&#160;Teensy3x.h']]],
+  ['timer_5fsize',['TIMER_SIZE',['../Esp32_8h.html#a9552c41a5b5e71c374a545241bb477ed',1,'Esp32.h']]]
 ];

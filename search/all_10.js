@@ -1,8 +1,28 @@
 var searchData=
 [
-  ['undecoded',['undecoded',['../classMultiDecoder.html#a6b119d114e11f2fd74a74f0c8524a2a6a77c581118f867cd52b8abcf4b6dc15ce',1,'MultiDecoder']]],
-  ['unpacktimeval',['unpackTimeVal',['../classIrWidget.html#aca3ef24d4335c14f359183b043823d49',1,'IrWidget']]],
-  ['use_5fdefault_5fenable_5fir_5fin',['USE_DEFAULT_ENABLE_IR_IN',['../boarddefs_8h.html#a95332d92d93c77cc22b633ad24205f49',1,'boarddefs.h']]],
-  ['use_5fprescaler_5ffactor_5f8',['USE_PRESCALER_FACTOR_8',['../IrWidget_8h.html#a6278e06f908be1d32b66d7ff6108a5ee',1,'IrWidget.h']]],
-  ['usecpertick',['USECPERTICK',['../boarddefs_8h.html#aad2fcaac88c28bf54ecbd42146a56e3f',1,'boarddefs.h']]]
+  ['sam',['Sam',['../classSam.html',1,'Sam'],['../classSam.html#afd6d665491358bb9879e9b91071d935c',1,'Sam::Sam()']]],
+  ['sam_2ecpp',['Sam.cpp',['../Sam_8cpp.html',1,'']]],
+  ['sam_2eh',['Sam.h',['../Sam_8h.html',1,'']]],
+  ['samplesize',['sampleSize',['../classIrWidget.html#a194bd38203da4a26da25e24f0adfdfbc',1,'IrWidget']]],
+  ['sbi',['sbi',['../IrWidget_8h.html#ac4a5536d9bf092116f88b94797ddc882',1,'IrWidget.h']]],
+  ['send',['send',['../classIrSender.html#a723fdbbd8ae77c0ac5a75d07d44ff0dd',1,'IrSender::send()'],['../classIrSenderSimulator.html#a75ebe0fc49c9801a36ff790f12ad83eb',1,'IrSenderSimulator::send()']]],
+  ['sendirsignal',['sendIrSignal',['../classIrSender.html#ad172264fa246b306832e75a162679eac',1,'IrSender']]],
+  ['sendmark',['sendMark',['../classIrSender.html#a47cf5fa888aadc0920e9adb18a089c30',1,'IrSender::sendMark()'],['../classIrSenderPwmSoft.html#a72419641591c0a594d40b3ccda57da01',1,'IrSenderPwmSoft::sendMark()'],['../classIrSenderSimulator.html#a51adcc0bc74061c78a8458db0809624c',1,'IrSenderSimulator::sendMark()']]],
+  ['sendnonmodulated',['sendNonModulated',['../classIrSenderNonMod.html#ae65191daf918ba201d2d85b4f3706599',1,'IrSenderNonMod']]],
+  ['sendpwmmark',['sendPwmMark',['../classBoard.html#a1fb283a928c2d31f88c57586e5b5dbb3',1,'Board']]],
+  ['sendspace',['sendSpace',['../classIrSender.html#ac5929c42fc0dc41ad9bc8034ec5a93e1',1,'IrSender::sendSpace()'],['../classIrSenderSimulator.html#a83ca1302c603d17d11eebd8a88cc3686',1,'IrSenderSimulator::sendSpace()']]],
+  ['sendwhile',['sendWhile',['../classIrSender.html#afb3e86bd8f7f16e9fc84d4c7f72993c9',1,'IrSender']]],
+  ['setbeginningtimeout',['setBeginningTimeout',['../classIrReader.html#a16c564724d31eaa90f72de3e803e0316',1,'IrReader::setBeginningTimeout()'],['../classIrReceiverPoll.html#a9d8d2b2c7e991dea2f4d05dbca91e692',1,'IrReceiverPoll::setBeginningTimeout()'],['../classIrReceiverSampler.html#aa43f4a04f51e3d65fc2f2d9f4d4d3b58',1,'IrReceiverSampler::setBeginningTimeout()']]],
+  ['setendingtimeout',['setEndingTimeout',['../classIrReader.html#add2963a17c26882c38a015e84ec44e9c',1,'IrReader::setEndingTimeout()'],['../classIrReceiverPoll.html#afb37da8323c5c11cd0d1d4606772d335',1,'IrReceiverPoll::setEndingTimeout()'],['../classIrReceiverSampler.html#aed65891a886946964c2e31cb3eab6293',1,'IrReceiverSampler::setEndingTimeout()'],['../classIrWidget.html#a6fd29fbdb2188444cc75e142045c85d5',1,'IrWidget::setEndingTimeout()']]],
+  ['setmarkexcess',['setMarkExcess',['../classIrReader.html#adc84220ea337fc219bb3ccfd094f5b50',1,'IrReader']]],
+  ['setpinmode',['setPinMode',['../classBoard.html#a775e6a2983b8be2a0095d1103c141af7',1,'Board']]],
+  ['setupdebugpin',['setupDebugPin',['../classBoard.html#a42b5532f87259199a24b4b8374aa623b',1,'Board']]],
+  ['setvalid',['setValid',['../classIrDecoder.html#a1a6b109d835184dde64382371bc5bca9',1,'IrDecoder']]],
+  ['sleepmicros',['sleepMicros',['../classIrSenderPwmSoft.html#a3a11fd254e70f8e98a08c213ddbbf11c',1,'IrSenderPwmSoft']]],
+  ['sleepuntilmicros',['sleepUntilMicros',['../classIrSenderPwmSoft.html#a492fbb72328dbc622b92923345e25c03',1,'IrSenderPwmSoft']]],
+  ['state_5fidle',['STATE_IDLE',['../classIrReceiverSampler.html#a356af266f6fb09ad6cf32ffd9b7da38ca73857fe1ae89531239e7a343e352bc4a',1,'IrReceiverSampler']]],
+  ['state_5fmark',['STATE_MARK',['../classIrReceiverSampler.html#a356af266f6fb09ad6cf32ffd9b7da38caccc98e7ea7fe1d96f9a2a97b6b995c79',1,'IrReceiverSampler']]],
+  ['state_5fspace',['STATE_SPACE',['../classIrReceiverSampler.html#a356af266f6fb09ad6cf32ffd9b7da38cafb7c67fdbd48bbce2eb99317a03a3c9d',1,'IrReceiverSampler']]],
+  ['state_5fstop',['STATE_STOP',['../classIrReceiverSampler.html#a356af266f6fb09ad6cf32ffd9b7da38cab598bdf500e6a33d8ad494187907658a',1,'IrReceiverSampler']]],
+  ['strcpy_5fpf_5fcast',['STRCPY_PF_CAST',['../ATmega4809_8h.html#a4f1cdbdc0bec47930868b29fe8e824d0',1,'STRCPY_PF_CAST():&#160;ATmega4809.h'],['../avr_8h.html#a4f1cdbdc0bec47930868b29fe8e824d0',1,'STRCPY_PF_CAST():&#160;avr.h'],['../Due_8h.html#a4f1cdbdc0bec47930868b29fe8e824d0',1,'STRCPY_PF_CAST():&#160;Due.h'],['../Esp32_8h.html#a4f1cdbdc0bec47930868b29fe8e824d0',1,'STRCPY_PF_CAST():&#160;Esp32.h'],['../Sam_8h.html#a4f1cdbdc0bec47930868b29fe8e824d0',1,'STRCPY_PF_CAST():&#160;Sam.h']]]
 ];

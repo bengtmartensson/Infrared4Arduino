@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['pin_5ft',['pin_t',['../InfraredTypes_8h.html#aede467d93ddeb5fdeff6023236aa4ad6',1,'InfraredTypes.h']]]
+  ['ovlbitsdatatype',['ovlBitsDataType',['../classIrWidget.html#a4afe9486ef7f21d095be040f68c50cd4',1,'IrWidget']]]
 ];

@@ -1,10 +1,13 @@
 <map id="src/IrReceiverPoll.cpp" name="src/IrReceiverPoll.cpp">
-<area shape="rect" id="node1" title=" " alt="" coords="29,5,192,32"/>
-<area shape="rect" id="node2" title=" " alt="" coords="85,453,169,480"/>
-<area shape="rect" id="node3" href="$IrReceiverPoll_8h.html" title=" " alt="" coords="123,80,247,107"/>
-<area shape="rect" id="node4" href="$IrReceiver_8h.html" title=" " alt="" coords="199,155,299,181"/>
-<area shape="rect" id="node5" href="$InfraredTypes_8h.html" title="This file defines some general data types that are used in the library." alt="" coords="136,379,259,405"/>
-<area shape="rect" id="node6" href="$IrReader_8h.html" title=" " alt="" coords="73,229,162,256"/>
-<area shape="rect" id="node8" href="$IrSignal_8h.html" title=" " alt="" coords="208,229,291,256"/>
-<area shape="rect" id="node7" href="$IrSequence_8h.html" title=" " alt="" coords="144,304,251,331"/>
+<area shape="rect" id="node1" title=" " alt="" coords="80,5,243,32"/>
+<area shape="rect" id="node2" title=" " alt="" coords="223,528,307,555"/>
+<area shape="rect" id="node3" href="$IrReceiverPoll_8h.html" title=" " alt="" coords="231,80,355,107"/>
+<area shape="rect" id="node4" href="$IrReceiver_8h.html" title=" " alt="" coords="321,155,421,181"/>
+<area shape="rect" id="node5" href="$InfraredTypes_8h.html" title="This file defines some general data types that are used in the library." alt="" coords="413,453,536,480"/>
+<area shape="rect" id="node6" href="$IrReader_8h.html" title=" " alt="" coords="590,304,679,331"/>
+<area shape="rect" id="node8" href="$IrSignal_8h.html" title=" " alt="" coords="461,304,544,331"/>
+<area shape="rect" id="node9" href="$Board_8h.html" title=" " alt="" coords="281,229,353,256"/>
+<area shape="rect" id="node7" href="$IrSequence_8h.html" title=" " alt="" coords="512,379,619,405"/>
+<area shape="rect" id="node10" href="$PinModeStatus_8h.html" title=" " alt="" coords="93,304,224,331"/>
+<area shape="rect" id="node11" href="$NoBoard_8h.html" title=" " alt="" coords="248,304,387,331"/>
 </map>

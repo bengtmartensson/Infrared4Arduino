@@ -1,9 +1,12 @@
 <map id="src/IrReceiverPoll.h" name="src/IrReceiverPoll.h">
-<area shape="rect" id="node1" title=" " alt="" coords="79,5,226,32"/>
-<area shape="rect" id="node2" href="$IrReceiver_8h.html" title=" " alt="" coords="103,80,203,107"/>
-<area shape="rect" id="node3" title=" " alt="" coords="5,379,89,405"/>
-<area shape="rect" id="node4" href="$InfraredTypes_8h.html" title="This file defines some general data types that are used in the library." alt="" coords="127,304,250,331"/>
-<area shape="rect" id="node5" href="$IrReader_8h.html" title=" " alt="" coords="53,155,143,181"/>
-<area shape="rect" id="node7" href="$IrSignal_8h.html" title=" " alt="" coords="167,155,250,181"/>
-<area shape="rect" id="node6" href="$IrSequence_8h.html" title=" " alt="" coords="135,229,242,256"/>
+<area shape="rect" id="node1" title=" " alt="" coords="187,5,333,32"/>
+<area shape="rect" id="node2" href="$IrReceiver_8h.html" title=" " alt="" coords="210,80,310,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="14,453,98,480"/>
+<area shape="rect" id="node4" href="$InfraredTypes_8h.html" title="This file defines some general data types that are used in the library." alt="" coords="136,379,259,405"/>
+<area shape="rect" id="node5" href="$IrReader_8h.html" title=" " alt="" coords="83,229,173,256"/>
+<area shape="rect" id="node7" href="$IrSignal_8h.html" title=" " alt="" coords="219,229,301,256"/>
+<area shape="rect" id="node8" href="$Board_8h.html" title=" " alt="" coords="405,155,477,181"/>
+<area shape="rect" id="node6" href="$IrSequence_8h.html" title=" " alt="" coords="144,304,251,331"/>
+<area shape="rect" id="node9" href="$PinModeStatus_8h.html" title=" " alt="" coords="376,229,507,256"/>
+<area shape="rect" id="node10" href="$NoBoard_8h.html" title=" " alt="" coords="531,229,669,256"/>
 </map>

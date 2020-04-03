@@ -1,11 +1,10 @@
 var searchData=
 [
-  ['send',['send',['../classIrSender.html#a968752fe39b86cbdec16168a353b0ecb',1,'IrSender::send()'],['../classIrSenderNonMod.html#af5af9d6291aaf87b965795c77b30abbd',1,'IrSenderNonMod::send()'],['../classIrSenderPwm.html#ad58382fa6dbb11befeca3e534abdad84',1,'IrSenderPwm::send()'],['../classIrSenderSimulator.html#a8063e844623486ac6e3be347494a8b8c',1,'IrSenderSimulator::send()']]],
-  ['sendirsignal',['sendIrSignal',['../classIrSender.html#ad172264fa246b306832e75a162679eac',1,'IrSender']]],
-  ['sendnonmodulated',['sendNonModulated',['../classIrSenderNonMod.html#ae65191daf918ba201d2d85b4f3706599',1,'IrSenderNonMod']]],
-  ['sendwhile',['sendWhile',['../classIrSender.html#afb3e86bd8f7f16e9fc84d4c7f72993c9',1,'IrSender']]],
-  ['setbeginningtimeout',['setBeginningTimeout',['../classIrReader.html#a16c564724d31eaa90f72de3e803e0316',1,'IrReader::setBeginningTimeout()'],['../classIrReceiverPoll.html#a9d8d2b2c7e991dea2f4d05dbca91e692',1,'IrReceiverPoll::setBeginningTimeout()'],['../classIrReceiverSampler.html#aa43f4a04f51e3d65fc2f2d9f4d4d3b58',1,'IrReceiverSampler::setBeginningTimeout()']]],
-  ['setendingtimeout',['setEndingTimeout',['../classIrReader.html#add2963a17c26882c38a015e84ec44e9c',1,'IrReader::setEndingTimeout()'],['../classIrReceiverPoll.html#afb37da8323c5c11cd0d1d4606772d335',1,'IrReceiverPoll::setEndingTimeout()'],['../classIrReceiverSampler.html#aed65891a886946964c2e31cb3eab6293',1,'IrReceiverSampler::setEndingTimeout()'],['../classIrWidget.html#a6fd29fbdb2188444cc75e142045c85d5',1,'IrWidget::setEndingTimeout()']]],
-  ['setmarkexcess',['setMarkExcess',['../classIrReader.html#adc84220ea337fc219bb3ccfd094f5b50',1,'IrReader']]],
-  ['setvalid',['setValid',['../classIrDecoder.html#a1a6b109d835184dde64382371bc5bca9',1,'IrDecoder']]]
+  ['nec1decoder',['Nec1Decoder',['../classNec1Decoder.html#a256a78a769f2c7da7ec34c9741105cf3',1,'Nec1Decoder::Nec1Decoder()'],['../classNec1Decoder.html#ae98563b937f54bae6333c9c5c4f26f73',1,'Nec1Decoder::Nec1Decoder(const IrReader &amp;irReader)']]],
+  ['newinstance',['newInstance',['../classIrSenderPwm.html#a624fc7923999d04739439a0514bd1eab',1,'IrSenderPwm::newInstance()'],['../classIrSenderPwmHard.html#aeffce78c385b4aae2811c9056111fdb7',1,'IrSenderPwmHard::newInstance()']]],
+  ['newirreceiversampler',['newIrReceiverSampler',['../classIrReceiverSampler.html#aa188297e07e923a9cbe4c22a09866973',1,'IrReceiverSampler']]],
+  ['newirsignal',['newIrSignal',['../classNec1Renderer.html#a2eefe1e9c94e56dfa5d94bc83fe8b9e9',1,'Nec1Renderer::newIrSignal(unsigned int D, unsigned int S, unsigned int F)'],['../classNec1Renderer.html#af8e68486151b97c5e1535b2c0b37ab44',1,'Nec1Renderer::newIrSignal(unsigned int D, unsigned int F)'],['../classRc5Renderer.html#a91d6f5cd78ccf97bdb22c60f45dfe5df',1,'Rc5Renderer::newIrSignal(unsigned int D, unsigned int F, unsigned int T)'],['../classRc5Renderer.html#aed8d8a1bb349504ef5e8dd86f144ee58',1,'Rc5Renderer::newIrSignal(unsigned int D, unsigned int F)']]],
+  ['newirwidgetaggregating',['newIrWidgetAggregating',['../classIrWidgetAggregating.html#afad8baa2850348f31036a2d2959dc6ad',1,'IrWidgetAggregating']]],
+  ['noboard',['NoBoard',['../classNoBoard.html#a09a3ee27f338a702308d54e067efe659',1,'NoBoard']]],
+  ['norepetitions',['noRepetitions',['../classIrSignal.html#a77fcdb70aacad9d41f79a978c2025df0',1,'IrSignal']]]
 ];

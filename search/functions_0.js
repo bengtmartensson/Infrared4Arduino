@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['capture',['capture',['../classIrWidget.html#a615b8fb0466161aaf14f94cd89a85946',1,'IrWidget::capture()'],['../classIrWidgetAggregating.html#aac3cf9d27cb28ac4459108be8cf2a756',1,'IrWidgetAggregating::capture()']]],
-  ['clone',['clone',['../classIrSequence.html#a92a8c576397573e3dc64f1bc79e425a2',1,'IrSequence::clone()'],['../classIrSignal.html#afdfb2f81db5cf262ca91f9d97ff9dddc',1,'IrSignal::clone()']]]
+  ['atmega2560',['ATmega2560',['../classATmega2560.html#ab321128990335bf3d6a61954c2a6c17e',1,'ATmega2560']]],
+  ['atmega32u4',['ATmega32U4',['../classATmega32U4.html#a6c65fda08b222a65a4e0be28a0f6d09e',1,'ATmega32U4']]],
+  ['atmega4809',['ATmega4809',['../classATmega4809.html#adb100c693dd6fb51bd74ee10d69787fc',1,'ATmega4809']]]
 ];

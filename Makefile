@@ -42,11 +42,11 @@ IrSender.o \
 IrSender.o \
 IrSenderNonMod.o \
 IrSenderPwm.o \
+IrSenderPwmHard.o \
 IrSenderPwmSoft.o \
 IrSenderPwmSoftDelay.o \
-IrSenderPwmHard.o \
-IrSenderSimulator.o \
 IrSenderPwmSpinWait.o \
+IrSenderSimulator.o \
 IrSequence.o \
 IrSignal.o \
 IrWidget.o \
@@ -81,15 +81,24 @@ test%: test%.o libInfrared.a
 	$(CXX) -o $@ $< -L. -lInfrared
 	./$@
 
+release: push gh-pages tag deploy
+
+push:
+	git push
+
+deploy:
+
+
 version: $(VERSION_H)
 
 $(VERSION_H): library.properties Makefile
-	echo "// This file was automatically generated from $<; do not edit." > $@
-	echo "/**"                                                           >> $@
-	echo " * Version of the current library."                            >> $@
-	echo " * Taken from the version in $<."                              >> $@
-	echo " */"                                                           >> $@
-	echo "#define VERSION \"$(VERSION)\""                                >> $@
+	echo "Creating $(VERSION_H)"
+	@echo "// This file was automatically generated from $<; do not edit." > $@
+	@echo "/**"                                                           >> $@
+	@echo " * Version of the current library."                            >> $@
+	@echo " * Taken from the version in $<."                              >> $@
+	@echo " */"                                                           >> $@
+	@echo "#define VERSION \"$(VERSION)\""                                >> $@
 
 api-doc/index.html xml/index.xml: $(wildcard src/*) $(VERSION_H) $(DOXYFILE) README.md
 	GIT_VERSION=$(VERSION) $(DOXYGEN) $(DOXYFILE)
@@ -113,7 +122,7 @@ tag:
 	git push origin Version-$(VERSION)
 
 clean:
-	rm -rf *.a *.o api-doc xml test1 $(GH_PAGES) library.properties.tmp keywords.txt
+	rm -rf *.a *.o api-doc xml test1 $(GH_PAGES) library.properties.tmp
 
 spotless: clean
 	rm -rf keywords.txt

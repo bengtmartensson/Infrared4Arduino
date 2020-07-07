@@ -4,7 +4,7 @@
 #include <string.h>
 
 IrSignal *Pronto::parse(const uint16_t *data, size_t size) {
-    double timebase = prontoFreqConst * data[1];
+    microseconds_t timebase = (microsecondsInSeconds * data[1] + referenceFrequency/2) / referenceFrequency;
     frequency_t frequency;
     switch (data[0]) {
         case learnedToken: // normal, "learned"
@@ -69,7 +69,7 @@ IrSignal *Pronto::parse(const __FlashStringHelper *str) {
 }
 #endif
 
-IrSequence *Pronto::mkSequence(const uint16_t* data, size_t noPairs, double timebase) {
+IrSequence *Pronto::mkSequence(const uint16_t* data, size_t noPairs, microseconds_t timebase) {
     microseconds_t *durations = new microseconds_t[2*noPairs];
     for (unsigned int i = 0; i < 2*noPairs; i++) {
         uint32_t duration = (uint32_t) (data[i] * timebase);
@@ -79,11 +79,19 @@ IrSequence *Pronto::mkSequence(const uint16_t* data, size_t noPairs, double time
 }
 
 frequency_t Pronto::toFrequency(prontoInt code) {
-    return (frequency_t) (prontoConst / code);
+    return static_cast<frequency_t> (referenceFrequency / code);
 }
 
 Pronto::prontoInt Pronto::toFrequencyCode(frequency_t frequency) {
-    return (prontoInt) (prontoConst / frequency);
+    return static_cast<prontoInt> (referenceFrequency / effectiveFrequency(frequency));
+}
+
+frequency_t Pronto::effectiveFrequency(frequency_t frequency) {
+    return frequency > 0 ? frequency : fallbackFrequency;
+}
+
+microseconds_t Pronto::toTimebase(frequency_t frequency) {
+    return static_cast<microseconds_t> (microsecondsInSeconds / effectiveFrequency(frequency));
 }
 
 size_t Pronto::lengthHexString(size_t introLength, size_t repeatLength) {
@@ -112,19 +120,18 @@ unsigned int Pronto::appendNumber(char *result, unsigned int index, prontoInt nu
     return appendChar(result, index, ' ');
 }
 
-unsigned int Pronto::appendDuration(char *result, unsigned int index, microseconds_t duration, frequency_t frequency) {
-    return appendNumber(result, index, (unsigned int)(1E-6 * duration * frequency + 0.5));
+unsigned int Pronto::appendDuration(char *result, unsigned int index, microseconds_t duration, microseconds_t timebase) {
+    return appendNumber(result, index, (duration + timebase/2) / timebase);
 }
 
-unsigned int Pronto::appendSequence(char *result, unsigned int index, const microseconds_t *data, size_t length, frequency_t frequency) {
-    frequency_t effectiveFrequency = frequency > 0 ? frequency : fallbackFrequency;
+unsigned int Pronto::appendSequence(char *result, unsigned int index, const microseconds_t *data, size_t length, microseconds_t timebase) {
     for (unsigned int i = 0; i < length; i++)
-        index = appendDuration(result, index, data[i], effectiveFrequency);
+        index = appendDuration(result, index, data[i], timebase);
     return index;
 }
 
-unsigned int Pronto::appendSequence(char *result, unsigned int index, const IrSequence& irSequence, frequency_t frequency) {
-    return appendSequence(result, index, irSequence.getDurations(), irSequence.getLength(), frequency);
+unsigned int Pronto::appendSequence(char *result, unsigned int index, const IrSequence& irSequence, microseconds_t timebase) {
+    return appendSequence(result, index, irSequence.getDurations(), irSequence.getLength(), timebase);
 }
 
 char* Pronto::setup(frequency_t frequency, size_t introLength, size_t repeatLength) {
@@ -140,7 +147,8 @@ char* Pronto::setup(frequency_t frequency, size_t introLength, size_t repeatLeng
 char* Pronto::toProntoHex(const microseconds_t* data, size_t length, frequency_t frequency) {
     char *result = setup(frequency, length, 0);
     unsigned int index = charsInPreamble;
-    index = appendSequence(result, index, data, length, frequency);
+    microseconds_t timebase = toTimebase(frequency);
+    index = appendSequence(result, index, data, length, timebase);
     appendChar(result, index - 1, '\0');
     return result;
 }
@@ -152,8 +160,9 @@ char* Pronto::toProntoHex(const IrSequence& irSequence, frequency_t frequency) {
 char* Pronto::toProntoHex(const IrSignal& irSignal) {
     char *result = setup(irSignal.getFrequency(), irSignal.getIntro().getLength(), irSignal.getRepeat().getLength());
     unsigned int index = charsInPreamble;
-    index = appendSequence(result, index, irSignal.getIntro(), irSignal.getFrequency());
-    index = appendSequence(result, index, irSignal.getRepeat(), irSignal.getFrequency());
+    microseconds_t timebase = toTimebase(irSignal.getFrequency());
+    index = appendSequence(result, index, irSignal.getIntro(), timebase);
+    index = appendSequence(result, index, irSignal.getRepeat(), timebase);
     appendChar(result, index - 1, '\0');
     return result;
 }

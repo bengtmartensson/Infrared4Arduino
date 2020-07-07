@@ -6,6 +6,8 @@
  * Note: Unless you have "infinitely much" memory, it is a very bad idea to put Pronto Hex in your source files.
  * Better is to use, for example IrScruitinizer to convert the signals offline,
  * and put the converted version in your source files instead.
+ *
+ * This class presently does not use floating point arithmetics.
  */
 
 #pragma once
@@ -25,18 +27,22 @@ private:
     static const unsigned int numbersInPreamble = 4;
     static const unsigned int hexMask = 0xF;
     static const unsigned int charsInPreamble = numbersInPreamble * (digitsInProntoNumber + 1);
-    static constexpr double prontoFreqConst = 0.241246;
-    static const uint32_t prontoConst = (uint32_t) (1E6 / prontoFreqConst); // 4145146
+    static const uint32_t referenceFrequency = 4145146UL;
     static const prontoInt fallbackFrequencyCode = 0x0040; // To use with frequency = 0;
-    static const frequency_t fallbackFrequency = 64767; // To use with frequency = 0;
+    static const frequency_t fallbackFrequency = 64767U; // To use with frequency = 0;
+    static const uint32_t microsecondsInSeconds = 1000000UL;
 
     Pronto() {};
 
-    static IrSequence *mkSequence(const uint16_t *data, size_t pairs, double timebase);
+    static IrSequence *mkSequence(const uint16_t *data, size_t pairs, microseconds_t timebase);
 
     static frequency_t toFrequency(prontoInt code);
 
     static prontoInt toFrequencyCode(frequency_t frequency);
+
+    static frequency_t effectiveFrequency(frequency_t frequency);
+
+    static microseconds_t toTimebase(frequency_t frequency_t);
 
     static size_t lengthHexString(size_t introLength, size_t repeatLength);
 
@@ -46,15 +52,15 @@ private:
 
     static unsigned int appendChar(char *result, unsigned int index, char ch);
 
-    static unsigned int appendDuration(char *result, unsigned int index, microseconds_t duration, frequency_t frequency);
+    static unsigned int appendDuration(char *result, unsigned int index, prontoInt duration, microseconds_t timebase);
 
     static unsigned int appendDigit(char *result, unsigned int index, unsigned int number);
 
     static unsigned int appendNumber(char *result, unsigned int index, prontoInt number);
 
-    static unsigned int appendSequence(char *result, unsigned int index, const microseconds_t *data, size_t length, frequency_t frequency);
+    static unsigned int appendSequence(char *result, unsigned int index, const microseconds_t *data, size_t length, microseconds_t timebase);
 
-    static unsigned int appendSequence(char *result, unsigned int index, const IrSequence& irSequence, frequency_t frequency);
+    static unsigned int appendSequence(char *result, unsigned int index, const IrSequence& irSequence, microseconds_t timebase);
 
 public:
     /**

@@ -20,6 +20,8 @@ IrSequence::~IrSequence() {
         delete [] durations;
 }
 
+const IrSequence IrSequence::emptyInstance;
+
 IrSequence *IrSequence::clone() const {
     microseconds_t *durationsClone = new microseconds_t[length];
     memcpy(durationsClone, durations, length*sizeof(microseconds_t));

@@ -41,6 +41,8 @@ public:
      */
     IrSequence(const IrSequence& orig, bool toBeFreed);
 
+    static const IrSequence emptyInstance;
+
     /**
      * Returns the length of the data.
      * @return length

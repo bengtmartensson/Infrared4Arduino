@@ -134,7 +134,7 @@ unsigned int Pronto::appendSequence(char *result, unsigned int index, const IrSe
     return appendSequence(result, index, irSequence.getDurations(), irSequence.getLength(), timebase);
 }
 
-char* Pronto::setup(frequency_t frequency, size_t introLength, size_t repeatLength) {
+char* Pronto::prelude(frequency_t frequency, size_t introLength, size_t repeatLength) {
     char *result = new char[lengthHexString(introLength, repeatLength)];
     unsigned int index = 0;
     index = appendNumber(result, index, frequency > 0 ? learnedToken : learnedNonModulatedToken);
@@ -144,25 +144,43 @@ char* Pronto::setup(frequency_t frequency, size_t introLength, size_t repeatLeng
     return result;
 }
 
-char* Pronto::toProntoHex(const microseconds_t* data, size_t length, frequency_t frequency) {
-    char *result = setup(frequency, length, 0);
+char* Pronto::toProntoHex(const microseconds_t* introData, size_t introLength, const microseconds_t* repeatData, size_t repeatLength, frequency_t frequency) {
+    char *result = prelude(frequency, introLength, repeatLength);
     unsigned int index = charsInPreamble;
     microseconds_t timebase = toTimebase(frequency);
-    index = appendSequence(result, index, data, length, timebase);
+    index = appendSequence(result, index, introData, introLength, timebase);
+    index = appendSequence(result, index, repeatData, repeatLength, timebase);
     appendChar(result, index - 1, '\0');
     return result;
 }
 
-char* Pronto::toProntoHex(const IrSequence& irSequence, frequency_t frequency) {
-    return toProntoHex(irSequence.getDurations(), irSequence.getLength(), frequency);
+void Pronto::dump(Stream& stream, const microseconds_t* introData, size_t introLength, const microseconds_t* repeatData, size_t repeatLength, frequency_t frequency) {
+    dumpNumber(stream, frequency > 0 ? learnedToken : learnedNonModulatedToken);
+    dumpNumber(stream, toFrequencyCode(frequency));
+    dumpNumber(stream, introLength / 2);
+    dumpNumber(stream, repeatLength / 2);
+    microseconds_t timebase = toTimebase(frequency);
+    dumpSequence(stream, introData, introLength, timebase);
+    dumpSequence(stream, repeatData, repeatLength, timebase);
 }
 
-char* Pronto::toProntoHex(const IrSignal& irSignal) {
-    char *result = setup(irSignal.getFrequency(), irSignal.getIntro().getLength(), irSignal.getRepeat().getLength());
-    unsigned int index = charsInPreamble;
-    microseconds_t timebase = toTimebase(irSignal.getFrequency());
-    index = appendSequence(result, index, irSignal.getIntro(), timebase);
-    index = appendSequence(result, index, irSignal.getRepeat(), timebase);
-    appendChar(result, index - 1, '\0');
-    return result;
+void Pronto::dumpSequence(Stream& stream, const microseconds_t *data, size_t length, microseconds_t timebase) {
+    for (unsigned int i = 0; i < length; i++)
+        dumpDuration(stream, data[i], timebase);
+}
+
+void Pronto::dumpDuration(Stream& stream, microseconds_t duration, microseconds_t timebase) {
+    dumpNumber(stream, (duration + timebase / 2) / timebase);
+}
+
+void Pronto::dumpNumber(Stream& stream, prontoInt number) {
+    for (unsigned int i = 0; i < digitsInProntoNumber; i++) {
+        unsigned int shifts = bitsInHexadecimal * (digitsInProntoNumber - 1 - i);
+        dumpDigit(stream, (number >> shifts) & hexMask);
+    }
+    stream.print(' ');
+}
+
+void Pronto::dumpDigit(Stream& stream, unsigned int number) {
+    return stream.print(hexDigit(number));
 }

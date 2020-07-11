@@ -88,7 +88,6 @@ push:
 
 deploy:
 
-
 version: $(VERSION_H)
 
 $(VERSION_H): library.properties Makefile

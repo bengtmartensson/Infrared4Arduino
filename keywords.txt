@@ -318,8 +318,10 @@ Pronto	KEYWORD2
 mkSequence	KEYWORD2
 toFrequency	KEYWORD2
 toFrequencyCode	KEYWORD2
+effectiveFrequency	KEYWORD2
+toTimebase	KEYWORD2
 lengthHexString	KEYWORD2
-setup	KEYWORD2
+prelude	KEYWORD2
 hexDigit	KEYWORD2
 appendChar	KEYWORD2
 appendDuration	KEYWORD2
@@ -327,6 +329,10 @@ appendDigit	KEYWORD2
 appendNumber	KEYWORD2
 appendSequence	KEYWORD2
 appendSequence	KEYWORD2
+dumpSequence	KEYWORD2
+dumpDuration	KEYWORD2
+dumpNumber	KEYWORD2
+dumpDigit	KEYWORD2
 parse	KEYWORD2
 parse	KEYWORD2
 parse_PF	KEYWORD2
@@ -335,6 +341,10 @@ parse	KEYWORD2
 toProntoHex	KEYWORD2
 toProntoHex	KEYWORD2
 toProntoHex	KEYWORD2
+toProntoHex	KEYWORD2
+dump	KEYWORD2
+dump	KEYWORD2
+dump	KEYWORD2
 Rc5Decoder	KEYWORD2
 ~Rc5Decoder	KEYWORD2
 getF	KEYWORD2

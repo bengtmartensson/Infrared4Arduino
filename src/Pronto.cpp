@@ -11,7 +11,7 @@ IrSignal *Pronto::parse(const uint16_t *data, size_t size) {
              frequency = toFrequency(data[1]);
              break;
         case learnedNonModulatedToken: // non-demodulated, "learned"
-            frequency = static_cast<frequency_t>(0U);
+            frequency = 0U;
             break;
         default:
             return NULL;
@@ -46,13 +46,13 @@ IrSignal *Pronto::parse(const char *str) {
             len = i;
             break;
         }
-        data[i] = static_cast<uint16_t>(x); // If input is conforming, there can be no overflow!
+        data[i] = x; // If input is conforming, there can be no overflow!
         p = *endptr;
     }
     return parse(data, len);
 }
 
-#if HAS_FLASH_READ
+#if HAS_FLASH_READ || defined(DOXYGEN)
 IrSignal *Pronto::parse_PF(uint_farptr_t str) {
     size_t len = strlen_PF(STRCPY_PF_CAST(str));
     char work[len + 1];
@@ -72,18 +72,18 @@ IrSignal *Pronto::parse(const __FlashStringHelper *str) {
 IrSequence *Pronto::mkSequence(const uint16_t* data, size_t noPairs, microseconds_t timebase) {
     microseconds_t *durations = new microseconds_t[2*noPairs];
     for (unsigned int i = 0; i < 2*noPairs; i++) {
-        uint32_t duration = (uint32_t) (data[i] * timebase);
-        durations[i] = (microseconds_t)((duration <= MICROSECONDS_T_MAX) ? duration : MICROSECONDS_T_MAX);
+        uint32_t duration = static_cast<uint32_t>(data[i]) * timebase;
+        durations[i] = (duration <= MICROSECONDS_T_MAX) ? duration : MICROSECONDS_T_MAX;
     }
     return new IrSequence(durations, 2*noPairs, false);
 }
 
-frequency_t Pronto::toFrequency(prontoInt code) {
-    return static_cast<frequency_t> (referenceFrequency / code);
+frequency_t Pronto::toFrequency(uint16_t code) {
+    return referenceFrequency / code;
 }
 
-Pronto::prontoInt Pronto::toFrequencyCode(frequency_t frequency) {
-    return static_cast<prontoInt> (referenceFrequency / effectiveFrequency(frequency));
+uint16_t Pronto::toFrequencyCode(frequency_t frequency) {
+    return referenceFrequency / effectiveFrequency(frequency);
 }
 
 frequency_t Pronto::effectiveFrequency(frequency_t frequency) {
@@ -91,7 +91,7 @@ frequency_t Pronto::effectiveFrequency(frequency_t frequency) {
 }
 
 microseconds_t Pronto::toTimebase(frequency_t frequency) {
-    return static_cast<microseconds_t> (microsecondsInSeconds / effectiveFrequency(frequency));
+    return microsecondsInSeconds / effectiveFrequency(frequency);
 }
 
 size_t Pronto::lengthHexString(size_t introLength, size_t repeatLength) {
@@ -99,7 +99,7 @@ size_t Pronto::lengthHexString(size_t introLength, size_t repeatLength) {
 }
 
 char Pronto::hexDigit(unsigned int x) {
-    return (char) (x <= 9 ? ('0' + x) : ('A' + (x - 10)));
+    return x <= 9 ? ('0' + x) : ('A' + (x - 10));
 }
 
 unsigned int Pronto::appendChar(char *result, unsigned int index, char ch) {
@@ -109,10 +109,10 @@ unsigned int Pronto::appendChar(char *result, unsigned int index, char ch) {
 }
 
 unsigned int Pronto::appendDigit(char *result, unsigned int index, unsigned int number) {
-    return appendChar(result, index, hexDigit(number)); //(number >> shifts) & 0xF);
+    return appendChar(result, index, hexDigit(number));
 }
 
-unsigned int Pronto::appendNumber(char *result, unsigned int index, prontoInt number) {
+unsigned int Pronto::appendNumber(char *result, unsigned int index, uint16_t number) {
     for (unsigned int i = 0; i < digitsInProntoNumber; i++) {
         unsigned int shifts = bitsInHexadecimal * (digitsInProntoNumber - 1 - i);
         index = appendDigit(result, index, (number >> shifts) & hexMask);
@@ -146,7 +146,7 @@ char* Pronto::prelude(frequency_t frequency, size_t introLength, size_t repeatLe
 
 char* Pronto::toProntoHex(const microseconds_t* introData, size_t introLength, const microseconds_t* repeatData, size_t repeatLength, frequency_t frequency) {
     char *result = prelude(frequency, introLength, repeatLength);
-    unsigned int index = charsInPreamble;
+    unsigned int index = numbersInPreamble * (digitsInProntoNumber + 1);
     microseconds_t timebase = toTimebase(frequency);
     index = appendSequence(result, index, introData, introLength, timebase);
     index = appendSequence(result, index, repeatData, repeatLength, timebase);
@@ -173,7 +173,7 @@ void Pronto::dumpDuration(Stream& stream, microseconds_t duration, microseconds_
     dumpNumber(stream, (duration + timebase / 2) / timebase);
 }
 
-void Pronto::dumpNumber(Stream& stream, prontoInt number) {
+void Pronto::dumpNumber(Stream& stream, uint16_t number) {
     for (unsigned int i = 0; i < digitsInProntoNumber; i++) {
         unsigned int shifts = bitsInHexadecimal * (digitsInProntoNumber - 1 - i);
         dumpDigit(stream, (number >> shifts) & hexMask);

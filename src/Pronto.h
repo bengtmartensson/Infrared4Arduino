@@ -18,27 +18,24 @@
 
 class Pronto {
 private:
-    typedef uint16_t prontoInt;
-
-    static const prontoInt learnedToken = 0x0000;
-    static const prontoInt learnedNonModulatedToken = 0x0100;
-    static const unsigned int bitsInHexadecimal = 4;
-    static const unsigned int digitsInProntoNumber = 4;
-    static const unsigned int numbersInPreamble = 4;
-    static const unsigned int hexMask = 0xF;
-    static const unsigned int charsInPreamble = numbersInPreamble * (digitsInProntoNumber + 1);
-    static const uint32_t referenceFrequency = 4145146UL;
-    static const prontoInt fallbackFrequencyCode = 0x0040; // To use with frequency = 0;
-    static const frequency_t fallbackFrequency = 64767U; // To use with frequency = 0;
-    static const uint32_t microsecondsInSeconds = 1000000UL;
+    static const unsigned int bitsInHexadecimal         = 4U;
+    static const unsigned int digitsInProntoNumber      = 4U;
+    static const unsigned int numbersInPreamble         = 4U;
+    static const unsigned int hexMask                   = 0xFU;
+    static const uint16_t learnedToken                  = 0x0000U;
+    static const uint16_t learnedNonModulatedToken      = 0x0100U;
+    static const uint32_t referenceFrequency            = 4145146UL;
+    static const uint16_t fallbackFrequencyCode         = 0x0040U; // To use with frequency = 0;
+    static const frequency_t fallbackFrequency          = 64767U; // To use with frequency = 0;
+    static const uint32_t microsecondsInSeconds         = 1000000UL;
 
     Pronto() {};
 
     static IrSequence *mkSequence(const uint16_t *data, size_t pairs, microseconds_t timebase);
 
-    static frequency_t toFrequency(prontoInt code);
+    static frequency_t toFrequency(uint16_t code);
 
-    static prontoInt toFrequencyCode(frequency_t frequency);
+    static uint16_t toFrequencyCode(frequency_t frequency);
 
     static frequency_t effectiveFrequency(frequency_t frequency);
 
@@ -52,11 +49,11 @@ private:
 
     static unsigned int appendChar(char *result, unsigned int index, char ch);
 
-    static unsigned int appendDuration(char *result, unsigned int index, prontoInt duration, microseconds_t timebase);
+    static unsigned int appendDuration(char *result, unsigned int index, uint16_t duration, microseconds_t timebase);
 
     static unsigned int appendDigit(char *result, unsigned int index, unsigned int number);
 
-    static unsigned int appendNumber(char *result, unsigned int index, prontoInt number);
+    static unsigned int appendNumber(char *result, unsigned int index, uint16_t number);
 
     static unsigned int appendSequence(char *result, unsigned int index, const microseconds_t *data, size_t length, microseconds_t timebase);
 
@@ -66,7 +63,7 @@ private:
 
     static void dumpDuration(Stream& stream, microseconds_t duration, microseconds_t timebase);
 
-    static void dumpNumber(Stream& stream, prontoInt number);
+    static void dumpNumber(Stream& stream, uint16_t number);
 
     static void dumpDigit(Stream& stream, unsigned int number);
 
@@ -86,6 +83,7 @@ public:
      */
     static IrSignal *parse(const char *str);
 
+#if HAS_FLASH_READ || defined(DOXYGEN)
     /**
      * Function for parsing its input data into an IrSignal. The ending sequence will always be empty.
      * @param str Text string containing a Pronto form signal.
@@ -95,7 +93,6 @@ public:
 
     static IrSignal *parse_PF(const char * ptr);
 
-//#if defined(ARDUINO) || defined(DOXYGEN)
     /**
      * Function for parsing its input data into an IrSignal. The ending sequence will always be empty.
      * @param str Text string containing a Pronto form signal.
@@ -104,7 +101,7 @@ public:
      * @return IrSignal
      */
     static IrSignal *parse(const __FlashStringHelper *str);
-//#endif
+#endif
 
     /**
      * Function for generating a Pronto Hex string from the argument.

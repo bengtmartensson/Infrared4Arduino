@@ -11,6 +11,7 @@
 #include "Pronto.h"
 #include "Rc5Renderer.h"
 #include "Rc5Decoder.h"
+#include "HashDecoder.h"
 #include "IrSenderPwmSpinWait.h"
 #include "IrSenderNonMod.h"
 #include <unistd.h>
@@ -114,6 +115,26 @@ static bool testRc5Decoder(bool verbose) {
     return checkDecoderDump(verbose, rc5Decoder, "RC5 0 1 0\n");
 }
 
+static bool testHashDecoder(bool verbose) {
+    const IrSignal *nec1 = Nec1Renderer::newIrSignal(122, 29); // power_on for Yahama receivers
+    IrSequenceReader irSequenceReader(nec1->getIntro());
+    HashDecoder decoder(irSequenceReader);
+    return checkDecoderDump(verbose, decoder, "75da50e3\n");
+}
+
+static bool testHashDecoder1(bool verbose) {
+    const IrSignal *nec1 = Nec1Renderer::newIrSignal(122, 29); // power_on for Yahama receivers
+
+    HashDecoder decoder(nec1->getIntro());
+    return checkDecoderDump(verbose, decoder, "75da50e3\n");
+}
+
+static bool testHashDecoder2(bool verbose) {
+    const IrSignal *nec1 = Nec1Renderer::newIrSignal(122, 29); // power_on for Yahama receivers
+    HashDecoder decoder(*nec1);
+    return checkDecoderDump(verbose, decoder, "69ad5559\n");
+}
+
 static bool testIrSenderSimulator(bool verbose) {
     const IrSignal *nec1 = Nec1Renderer::newIrSignal(122, 29); // power_on for Yahama receivers
     if (verbose) {
@@ -191,6 +212,10 @@ int main(int argc, const char *args[] __attribute__((unused))) {
     TEST(testRc5Renderer);
     TEST(testNec1Decoder);
     TEST(testRc5Decoder);
+    TEST(testHashDecoder);
+    TEST(testHashDecoder1);
+    TEST(testHashDecoder2);
+
     TEST(testIrSenderSimulator);
     TEST(testPronto);
     TEST(testToProntoHex);

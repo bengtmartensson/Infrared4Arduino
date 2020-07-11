@@ -34,6 +34,7 @@ ORIGINURL := $(shell git remote get-url origin)
 
 OBJS=\
 Board.o \
+HashDecoder.o \
 IrReader.o \
 IrReceiver.o \
 IrReceiverPoll.o \

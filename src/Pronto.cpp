@@ -182,5 +182,5 @@ void Pronto::dumpNumber(Stream& stream, uint16_t number) {
 }
 
 void Pronto::dumpDigit(Stream& stream, unsigned int number) {
-    return stream.print(hexDigit(number));
+    stream.print(hexDigit(number));
 }

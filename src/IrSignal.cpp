@@ -6,9 +6,14 @@ IrSignal::IrSignal(const IrSequence& intro_, const IrSequence& repeat_, const Ir
 : frequency(frequency_),dutyCycle(dutyCycle_),intro(intro_, toBeFreed),repeat(repeat_, toBeFreed),ending(ending_, toBeFreed) {
 }
 
+IrSignal::IrSignal(const IrSequence& intro_, const IrSequence& repeat_, const IrSequence& ending_,
+        frequency_t frequency_, dutycycle_t dutyCycle_)
+: frequency(frequency_),dutyCycle(dutyCycle_),intro(intro_),repeat(repeat_),ending(ending_) {
+}
+
 IrSignal::IrSignal(const IrSequence& intro_, const IrSequence& repeat_,
-        frequency_t frequency_, dutycycle_t dutyCycle_, bool toBeFreed)
-: frequency(frequency_), dutyCycle(dutyCycle_), intro(intro_, toBeFreed), repeat(repeat_, toBeFreed), ending(NULL, 0, false) {
+        frequency_t frequency_, dutycycle_t dutyCycle_)
+: frequency(frequency_), dutyCycle(dutyCycle_), intro(intro_), repeat(repeat_), ending(NULL, 0, false) {
 }
 
 IrSignal::IrSignal(const IrSignal& orig)

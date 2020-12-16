@@ -90,15 +90,19 @@ static bool testNec1SendNonMod(bool verbose) {
 
 static bool testNec1Renderer(bool verbose) {
     const IrSignal *nec1 = Nec1Renderer::newIrSignal(122, 29); // power_on for Yahama receivers
-    return testSignalRenderer(verbose, nec1, "f=38400 "
+    bool result = testSignalRenderer(verbose, nec1, "f=38400 "
             "+9024 -4512 +564 -564 +564 -1692 +564 -564 +564 -1692 +564 -1692 +564 -1692 +564 -1692 +564 -564 +564 -1692 +564 -564 +564 -1692 +564 -564 +564 -564 +564 -564 +564 -564 +564 -1692 +564 -1692 +564 -564 +564 -1692 +564 -1692 +564 -1692 +564 -564 +564 -564 +564 -564 +564 -564 +564 -1692 +564 -564 +564 -564 +564 -564 +564 -1692 +564 -1692 +564 -1692 +564 -39756\n"
             "+9024 -2256 +564 -65535\n\n");
+    delete nec1;
+    return result;
 }
 
 static bool testRc5Renderer(bool verbose) {
     const IrSignal *sig = Rc5Renderer::newIrSignal(0, 1, 0);
-    return testSignalRenderer(verbose, sig, "f=36000 \n"
+    bool result = testSignalRenderer(verbose, sig, "f=36000 \n"
             "+889 -889 +1778 -889 +889 -889 +889 -889 +889 -889 +889 -889 +889 -889 +889 -889 +889 -889 +889 -889 +889 -889 +889 -1778 +889 -65535\n\n");
+    delete sig;
+    return result;
 }
 
 static bool testNec1Decoder(bool verbose) {
@@ -182,7 +186,7 @@ static bool testToProntoHex(bool verbose) {
 
 static bool testProntoParse(bool verbose __attribute__((unused))) {
     const char prontoHex[] = "0000 006C 0022 0000 015B 00AD 0016 0016 0016 0041 0016 0016 0016 0041 0016 0041 0016 0041 0016 0041 0016 0016 0016 0041 0016 0016 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0041 0016 0016 0016 0041 0016 0041 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0016 0016 0016 0016 0016 0016 0041 0016 0041 0016 0041 0016 05F7";
-        IrSignal* irSignal = Pronto::parse(prontoHex);
+    IrSignal* irSignal = Pronto::parse(prontoHex);
     const char* s = Pronto::toProntoHex(*irSignal);
     return std::string(s) == std::string(prontoHex);
 }

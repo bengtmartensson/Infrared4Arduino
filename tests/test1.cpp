@@ -90,7 +90,7 @@ static bool testNec1SendNonMod(bool verbose) {
 
 static bool testNec1Renderer(bool verbose) {
     const IrSignal *nec1 = Nec1Renderer::newIrSignal(122, 29); // power_on for Yahama receivers
-    bool result = testSignalRenderer(verbose, nec1, "f=38400 "
+    bool result = testSignalRenderer(verbose, nec1, "f=38400 33% "
             "+9024 -4512 +564 -564 +564 -1692 +564 -564 +564 -1692 +564 -1692 +564 -1692 +564 -1692 +564 -564 +564 -1692 +564 -564 +564 -1692 +564 -564 +564 -564 +564 -564 +564 -564 +564 -1692 +564 -1692 +564 -564 +564 -1692 +564 -1692 +564 -1692 +564 -564 +564 -564 +564 -564 +564 -564 +564 -1692 +564 -564 +564 -564 +564 -564 +564 -1692 +564 -1692 +564 -1692 +564 -39756\n"
             "+9024 -2256 +564 -65535\n\n");
     delete nec1;

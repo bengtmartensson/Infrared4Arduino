@@ -6,10 +6,6 @@
 
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 
-const microseconds_t Nec1Renderer::repeatData[repeatLength] = { 9024, 2256, 564, MIN(96156, MICROSECONDS_T_MAX) };
-const IrSequence Nec1Renderer::repeat(repeatData, repeatLength, false);
-static const IrSequence emptyIrSequence;
-
 const IrSignal *Nec1Renderer::newIrSignal(unsigned int D, unsigned int S, unsigned int F) {
     microseconds_t *introData = new microseconds_t[introLength];
     unsigned int i = 0U;
@@ -22,8 +18,12 @@ const IrSignal *Nec1Renderer::newIrSignal(unsigned int D, unsigned int S, unsign
     lsbByte(introData, i, sum, 255U-F);
     introData[i] = 564U; i++;
     introData[i] = (microseconds_t) (108000U - sum); i++;
-    IrSequence *introPtr = new IrSequence(introData, introLength, true);
-    return new IrSignal(*introPtr, repeat, emptyIrSequence, frequency);
+    microseconds_t *repeatData = new microseconds_t[repeatLength];
+    repeatData[0] = 9024U;
+    repeatData[1] = 2256U;
+    repeatData[2] = 564U;
+    repeatData[3] = MIN(96156U, MICROSECONDS_T_MAX);
+    return new IrSignal(introData, introLength, repeatData, repeatLength, frequency, dutyCycle, true);
 }
 
 void Nec1Renderer::lsbByte(microseconds_t *intro, unsigned int& i, uint32_t& sum, unsigned int X) {

@@ -10,6 +10,7 @@
 class Nec1Renderer {
 private:
     static const frequency_t frequency = 38400U;
+    static const dutycycle_t dutyCycle = 33U;
     static const size_t introLength = 68U;
     static const size_t repeatLength = 4U;
 
@@ -38,8 +39,6 @@ public:
 
 private:
     Nec1Renderer();
-    static const microseconds_t repeatData[repeatLength];
-    static const IrSequence repeat;
     static void lsbByte(microseconds_t *intro, unsigned int& i, uint32_t& sum, unsigned int D);
     static void transmitBit(microseconds_t *intro, unsigned int& i, uint32_t& sum, unsigned int data);
 };

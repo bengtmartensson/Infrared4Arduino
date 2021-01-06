@@ -1,6 +1,7 @@
 <map id="IrDecoder" name="IrDecoder">
-<area shape="rect" id="node1" title="Abstract base class for all decoder classes." alt="" coords="151,5,236,32"/>
-<area shape="rect" id="node2" href="$classMultiDecoder.html" title="A preliminary multi protocol decoder." alt="" coords="5,80,115,107"/>
-<area shape="rect" id="node3" href="$classNec1Decoder.html" title="A decoder class for NEC1 signals." alt="" coords="139,80,248,107"/>
-<area shape="rect" id="node4" href="$classRc5Decoder.html" title="A decoder class for RC5 signals." alt="" coords="273,80,373,107"/>
+<area shape="rect" id="node1" title="Abstract base class for all decoder classes." alt="" coords="205,5,284,32"/>
+<area shape="rect" id="node2" href="$classHashDecoder.html" title="A decoder class using FNV&#45;1 hashes of length 32." alt="" coords="5,80,108,107"/>
+<area shape="rect" id="node3" href="$classMultiDecoder.html" title="A preliminary multi protocol decoder." alt="" coords="133,80,231,107"/>
+<area shape="rect" id="node4" href="$classNec1Decoder.html" title="A decoder class for NEC1 signals." alt="" coords="256,80,359,107"/>
+<area shape="rect" id="node5" href="$classRc5Decoder.html" title="A decoder class for RC5 signals." alt="" coords="383,80,477,107"/>
 </map>

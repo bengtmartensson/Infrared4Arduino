@@ -1,12 +1,12 @@
 <map id="src/IrReceiverPoll.h" name="src/IrReceiverPoll.h">
-<area shape="rect" id="node1" title=" " alt="" coords="187,5,333,32"/>
-<area shape="rect" id="node2" href="$IrReceiver_8h.html" title=" " alt="" coords="210,80,310,107"/>
-<area shape="rect" id="node3" title=" " alt="" coords="14,453,98,480"/>
-<area shape="rect" id="node4" href="$InfraredTypes_8h.html" title="This file defines some general data types that are used in the library." alt="" coords="136,379,259,405"/>
-<area shape="rect" id="node5" href="$IrReader_8h.html" title=" " alt="" coords="83,229,173,256"/>
-<area shape="rect" id="node7" href="$IrSignal_8h.html" title=" " alt="" coords="219,229,301,256"/>
-<area shape="rect" id="node8" href="$Board_8h.html" title=" " alt="" coords="405,155,477,181"/>
-<area shape="rect" id="node6" href="$IrSequence_8h.html" title=" " alt="" coords="144,304,251,331"/>
-<area shape="rect" id="node9" href="$PinModeStatus_8h.html" title=" " alt="" coords="376,229,507,256"/>
-<area shape="rect" id="node10" href="$NoBoard_8h.html" title=" " alt="" coords="531,229,669,256"/>
+<area shape="rect" id="node1" title=" " alt="" coords="187,5,322,32"/>
+<area shape="rect" id="node2" href="$IrReceiver_8h.html" title=" " alt="" coords="209,80,300,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="17,453,95,480"/>
+<area shape="rect" id="node4" href="$InfraredTypes_8h.html" title="This file defines some general data types that are used in the library." alt="" coords="137,379,249,405"/>
+<area shape="rect" id="node5" href="$IrReader_8h.html" title=" " alt="" coords="88,229,171,256"/>
+<area shape="rect" id="node7" href="$IrSignal_8h.html" title=" " alt="" coords="216,229,293,256"/>
+<area shape="rect" id="node8" href="$Board_8h.html" title=" " alt="" coords="396,155,463,181"/>
+<area shape="rect" id="node6" href="$IrSequence_8h.html" title=" " alt="" coords="144,304,243,331"/>
+<area shape="rect" id="node9" href="$PinModeStatus_8h.html" title=" " alt="" coords="368,229,491,256"/>
+<area shape="rect" id="node10" href="$NoBoard_8h.html" title=" " alt="" coords="515,229,642,256"/>
 </map>

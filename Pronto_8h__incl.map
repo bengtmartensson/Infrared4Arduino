@@ -1,10 +1,10 @@
 <map id="src/Pronto.h" name="src/Pronto.h">
-<area shape="rect" id="node1" title=" " alt="" coords="45,5,144,32"/>
-<area shape="rect" id="node2" href="$InfraredTypes_8h.html" title="This file defines some general data types that are used in the library." alt="" coords="5,304,128,331"/>
-<area shape="rect" id="node4" href="$IrSignal_8h.html" title=" " alt="" coords="53,155,136,181"/>
-<area shape="rect" id="node6" href="$Board_8h.html" title=" " alt="" coords="189,80,261,107"/>
-<area shape="rect" id="node3" title=" " alt="" coords="25,379,109,405"/>
-<area shape="rect" id="node5" href="$IrSequence_8h.html" title=" " alt="" coords="104,229,211,256"/>
-<area shape="rect" id="node7" href="$PinModeStatus_8h.html" title=" " alt="" coords="160,155,291,181"/>
-<area shape="rect" id="node8" href="$NoBoard_8h.html" title=" " alt="" coords="315,155,453,181"/>
+<area shape="rect" id="node1" title=" " alt="" coords="40,5,133,32"/>
+<area shape="rect" id="node2" href="$InfraredTypes_8h.html" title="This file defines some general data types that are used in the library." alt="" coords="5,304,117,331"/>
+<area shape="rect" id="node4" href="$IrSignal_8h.html" title=" " alt="" coords="48,155,125,181"/>
+<area shape="rect" id="node6" href="$Board_8h.html" title=" " alt="" coords="177,80,244,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="23,379,100,405"/>
+<area shape="rect" id="node5" href="$IrSequence_8h.html" title=" " alt="" coords="99,229,197,256"/>
+<area shape="rect" id="node7" href="$PinModeStatus_8h.html" title=" " alt="" coords="149,155,272,181"/>
+<area shape="rect" id="node8" href="$NoBoard_8h.html" title=" " alt="" coords="297,155,423,181"/>
 </map>

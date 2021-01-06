@@ -1,4 +1,4 @@
 <map id="IrSenderSimulator" name="IrSenderSimulator">
-<area shape="rect" id="node1" title="Simulates sending in the sense that it prints the IrSequences on the Stream given as argument." alt="" coords="5,80,144,107"/>
-<area shape="rect" id="node2" href="$classIrSender.html" title="Abstract base class for all sending classes." alt="" coords="37,5,113,32"/>
+<area shape="rect" id="node1" title="Simulates sending in the sense that it prints the IrSequences on the Stream given as argument." alt="" coords="5,80,132,107"/>
+<area shape="rect" id="node2" href="$classIrSender.html" title="Abstract base class for all sending classes." alt="" coords="33,5,104,32"/>
 </map>

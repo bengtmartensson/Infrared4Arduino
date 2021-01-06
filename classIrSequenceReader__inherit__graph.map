@@ -1,4 +1,4 @@
 <map id="IrSequenceReader" name="IrSequenceReader">
-<area shape="rect" id="node1" title="This class packs an IrSequence into a dummy, immutable IrReader." alt="" coords="5,80,145,107"/>
-<area shape="rect" id="node2" href="$classIrReader.html" title="Abstract base class for all IR readers, capturing or receiving." alt="" coords="37,5,114,32"/>
+<area shape="rect" id="node1" title="This class packs an IrSequence into a dummy, immutable IrReader." alt="" coords="5,80,135,107"/>
+<area shape="rect" id="node2" href="$classIrReader.html" title="Abstract base class for all IR readers, capturing or receiving." alt="" coords="35,5,105,32"/>
 </map>

@@ -1,4 +1,4 @@
 <map id="Rc5Decoder" name="Rc5Decoder">
-<area shape="rect" id="node1" title="A decoder class for RC5 signals." alt="" coords="5,80,105,107"/>
-<area shape="rect" id="node2" href="$classIrDecoder.html" title="Abstract base class for all decoder classes." alt="" coords="13,5,98,32"/>
+<area shape="rect" id="node1" title="A decoder class for RC5 signals." alt="" coords="5,80,100,107"/>
+<area shape="rect" id="node2" href="$classIrDecoder.html" title="Abstract base class for all decoder classes." alt="" coords="13,5,92,32"/>
 </map>

@@ -1,6 +1,6 @@
 <map id="src/boards/avr.h" name="src/boards/avr.h">
-<area shape="rect" id="node1" title=" " alt="" coords="252,5,379,32"/>
-<area shape="rect" id="node2" href="$ATmega2560_8h.html" title="Hardware dependent definitions for boards based on the ATMega 2560." alt="" coords="5,80,196,107"/>
-<area shape="rect" id="node3" href="$ATmega328P_8h.html" title="Hardware dependent definitions for boards based on the ATMega 328P." alt="" coords="221,80,410,107"/>
-<area shape="rect" id="node4" href="$ATmega32U4_8h.html" title="Hardware dependent definitions for Leonardo like boards like Leonardo and Micro." alt="" coords="435,80,628,107"/>
+<area shape="rect" id="node1" title=" " alt="" coords="233,5,349,32"/>
+<area shape="rect" id="node2" href="$ATmega2560_8h.html" title="Hardware dependent definitions for boards based on the ATMega 2560." alt="" coords="5,80,180,107"/>
+<area shape="rect" id="node3" href="$ATmega328P_8h.html" title="Hardware dependent definitions for boards based on the ATMega 328P." alt="" coords="204,80,379,107"/>
+<area shape="rect" id="node4" href="$ATmega32U4_8h.html" title="Hardware dependent definitions for Leonardo like boards like Leonardo and Micro." alt="" coords="403,80,580,107"/>
 </map>

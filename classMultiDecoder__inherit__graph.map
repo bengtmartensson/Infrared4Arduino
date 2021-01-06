@@ -1,4 +1,4 @@
 <map id="MultiDecoder" name="MultiDecoder">
-<area shape="rect" id="node1" title="A preliminary multi protocol decoder." alt="" coords="5,80,115,107"/>
-<area shape="rect" id="node2" href="$classIrDecoder.html" title="Abstract base class for all decoder classes." alt="" coords="17,5,103,32"/>
+<area shape="rect" id="node1" title="A preliminary multi protocol decoder." alt="" coords="5,80,104,107"/>
+<area shape="rect" id="node2" href="$classIrDecoder.html" title="Abstract base class for all decoder classes." alt="" coords="15,5,94,32"/>
 </map>

@@ -298,10 +298,10 @@ typedef void *  uint_farptr_t;
 inline constexpr bool Board::hasHardwarePwm() {
     return true;
 }
-inline constexpr pin_t Board::defaultPwmPin() { return PWM_PIN; };
-inline pin_t Board::getPwmPin() const { return PWM_PIN; };
-inline void Board::writeLow() { digitalWrite(getPwmPin(), LOW); };
-inline void Board::writeHigh() { digitalWrite(getPwmPin(), HIGH); };
+inline constexpr pin_t Board::defaultPwmPin() { return PWM_PIN; }
+inline pin_t Board::getPwmPin() const { return PWM_PIN; }
+inline void Board::writeLow() { digitalWrite(getPwmPin(), LOW); }
+inline void Board::writeHigh() { digitalWrite(getPwmPin(), HIGH); }
 
 #else
 

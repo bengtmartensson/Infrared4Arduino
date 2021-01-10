@@ -3,17 +3,17 @@
 #include <string.h>
 
 IrSequence::IrSequence() : durations(NULL), length(0U), toBeFreed(false) {
-};
+}
 
 IrSequence::IrSequence(const microseconds_t *durations_, size_t length_, bool toBeFreed_)
 : durations(durations_), length(length_), toBeFreed(toBeFreed_) {
 }
 
 IrSequence::IrSequence(const IrSequence& orig) : durations(orig.durations), length(orig.length), toBeFreed(orig.toBeFreed) {
-};
+}
 
 IrSequence::IrSequence(const IrSequence& orig, bool toBeFreed_) : durations(orig.durations), length(orig.length), toBeFreed(toBeFreed_) {
-};
+}
 
 IrSequence::~IrSequence() {
     if (toBeFreed)

@@ -64,7 +64,7 @@ inline void pinMode(uint8_t pin, PinMode mode) {
         currentWritePin = pin;
         lastValue = LOW;
     }
-};
+}
 
 inline void delayMicroseconds(unsigned int t) {
 #ifdef REAL_TIME
@@ -77,15 +77,15 @@ inline void delayMicroseconds(unsigned int t) {
         simulatedTime.tv_sec++;
     }
 #endif
-};
+}
 
 inline void delay(unsigned long t) {
     delayMicroseconds(1000U * t);
-};
+}
 
-inline void noInterrupts() {};
-inline void interrupts() {};
-inline void yield() {};
+inline void noInterrupts() {}
+inline void interrupts() {}
+inline void yield() {}
 
 inline unsigned long micros() {
     struct timeval tv = getTimeOfDay();
@@ -102,7 +102,7 @@ inline unsigned long millis() {
 
 inline uint8_t digitalRead(uint8_t pin __attribute__((unused))) {
     return 0;
-};
+}
 
 inline void digitalWrite(uint8_t pin __attribute__((unused)), PinStatus value) {
 #ifdef REPORT_TIMES
@@ -128,7 +128,7 @@ inline void digitalWrite(uint8_t pin __attribute__((unused)), PinStatus value) {
     std::cout << "digitalWrite(" << (int) pin << ", "
             << (value == LOW ? "LOW" : "HIGH") << ")" << std::endl;
 #endif
-};
+}
 
 
 #define F_CPU 16000000 // Good default, correct for Unu etc

@@ -14,12 +14,12 @@ IrSignal *Pronto::parse(const uint16_t *data, size_t size) {
             frequency = 0U;
             break;
         default:
-            return NULL;
+            return nullptr;
     }
     size_t introPairs = data[2];
     size_t repetitionPairs = data[3];
     if (numbersInPreamble + 2*(introPairs + repetitionPairs) != size) // inconsistent sizes
-        return NULL;
+        return nullptr;
 
     IrSequence *intro = mkSequence(data + numbersInPreamble, introPairs, timebase);
     IrSequence *repeat = mkSequence(data + numbersInPreamble + 2*introPairs, repetitionPairs, timebase);

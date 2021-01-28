@@ -11,7 +11,7 @@ milliseconds_t IrReceiverSampler::ticks2millisecs(uint32_t tix) {
     return (milliseconds_t) ((tix * Board::microsPerTick)/1000UL);
 }
 
-IrReceiverSampler *IrReceiverSampler::instance = NULL;
+IrReceiverSampler *IrReceiverSampler::instance = nullptr;
 
 IrReceiverSampler::IrReceiverSampler(size_t captureLength,
         pin_t pin_,
@@ -33,15 +33,15 @@ IrReceiverSampler *IrReceiverSampler::newIrReceiverSampler(size_t captureLength,
         microseconds_t markExcess,
         milliseconds_t beginningTimeout,
         milliseconds_t endingTimeout) {
-    if (instance != NULL || pin == invalidPin)
-        return NULL;
+    if (instance != nullptr || pin == invalidPin)
+        return nullptr;
     instance = new IrReceiverSampler(captureLength, pin, pullup, markExcess, beginningTimeout, endingTimeout);
     return instance;
 }
 
 void IrReceiverSampler::deleteInstance() {
     delete instance;
-    instance = NULL;
+    instance = nullptr;
 }
 
 IrReceiverSampler::~IrReceiverSampler() {

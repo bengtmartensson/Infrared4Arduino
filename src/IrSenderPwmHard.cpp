@@ -21,7 +21,7 @@ this program. If not, see http://www.gnu.org/licenses/.
 #ifdef HAS_HARDWARE_PWM
 #include "IrSenderPwmHard.h"
 
-IrSenderPwmHard *IrSenderPwmHard::instance = NULL;
+IrSenderPwmHard *IrSenderPwmHard::instance = nullptr;
 
 IrSenderPwmHard::IrSenderPwmHard(pin_t outputPin __attribute__((unused))) : IrSenderPwm(PWM_PIN) {
 }
@@ -31,14 +31,14 @@ IrSenderPwmHard::~IrSenderPwmHard() {
 }
 
 IrSenderPwmHard *IrSenderPwmHard::newInstance(pin_t outputPin) {
-    if (instance != NULL)
-        return NULL;
+    if (instance != nullptr)
+        return nullptr;
     instance = new IrSenderPwmHard(outputPin);
     return instance;
 }
 
 IrSenderPwmHard *IrSenderPwmHard::getInstance(bool create, pin_t outputPin) {
-    if (instance == NULL && create)
+    if (instance == nullptr && create)
         instance = new IrSenderPwmHard(outputPin);
     return instance;
 }

@@ -17,15 +17,15 @@ IrWidgetAggregating::IrWidgetAggregating(size_t captureLength,
 : IrWidget(captureLength, pullup, markExcess, beginningTimeout, endingTimeout) {
 }
 
-IrWidgetAggregating *IrWidgetAggregating::instance = NULL;
+IrWidgetAggregating *IrWidgetAggregating::instance = nullptr;
 
 IrWidgetAggregating *IrWidgetAggregating::newIrWidgetAggregating(size_t captureLength,
             bool pullup,
             int16_t markExcess,
             milliseconds_t beginningTimeout,
             milliseconds_t endingTimeout) {
-    if (instance != NULL)
-        return NULL;
+    if (instance != nullptr)
+        return nullptr;
     instance = new IrWidgetAggregating(captureLength, pullup, markExcess,
             beginningTimeout, endingTimeout);
     return instance;
@@ -33,7 +33,7 @@ IrWidgetAggregating *IrWidgetAggregating::newIrWidgetAggregating(size_t captureL
 
 void IrWidgetAggregating::deleteInstance() {
     delete instance;
-    instance = NULL;
+    instance = nullptr;
 }
 
 // Wait for a signal on pin ICP1 and store the captured time values in the array 'captureData'

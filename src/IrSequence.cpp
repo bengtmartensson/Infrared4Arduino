@@ -2,7 +2,7 @@
 #include "Board.h"
 #include <string.h>
 
-IrSequence::IrSequence() : durations(NULL), length(0U), toBeFreed(false) {
+IrSequence::IrSequence() : durations(nullptr), length(0U), toBeFreed(false) {
 }
 
 IrSequence::IrSequence(const microseconds_t *durations_, size_t length_, bool toBeFreed_)

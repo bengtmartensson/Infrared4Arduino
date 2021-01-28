@@ -183,10 +183,10 @@ static void decodeOrDump(IrReader *irReader, Stream& stream) {
 static bool receive(Stream& stream) {
     IrReceiverSampler *irReceiver = IrReceiverSampler::getInstance();
     flushIn(stream);
-    if (irReceiver == NULL) {
+    if (irReceiver == nullptr) {
         irReceiver = IrReceiverSampler::newIrReceiverSampler(captureSize,
                 IRRECEIVER_PIN, IRRECEIVER_PULLUP);
-        if (irReceiver == NULL)
+        if (irReceiver == nullptr)
             return false;
         irReceiver->setEndingTimeout(receiveEndingTimeout);
         irReceiver->setBeginningTimeout(beginTimeout);
@@ -195,7 +195,7 @@ static bool receive(Stream& stream) {
     } else {
         irReceiver->reset();
     }
-    
+
     while (!irReceiver->isReady() && stream.available() == 0)
         yield();
     bool ready = irReceiver->isReady();
@@ -212,7 +212,7 @@ static bool receive(Stream& stream) {
 static bool capture(Stream& stream) {
     IrWidget *irWidget = IrWidgetAggregating::newIrWidgetAggregating(captureSize,
             IRCAPTURER_PULLUP);
-    if (irWidget == NULL)
+    if (irWidget == nullptr)
         stream.println(F("This cannot happen"));
     irWidget->setEndingTimeout(captureEndingTimeout);
     irWidget->setBeginningTimeout(beginTimeout);
@@ -317,9 +317,9 @@ static bool processCommand(const String& line, Stream& stream) {
         if (cmd[0] == 'p') { // parameter
         String variableName = tokenizer.getToken();
         long value = tokenizer.getInt();
-        unsigned long *variable32 = NULL;
-        uint16_t *variable16 = NULL;
-        uint8_t *variable8 = NULL;
+        unsigned long *variable32 = nullptr;
+        uint16_t *variable16 = nullptr;
+        uint8_t *variable8 = nullptr;
 #if defined(RECEIVE) || defined(CAPTURE)
            if (isPrefix("beg", variableName))
             variable32 = &beginTimeout;
@@ -340,17 +340,17 @@ static bool processCommand(const String& line, Stream& stream) {
         variable16 = &captureSize;
         } else
 #endif
-        if (variable32 != NULL) {
+        if (variable32 != nullptr) {
             if (value != Tokenizer::invalid)
                 *variable32 = value;
 
             printVariable(stream, variableName.c_str(), *variable32);
-        } else if (variable16 != NULL) {
+        } else if (variable16 != nullptr) {
             if (value != Tokenizer::invalid)
                 *variable16 = (uint16_t) value;
 
             printVariable(stream, variableName.c_str(), *variable16);
-        } else if (variable8 != NULL) {
+        } else if (variable8 != nullptr) {
             if (value != Tokenizer::invalid)
                 *variable8 = (uint8_t) value;
 
@@ -398,7 +398,7 @@ static bool processCommand(const String& line, Stream& stream) {
         String rest = tokenizer.getRest();
         IrSignal *irSignal = Pronto::parse(rest.c_str());
         bool status = false;
-        if (irSignal != NULL) {
+        if (irSignal != nullptr) {
             status = sendIrSignal(*irSignal, noSends); // waits
             delete irSignal;
         }
@@ -411,7 +411,7 @@ static bool processCommand(const String& line, Stream& stream) {
         // TODO: handle unparseable data gracefully
         uint16_t noSends = (uint16_t) tokenizer.getInt();
         String protocol = tokenizer.getToken();
-        const IrSignal *irSignal = NULL;
+        const IrSignal *irSignal = nullptr;
         if (isPrefix(protocol, "nec1")) {
             unsigned int D = (unsigned) tokenizer.getInt();
             unsigned int S = (unsigned) tokenizer.getInt();
@@ -431,7 +431,7 @@ static bool processCommand(const String& line, Stream& stream) {
             stream.println(protocol);
         }
         bool status = false;
-        if (irSignal != NULL) {
+        if (irSignal != nullptr) {
             status = sendIrSignal(*irSignal, noSends); // waits, blinks
             delete irSignal;
         }

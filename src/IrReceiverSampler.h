@@ -63,7 +63,7 @@ private:
 public:
     /**
      * This factory method replaces public constructors. Provided that no instance currently exists,
-     * it constructs a new instance and return a pointer to it, if possible. Otherwise, it returns NULL.
+     * it constructs a new instance and return a pointer to it, if possible. Otherwise, it returns nullptr.
      *
      * @param captureLength buffersize requested
      * @param pin GPIO pin to use
@@ -71,7 +71,7 @@ public:
      * @param markExcess markExcess to use
      * @param beginningTimeout beginningTimeout to use
      * @param endingTimeout endingTimeout to use
-     * @return pointer to a valid instance, or NULL.
+     * @return pointer to a valid instance, or nullptr.
      */
     static IrReceiverSampler *newIrReceiverSampler(size_t captureLength = defaultCaptureLength,
             pin_t pin = defaultPin,
@@ -87,8 +87,8 @@ public:
     static void deleteInstance();
 
     /**
-     * Returns a pointer to the instance, or NULL.
-     * @return pointer to instance, possibly NULL.
+     * Returns a pointer to the instance, or nullptr.
+     * @return pointer to instance, possibly nullptr.
      */
     static IrReceiverSampler *getInstance() {
         return instance;

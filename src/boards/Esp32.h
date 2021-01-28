@@ -75,7 +75,7 @@ private:
     };
 
     void timerDisableIntr() {
-        if (Esp32::timer != NULL) {
+        if (Esp32::timer != nullptr) {
             timerEnd(Esp32::timer);
             timerDetachInterrupt(Esp32::timer);
         }

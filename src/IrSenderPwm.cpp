@@ -23,14 +23,14 @@ this program. If not, see http://www.gnu.org/licenses/.
 #include "IrSenderPwmSoftDelay.h"
 #endif
 
-IrSenderPwm *IrSenderPwm::instance = NULL;
+IrSenderPwm *IrSenderPwm::instance = nullptr;
 
 IrSenderPwm::IrSenderPwm(pin_t outputPin) : IrSender(outputPin) {
 }
 
 IrSenderPwm *IrSenderPwm::newInstance(pin_t outputPin) {
-    if (instance != NULL)
-        return NULL;
+    if (instance != nullptr)
+        return nullptr;
     instance =
 #ifdef HAS_HARDWARE_PWM
             IrSenderPwmHard::newInstance(outputPin);
@@ -41,17 +41,17 @@ IrSenderPwm *IrSenderPwm::newInstance(pin_t outputPin) {
 }
 
 IrSenderPwm *IrSenderPwm::getInstance(bool create, pin_t outputPin) {
-    if (instance == NULL && create)
+    if (instance == nullptr && create)
         instance = newInstance(outputPin);
     return instance;
 }
 
 void IrSenderPwm::deleteInstance() {
-    if (instance != NULL)
+    if (instance != nullptr)
 #ifdef HAS_HARDWARE_PWM
             IrSenderPwmHard::deleteInstance();
 #else
             delete instance;
 #endif
-    instance = NULL;
+    instance = nullptr;
 }

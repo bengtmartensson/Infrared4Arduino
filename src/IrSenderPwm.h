@@ -39,14 +39,14 @@ public:
     static unsigned int getDutyCycle() { return defaultDutyCycle; };
 
     /**
-     * Returns a pointer to the instance, or NULL if not initialized.
+     * Returns a pointer to the instance, or nullptr if not initialized.
      * If argument true, in the latter case creates a new instance and returns it.
      */
     static IrSenderPwm *getInstance(bool create = false, pin_t outputPin = Board::getInstance()->defaultPwmPin());
 
     /**
      *  Creates a new instance (if not existing) and returns it.
-     *  Returns NULL if an instance already exists.
+     *  Returns nullptr if an instance already exists.
      */
     static IrSenderPwm *newInstance(pin_t outputPin);
 

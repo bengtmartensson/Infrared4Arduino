@@ -113,7 +113,7 @@ public:
     }
 
     microseconds_t getDuration(unsigned int i) const {
-        uint32_t bigvalue = Board::microsPerTick * (uint32_t) durationData[i] + (i & 1 ? markExcess : -markExcess);
+        uint32_t bigvalue = Board::microsPerTick * static_cast<uint32_t>(durationData[i]) + (i & 1 ? markExcess : -markExcess);
         return bigvalue <=  MICROSECONDS_T_MAX ? (microseconds_t) bigvalue : MICROSECONDS_T_MAX;
     }
 

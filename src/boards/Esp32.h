@@ -90,7 +90,7 @@ private:
     };
 
     void timerConfigHz(frequency_t frequency, dutycycle_t dutyCycle) {
-        onValue = (uint8_t) (256U * dutyCycle / 100U);
+        onValue = static_cast<uint8_t>(256U * dutyCycle / 100U);
         ledcSetup(LEDCHANNEL, frequency, TIMER_SIZE);
         ledcAttachPin(PWM_PIN, LEDCHANNEL);
     };

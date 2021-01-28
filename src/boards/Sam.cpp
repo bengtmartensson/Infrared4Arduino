@@ -36,7 +36,7 @@ void Sam::setTimerFrequency(frequency_t frequencyHz) {
 }
 
 void Sam::timerEnableIntr() {
-    REG_GCLK_CLKCTRL = (uint16_t) (GCLK_CLKCTRL_CLKEN | GCLK_CLKCTRL_GEN_GCLK0 | GCLK_CLKCTRL_ID_TCC2_TC3);
+    REG_GCLK_CLKCTRL = static_cast<uint16_t>(GCLK_CLKCTRL_CLKEN | GCLK_CLKCTRL_GEN_GCLK0 | GCLK_CLKCTRL_ID_TCC2_TC3);
     while (GCLK->STATUS.bit.SYNCBUSY == 1); // wait for sync
 
     TcCount16* TC = (TcCount16*) TC3;

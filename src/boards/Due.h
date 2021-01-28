@@ -136,11 +136,11 @@ private:
         PIO_Configure(IR_USE_PWM_PORT, IR_USE_PWM_PERIPH, IR_USE_PWM_PINMASK, PIO_DEFAULT);
         PWMC_ConfigureChannel(PWM_INTERFACE, IR_USE_PWM_CH, PWM_CMR_CPRE_CLKB, 0U, 0U);
         PWMC_SetPeriod(PWM_INTERFACE, IR_USE_PWM_CH, multiplicator);
-        PWMC_SetDutyCycle(PWM_INTERFACE, IR_USE_PWM_CH, (uint16_t) ((multiplicator * dutyCycle + 50U) / 100U));
+        PWMC_SetDutyCycle(PWM_INTERFACE, IR_USE_PWM_CH, static_cast<uint16_t>((multiplicator * dutyCycle + 50U) / 100U));
     };
 
     void timerConfigNormal() {
-        pmc_enable_periph_clk((uint32_t) IR_USE_TC_IRQ);
+        pmc_enable_periph_clk(static_cast<uint32_t>(IR_USE_TC_IRQ));
         TC_Configure(IR_USE_TC, IR_USE_CH, TC_CMR_WAVE | TC_CMR_WAVSEL_UP_RC | TC_CMR_TCCLKS_TIMER_CLOCK1);
         const uint32_t rc = F_CPU / 2U * microsPerTick / 1000000U;
         TC_SetRA(IR_USE_TC, IR_USE_CH, rc / 2U);

@@ -36,7 +36,7 @@ IrSignal *Pronto::parse(const uint16_t *data, size_t size) {
 
 IrSignal *Pronto::parse(const char *str) {
     size_t len = strlen(str)/(digitsInProntoNumber + 1) + 1;
-    uint16_t data[len];
+    uint16_t* data = new uint16_t[len];
     const char *p = str;
     char *endptr[1];
     for (unsigned int i = 0; i < len; i++) {
@@ -49,7 +49,9 @@ IrSignal *Pronto::parse(const char *str) {
         data[i] = x; // If input is conforming, there can be no overflow!
         p = *endptr;
     }
-    return parse(data, len);
+    IrSignal *res = parse(data, len);
+    delete [] data;
+    return res;
 }
 
 #if HAS_FLASH_READ || defined(DOXYGEN)

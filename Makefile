@@ -18,7 +18,7 @@ TRANSFORMATION := $(KEYWORD_TXT_GENERATOR_DIR)/doxygen2keywords.xsl
 CXX:=g++
 BROWSER:=firefox
 DEBUGFLAGS:=-g
-WARNINGFLAGS:=-Wall -Werror -Wextra
+WARNINGFLAGS:=-Wall -Werror -Wextra -pedantic
 
 VPATH=tests src src/boards
 

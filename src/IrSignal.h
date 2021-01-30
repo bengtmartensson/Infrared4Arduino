@@ -10,58 +10,127 @@
 class IrSignal {
 public:
     static const frequency_t defaultFrequency = 38000U;
-    static const frequency_t invalidFrequency = (frequency_t) -1;
-    static const dutycycle_t noDutyCycle = -1;
-private:
+    static const frequency_t invalidFrequency = static_cast<frequency_t>(-1);
+    static const dutycycle_t noDutyCycle = static_cast<dutycycle_t>(-1);
     static const dutycycle_t defaultDutyCycle = noDutyCycle;
-public:
-    IrSignal();
-    IrSignal(const IrSignal& orig);
-
-    virtual ~IrSignal();
-    IrSignal(const microseconds_t *intro, size_t lengthIntro,
-            const microseconds_t *repeat, size_t lengthRepeat,
-            const microseconds_t *ending, size_t lengthEnding,
-            frequency_t frequency = defaultFrequency,
-            dutycycle_t dutyCycle = defaultDutyCycle);
-
-    IrSignal(const microseconds_t *intro, size_t lengthIntro,
-            const microseconds_t *repeat, size_t lengthRepeat,
-            frequency_t frequency = defaultFrequency,
-            dutycycle_t dutyCycle = defaultDutyCycle);
-
-    IrSignal(const IrSequence& intro, const IrSequence& repeat, const IrSequence& ending,
-            frequency_t frequency = defaultFrequency, dutycycle_t dutyCycle = defaultDutyCycle);
-
-    IrSignal(const IrSequence& intro, const IrSequence& repeat,
-            frequency_t frequency = defaultFrequency, dutycycle_t dutyCycle = defaultDutyCycle);
-
-    static IrSignal* readFlash(const microseconds_t *intro, size_t lengthIntro,
-            const microseconds_t *repeat, size_t lengthRepeat,
-            const microseconds_t *ending, size_t lengthEnding,
-            frequency_t frequency = defaultFrequency,
-            dutycycle_t dutyCycle = defaultDutyCycle);
-
-    static IrSignal* readFlash(const microseconds_t *intro, size_t lengthIntro,
-            const microseconds_t *repeat, size_t lengthRepeat,
-            frequency_t frequency = defaultFrequency,
-            dutycycle_t dutyCycle = defaultDutyCycle);
 
 private:
-    const frequency_t frequency;
-    const dutycycle_t dutyCycle;
+    // Maintainer note: the members being const prohibits assignment operators.
+    // Alternatively, the members can be made non-const and assignments allowed.
+    const frequency_t frequency = defaultFrequency;
+    const dutycycle_t dutyCycle = defaultDutyCycle;
     const IrSequence intro;
     const IrSequence repeat;
     const IrSequence ending;
 
 public:
+    /**
+     * Constructs an empty IrSignal.
+     */
+    IrSignal() {};
+    IrSignal(const IrSignal& orig) = default;
+    IrSignal(IrSignal&& orig) = default;
+
+#ifndef DOXYGEN
+    IrSignal& operator=(const IrSignal& rhs) = delete;
+    IrSignal& operator=(IrSignal&& rhs) = delete;
+#endif // ! DOXYGEN
+
+    virtual ~IrSignal() {};
 
     /**
-     * Creates a (deep) copy of the current object.
-     * The user must delete it manually.
-     * @return Pointer to the cloned object.
+     * Constructor that "moves" the data pointers.
+     * This is essentially a convenience function that combines IrSequence and IrSignal constructors.
+     *
+     * @param intro
+     * @param lengthIntro
+     * @param repeat
+     * @param lengthRepeat
+     * @param ending
+     * @param lengthEnding
+     * @param frequency
+     * @param dutyCycle
      */
-    IrSignal *clone() const;
+    IrSignal(const microseconds_t *intro, size_t lengthIntro,
+            const microseconds_t *repeat, size_t lengthRepeat,
+            const microseconds_t *ending, size_t lengthEnding,
+            frequency_t frequency = defaultFrequency,
+            dutycycle_t dutyCycle = defaultDutyCycle);
+
+    /**
+     * Constructor that "moves" the data pointers. No ending sequence.
+     * This is essentially a convenience function that combines IrSequence and IrSignal constructors.
+     *
+     * @param intro
+     * @param lengthIntro
+     * @param repeat
+     * @param lengthRepeat
+     * @param frequency
+     * @param dutyCycle
+     */
+    IrSignal(const microseconds_t *intro, size_t lengthIntro,
+            const microseconds_t *repeat, size_t lengthRepeat,
+            frequency_t frequency = defaultFrequency,
+            dutycycle_t dutyCycle = defaultDutyCycle);
+
+    /**
+     * Copy constructor.
+     * @param intro
+     * @param repeat
+     * @param ending
+     * @param frequency
+     * @param dutyCycle
+     * @return
+     */
+    IrSignal(const IrSequence& intro, const IrSequence& repeat, const IrSequence& ending,
+            frequency_t frequency = defaultFrequency, dutycycle_t dutyCycle = defaultDutyCycle);
+
+    /**
+     * Move constructor.
+     *
+     * @param intro
+     * @param repeat
+     * @param ending
+     * @param frequency
+     * @param dutyCycle
+     * @return
+     */
+    IrSignal(IrSequence&& intro, IrSequence&& repeat, IrSequence&& ending,
+            frequency_t frequency = defaultFrequency, dutycycle_t dutyCycle = defaultDutyCycle);
+
+    /**
+     * Copy constructors for IrSignals without ending sequence.
+     *
+     * @param intro
+     * @param repeat
+     * @param frequency
+     * @param dutyCycle
+     * @return
+     */
+    IrSignal(const IrSequence& intro, const IrSequence& repeat,
+            frequency_t frequency = defaultFrequency, dutycycle_t dutyCycle = defaultDutyCycle);
+
+    /**
+     * Move constructor for IrSignals without ending sequence.
+     * @param intro
+     * @param repeat
+     * @param frequency
+     * @param dutyCycle
+     * @return
+     */
+    IrSignal(IrSequence&& intro, IrSequence&& repeat,
+            frequency_t frequency = defaultFrequency, dutycycle_t dutyCycle = defaultDutyCycle);
+
+    static IrSignal* readFlash(const microseconds_t *intro, size_t lengthIntro,
+            const microseconds_t *repeat, size_t lengthRepeat,
+            const microseconds_t *ending, size_t lengthEnding,
+            frequency_t frequency = defaultFrequency,
+            dutycycle_t dutyCycle = defaultDutyCycle);
+
+    static IrSignal* readFlash(const microseconds_t *intro, size_t lengthIntro,
+            const microseconds_t *repeat, size_t lengthRepeat,
+            frequency_t frequency = defaultFrequency,
+            dutycycle_t dutyCycle = defaultDutyCycle);
 
     frequency_t getFrequency() const {
         return frequency;
@@ -119,7 +188,6 @@ public:
      * Otherwise do nothing and return false.
      * No extra spaces or line feeds are generated.
      * @param stream Stream onto the output is printed.
-     * @param frequency modulation frequency
      */
     bool dumpDutyCycle(Stream& stream) const {
         return dumpDutyCycle(stream, dutyCycle);
@@ -128,7 +196,7 @@ public:
     /**
      * Static version of dumpDutyCycle.
      * @param stream Stream onto the output is printed.
-     * @param frequency modulation frequency
+     * @param dutyCycle
      */
     static bool dumpDutyCycle(Stream& stream, dutycycle_t dutyCycle);
 

@@ -6,40 +6,40 @@ IrSignal::IrSignal(const IrSequence& intro_, const IrSequence& repeat_, const Ir
 : frequency(frequency_),dutyCycle(dutyCycle_),intro(intro_),repeat(repeat_),ending(ending_) {
 }
 
+IrSignal::IrSignal(IrSequence&& intro_, IrSequence&& repeat_, IrSequence&& ending_,
+        frequency_t frequency_, dutycycle_t dutyCycle_)
+: frequency(frequency_),dutyCycle(dutyCycle_),intro(intro_),repeat(repeat_),ending(ending_) {
+}
+
 IrSignal::IrSignal(const IrSequence& intro_, const IrSequence& repeat_,
         frequency_t frequency_, dutycycle_t dutyCycle_)
 : frequency(frequency_), dutyCycle(dutyCycle_), intro(intro_), repeat(repeat_), ending() {
 }
 
-IrSignal::IrSignal(const IrSignal& orig)
-: frequency(orig.frequency),dutyCycle(orig.dutyCycle),intro(orig.intro),repeat(orig.repeat),ending(orig.ending) {
+IrSignal::IrSignal(IrSequence&& intro_, IrSequence&& repeat_,
+        frequency_t frequency_, dutycycle_t dutyCycle_)
+: frequency(frequency_), dutyCycle(dutyCycle_), intro(intro_), repeat(repeat_), ending() {
 }
 
 IrSignal::IrSignal(const microseconds_t *intro_, size_t introLength,
-            const microseconds_t *repeat_, size_t repeatLength,
-            const microseconds_t *ending_, size_t endingLength,
-            frequency_t frequency_, dutycycle_t dutyCycle_)
+        const microseconds_t *repeat_, size_t repeatLength,
+        const microseconds_t *ending_, size_t endingLength,
+        frequency_t frequency_, dutycycle_t dutyCycle_)
 : frequency(frequency_),
-        dutyCycle(dutyCycle_),
-        intro(intro_, introLength),
-  repeat(repeat_, repeatLength),
-        ending(ending_, endingLength) {
+dutyCycle(dutyCycle_),
+intro(intro_, introLength),
+repeat(repeat_, repeatLength),
+ending(ending_, endingLength) {
 }
 
 IrSignal::IrSignal(const microseconds_t *intro_, size_t introLength,
         const microseconds_t *repeat_, size_t repeatLength,
         frequency_t frequency_, dutycycle_t dutyCycle_)
 : frequency(frequency_),
-        dutyCycle(dutyCycle_),
+dutyCycle(dutyCycle_),
 intro(intro_, introLength),
 repeat(repeat_, repeatLength),
 ending() {
-}
-
-IrSignal::~IrSignal() {
-    //delete intro;
-    //delete repeat;
-    //delete ending;
 }
 
 #if HAS_FLASH_READ

@@ -260,12 +260,14 @@ getDataLength	KEYWORD2
 getDuration	KEYWORD2
 IrSignal	KEYWORD2
 IrSignal	KEYWORD2
+IrSignal	KEYWORD2
 ~IrSignal	KEYWORD2
 IrSignal	KEYWORD2
 IrSignal	KEYWORD2
 IrSignal	KEYWORD2
 IrSignal	KEYWORD2
-clone	KEYWORD2
+IrSignal	KEYWORD2
+IrSignal	KEYWORD2
 getFrequency	KEYWORD2
 getDutyCycle	KEYWORD2
 getEnding	KEYWORD2

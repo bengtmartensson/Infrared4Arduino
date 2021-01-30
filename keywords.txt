@@ -104,6 +104,7 @@ decode	KEYWORD2
 decode	KEYWORD2
 decode	KEYWORD2
 decode	KEYWORD2
+~HashDecoder	KEYWORD2
 HashDecoder	KEYWORD2
 HashDecoder	KEYWORD2
 HashDecoder	KEYWORD2
@@ -249,6 +250,7 @@ operator[]	KEYWORD2
 dump	KEYWORD2
 dumpWithSigns	KEYWORD2
 readFlash	KEYWORD2
+IrSequenceReader	KEYWORD2
 IrSequenceReader	KEYWORD2
 IrSequenceReader	KEYWORD2
 IrSequenceReader	KEYWORD2

@@ -35,6 +35,14 @@ public:
      */
     MultiDecoder(const IrReader &irReader);
 
+#ifndef DOXYGEN
+    MultiDecoder() = delete;
+    MultiDecoder(const MultiDecoder&) = delete;
+    MultiDecoder(MultiDecoder&&) = delete;
+    MultiDecoder& operator=(const MultiDecoder&) = delete;
+    MultiDecoder& operator=(MultiDecoder&&) = delete;
+#endif // ! DOXYGEN
+
     virtual ~MultiDecoder() {
     }
 

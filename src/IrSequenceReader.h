@@ -18,6 +18,9 @@ public:
     IrSequenceReader(const IrSequenceReader& orig) : IrReader(),irSequence(orig.irSequence) {
     };
 
+    IrSequenceReader(IrSequenceReader&& orig) : IrReader(),irSequence(orig.irSequence) {
+    };
+
     IrSequenceReader(const IrSequence& irSequence_) : IrReader(),irSequence(irSequence_) {
     };
 

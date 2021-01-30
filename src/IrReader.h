@@ -30,9 +30,9 @@ this program. If not, see http://www.gnu.org/licenses/.
 class IrReader {
 public:
     // Defaults
-    static const milliseconds_t defaultBeginningTimeout = 2000U;
-    static const milliseconds_t defaultEndingTimeout = 30U;
-    static const size_t defaultCaptureLength = 100U;
+    static constexpr milliseconds_t defaultBeginningTimeout = 2000U;
+    static constexpr milliseconds_t defaultEndingTimeout = 30U;
+    static constexpr size_t defaultCaptureLength = 100U;
 
 protected:
     milliseconds_t beginningTimeout;
@@ -59,6 +59,13 @@ protected:
 
     IrReader() {
     }
+
+#ifndef DOXYGEN
+    IrReader(const IrReader&) = delete;
+    IrReader(IrReader&&) = delete;
+    IrReader& operator=(const IrReader&) = delete;
+    IrReader& operator=(IrReader&&) = delete;
+#endif // ! DOXYGEN
 
     virtual ~IrReader() {
     };

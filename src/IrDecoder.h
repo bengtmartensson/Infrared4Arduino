@@ -7,9 +7,14 @@
  */
 class IrDecoder {
 public:
-    IrDecoder() {
-        valid = false;
-    }
+    IrDecoder() {}
+
+#ifndef DOXYGEN
+    IrDecoder(const IrDecoder&) = delete;
+    IrDecoder(IrDecoder&&) = delete;
+    IrDecoder& operator=(const IrDecoder&) = delete;
+    IrDecoder& operator=(IrDecoder&&) = delete;
+#endif // ! DOXYGEN
 
     virtual ~IrDecoder() {}
 
@@ -39,11 +44,11 @@ public:
     }
 
 private:
-    const static uint32_t endingMin = 20000U;
-    bool valid;
+    constexpr static uint32_t endingMin = 20000U;
+    bool valid = false;
 
 protected:
-    static const int invalid = -1;
+    constexpr static int invalid = -1;
     void setValid(bool valid_) {
         valid = valid_;
     }

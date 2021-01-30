@@ -7,7 +7,7 @@
 
 #if HAS_INPUT_CAPTURE
 
-static const frequency_t min_frequency = 20000U;
+static constexpr frequency_t min_frequency = 20000U;
 
 IrWidgetAggregating::IrWidgetAggregating(size_t captureLength,
         bool pullup,

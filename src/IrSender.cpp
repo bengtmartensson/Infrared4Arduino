@@ -72,7 +72,7 @@ void IrSender::send(const IrSequence& irSequence, frequency_t frequency, dutycyc
 #else
         microseconds_t delay = irSequence.getDurations()[i];
 #endif
-        if (i & 1)
+        if (i & 1U)
             sendSpace(delay);
         else
             sendMark(delay);

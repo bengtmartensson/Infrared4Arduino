@@ -43,7 +43,7 @@ http://arduino.cc/en/Hacking/PinMapping2560
  */
 class IrWidget : public IrReader {
 public:
-    static const int16_t defaultMarkExcess = 0;
+    static constexpr int16_t defaultMarkExcess = 0;
 
 protected:
     frequency_t frequency;
@@ -127,7 +127,7 @@ protected:
     typedef uint8_t ovlBitsDataType;
 #endif
 
-    static const uint8_t RANGE_EXTENSION_BITS = 4; // factor for upper measurement range = 2^(RANGE_EXTENSION_BITS+1)
+    static constexpr uint8_t RANGE_EXTENSION_BITS = 4; // factor for upper measurement range = 2^(RANGE_EXTENSION_BITS+1)
 
     ovlBitsDataType endingTimeout; // = _BV(RANGE_EXTENSION_BITS) - 1;
 
@@ -197,7 +197,7 @@ protected:
     }
     uint16_t *captureData; //[bufSize]; // the buffer where the catured data is stored
     uint16_t captureCount; // number of values stored in captureData
-    static const uint8_t sampleSize = 2;
+    static constexpr uint8_t sampleSize = 2;
 
     virtual uint32_t unpackTimeVal(uint32_t val) const = 0;
 

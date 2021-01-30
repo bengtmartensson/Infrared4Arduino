@@ -17,7 +17,7 @@ const IrSignal *Nec1Renderer::newIrSignal(unsigned int D, unsigned int S, unsign
     lsbByte(introData, i, sum, F);
     lsbByte(introData, i, sum, 255U-F);
     introData[i] = 564U; i++;
-    introData[i] = (microseconds_t) (108000U - sum); i++;
+    introData[i] = static_cast<microseconds_t>(108000UL - sum); i++;
     microseconds_t *repeatData = new microseconds_t[repeatLength];
     repeatData[0] = 9024U;
     repeatData[1] = 2256U;

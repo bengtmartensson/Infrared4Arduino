@@ -39,10 +39,22 @@ private:
     }
 
     static const char *format;
-    static const uint32_t FNVprime = 16777619U;
-    static const uint32_t FNVoffsetBasis = 2166136261U;
+    static constexpr uint32_t FNVprime = 16777619UL;
+    static constexpr uint32_t FNVoffsetBasis = 2166136261UL;
+    static constexpr unsigned int minMeaningfulLength = 4U;
 
 public:
+
+#ifndef DOXYGEN
+    HashDecoder() = delete;
+    HashDecoder(const HashDecoder&) = delete;
+    HashDecoder(HashDecoder&&) = delete;
+    HashDecoder& operator=(const HashDecoder&) = delete;
+    HashDecoder& operator=(HashDecoder&&) = delete;
+#endif // ! DOXYGEN
+
+    virtual ~HashDecoder() {}
+
     /**
      * Constructs a HashDecoder from an IrReader, containing data.
      * @param irReader IrReader with data, i.e. with isReady() true.

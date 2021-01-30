@@ -16,7 +16,7 @@ this program. If not, see http://www.gnu.org/licenses/.
  */
 
 /**
- * @file Esp.h
+ * @file Esp32.h
  *
  * @brief Hardware dependent definitions for Esp32 boards.
  * Based upon https://github.com/z3t0/Arduino-IRremote/pull/540/files

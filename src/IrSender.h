@@ -48,12 +48,21 @@ protected:
     virtual void sendMark(microseconds_t time) = 0;
 
 public:
+#ifndef DOXYGEN
+    IrSender() = delete;
+    IrSender(const IrSender&) = delete;
+    IrSender(IrSender&&) = delete;
+    IrSender& operator=(const IrSender&) = delete;
+    IrSender& operator=(IrSender&&) = delete;
+#endif // ! DOXYGEN
+
     virtual ~IrSender();
 
     /**
      * Sends an IrSequence with the prescribed frequency
      * @param irSequence
      * @param frequency frequency in Hz
+     * @param dutyCycle
      */
     virtual void send(const IrSequence& irSequence, frequency_t frequency = IrSignal::defaultFrequency, dutycycle_t dutyCycle = Board::defaultDutyCycle);
 

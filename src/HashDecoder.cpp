@@ -2,7 +2,7 @@
 
 const char *HashDecoder::format = "%0x";
 
-const unsigned int offset = 2;
+constexpr unsigned int offset = 2;
 
 uint32_t HashDecoder::compare(microseconds_t oldVal, microseconds_t newVal) {
     return
@@ -17,7 +17,7 @@ bool HashDecoder::tryDecode(const IrReader& irCapturer, Stream& stream) {
 }
 
 void HashDecoder::decode(const microseconds_t* data, size_t length) {
-    if (length < 4)
+    if (length < minMeaningfulLength)
         return;
 
     for (unsigned int i = 0; i < length - offset - 1; i++) {
@@ -30,7 +30,7 @@ void HashDecoder::decode(const microseconds_t* data, size_t length) {
 
 void HashDecoder::decode(const IrReader& irReader) {
     size_t length = irReader.getDataLength();
-    if (length < 4)
+    if (length < minMeaningfulLength)
         return;
 
     for (unsigned int i = 0; i < length - offset - 1; i++) {

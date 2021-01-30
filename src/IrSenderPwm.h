@@ -28,7 +28,7 @@ this program. If not, see http://www.gnu.org/licenses/.
  */
 class IrSenderPwm : public IrSender {
 private:
-    static const unsigned int defaultDutyCycle = 50U;
+    static constexpr unsigned int defaultDutyCycle = 50U;
     static IrSenderPwm *instance;
 
 protected:

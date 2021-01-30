@@ -18,7 +18,7 @@ this program. If not, see http://www.gnu.org/licenses/.
 /**
  * This class serves as an HAL (Hardware Abstraction Layer).
  * All access to the hardware should go through this class.
- * (In particular, using digital[Read,Write] and ::pinMode is prohibited
+ * (In particular, using \c digital[Read,Write] and \c \::pinMode is prohibited
  * (exception: code that runs exclusively on the host).
  *
  * It is a singleton class (since there is only one board), instantiated

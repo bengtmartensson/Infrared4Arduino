@@ -6,9 +6,10 @@
  * Note: Unless you have "infinitely much" memory, it is a very bad idea to put Pronto Hex in your source files.
  * Better is to use, for example IrScruitinizer to convert the signals offline,
  * and put the converted version in your source files instead.
- *
- * This class presently does not use floating point arithmetics.
  */
+
+// Maintainer note:
+// Make sure that this class does not use floating point arithmetics.
 
 #pragma once
 
@@ -18,16 +19,16 @@
 
 class Pronto {
 private:
-    static const unsigned int bitsInHexadecimal         = 4U;
-    static const unsigned int digitsInProntoNumber      = 4U;
-    static const unsigned int numbersInPreamble         = 4U;
-    static const unsigned int hexMask                   = 0xFU;
-    static const uint16_t learnedToken                  = 0x0000U;
-    static const uint16_t learnedNonModulatedToken      = 0x0100U;
-    static const uint32_t referenceFrequency            = 4145146UL;
-    static const uint16_t fallbackFrequencyCode         = 0x0040U; // To use with frequency = 0;
-    static const frequency_t fallbackFrequency          = 64767U; // To use with frequency = 0;
-    static const uint32_t microsecondsInSeconds         = 1000000UL;
+    static constexpr unsigned int bitsInHexadecimal         = 4U;
+    static constexpr unsigned int digitsInProntoNumber      = 4U;
+    static constexpr unsigned int numbersInPreamble         = 4U;
+    static constexpr unsigned int hexMask                   = 0xFU;
+    static constexpr uint16_t learnedToken                  = 0x0000U;
+    static constexpr uint16_t learnedNonModulatedToken      = 0x0100U;
+    static constexpr uint32_t referenceFrequency            = 4145146UL;
+    static constexpr uint16_t fallbackFrequencyCode         = 0x0040U; // To use with frequency = 0;
+    static constexpr frequency_t fallbackFrequency          = 64767U; // To use with frequency = 0;
+    static constexpr uint32_t microsecondsInSeconds         = 1000000UL;
 
     Pronto() {};
 
@@ -89,7 +90,7 @@ public:
      * @param str Text string containing a Pronto form signal.
      * @return IrSignal
      */
-    static IrSignal *parse_PF(const uint_farptr_t ptr);
+    static IrSignal *parse_PF(const uint_farptr_t str);
 
     static IrSignal *parse_PF(const char * ptr);
 

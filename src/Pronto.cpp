@@ -23,13 +23,11 @@ IrSignal *Pronto::parse(const uint16_t *data, size_t size) {
 
     IrSequence *intro = mkSequence(data + numbersInPreamble, introPairs, timebase);
     IrSequence *repeat = mkSequence(data + numbersInPreamble + 2*introPairs, repetitionPairs, timebase);
-    IrSequence *ending = new IrSequence();
 
-    IrSignal *code = new IrSignal(*intro, *repeat, *ending, frequency, IrSignal::noDutyCycle);
+    IrSignal *code = new IrSignal(*intro, *repeat, frequency);
 
     delete intro;
     delete repeat;
-    delete ending;
 
     return code;
 }

@@ -5,14 +5,14 @@
 /**
  * A static class consisting of two functions that generate IrSignal-s from the NEC1 protocol parameters.
  * The NEC1 protocol is given in IRP notation as
- * {38.4k,564}<1,-1|1,-3>(16,-8,D:8,S:8,F:8,~F:8,1,^108m,(16,-4,1,^108m)*) [D:0..255,S:0..255=255-D,F:0..255]
+ * \c {38.4k,564}<1,-1|1,-3>(16,-8,D:8,S:8,F:8,~F:8,1,^108m,(16,-4,1,^108m)*) [D:0..255,S:0..255=255-D,F:0..255]
  */
 class Nec1Renderer {
 private:
-    static const frequency_t frequency = 38400U;
-    static const dutycycle_t dutyCycle = 33U;
-    static const size_t introLength = 68U;
-    static const size_t repeatLength = 4U;
+    static constexpr frequency_t frequency = 38400UL;
+    static constexpr dutycycle_t dutyCycle = 33U;
+    static constexpr size_t introLength = 68U;
+    static constexpr size_t repeatLength = 4U;
 
 public:
 

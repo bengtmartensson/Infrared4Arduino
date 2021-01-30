@@ -8,9 +8,9 @@
  */
 class Nec1Decoder : public IrDecoder {
 private:
-    static const microseconds_t timebase = 564;
-    static const microseconds_t timebaseUpper = 650;
-    static const microseconds_t timebaseLower = 450;
+    static constexpr microseconds_t timebase = 564U;
+    static constexpr microseconds_t timebaseUpper = 650U;
+    static constexpr microseconds_t timebaseLower = 450U;
 
     // NOTE: use a signed type to be able to return the value invalid.
     int F;

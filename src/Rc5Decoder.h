@@ -8,7 +8,6 @@
  */
 class Rc5Decoder : public IrDecoder {
 public:
-    static const char *format;
 
     /**
      * Constructs a Rc5Decoder from an IrReader, containing data.
@@ -74,4 +73,5 @@ private:
 
     static Length decodeDuration(microseconds_t t);
     static unsigned int decodeFlashGap(microseconds_t flash, microseconds_t gap);
+    static const char *format;
 };

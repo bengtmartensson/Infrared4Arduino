@@ -31,7 +31,7 @@ protected:
     virtual ~IrSenderPwmSoft() {}
     void enable(frequency_t hz, dutycycle_t dutyCycle = Board::defaultDutyCycle);
     void sendMark(microseconds_t time);
-    static const unsigned int PULSE_CORRECTION = 3U;
+    static constexpr unsigned int PULSE_CORRECTION = 3U;
 
     virtual void sleepMicros(microseconds_t us) = 0;
     virtual void sleepUntilMicros(uint32_t terminateTime) = 0;

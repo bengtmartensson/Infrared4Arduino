@@ -2,18 +2,13 @@
 #include "IrSender.h"
 
 IrSignal::IrSignal(const IrSequence& intro_, const IrSequence& repeat_, const IrSequence& ending_,
-        frequency_t frequency_, dutycycle_t dutyCycle_, bool toBeFreed)
-: frequency(frequency_),dutyCycle(dutyCycle_),intro(intro_, toBeFreed),repeat(repeat_, toBeFreed),ending(ending_, toBeFreed) {
-}
-
-IrSignal::IrSignal(const IrSequence& intro_, const IrSequence& repeat_, const IrSequence& ending_,
         frequency_t frequency_, dutycycle_t dutyCycle_)
 : frequency(frequency_),dutyCycle(dutyCycle_),intro(intro_),repeat(repeat_),ending(ending_) {
 }
 
 IrSignal::IrSignal(const IrSequence& intro_, const IrSequence& repeat_,
         frequency_t frequency_, dutycycle_t dutyCycle_)
-: frequency(frequency_), dutyCycle(dutyCycle_), intro(intro_), repeat(repeat_), ending(nullptr, 0, false) {
+: frequency(frequency_), dutyCycle(dutyCycle_), intro(intro_), repeat(repeat_), ending() {
 }
 
 IrSignal::IrSignal(const IrSignal& orig)
@@ -23,22 +18,22 @@ IrSignal::IrSignal(const IrSignal& orig)
 IrSignal::IrSignal(const microseconds_t *intro_, size_t introLength,
             const microseconds_t *repeat_, size_t repeatLength,
             const microseconds_t *ending_, size_t endingLength,
-            frequency_t frequency_, dutycycle_t dutyCycle_, bool toBeFreed)
+            frequency_t frequency_, dutycycle_t dutyCycle_)
 : frequency(frequency_),
         dutyCycle(dutyCycle_),
-        intro(intro_, introLength, toBeFreed),
-  repeat(repeat_, repeatLength, toBeFreed),
-        ending(ending_, endingLength, toBeFreed) {
+        intro(intro_, introLength),
+  repeat(repeat_, repeatLength),
+        ending(ending_, endingLength) {
 }
 
 IrSignal::IrSignal(const microseconds_t *intro_, size_t introLength,
         const microseconds_t *repeat_, size_t repeatLength,
-        frequency_t frequency_, dutycycle_t dutyCycle_, bool toBeFreed)
+        frequency_t frequency_, dutycycle_t dutyCycle_)
 : frequency(frequency_),
         dutyCycle(dutyCycle_),
-intro(intro_, introLength, toBeFreed),
-repeat(repeat_, repeatLength, toBeFreed),
-ending(nullptr, 0, false) {
+intro(intro_, introLength),
+repeat(repeat_, repeatLength),
+ending() {
 }
 
 IrSignal::~IrSignal() {
@@ -69,10 +64,6 @@ IrSignal* IrSignal::readFlash(const microseconds_t *intro, size_t lengthIntro,
              frequency_, dutyCycle_);
 }
 #endif
-
-IrSignal *IrSignal::clone() const {
-    return new IrSignal(*intro.clone(), *repeat.clone(), *ending.clone(), frequency, dutyCycle);
-}
 
 void IrSignal::dump(Stream& stream, bool usingSigns) const {
     bool printedSomething = dumpFrequency(stream);

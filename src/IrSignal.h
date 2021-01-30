@@ -23,17 +23,12 @@ public:
             const microseconds_t *repeat, size_t lengthRepeat,
             const microseconds_t *ending, size_t lengthEnding,
             frequency_t frequency = defaultFrequency,
-            dutycycle_t dutyCycle = defaultDutyCycle,
-            bool toBeFreed = false);
+            dutycycle_t dutyCycle = defaultDutyCycle);
 
     IrSignal(const microseconds_t *intro, size_t lengthIntro,
             const microseconds_t *repeat, size_t lengthRepeat,
             frequency_t frequency = defaultFrequency,
-            dutycycle_t dutyCycle = defaultDutyCycle,
-            bool toBeFreed = false);
-
-    IrSignal(const IrSequence& intro, const IrSequence& repeat, const IrSequence& ending,
-            frequency_t frequency, dutycycle_t dutyCycle, bool toBeFreed);
+            dutycycle_t dutyCycle = defaultDutyCycle);
 
     IrSignal(const IrSequence& intro, const IrSequence& repeat, const IrSequence& ending,
             frequency_t frequency = defaultFrequency, dutycycle_t dutyCycle = defaultDutyCycle);

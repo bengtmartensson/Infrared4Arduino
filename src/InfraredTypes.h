@@ -15,8 +15,7 @@
 typedef uint16_t microseconds_t;
 //typedef uint32_t microseconds_t;
 /** Largest microseconds_t number possible */
-#define MICROSECONDS_T_MAX 65535
-//#define MICROSECONDS_T_MAX 4294967295
+constexpr static microseconds_t MICROSECONDS_T_MAX = static_cast<microseconds_t>(-1);
 
 /**
  * Type for durations in milli seconds.
@@ -24,7 +23,7 @@ typedef uint16_t microseconds_t;
  */
 typedef uint16_t milliseconds_t;
 /** Largest milliseconds_t number possible */
-#define MILLISECONDS_T_MAX 65535
+constexpr static milliseconds_t MILLISECONDS_T_MAX = static_cast<milliseconds_t>(-1);
 
 /**
  * Type for modulation frequency in Hz.
@@ -43,4 +42,4 @@ typedef uint8_t pin_t;
 /** Symbolic name for an invalid pin number */
 const pin_t invalidPin = 255;
 /** Largest pin_t number possible */
-#define PIN_T_MAX 255
+constexpr static pin_t PIN_T_MAX = 255;

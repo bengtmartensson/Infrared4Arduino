@@ -33,5 +33,5 @@ IrSequence *IrReader::toIrSequence() const {
     microseconds_t *durations = new microseconds_t[getDataLength()];
     for (unsigned int i = 0; i < getDataLength(); i++)
         durations[i] = getDuration(i);
-    return new IrSequence(durations, getDataLength(), true);
+    return new IrSequence(durations, getDataLength());
 }

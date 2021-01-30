@@ -25,7 +25,7 @@ IrSignal *Pronto::parse(const uint16_t *data, size_t size) {
     IrSequence *repeat = mkSequence(data + numbersInPreamble + 2*introPairs, repetitionPairs, timebase);
     IrSequence *ending = new IrSequence();
 
-    IrSignal *code = new IrSignal(*intro, *repeat, *ending, frequency, IrSignal::noDutyCycle, true);
+    IrSignal *code = new IrSignal(*intro, *repeat, *ending, frequency, IrSignal::noDutyCycle);
 
     delete intro;
     delete repeat;
@@ -77,7 +77,7 @@ IrSequence *Pronto::mkSequence(const uint16_t* data, size_t noPairs, microsecond
         uint32_t duration = static_cast<uint32_t>(data[i]) * timebase;
         durations[i] = (duration <= MICROSECONDS_T_MAX) ? duration : MICROSECONDS_T_MAX;
     }
-    return new IrSequence(durations, 2*noPairs, false);
+    return new IrSequence(durations, 2*noPairs);
 }
 
 frequency_t Pronto::toFrequency(uint16_t code) {

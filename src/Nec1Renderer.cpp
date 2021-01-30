@@ -23,7 +23,7 @@ const IrSignal *Nec1Renderer::newIrSignal(unsigned int D, unsigned int S, unsign
     repeatData[1] = 2256U;
     repeatData[2] = 564U;
     repeatData[3] = MIN(96156U, MICROSECONDS_T_MAX);
-    return new IrSignal(introData, introLength, repeatData, repeatLength, frequency, dutyCycle, true);
+    return new IrSignal(introData, introLength, repeatData, repeatLength, frequency, dutyCycle);
 }
 
 void Nec1Renderer::lsbByte(microseconds_t *intro, unsigned int& i, uint32_t& sum, unsigned int X) {

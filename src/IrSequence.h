@@ -6,45 +6,54 @@
  * This class consists of a vector of durations. The even entries denotes spaces,
  * while the odd entries denotes gaps. The length should always be even, i.e.,
  * the sequences starts with a space, and ends with a gap.
- * This class is immutable.
+ * This class is immutable (except for assignments).
  */
 class IrSequence {
 private:
-    const microseconds_t *durations;
-    size_t length;
-    bool toBeFreed;
+    const microseconds_t *durations = nullptr;
+    size_t length = 0U;
 
 public:
     /** Create an empty sequence. */
-    IrSequence();
+    IrSequence() {};
 
     /**
      * Creates an IrSequence.
-     * @param durations const array of microseconds durations
-     * @param length length of durations. Shuld be even (not checked).
-     * @param toBeFreed If true, the destructor will delete the durations array.
+     * @param durations const array of microseconds durations. Will be "moved", and delete []-d by the destructor.
+     * @param length length of durations. Should be even (not checked).
      */
-    IrSequence(const microseconds_t *durations, size_t length, bool toBeFreed = false);
+    IrSequence(const microseconds_t *durations, size_t length);
 
     virtual ~IrSequence();
 
     /**
-     * Performs shallow copy.
-     * @param orig original IrSequence to be cloned
+     * Copy constructor.
+     * @param orig original IrSequence to be copied.
      */
     IrSequence(const IrSequence& orig);
 
     /**
-     * Performs shallow copy.
-     * @param orig original IrSequence to be cloned
-     * @param toBeFreed If true, the destructor will delete the durations array.
+     * Move constructor.
+     * @param orig original IrSequence to be moved
      */
-    IrSequence(const IrSequence& orig, bool toBeFreed);
+    IrSequence(IrSequence&& orig);
+
+    /**
+     * Copy assignment.
+     * @param rhs
+     */
+    IrSequence& operator=(const IrSequence& rhs);
+
+    /**
+     * Move assignment.
+     * @param rhs
+     */
+    IrSequence& operator=(IrSequence&& rhs);
 
     static const IrSequence emptyInstance;
 
     /**
-     * Returns the length of the data.
+     * Returns the number of durations.
      * @return length
      */
     size_t getLength() const {
@@ -52,19 +61,28 @@ public:
     }
 
     bool isEmpty() const {
-        return length == 0;
+        return length == 0U;
     }
 
     const microseconds_t *getDurations() const {
         return durations;
     }
 
-    /**
-     * Creates a (deep) clone of the current object.
-     * The used must delete it manually.
-     * @return pointer to the cloned object
-     */
-    IrSequence *clone() const;
+    size_t size() const {
+        return length;
+    }
+
+    const microseconds_t* begin() const {
+        return durations;
+    }
+
+    const microseconds_t* end() const {
+        return durations + length;
+    }
+
+    microseconds_t operator[](int i) const {
+        return durations[i];
+    }
 
     /**
      * Prints the IrSequence on the stream provided.

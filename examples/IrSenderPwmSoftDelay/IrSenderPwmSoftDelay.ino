@@ -3,9 +3,14 @@
 
 #include <IrSenderPwmSoftDelay.h>
 
-static const frequency_t necFrequency = 38400U;
-static const pin_t pin = 4U; // D2 on ESP8266
-static const uint32_t BAUD = 115200UL;
+static constexpr frequency_t necFrequency = 38400U;
+static constexpr pin_t pin =
+#ifdef ESP8266
+        4U; // D2 on ESP8266
+#else
+        3U;
+#endif
+static constexpr uint32_t BAUD = 115200UL;
 
 // NEC(1) 122 29 with no repetition; powers on many Yamaha receivers
 static const microseconds_t array[] = {
@@ -18,7 +23,7 @@ static const microseconds_t array[] = {
 };
 
 static const IrSequence irSequence(array, sizeof(array) / sizeof(microseconds_t));
-IrSender* irSender;
+static IrSender* irSender;
 
 void setup() {
     Serial.begin(BAUD);

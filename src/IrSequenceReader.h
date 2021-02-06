@@ -43,6 +43,6 @@ public:
     };
 
     microseconds_t getDuration(unsigned int index) const {
-        return irSequence.getDurations()[index];
+        return irSequence[index];
     };
 };

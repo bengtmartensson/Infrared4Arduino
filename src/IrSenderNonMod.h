@@ -39,6 +39,7 @@ public:
     /**
      * Sends the IrSequence as argument.
      * @param irSequence
+     * @param times Number of times to send, default 1.
      */
-    void sendNonModulated(const IrSequence& irSequence) { send(irSequence); }
+    void sendNonModulated(const IrSequence& irSequence, unsigned int times = 1U);
 };

@@ -53,6 +53,12 @@ public:
     static const IrSequence emptyInstance;
 
     /**
+     * True if and only if non-empty.
+     * @return
+     */
+    operator bool() const { return ! isEmpty(); }
+
+    /**
      * Returns the number of durations.
      * @return length
      */

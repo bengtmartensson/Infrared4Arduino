@@ -1,11 +1,18 @@
 // This sketch sends a raw signal using the soft PWM sender every 5 seconds.
 // It requires an IR-Led connected to the sending pin
+// On slow processors, it may produce erroneous result,
+// in particular modulation frequency.
 
 #include <IrSenderPwmSpinWait.h>
 
-static const frequency_t necFrequency = 38400U;
-static const pin_t pin = 4U; // D2 on ESP8266
-static const unsigned long BAUD = 115200UL;
+static constexpr frequency_t necFrequency = 38400U;
+static constexpr pin_t pin =
+#ifdef ESP8266
+        4U; // D2 on ESP8266
+#else
+        3U;
+#endif
+static constexpr uint32_t BAUD = 115200UL;
 
 // NEC(1) 122 29 with no repetition; powers on many Yamaha receivers
 static const microseconds_t array[] = {
@@ -18,7 +25,7 @@ static const microseconds_t array[] = {
 };
 
 static const IrSequence irSequence(array, sizeof(array) / sizeof(microseconds_t));
-IrSender* irSender;
+static IrSender* irSender;
 
 void setup() {
     Serial.begin(BAUD);
@@ -28,8 +35,8 @@ void setup() {
 }
 
 void loop() {
-    Serial.print("sending on pin ");
+    Serial.print(F(" sending @ pin "));
     Serial.println(pin, DEC);
-    irSender->send(irSequence, necFrequency, 33U);
+    irSender->send(irSequence, necFrequency);
     delay(5000);
 }

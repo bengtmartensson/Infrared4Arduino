@@ -2,6 +2,7 @@
 
 #include "InfraredTypes.h"
 #include "IrSequence.h"
+#include "version.h"
 
 /**
  * This class models an IR signal with intro-, repeat-, and ending sequences.
@@ -9,10 +10,11 @@
  */
 class IrSignal {
 public:
-    static const frequency_t defaultFrequency = 38000U;
-    static const frequency_t invalidFrequency = static_cast<frequency_t>(-1);
-    static const dutycycle_t noDutyCycle = static_cast<dutycycle_t>(-1);
-    static const dutycycle_t defaultDutyCycle = noDutyCycle;
+    static constexpr frequency_t defaultFrequency = 38000U;
+    static constexpr frequency_t invalidFrequency = static_cast<frequency_t>(-1);
+    static constexpr dutycycle_t noDutyCycle = static_cast<dutycycle_t>(-1);
+    static constexpr dutycycle_t defaultDutyCycle = noDutyCycle;
+    static constexpr const char *version = VERSION;
 
 private:
     // Maintainer note: the members being const prohibits assignment operators.
@@ -30,11 +32,8 @@ public:
     IrSignal() {};
     IrSignal(const IrSignal& orig) = default;
     IrSignal(IrSignal&& orig) = default;
-
-#ifndef DOXYGEN
-    IrSignal& operator=(const IrSignal& rhs) = delete;
-    IrSignal& operator=(IrSignal&& rhs) = delete;
-#endif // ! DOXYGEN
+    IrSignal& operator=(const IrSignal& rhs) = default;
+    IrSignal& operator=(IrSignal&& rhs) = default;
 
     virtual ~IrSignal() {};
 
@@ -153,6 +152,12 @@ public:
     }
 
     /**
+     * True if and only if at least one of the sequences is true (= non-empty).
+     * @return
+     */
+    operator bool() const { return intro || repeat || ending; }
+
+    /**
      * Print a human readable representation of the IrSignal on the Stream supplied.
      * @param stream Stream onto the output is printed.
      * @param usingSigns is true, prepend marks with '+' and gaps with '-'.
@@ -207,6 +212,6 @@ public:
      */
     unsigned int noRepetitions(unsigned int noSends) const {
         return noSends == 0 ? 0
-                : getIntro().isEmpty() ? noSends : noSends - 1;
+                : intro ? noSends -1 : noSends;
     }
 };

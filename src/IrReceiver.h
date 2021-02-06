@@ -16,11 +16,11 @@ private:
 
 public:
     // Default values
-    static const pin_t defaultPin = 5;
-    static const microseconds_t defaultMarkExcess = 50U;
+    static constexpr pin_t defaultPin = 5;
+    static constexpr microseconds_t defaultMarkExcess = 50U;
 
     /** Are we using inverting sensor, like most TSOPs? */
-    static const bool invertingSensor = true;
+    static constexpr bool invertingSensor = true;
 
     /**
      * Constructor.

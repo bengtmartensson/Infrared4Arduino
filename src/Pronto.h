@@ -30,9 +30,9 @@ private:
     static constexpr frequency_t fallbackFrequency          = 64767U; // To use with frequency = 0;
     static constexpr uint32_t microsecondsInSeconds         = 1000000UL;
 
-    Pronto() {};
+    Pronto() = delete;
 
-    static IrSequence *mkSequence(const uint16_t *data, size_t pairs, microseconds_t timebase);
+    static microseconds_t* mkSequence(const uint16_t *data, size_t pairs, microseconds_t timebase);
 
     static frequency_t toFrequency(uint16_t code);
 
@@ -48,17 +48,17 @@ private:
 
     static char hexDigit(unsigned int x);
 
-    static unsigned int appendChar(char *result, unsigned int index, char ch);
+    static void appendChar(char *result, unsigned int& index, char ch);
 
-    static unsigned int appendDuration(char *result, unsigned int index, uint16_t duration, microseconds_t timebase);
+    static void appendDuration(char *result, unsigned int& index, uint16_t duration, microseconds_t timebase);
 
-    static unsigned int appendDigit(char *result, unsigned int index, unsigned int number);
+    static void appendDigit(char *result, unsigned int& index, unsigned int number);
 
-    static unsigned int appendNumber(char *result, unsigned int index, uint16_t number);
+    static void appendNumber(char *result, unsigned int& index, uint16_t number);
 
-    static unsigned int appendSequence(char *result, unsigned int index, const microseconds_t *data, size_t length, microseconds_t timebase);
+    static void appendSequence(char *result, unsigned int& index, const microseconds_t *data, size_t length, microseconds_t timebase);
 
-    static unsigned int appendSequence(char *result, unsigned int index, const IrSequence& irSequence, microseconds_t timebase);
+    static void appendSequence(char *result, unsigned int& index, const IrSequence& irSequence, microseconds_t timebase);
 
     static void dumpSequence(Stream& stream, const microseconds_t *data, size_t length, microseconds_t timebase);
 

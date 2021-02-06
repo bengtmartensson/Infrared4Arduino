@@ -5,8 +5,6 @@
 
 //{38.4k,564}<1,-1|1,-3>(16,-8,D:8,S:8,F:8,~F:8,1,^108m,(16,-4,1,^108m)*) [D:0..255,S:0..255=255-D,F:0..255]
 
-static const char nec1DittoLiteral[] = "NEC1 ditto";
-
 int Nec1Decoder::decodeFlashGap(microseconds_t flash, microseconds_t gap) {
     bool result = getDuration(flash, 1);
     if (!result)

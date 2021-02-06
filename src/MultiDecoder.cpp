@@ -3,20 +3,20 @@
 #include "Rc5Decoder.h"
 #include <string.h>
 
-MultiDecoder::MultiDecoder(const IrReader &IrReader) {
-    if (IrReader.isEmpty()) {
+MultiDecoder::MultiDecoder(const IrReader &irReader) {
+    if (! irReader) {
         type = timeout;
         strcpy(decode, ".");
         return;
     }
 
-    if (IrReader.getDataLength() < 3) {
+    if (irReader.getDataLength() < 3) {
         type = noise;
         strcpy(decode, ":");
         return;
     }
 
-    Nec1Decoder nec1decoder(IrReader);
+    Nec1Decoder nec1decoder(irReader);
     if (nec1decoder.isValid()) {
         strcpy(decode, nec1decoder.getDecode());
         type = nec1decoder.isDitto() ? nec_ditto : nec;
@@ -24,7 +24,7 @@ MultiDecoder::MultiDecoder(const IrReader &IrReader) {
         return;
     }
 
-    Rc5Decoder rc5decoder(IrReader);
+    Rc5Decoder rc5decoder(irReader);
     if (rc5decoder.isValid()) {
         strcpy(decode, rc5decoder.getDecode());
         type = rc5;

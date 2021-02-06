@@ -16,14 +16,15 @@ this program. If not, see http://www.gnu.org/licenses/.
  */
 
 /**
- * TODO
+ * This file defines the enums PinStatus and PinMode unless already known.
  */
 
 #pragma once
 
-#if !defined(ARDUINO) || defined(ARDUINO_ARCH_AVR) || defined(ARDUINO_ARCH_SAMD) \
- || defined(ARDUINO_ARCH_SAM) || defined(TEENSYDUINO) || defined(ARDUINO_ARCH_ESP32) \
- || defined(ARDUINO_ARCH_ESP8266)
+//#if defined(ARDUINO) && defined(ARDUINO_ARCH_AVR)
+//// PinStatus and PinMode already defined in
+//// ~/.arduino15/packages/arduino/hardware/megaavr/*/cores/arduino/api/Common.h
+//#else
 
 #ifdef LOW
 #undef LOW
@@ -76,4 +77,4 @@ typedef enum {
     INPUT_PULLDOWN = 0x3,
 } PinMode;
 
-#endif
+//#endif

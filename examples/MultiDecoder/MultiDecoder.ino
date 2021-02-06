@@ -6,7 +6,7 @@
 
 #define RECEIVE_PIN 5U
 #define BUFFERSIZE 200U
-#define BAUD 115200
+#define BAUD 115200UL
 
 IrReceiver *receiver;
 
@@ -22,7 +22,7 @@ void loop() {
         Serial.println(F("timeout"));
     else {
         MultiDecoder decoder(*receiver);
-        if (decoder.isValid())
+        if (decoder)
             decoder.printDecode(Serial);
         else
             Serial.println(F("No decode"));

@@ -1,9 +1,5 @@
 #include "HashDecoder.h"
 
-const char *HashDecoder::format = "%0x";
-
-constexpr unsigned int offset = 2;
-
 uint32_t HashDecoder::compare(microseconds_t oldVal, microseconds_t newVal) {
     return
     newVal < 3 * (oldVal / 4) ? 0

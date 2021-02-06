@@ -20,6 +20,11 @@ this program. If not, see http://www.gnu.org/licenses/.
 IrSenderNonMod::IrSenderNonMod(pin_t pin, bool _invert) : IrSender(pin),invert(_invert) {
 }
 
+void IrSenderNonMod::sendNonModulated(const IrSequence& irSequence, unsigned int times) {
+    for (unsigned int i = 0; i < times; i++)
+        send(irSequence);
+}
+
 void IrSenderNonMod::sendSpace(microseconds_t time) {
     if (invert)
         writeHigh();

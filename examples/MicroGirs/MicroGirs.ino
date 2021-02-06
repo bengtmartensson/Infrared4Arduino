@@ -377,9 +377,9 @@ static bool processCommand(const String& line, Stream& stream) {
         uint16_t introLength = (uint16_t) tokenizer.getInt();
         uint16_t repeatLength = (uint16_t) tokenizer.getInt();
         uint16_t endingLength = (uint16_t) tokenizer.getInt();
-        microseconds_t intro[introLength];
-        microseconds_t repeat[repeatLength];
-        microseconds_t ending[endingLength];
+        microseconds_t *intro = new microseconds_t[introLength];
+        microseconds_t *repeat = new microseconds_t[repeatLength];
+        microseconds_t *ending = new microseconds_t[endingLength];
         for (uint16_t i = 0; i < introLength; i++)
             intro[i] = tokenizer.getMicroseconds();
         for (uint16_t i = 0; i < repeatLength; i++)

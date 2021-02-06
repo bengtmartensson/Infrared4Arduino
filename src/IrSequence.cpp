@@ -18,11 +18,13 @@ IrSequence::IrSequence(const IrSequence& orig) : length(orig.length) {
 }
 
 IrSequence& IrSequence::operator=(IrSequence&& rhs) {
-    delete [] durations;
-    durations = rhs.durations;
-    length = rhs.length;
-    rhs.durations = nullptr;
-    rhs.length = 0;
+    if (this != &rhs) {
+        delete [] durations;
+        durations = rhs.durations;
+        length = rhs.length;
+        rhs.durations = nullptr;
+        rhs.length = 0;
+    }
     return *this;
 }
 

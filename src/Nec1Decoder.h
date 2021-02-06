@@ -26,6 +26,7 @@ private:
     }
     static int decodeParameter(const IrReader &irCapturer, unsigned int index);
     static int decodeFlashGap(microseconds_t flash, microseconds_t gap);
+    static constexpr const char *nec1DittoLiteral = "NEC1 ditto";
 
 public:
     Nec1Decoder();

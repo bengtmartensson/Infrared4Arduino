@@ -3,6 +3,10 @@
 #include "Board.h" // for HAS_FLASH_READ
 #include <string.h>
 
+inline uint16_t divRound(microseconds_t duration, microseconds_t timebase) {
+    return static_cast<uint16_t>((static_cast<uint32_t>(duration) + timebase / 2) / timebase);
+}
+
 IrSignal *Pronto::parse(const uint16_t *data, size_t size) {
     microseconds_t timebase = (microsecondsInSeconds * data[1] + referenceFrequency/2) / referenceFrequency;
     frequency_t frequency;
@@ -21,15 +25,10 @@ IrSignal *Pronto::parse(const uint16_t *data, size_t size) {
     if (numbersInPreamble + 2*(introPairs + repetitionPairs) != size) // inconsistent sizes
         return nullptr;
 
-    IrSequence *intro = mkSequence(data + numbersInPreamble, introPairs, timebase);
-    IrSequence *repeat = mkSequence(data + numbersInPreamble + 2*introPairs, repetitionPairs, timebase);
+    microseconds_t* intro = mkSequence(data + numbersInPreamble, introPairs, timebase);
+    microseconds_t* repeat = mkSequence(data + numbersInPreamble + 2*introPairs, repetitionPairs, timebase);
 
-    IrSignal *code = new IrSignal(*intro, *repeat, frequency);
-
-    delete intro;
-    delete repeat;
-
-    return code;
+    return new IrSignal(intro, 2*introPairs, repeat, 2*repetitionPairs, frequency);
 }
 
 IrSignal *Pronto::parse(const char *str) {
@@ -69,13 +68,13 @@ IrSignal *Pronto::parse(const __FlashStringHelper *str) {
 }
 #endif
 
-IrSequence *Pronto::mkSequence(const uint16_t* data, size_t noPairs, microseconds_t timebase) {
+microseconds_t* Pronto::mkSequence(const uint16_t* data, size_t noPairs, microseconds_t timebase) {
     microseconds_t *durations = new microseconds_t[2*noPairs];
     for (unsigned int i = 0; i < 2*noPairs; i++) {
         uint32_t duration = static_cast<uint32_t>(data[i]) * timebase;
         durations[i] = (duration <= MICROSECONDS_T_MAX) ? duration : MICROSECONDS_T_MAX;
     }
-    return new IrSequence(durations, 2*noPairs);
+    return durations;
 }
 
 frequency_t Pronto::toFrequency(uint16_t code) {
@@ -102,45 +101,43 @@ char Pronto::hexDigit(unsigned int x) {
     return x <= 9 ? ('0' + x) : ('A' + (x - 10));
 }
 
-unsigned int Pronto::appendChar(char *result, unsigned int index, char ch) {
+void Pronto::appendChar(char *result, unsigned int& index, char ch) {
     result[index] = ch;
     index++;
-    return index;
 }
 
-unsigned int Pronto::appendDigit(char *result, unsigned int index, unsigned int number) {
-    return appendChar(result, index, hexDigit(number));
+void Pronto::appendDigit(char *result, unsigned int& index, unsigned int number) {
+    appendChar(result, index, hexDigit(number));
 }
 
-unsigned int Pronto::appendNumber(char *result, unsigned int index, uint16_t number) {
+void Pronto::appendNumber(char *result, unsigned int& index, uint16_t number) {
     for (unsigned int i = 0; i < digitsInProntoNumber; i++) {
         unsigned int shifts = bitsInHexadecimal * (digitsInProntoNumber - 1 - i);
-        index = appendDigit(result, index, (number >> shifts) & hexMask);
+        appendDigit(result, index, (number >> shifts) & hexMask);
     }
-    return appendChar(result, index, ' ');
+    appendChar(result, index, ' ');
 }
 
-unsigned int Pronto::appendDuration(char *result, unsigned int index, microseconds_t duration, microseconds_t timebase) {
-    return appendNumber(result, index, (duration + timebase/2) / timebase);
+void Pronto::appendDuration(char *result, unsigned int& index, microseconds_t duration, microseconds_t timebase) {
+    appendNumber(result, index, divRound(duration, timebase));
 }
 
-unsigned int Pronto::appendSequence(char *result, unsigned int index, const microseconds_t *data, size_t length, microseconds_t timebase) {
+void Pronto::appendSequence(char *result, unsigned int& index, const microseconds_t *data, size_t length, microseconds_t timebase) {
     for (unsigned int i = 0; i < length; i++)
-        index = appendDuration(result, index, data[i], timebase);
-    return index;
+        appendDuration(result, index, data[i], timebase);
 }
 
-unsigned int Pronto::appendSequence(char *result, unsigned int index, const IrSequence& irSequence, microseconds_t timebase) {
-    return appendSequence(result, index, irSequence.getDurations(), irSequence.getLength(), timebase);
+void Pronto::appendSequence(char *result, unsigned int& index, const IrSequence& irSequence, microseconds_t timebase) {
+    appendSequence(result, index, irSequence.getDurations(), irSequence.getLength(), timebase);
 }
 
 char* Pronto::prelude(frequency_t frequency, size_t introLength, size_t repeatLength) {
     char *result = new char[lengthHexString(introLength, repeatLength)];
     unsigned int index = 0;
-    index = appendNumber(result, index, frequency > 0 ? learnedToken : learnedNonModulatedToken);
-    index = appendNumber(result, index, toFrequencyCode(frequency));
-    index = appendNumber(result, index, introLength / 2);
-    index = appendNumber(result, index, repeatLength / 2);
+    appendNumber(result, index, frequency > 0 ? learnedToken : learnedNonModulatedToken);
+    appendNumber(result, index, toFrequencyCode(frequency));
+    appendNumber(result, index, introLength / 2);
+    appendNumber(result, index, repeatLength / 2);
     return result;
 }
 
@@ -148,29 +145,37 @@ char* Pronto::toProntoHex(const microseconds_t* introData, size_t introLength, c
     char *result = prelude(frequency, introLength, repeatLength);
     unsigned int index = numbersInPreamble * (digitsInProntoNumber + 1);
     microseconds_t timebase = toTimebase(frequency);
-    index = appendSequence(result, index, introData, introLength, timebase);
-    index = appendSequence(result, index, repeatData, repeatLength, timebase);
-    appendChar(result, index - 1, '\0');
+    appendSequence(result, index, introData, introLength, timebase);
+    appendSequence(result, index, repeatData, repeatLength, timebase);
+    result[index - 1] = '\0';
     return result;
 }
 
 void Pronto::dump(Stream& stream, const microseconds_t* introData, size_t introLength, const microseconds_t* repeatData, size_t repeatLength, frequency_t frequency) {
     dumpNumber(stream, frequency > 0 ? learnedToken : learnedNonModulatedToken);
+    stream.print(' ');
     dumpNumber(stream, toFrequencyCode(frequency));
+    stream.print(' ');
     dumpNumber(stream, introLength / 2);
+    stream.print(' ');
     dumpNumber(stream, repeatLength / 2);
+    stream.print(' ');
     microseconds_t timebase = toTimebase(frequency);
     dumpSequence(stream, introData, introLength, timebase);
+    stream.print(' ');
     dumpSequence(stream, repeatData, repeatLength, timebase);
 }
 
 void Pronto::dumpSequence(Stream& stream, const microseconds_t *data, size_t length, microseconds_t timebase) {
-    for (unsigned int i = 0; i < length; i++)
+    for (unsigned int i = 0; i < length; i++) {
         dumpDuration(stream, data[i], timebase);
+        if (i < length - 1)
+            stream.print(' ');
+    }
 }
 
 void Pronto::dumpDuration(Stream& stream, microseconds_t duration, microseconds_t timebase) {
-    dumpNumber(stream, (duration + timebase / 2) / timebase);
+    dumpNumber(stream, divRound(duration, timebase));
 }
 
 void Pronto::dumpNumber(Stream& stream, uint16_t number) {
@@ -178,7 +183,6 @@ void Pronto::dumpNumber(Stream& stream, uint16_t number) {
         unsigned int shifts = bitsInHexadecimal * (digitsInProntoNumber - 1 - i);
         dumpDigit(stream, (number >> shifts) & hexMask);
     }
-    stream.print(' ');
 }
 
 void Pronto::dumpDigit(Stream& stream, unsigned int number) {

@@ -38,7 +38,8 @@ private:
         decode(irSignal.getEnding());
     }
 
-    static const char *format;
+    static constexpr unsigned int offset = 2;
+    static constexpr const char *format = "%0lx";
     static constexpr uint32_t FNVprime = 16777619UL;
     static constexpr uint32_t FNVoffsetBasis = 2166136261UL;
     static constexpr unsigned int minMeaningfulLength = 4U;
@@ -61,7 +62,7 @@ public:
      */
     HashDecoder(const IrReader& irReader) : IrDecoder(),hash(FNVoffsetBasis) {
         decode(irReader);
-        sprintf(decodeBuffer, format, hash);
+        sprintf(decodeBuffer, format, static_cast<unsigned long>(hash));
     }
 
     /**
@@ -70,12 +71,12 @@ public:
      */
     HashDecoder(const IrSequence& irSequence) : IrDecoder(),hash(FNVoffsetBasis) {
         decode(irSequence);
-        sprintf(decodeBuffer, format, hash);
+        sprintf(decodeBuffer, format, static_cast<unsigned long>(hash));
     }
 
     HashDecoder(const IrSignal& irSignal) : IrDecoder(),hash(FNVoffsetBasis) {
         decode(irSignal);
-        sprintf(decodeBuffer, format, hash);
+        sprintf(decodeBuffer, format, static_cast<unsigned long>(hash));
     }
 
     /**

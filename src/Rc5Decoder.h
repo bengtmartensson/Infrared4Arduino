@@ -71,7 +71,8 @@ private:
         full = 2
     };
 
+    static constexpr const char *format = "RC5 %d %d %d";
+
     static Length decodeDuration(microseconds_t t);
     static unsigned int decodeFlashGap(microseconds_t flash, microseconds_t gap);
-    static const char *format;
 };

@@ -3,26 +3,26 @@
 #include <IrReceiverPoll.h>
 #include <IrReceiverSampler.h>
 
-IrReader *reader;
-const unsigned int captureLength = 200;
-const pin_t receiverPin = 5;
-const microseconds_t markExcess = 50;
+static IrReader *reader;
+constexpr unsigned int captureLength = 200U;
+constexpr pin_t receiverPin = 5U;
+constexpr microseconds_t markExcess = 50U;
 
 void setup() {
-    Serial.begin(115200);
-    Serial.setTimeout(10000);
+    Serial.begin(115200UL);
+    Serial.setTimeout(10000U);
     Serial.flush();
     Serial.println(F("Enter s for sampler, p for poll, w for widget"));
     String line = Serial.readStringUntil('\r');
     char ch = line.charAt(0);
     Serial.println(F("Enter beginning timeout in milliseconds (default 5000)"));
     long beginningTimeout = Serial.parseInt();
-    if (beginningTimeout == 0)
-        beginningTimeout = 5000;
+    if (beginningTimeout == 0U)
+        beginningTimeout = 5000U;
     Serial.println(F("Enter ending timeout in milliseconds (default 30)"));
     long endingTimeout = Serial.parseInt();
-    if (endingTimeout == 0)
-        endingTimeout = 30;
+    if (endingTimeout == 0U)
+        endingTimeout = 30U;
 
     reader = ch == 's'
             ? (IrReader*) IrReceiverSampler::newIrReceiverSampler(captureLength, receiverPin,

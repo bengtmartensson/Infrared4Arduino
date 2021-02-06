@@ -1,9 +1,10 @@
 #include <IrReceiverSampler.h>
 #include <HashDecoder.h>
 
-#define RECEIVE_PIN 5U
-#define BUFFERSIZE 200U
-#define BAUD 115200
+static constexpr pin_t RECEIVE_PIN = 5U;
+static constexpr size_t BUFFERSIZE = 200U;
+static constexpr uint32_t BAUD = 115200UL;
+static constexpr uint32_t NecRepeatHash = 84696351UL;
 
 //#define DEBUG
 
@@ -24,11 +25,9 @@ public :
     Command(const char* n, uint32_t c) : name(n),code(c) {}
 };
 
-unsigned numberCommands = sizeof (names) / sizeof (const char*);
-
+static constexpr unsigned numberCommands = sizeof(names) / sizeof(const char*);
 static Command *learnedCommands;
-
-IrReceiver *receiver;
+static IrReceiver *receiver;
 
 void setup() {
     Serial.begin(BAUD);
@@ -80,14 +79,14 @@ void setup() {
 
 void loop() {
     do
-            receiver->receive();
+        receiver->receive();
     while (receiver->isEmpty());
 
     uint32_t hash = HashDecoder::decodeHash(*receiver);
 #ifdef DEBUG
     Serial.println(hash);
 #endif
-    if (hash == 84696351) // NEC1 repeat, discard
+    if (hash == NecRepeatHash) // NEC1 repeat, discard
         return;
 
     for (unsigned i = 0; i < numberCommands; i++) {

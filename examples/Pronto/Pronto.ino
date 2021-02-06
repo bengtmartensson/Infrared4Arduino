@@ -32,6 +32,8 @@ void setup() {
 
     irSignal = Nec1Renderer::newIrSignal(122, 27); // volume_down for Yahama receivers
     Serial.println(Pronto::toProntoHex(*irSignal));
+    Pronto::dump(Serial, *irSignal);
+    Serial.println();
 }
 
 void loop() {

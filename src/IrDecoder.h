@@ -33,6 +33,14 @@ public:
     }
 
     /**
+     * Same as isValid().
+     * @return
+     */
+    operator bool() const {
+        return isValid();
+    }
+
+    /**
      * If valid, prints the decode to the stream.
      * @param stream where the output is generated
      * @return success status
@@ -44,7 +52,7 @@ public:
     }
 
 private:
-    constexpr static uint32_t endingMin = 20000U;
+    static constexpr uint32_t endingMin = 20000UL;
     bool valid = false;
 
 protected:

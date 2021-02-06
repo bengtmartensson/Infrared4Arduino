@@ -9,22 +9,22 @@
 #include <IrSenderPwm.h>
 
 // where the switch is connected
-const pin_t button = 4;
+static constexpr pin_t button = 4U;
 
-const IrSignal *irSignal;
-const IrSender *irSender;
+static const IrSignal *irSignal;
+static const IrSender *irSender;
 
-bool buttonIsPressed() {
+static bool buttonIsPressed() {
     return digitalRead(button) == LOW;
 }
 
 void setup() {
     // Define switch as input, using pullup to Vcc
     pinMode(button, INPUT_PULLUP);
-    
+
     // Set up the sender
     irSender = IrSenderPwm::getInstance(true);
-    
+
     // Set up the signal
     irSignal = Nec1Renderer::newIrSignal(122, 27); // volume_down for Yamaha receivers
 }

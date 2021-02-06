@@ -28,12 +28,10 @@ IrSender::~IrSender() {
 }
 
 void IrSender::sendIrSignal(const IrSignal& irSignal, unsigned int noSends) {
-    if (!irSignal.getIntro().isEmpty())
-        send(irSignal.getIntro(), irSignal.getFrequency());
+    send(irSignal.getIntro(), irSignal.getFrequency());
     for (unsigned int i = 0; i < irSignal.noRepetitions(noSends); i++)
         send(irSignal.getRepeat(), irSignal.getFrequency());
-    if (!irSignal.getEnding().isEmpty())
-        send(irSignal.getEnding(), irSignal.getFrequency());
+    send(irSignal.getEnding(), irSignal.getFrequency());
 }
 
 void IrSender::sendWhile(const IrSignal& irSignal, bool(*trigger)()) {
@@ -63,14 +61,14 @@ void IrSender::send(const IrSequence& irSequence, frequency_t frequency, dutycyc
 #endif
     for (unsigned int i = 0U; i < irSequence.getLength(); i++) {
 #ifdef CONSIDER_COMPUTATIONAL_DELAYS
-#error dssdfsdfsdf
-        microseconds_t duration = irSequence.getDurations()[i];
+#error not tested
+        microseconds_t duration = irSequence[i];
         refTime += duration;
         int32_t delay = refTime - micros(); // TODO verify overflow
         if (delay <= 0)
             return;
 #else
-        microseconds_t delay = irSequence.getDurations()[i];
+        microseconds_t delay = irSequence[i];
 #endif
         if (i & 1U)
             sendSpace(delay);

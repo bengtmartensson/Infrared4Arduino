@@ -106,6 +106,14 @@ public:
     virtual bool isReady() const = 0;
 
     /**
+     * Same as isReady()
+     * @return
+     */
+    operator bool() const {
+        return isReady();
+    }
+
+    /**
      * Returns the number of collected durations.
      * @return number durations
      */

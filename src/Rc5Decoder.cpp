@@ -1,8 +1,6 @@
 #include "Rc5Decoder.h"
 #include <string.h>
 
-const char *Rc5Decoder::format = "RC5 %d %d %d";
-
 Rc5Decoder::Length Rc5Decoder::decodeDuration(microseconds_t t) {
     Length len =  (t < timebaseLower) ? invalid
             : (t <= timebaseUpper) ? half

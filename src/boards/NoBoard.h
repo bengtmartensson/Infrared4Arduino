@@ -19,8 +19,6 @@ this program. If not, see http://www.gnu.org/licenses/.
 
 #include "Board.h"
 
-#include "PinModeStatus.h"
-
 #define CURRENT_CLASS NoBoard
 
 #define HAS_FLASH_READ      0

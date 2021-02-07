@@ -17,14 +17,19 @@ this program. If not, see http://www.gnu.org/licenses/.
 
 /**
  * This file defines the enums PinStatus and PinMode unless already known.
+ * To test this, we use the defined-ness of LOW.
  */
 
 #pragma once
 
-//#if defined(ARDUINO) && defined(ARDUINO_ARCH_AVR)
-//// PinStatus and PinMode already defined in
-//// ~/.arduino15/packages/arduino/hardware/megaavr/*/cores/arduino/api/Common.h
-//#else
+// Some, but not all, architectures defines PinStatus and PinMode in a file like
+// ~/.arduino15/packages/arduino/hardware/*/*/cores/arduino/api/Common.h
+// I make the guess that if and only if LOW is defined as macro,
+// the definition should be made.
+
+// See also https://github.com/arduino/ArduinoCore-API/issues/25
+
+#if defined(LOW) || ! defined(ARDUINO)
 
 #ifdef LOW
 #undef LOW
@@ -77,4 +82,4 @@ typedef enum {
     INPUT_PULLDOWN = 0x3,
 } PinMode;
 
-//#endif
+#endif

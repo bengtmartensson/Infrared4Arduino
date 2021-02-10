@@ -117,6 +117,7 @@ IrDecoder	KEYWORD2
 ~IrDecoder	KEYWORD2
 getDecode	KEYWORD2
 isValid	KEYWORD2
+operator bool	KEYWORD2
 printDecode	KEYWORD2
 setValid	KEYWORD2
 isEnding	KEYWORD2
@@ -130,6 +131,7 @@ enable	KEYWORD2
 disable	KEYWORD2
 receive	KEYWORD2
 isReady	KEYWORD2
+operator bool	KEYWORD2
 getDataLength	KEYWORD2
 getDuration	KEYWORD2
 dump	KEYWORD2
@@ -240,6 +242,7 @@ IrSequence	KEYWORD2
 IrSequence	KEYWORD2
 operator=	KEYWORD2
 operator=	KEYWORD2
+operator bool	KEYWORD2
 getLength	KEYWORD2
 isEmpty	KEYWORD2
 getDurations	KEYWORD2
@@ -263,6 +266,8 @@ getDuration	KEYWORD2
 IrSignal	KEYWORD2
 IrSignal	KEYWORD2
 IrSignal	KEYWORD2
+operator=	KEYWORD2
+operator=	KEYWORD2
 ~IrSignal	KEYWORD2
 IrSignal	KEYWORD2
 IrSignal	KEYWORD2
@@ -275,6 +280,7 @@ getDutyCycle	KEYWORD2
 getEnding	KEYWORD2
 getRepeat	KEYWORD2
 getIntro	KEYWORD2
+operator bool	KEYWORD2
 dump	KEYWORD2
 dumpWithSigns	KEYWORD2
 dumpFrequency	KEYWORD2
@@ -405,6 +411,7 @@ timerConfigHz	KEYWORD2
 timerConfigNormal	KEYWORD2
 IRTimer	KEYWORD2
 timeSince	KEYWORD2
+divRound	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)

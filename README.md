@@ -1,6 +1,16 @@
 # Infrared4Arduino
 Infrared4Arduino is an object-oriented infrared library for the Arduino.
 
+## NEWS
+
+__Version 1.2.0__ constitutes a rather extensive refactoring, in particular regarding memory allocation.
+It now uses some of the features of "modern C++" (restricted to C++-11 for Arduino compatibility)
+(#16 and #17), like move semantics. For the API user, this means that the duration data
+used to call the constructors of IrSequence and IrSignal are to be allocated using `new`,
+and are "moved" into the constructed objects.  Also, MicroGirs has been removed.
+(The user should use [AGirs](https://github.com/bengtmartensson/AGirs) instead.)
+
+## Introduction
 The library was (with some exceptions detailed below) written from scratch by myself.
 It uses Michael Dreher's
 IrWidget [(article in
@@ -42,10 +52,10 @@ them. Most classes are immutable. The classes are `const`-correct.
 ## Comparison with other infrared libraries
 Here we list a (subjective!) selection of generic IR libraries for Arduino, with some (very personal) comments.
 
-### [IRremote](https://github.com/z3t0/Arduino-IRremote) by Ken Shirriff and others.
-The original, that spawned all the rest! Now hosted [here](https://github.com/z3t0/Arduino-IRremote/).
-Unfortunately since several years "stale"; personally I have 3 pull requests open...
-License: LGPL2.1 (although a migration to MIT has been discussed).
+### [IRremote](https://github.com/Arduino-IRremote/Arduino-IRremote) by Ken Shirriff and others.
+The original, that spawned all the rest! Now hosted [here](https://github.com/Arduino-IRremote/Arduino-IRremote/).
+Was "stale" for several years, presently changes daily.
+License: MIT.
 
 ### [IRlib version 1](https://github.com/cyborg5/IRLib) and [version 2](https://github.com/cyborg5/IRLib2) by Ken Shirriff and Chris Young.
 Subjectively, this is a cleaned-up and modernized version of IRremote.
@@ -66,35 +76,15 @@ This "lightweight" library is written with the aim of minimal foot print on very
 License: MIT-like.
 
 ## Forum
-Feel free to open [issues at Github](https://github.com/bengtmartensson/Infrared4Arduino/issues) should
-the need or desire arise. A possible place to discuss is the
+Feel free to open [discussions](https://github.com/bengtmartensson/Infrared4Arduino/discussions)
+and [issues at Github](https://github.com/bengtmartensson/Infrared4Arduino/issues) should
+the need or desire arise. Other possible place to discuss are the
 [Home automation](https://forum.arduino.cc/index.php?board=16.0) or the
 [Sensor](https://forum.arduino.cc/index.php?board=10.0) sub-forums at the Arduino forum.
 
 ## Examples
 A fairly large numbers of examples are provided. Most of these are a straight-forward
 demonstration of a particular class, as indicated by the name.
-
-However, one "example" is not really an "example" but a deployment program:
-
-### MicroGirs
-This "example" implements a [Girs](http://www.harctoolbox.org/Girs.html) server for the Arduino.
-It can be used with [IrScrutinizer](https://github.com/bengtmartensson/harctoolboxbundle),
-and [Lirc](http://lirc.org) (using the [Girs driver](http://lirc.org/html/girs.html)).
-It is an interactive server that can send and receive IR signals, with some bells and whistles.
-The interactive server is mainly meant for interact with other programs. communicating over a serial line, likely in USB disguise.
-
-MicroGirs is essentially a simplified version of [AGirs](https://github.com/bengtmartensson/AGirs),
-stripped of features seldomly used (LCD and (visible-light) LED support, Ethernet, etc). As opposed to
-AGirs, it does not depend on other libraries. For more documentation, see the AGirs project.
-
-There are a number of configuration options. These are all contained in the
-file `config.h` and consists of CPP `#defines`.
-
-MicroGirs is essentially functionally equivalent to "GirsLite".
-
-Unfortunately, it is not yet working on [SAMD](https://github.com/bengtmartensson/Infrared4Arduino/issues/48)
-as well as [ESP and Teensy](https://github.com/bengtmartensson/Infrared4Arduino/issues/49).
 
 # API
 admin
@@ -145,10 +135,8 @@ is sensible, come with public constructors. (However, the user still has to take
 for avoiding pin- and timer-conflicts.)
 
 ## Hardware configuration
-For hardware support, the file `IRremoteInt.h` from the IRremote project is used. This means that
-all hardware that project supports is also supported here (for `IrReceiverSampler` and `IrSenderPwm`).
-(Actually, a small fix, borrowed from IRLib, was used
-to support Arduinos with ATMega32U4 (Leonardo, Micro).)
+Board specific hardware configuration is located in the class Board, and in the board specific files in `src/boards`.
+
 However, IrWidgetAggregating is currently supported on the boards Uno/Nano (ATmega328P), Leonardo/Micro (ATmega32U4),
 and Mega2560 (ATmega2560).
 
@@ -174,7 +162,11 @@ in general be selected freely, as long as it does not conflict with other
 requirements.
 
 ### ESP8266
-TODO.
+The ESP8266 is not a board very well suited for sending and receiving IR signals,
+since it lacks important features, as documented in
+[this issue](https://github.com/bengtmartensson/Infrared4Arduino/issues/5#issuecomment-589957060).
+Only the generic IR sender IrSenderPwmSoftDelay and IrSenderPwmSpinWait as well as the generic
+IR receiver IrReceiverPoll are available. For IR, please select another board if at all possible!
 
 ## Timeouts
 All the receiving classes adhere to the following conventions: When initialized, it waits
@@ -219,13 +211,8 @@ after connecting suitable hardware capable of sending non-modulated (IR- _or_ RF
 to the GPIO pin given as argument to the constructor.
 
 ## Hash codes
-This library does not, as opposed to some of its competitors, implement hash codes.
-I do not consider this a very useful feature: If the received signals conforms to
-a known protocol,  use the parameters (instead of a hash code).
-If it is not known, you need some form of meta-protocol in order to construct a hash code.
-It is very hard to define the decision criteria.
-I have yet to see a sensible use case for receiving signals as hash codes,
-i.e. where a hash-code based solution has advantages over other solutions.
+Hash-based decoding is implemented in the class HashDecoder. For an example of use,
+see the example of LearningHashDecoder.
 
 ## Event driven reception
 IRLib and IRremoteESP8266 implements interrupt driven reception, but currently

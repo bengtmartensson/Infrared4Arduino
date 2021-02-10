@@ -35,7 +35,7 @@ public:
     IrSignal& operator=(const IrSignal& rhs) = default;
     IrSignal& operator=(IrSignal&& rhs) = default;
 
-    virtual ~IrSignal() {};
+    virtual ~IrSignal() = default;
 
     /**
      * Constructor that "moves" the data pointers.

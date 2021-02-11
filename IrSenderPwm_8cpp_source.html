@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Infrared4Arduino
-   &#160;<span id="projectnumber">1.1.1</span>
+   &#160;<span id="projectnumber">1.2.0</span>
    </div>
   </td>
  </tr>
@@ -95,14 +95,14 @@ $(function() {
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="IrSenderPwmSoftDelay_8h.html">IrSenderPwmSoftDelay.h</a>&quot;</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<a class="code" href="classIrSenderPwm.html">IrSenderPwm</a> *IrSenderPwm::instance = NULL;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<a class="code" href="classIrSenderPwm.html">IrSenderPwm</a> *IrSenderPwm::instance = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
 <div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="classIrSenderPwm.html#a39c320c343490eb58086d5187c082e86">   28</a></span>&#160;<a class="code" href="classIrSenderPwm.html#a39c320c343490eb58086d5187c082e86">IrSenderPwm::IrSenderPwm</a>(<a class="code" href="InfraredTypes_8h.html#aede467d93ddeb5fdeff6023236aa4ad6">pin_t</a> outputPin) : <a class="code" href="classIrSender.html">IrSender</a>(outputPin) {</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;}</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
 <div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="classIrSenderPwm.html#a624fc7923999d04739439a0514bd1eab">   31</a></span>&#160;<a class="code" href="classIrSenderPwm.html">IrSenderPwm</a> *<a class="code" href="classIrSenderPwm.html#a624fc7923999d04739439a0514bd1eab">IrSenderPwm::newInstance</a>(<a class="code" href="InfraredTypes_8h.html#aede467d93ddeb5fdeff6023236aa4ad6">pin_t</a> outputPin) {</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordflow">if</span> (instance != NULL)</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keywordflow">return</span> NULL;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordflow">if</span> (instance != <span class="keyword">nullptr</span>)</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    instance =</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#ifdef HAS_HARDWARE_PWM</span></div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            <a class="code" href="classIrSenderPwmHard.html#aeffce78c385b4aae2811c9056111fdb7">IrSenderPwmHard::newInstance</a>(outputPin);</div>
@@ -113,23 +113,23 @@ $(function() {
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;}</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
 <div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="classIrSenderPwm.html#a5372cebc758d2a2dce3d8eeb2655ab2b">   43</a></span>&#160;<a class="code" href="classIrSenderPwm.html">IrSenderPwm</a> *<a class="code" href="classIrSenderPwm.html#a5372cebc758d2a2dce3d8eeb2655ab2b">IrSenderPwm::getInstance</a>(<span class="keywordtype">bool</span> create, <a class="code" href="InfraredTypes_8h.html#aede467d93ddeb5fdeff6023236aa4ad6">pin_t</a> outputPin) {</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordflow">if</span> (instance == NULL &amp;&amp; create)</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordflow">if</span> (instance == <span class="keyword">nullptr</span> &amp;&amp; create)</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        instance = <a class="code" href="classIrSenderPwm.html#a624fc7923999d04739439a0514bd1eab">newInstance</a>(outputPin);</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordflow">return</span> instance;</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;}</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
 <div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="classIrSenderPwm.html#a26fa3e67c6f8ffec82bfb5a3d97e365b">   49</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classIrSenderPwm.html#a26fa3e67c6f8ffec82bfb5a3d97e365b">IrSenderPwm::deleteInstance</a>() {</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordflow">if</span> (instance != NULL)</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordflow">if</span> (instance != <span class="keyword">nullptr</span>)</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#ifdef HAS_HARDWARE_PWM</span></div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            <a class="code" href="classIrSenderPwmHard.html#a00f493959904aaae8864f8659e0cf2f1">IrSenderPwmHard::deleteInstance</a>();</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor">#else</span></div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            <span class="keyword">delete</span> instance;</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    instance = NULL;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    instance = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aclassIrSenderPwm_html_a5372cebc758d2a2dce3d8eeb2655ab2b"><div class="ttname"><a href="classIrSenderPwm.html#a5372cebc758d2a2dce3d8eeb2655ab2b">IrSenderPwm::getInstance</a></div><div class="ttdeci">static IrSenderPwm * getInstance(bool create=false, pin_t outputPin=Board::getInstance() -&gt;defaultPwmPin())</div><div class="ttdoc">Returns a pointer to the instance, or NULL if not initialized.</div><div class="ttdef"><b>Definition:</b> <a href="IrSenderPwm_8cpp_source.html#l00043">IrSenderPwm.cpp:43</a></div></div>
-<div class="ttc" id="aInfraredTypes_8h_html_aede467d93ddeb5fdeff6023236aa4ad6"><div class="ttname"><a href="InfraredTypes_8h.html#aede467d93ddeb5fdeff6023236aa4ad6">pin_t</a></div><div class="ttdeci">uint8_t pin_t</div><div class="ttdoc">Type for GPIO pin, compatible with Arduino libs.</div><div class="ttdef"><b>Definition:</b> <a href="InfraredTypes_8h_source.html#l00042">InfraredTypes.h:42</a></div></div>
+<div class="ttc" id="aclassIrSenderPwm_html_a5372cebc758d2a2dce3d8eeb2655ab2b"><div class="ttname"><a href="classIrSenderPwm.html#a5372cebc758d2a2dce3d8eeb2655ab2b">IrSenderPwm::getInstance</a></div><div class="ttdeci">static IrSenderPwm * getInstance(bool create=false, pin_t outputPin=Board::getInstance() -&gt;defaultPwmPin())</div><div class="ttdoc">Returns a pointer to the instance, or nullptr if not initialized.</div><div class="ttdef"><b>Definition:</b> <a href="IrSenderPwm_8cpp_source.html#l00043">IrSenderPwm.cpp:43</a></div></div>
+<div class="ttc" id="aInfraredTypes_8h_html_aede467d93ddeb5fdeff6023236aa4ad6"><div class="ttname"><a href="InfraredTypes_8h.html#aede467d93ddeb5fdeff6023236aa4ad6">pin_t</a></div><div class="ttdeci">uint8_t pin_t</div><div class="ttdoc">Type for GPIO pin, compatible with Arduino libs.</div><div class="ttdef"><b>Definition:</b> <a href="InfraredTypes_8h_source.html#l00041">InfraredTypes.h:41</a></div></div>
 <div class="ttc" id="aIrSenderPwmHard_8h_html"><div class="ttname"><a href="IrSenderPwmHard_8h.html">IrSenderPwmHard.h</a></div></div>
 <div class="ttc" id="aclassIrSenderPwm_html_a624fc7923999d04739439a0514bd1eab"><div class="ttname"><a href="classIrSenderPwm.html#a624fc7923999d04739439a0514bd1eab">IrSenderPwm::newInstance</a></div><div class="ttdeci">static IrSenderPwm * newInstance(pin_t outputPin)</div><div class="ttdoc">Creates a new instance (if not existing) and returns it.</div><div class="ttdef"><b>Definition:</b> <a href="IrSenderPwm_8cpp_source.html#l00031">IrSenderPwm.cpp:31</a></div></div>
 <div class="ttc" id="aclassIrSenderPwm_html_a26fa3e67c6f8ffec82bfb5a3d97e365b"><div class="ttname"><a href="classIrSenderPwm.html#a26fa3e67c6f8ffec82bfb5a3d97e365b">IrSenderPwm::deleteInstance</a></div><div class="ttdeci">static void deleteInstance()</div><div class="ttdef"><b>Definition:</b> <a href="IrSenderPwm_8cpp_source.html#l00049">IrSenderPwm.cpp:49</a></div></div>
@@ -143,7 +143,7 @@ $(function() {
 <div class="ttc" id="aclassIrSender_html"><div class="ttname"><a href="classIrSender.html">IrSender</a></div><div class="ttdoc">Abstract base class for all sending classes.</div><div class="ttdef"><b>Definition:</b> <a href="IrSender_8h_source.html#l00027">IrSender.h:27</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jan 6 2021 20:39:14 for Infrared4Arduino by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
+Generated on Thu Feb 11 2021 10:34:33 for Infrared4Arduino by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
 </small></address>
 </body>
 </html>

@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Infrared4Arduino
-   &#160;<span id="projectnumber">1.1.1</span>
+   &#160;<span id="projectnumber">1.2.0</span>
    </div>
   </td>
  </tr>
@@ -81,7 +81,7 @@ $(function() {
 Inheritance diagram for IrDecoder:</div>
 <div class="dyncontent">
 <div class="center"><img src="classIrDecoder__inherit__graph.png" border="0" usemap="#aIrDecoder_inherit__map" alt="Inheritance graph"/></div>
-<map name="IrDecoder_inherit__map" id="aIrDecoder_inherit__map">
+<map name="IrDecoder_inherit__map" id="IrDecoder_inherit__map">
 <area shape="rect" title="Abstract base class for all decoder classes." alt="" coords="205,5,284,32"/>
 <area shape="rect" href="classHashDecoder.html" title="A decoder class using FNV&#45;1 hashes of length 32." alt="" coords="5,80,108,107"/>
 <area shape="rect" href="classMultiDecoder.html" title="A preliminary multi protocol decoder." alt="" coords="133,80,231,107"/>
@@ -102,6 +102,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0afca7f90358419b4bb17b339bc36e57"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrDecoder.html#a0afca7f90358419b4bb17b339bc36e57">isValid</a> () const</td></tr>
 <tr class="memdesc:a0afca7f90358419b4bb17b339bc36e57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the decode was successful.  <a href="classIrDecoder.html#a0afca7f90358419b4bb17b339bc36e57">More...</a><br /></td></tr>
 <tr class="separator:a0afca7f90358419b4bb17b339bc36e57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa046c6a5e9d10d36a105fb3b58ccf79b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrDecoder.html#aa046c6a5e9d10d36a105fb3b58ccf79b">operator bool</a> () const</td></tr>
+<tr class="memdesc:aa046c6a5e9d10d36a105fb3b58ccf79b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as <a class="el" href="classIrDecoder.html#a0afca7f90358419b4bb17b339bc36e57" title="Returns true if the decode was successful.">isValid()</a>.  <a href="classIrDecoder.html#aa046c6a5e9d10d36a105fb3b58ccf79b">More...</a><br /></td></tr>
+<tr class="separator:aa046c6a5e9d10d36a105fb3b58ccf79b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d2f495021a39a74dadb32bc6d9a0eb9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrDecoder.html#a8d2f495021a39a74dadb32bc6d9a0eb9">printDecode</a> (Stream &amp;stream) const</td></tr>
 <tr class="memdesc:a8d2f495021a39a74dadb32bc6d9a0eb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">If valid, prints the decode to the stream.  <a href="classIrDecoder.html#a8d2f495021a39a74dadb32bc6d9a0eb9">More...</a><br /></td></tr>
 <tr class="separator:a8d2f495021a39a74dadb32bc6d9a0eb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -119,8 +122,8 @@ Static Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-attribs"></a>
 Static Protected Attributes</h2></td></tr>
-<tr class="memitem:a2ce6b49c00f18e00e7c7d82bc3c42a0a"><td class="memItemLeft" align="right" valign="top">static const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrDecoder.html#a2ce6b49c00f18e00e7c7d82bc3c42a0a">invalid</a> = -1</td></tr>
-<tr class="separator:a2ce6b49c00f18e00e7c7d82bc3c42a0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff03542d18e3a97dda6474ce4b7b2206"><td class="memItemLeft" align="right" valign="top">constexpr static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrDecoder.html#aff03542d18e3a97dda6474ce4b7b2206">invalid</a> = -1</td></tr>
+<tr class="separator:aff03542d18e3a97dda6474ce4b7b2206"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Abstract base class for all decoder classes. </p>
@@ -177,7 +180,7 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="IrDecoder_8h_source.html#l00014">14</a> of file <a class="el" href="IrDecoder_8h_source.html">IrDecoder.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IrDecoder_8h_source.html#l00019">19</a> of file <a class="el" href="IrDecoder_8h_source.html">IrDecoder.h</a>.</p>
 
 </div>
 </div>
@@ -245,7 +248,7 @@ Static Protected Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if the duration is long enough </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="IrDecoder_8h_source.html#l00056">56</a> of file <a class="el" href="IrDecoder_8h_source.html">IrDecoder.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IrDecoder_8h_source.html#l00069">69</a> of file <a class="el" href="IrDecoder_8h_source.html">IrDecoder.h</a>.</p>
 
 </div>
 </div>
@@ -275,7 +278,37 @@ Static Protected Attributes</h2></td></tr>
 <p>Returns true if the decode was successful. </p>
 <dl class="section return"><dt>Returns</dt><dd>validity </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="IrDecoder_8h_source.html#l00026">26</a> of file <a class="el" href="IrDecoder_8h_source.html">IrDecoder.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IrDecoder_8h_source.html#l00031">31</a> of file <a class="el" href="IrDecoder_8h_source.html">IrDecoder.h</a>.</p>
+
+</div>
+</div>
+<a id="aa046c6a5e9d10d36a105fb3b58ccf79b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa046c6a5e9d10d36a105fb3b58ccf79b">&#9670;&nbsp;</a></span>operator bool()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">IrDecoder::operator bool </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Same as <a class="el" href="classIrDecoder.html#a0afca7f90358419b4bb17b339bc36e57" title="Returns true if the decode was successful.">isValid()</a>. </p>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="IrDecoder_8h_source.html#l00039">39</a> of file <a class="el" href="IrDecoder_8h_source.html">IrDecoder.h</a>.</p>
 
 </div>
 </div>
@@ -312,7 +345,7 @@ Static Protected Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>success status </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="IrDecoder_8h_source.html#l00035">35</a> of file <a class="el" href="IrDecoder_8h_source.html">IrDecoder.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IrDecoder_8h_source.html#l00048">48</a> of file <a class="el" href="IrDecoder_8h_source.html">IrDecoder.h</a>.</p>
 
 </div>
 </div>
@@ -340,13 +373,13 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="IrDecoder_8h_source.html#l00047">47</a> of file <a class="el" href="IrDecoder_8h_source.html">IrDecoder.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IrDecoder_8h_source.html#l00060">60</a> of file <a class="el" href="IrDecoder_8h_source.html">IrDecoder.h</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a2ce6b49c00f18e00e7c7d82bc3c42a0a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2ce6b49c00f18e00e7c7d82bc3c42a0a">&#9670;&nbsp;</a></span>invalid</h2>
+<a id="aff03542d18e3a97dda6474ce4b7b2206"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff03542d18e3a97dda6474ce4b7b2206">&#9670;&nbsp;</a></span>invalid</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -355,17 +388,17 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const int IrDecoder::invalid = -1</td>
+          <td class="memname">constexpr static int IrDecoder::invalid = -1</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="IrDecoder_8h_source.html#l00046">46</a> of file <a class="el" href="IrDecoder_8h_source.html">IrDecoder.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="IrDecoder_8h_source.html#l00059">59</a> of file <a class="el" href="IrDecoder_8h_source.html">IrDecoder.h</a>.</p>
 
 </div>
 </div>
@@ -375,7 +408,7 @@ Static Protected Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jan 6 2021 20:39:14 for Infrared4Arduino by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
+Generated on Thu Feb 11 2021 10:34:33 for Infrared4Arduino by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
 </small></address>
 </body>
 </html>

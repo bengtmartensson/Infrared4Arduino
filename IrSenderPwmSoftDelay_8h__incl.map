@@ -4,10 +4,11 @@
 <area shape="rect" id="node3" href="$IrSenderPwmSoft_8h.html" title=" " alt="" coords="87,80,221,107"/>
 <area shape="rect" id="node4" href="$IrSenderPwm_8h.html" title=" " alt="" coords="154,155,266,181"/>
 <area shape="rect" id="node5" href="$IrSender_8h.html" title=" " alt="" coords="194,229,277,256"/>
-<area shape="rect" id="node9" href="$Board_8h.html" title=" " alt="" coords="334,304,401,331"/>
+<area shape="rect" id="node10" href="$Board_8h.html" title=" " alt="" coords="334,304,401,331"/>
 <area shape="rect" id="node6" href="$IrSignal_8h.html" title=" " alt="" coords="238,379,315,405"/>
 <area shape="rect" id="node7" href="$InfraredTypes_8h.html" title="This file defines some general data types that are used in the library." alt="" coords="238,528,350,555"/>
-<area shape="rect" id="node8" href="$IrSequence_8h.html" title=" " alt="" coords="301,453,399,480"/>
-<area shape="rect" id="node10" href="$PinModeStatus_8h.html" title=" " alt="" coords="339,379,462,405"/>
-<area shape="rect" id="node11" href="$NoBoard_8h.html" title=" " alt="" coords="487,379,613,405"/>
+<area shape="rect" id="node8" href="$IrSequence_8h.html" title=" " alt="" coords="289,453,387,480"/>
+<area shape="rect" id="node9" href="$version_8h.html" title=" " alt="" coords="411,453,486,480"/>
+<area shape="rect" id="node11" href="$PinModeStatus_8h.html" title=" " alt="" coords="339,379,462,405"/>
+<area shape="rect" id="node12" href="$NoBoard_8h.html" title=" " alt="" coords="487,379,613,405"/>
 </map>

@@ -1,8 +1,9 @@
 <map id="src/IrSequenceReader.h" name="src/IrSequenceReader.h">
-<area shape="rect" id="node1" title=" " alt="" coords="24,5,187,32"/>
-<area shape="rect" id="node2" href="$IrSignal_8h.html" title=" " alt="" coords="15,80,92,107"/>
-<area shape="rect" id="node6" href="$IrReader_8h.html" title=" " alt="" coords="116,80,199,107"/>
-<area shape="rect" id="node3" href="$InfraredTypes_8h.html" title="This file defines some general data types that are used in the library." alt="" coords="38,229,150,256"/>
-<area shape="rect" id="node5" href="$IrSequence_8h.html" title=" " alt="" coords="22,155,120,181"/>
-<area shape="rect" id="node4" title=" " alt="" coords="102,304,179,331"/>
+<area shape="rect" id="node1" title=" " alt="" coords="78,5,241,32"/>
+<area shape="rect" id="node2" href="$IrSignal_8h.html" title=" " alt="" coords="69,80,146,107"/>
+<area shape="rect" id="node7" href="$IrReader_8h.html" title=" " alt="" coords="173,80,255,107"/>
+<area shape="rect" id="node3" href="$InfraredTypes_8h.html" title="This file defines some general data types that are used in the library." alt="" coords="138,229,250,256"/>
+<area shape="rect" id="node5" href="$IrSequence_8h.html" title=" " alt="" coords="122,155,221,181"/>
+<area shape="rect" id="node6" href="$version_8h.html" title=" " alt="" coords="23,155,98,181"/>
+<area shape="rect" id="node4" title=" " alt="" coords="202,304,279,331"/>
 </map>

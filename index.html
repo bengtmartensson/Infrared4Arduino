@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Infrared4Arduino
-   &#160;<span id="projectnumber">1.1.1</span>
+   &#160;<span id="projectnumber">1.2.0</span>
    </div>
   </td>
  </tr>
@@ -67,14 +67,17 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="md_README"></a>Infrared4Arduino is an object-oriented infrared library for the Arduino.</p>
+<h1>NEWS</h1>
+<p><b>Version 1.2.0</b> constitutes a rather extensive refactoring, in particular regarding memory allocation. It now uses some of the features of "modern C++" (restricted to C++-11 for Arduino compatibility) (#16 and #17), like move semantics. For the API user, this means that the duration data used to call the constructors of <a class="el" href="classIrSequence.html" title="This class consists of a vector of durations.">IrSequence</a> and <a class="el" href="classIrSignal.html" title="This class models an IR signal with intro-, repeat-, and ending sequences.">IrSignal</a> are to be allocated using <code>new</code>, and are "moved" into the constructed objects. Also, MicroGirs has been removed. (The user should use <a href="https://github.com/bengtmartensson/AGirs">AGirs</a> instead.)</p>
+<h1>Introduction</h1>
 <p>The library was (with some exceptions detailed below) written from scratch by myself. It uses Michael Dreher's <a class="el" href="classIrWidget.html" title="Base class for classes based upon ICP pins capture.">IrWidget</a> <a href="http://www.mikrocontroller.net/articles/High-Speed_capture_mit_ATmega_Timer">(article in German)</a>, see also <a href="http://www.hifi-remote.com/forums/viewtopic.php?p=111876#111876">this forum contribution</a>.</p>
 <p>The main inspiration for the present work was the well-known library called IRremote, published by Ken Shirriff in <a href="http://www.righto.com/2009/08/multi-protocol-infrared-remote-library.html">his blog</a>, now <a href="https://github.com/z3t0/Arduino-IRremote">hosted on GitHub</a>. <a href="http://tech.cyborg5.com/irlib/">Chris Young's IRLib</a>, (<a href="https://github.com/cyborg5/IRLib">GitHub repo</a>), should also be mentioned as a source of inspiration, but not of code. The SAMD21 support (Arduino Zero and others) is based on issues in the IRremote repository, and in particular <a href="https://github.com/z3t0/Arduino-IRremote/pull/437">this pull request</a>. I am also indebted to <a href="https://forum.arduino.cc/index.php?topic=346731.0">this thread in the Arduino forum</a>. The ATMega4809 support (Arduino WiFi Rev 2 and Arduino Nano Every) is based upon <a href="https://github.com/z3t0/Arduino-IRremote/pull/657">this PR</a>. The Arduino <a class="el" href="classDue.html">Due</a> support is basically taken from <a href="https://github.com/enternoescape/Arduino-IRremote-Due">this project</a>, which is licensed under the LGPL 2.1 license. The Teensy 3.x support is based upon code in IRremote. The ESP32 support is based upon <a href="https://github.com/z3t0/Arduino-IRremote/pull/680">this pull request</a>.</p>
 <p>The classes <code><a class="el" href="classIrWidget.html" title="Base class for classes based upon ICP pins capture.">IrWidget</a></code> and <code><a class="el" href="classIrWidgetAggregating.html" title="This class implements the IrWidget.">IrWidgetAggregating</a></code> are based on Michael's code. The classes <code><a class="el" href="classIrReceiverSampler.html" title="This receiving class samples the input pin every 50 microseconds using a timer interrupt.">IrReceiverSampler</a></code> and <code><a class="el" href="classIrSenderPwm.html" title="Sending function using timer PWM.">IrSenderPwm</a></code>, are adapted from Kevin's work. The remaining files are almost completely written from scratch.</p>
 <p>This work is a low-level library (like <code>IRremote</code> and <code>IRLib</code>) that can be used in other projects, like <a href="https://github.com/bengtmartensson/AGirs">AGirs</a>, which is an high-level program taking commands interactively from a user or a program through a bi-directional <code>Stream</code>. The goal has been to provide a sound, object oriented basis for the fundamental basis, not to provide maximal functionality, the maximal number of protocols supported, or the most complete support of different hardware. A clean design and high readability, without being "too" inefficient, has been the highest priority. Dynamic memory allocation with <code>new</code> and <code>delete</code> is used extensively. The user who is afraid of this can create his required objects at the start of the run, and keep them. Most classes are immutable. The classes are <code>const</code>-correct.</p>
 <h1>Comparison with other infrared libraries</h1>
 <p>Here we list a (subjective!) selection of generic IR libraries for Arduino, with some (very personal) comments.</p>
-<h2><a href="https://github.com/z3t0/Arduino-IRremote">IRremote</a> by Ken Shirriff and others.</h2>
-<p>The original, that spawned all the rest! Now hosted <a href="https://github.com/z3t0/Arduino-IRremote/">here</a>. Unfortunately since several years "stale"; personally I have 3 pull requests open... License: LGPL2.1 (although a migration to MIT has been discussed).</p>
+<h2><a href="https://github.com/Arduino-IRremote/Arduino-IRremote">IRremote</a> by Ken Shirriff and others.</h2>
+<p>The original, that spawned all the rest! Now hosted <a href="https://github.com/Arduino-IRremote/Arduino-IRremote/">here</a>. Was "stale" for several years, presently changes daily. License: MIT.</p>
 <h2><a href="https://github.com/cyborg5/IRLib">IRlib version 1</a> and <a href="https://github.com/cyborg5/IRLib2">version 2</a> by Ken Shirriff and Chris Young.</h2>
 <p>Subjectively, this is a cleaned-up and modernized version of IRremote. The basic structure is very similar, and it thus suffers from many of the basic problems of IRremote. It comes with a very ambitious PDF manual (125 pages!) entirely written by hand (not using a documentation system like Doxygen). It supports most 8 bit AVRs and SAMDs, but not ESPs. The libraries are not available in the Arduino library manager, however they are available on <a href="https://platformio.org/lib/show/1735/IRLib2">PlatformIO</a>. Licenses: LGPL2.1 (IRLib), GPL3 (IRLib2).</p>
 <h2><a href="https://github.com/crankyoldgit/IRremoteESP8266">IRremoteESP8266</a> by David Conran, Ken Shirriff, and others.</h2>
@@ -82,16 +85,9 @@ $(function() {
 <h2><a href="https://github.com/NicoHood/IRLremote">IRLremote</a> by Nico Hood.</h2>
 <p>This "lightweight" library is written with the aim of minimal foot print on very small systems, like the ATTiny. License: MIT-like.</p>
 <h1>Forum</h1>
-<p>Feel free to open <a href="https://github.com/bengtmartensson/Infrared4Arduino/issues">issues at Github</a> should the need or desire arise. A possible place to discuss is the <a href="https://forum.arduino.cc/index.php?board=16.0">Home automation</a> or the <a href="https://forum.arduino.cc/index.php?board=10.0">Sensor</a> sub-forums at the Arduino forum.</p>
+<p>Feel free to open <a href="https://github.com/bengtmartensson/Infrared4Arduino/discussions">discussions</a> and <a href="https://github.com/bengtmartensson/Infrared4Arduino/issues">issues at Github</a> should the need or desire arise. Other possible place to discuss are the <a href="https://forum.arduino.cc/index.php?board=16.0">Home automation</a> or the <a href="https://forum.arduino.cc/index.php?board=10.0">Sensor</a> sub-forums at the Arduino forum.</p>
 <h1>Examples</h1>
 <p>A fairly large numbers of examples are provided. Most of these are a straight-forward demonstration of a particular class, as indicated by the name.</p>
-<p>However, one "example" is not really an "example" but a deployment program:</p>
-<h2>MicroGirs</h2>
-<p>This "example" implements a <a href="http://www.harctoolbox.org/Girs.html">Girs</a> server for the Arduino. It can be used with <a href="https://github.com/bengtmartensson/harctoolboxbundle">IrScrutinizer</a>, and <a href="http://lirc.org">Lirc</a> (using the <a href="http://lirc.org/html/girs.html">Girs driver</a>). It is an interactive server that can send and receive IR signals, with some bells and whistles. The interactive server is mainly meant for interact with other programs. communicating over a serial line, likely in USB disguise.</p>
-<p>MicroGirs is essentially a simplified version of <a href="https://github.com/bengtmartensson/AGirs">AGirs</a>, stripped of features seldomly used (LCD and (visible-light) LED support, Ethernet, etc). As opposed to AGirs, it does not depend on other libraries. For more documentation, see the AGirs project.</p>
-<p>There are a number of configuration options. These are all contained in the file <code>config.h</code> and consists of CPP <code>#defines</code>.</p>
-<p>MicroGirs is essentially functionally equivalent to "GirsLite".</p>
-<p>Unfortunately, it is not yet working on <a href="https://github.com/bengtmartensson/Infrared4Arduino/issues/48">SAMD</a> as well as <a href="https://github.com/bengtmartensson/Infrared4Arduino/issues/49">ESP and Teensy</a>.</p>
 <h1>API</h1>
 <p>admin <a href="http://bengtmartensson.github.io/Infrared4Arduino">Up-to-date API, generated by Doxygen</a>.</p>
 <h2>Types</h2>
@@ -107,7 +103,8 @@ $(function() {
 <h2>Class construction</h2>
 <p>For some receiving and transmitting classes, multiple instantiations are not sensible, for others, it may be. In this library, the classes that should only be instantiated once are implemented as singleton classes, i.e. with no public constructor, but instead a static "factory" method (<code>newThing()</code>) that delivers a pointer to a newly constructed instance of <code>Thing</code>, provided that <code>Thing</code> has not been instantiated before. The classes, where multiple instances is sensible, come with public constructors. (However, the user still has to take responsibility for avoiding pin- and timer-conflicts.)</p>
 <h2>Hardware configuration</h2>
-<p>For hardware support, the file <code>IRremoteInt.h</code> from the IRremote project is used. This means that all hardware that project supports is also supported here (for <code><a class="el" href="classIrReceiverSampler.html" title="This receiving class samples the input pin every 50 microseconds using a timer interrupt.">IrReceiverSampler</a></code> and <code><a class="el" href="classIrSenderPwm.html" title="Sending function using timer PWM.">IrSenderPwm</a></code>). (Actually, a small fix, borrowed from IRLib, was used to support Arduinos with ATMega32U4 (Leonardo, Micro).) However, <a class="el" href="classIrWidgetAggregating.html" title="This class implements the IrWidget.">IrWidgetAggregating</a> is currently supported on the boards Uno/Nano (<a class="el" href="classATmega328P.html">ATmega328P</a>), Leonardo/Micro (<a class="el" href="classATmega32U4.html">ATmega32U4</a>), and Mega2560 (<a class="el" href="classATmega2560.html">ATmega2560</a>).</p>
+<p><a class="el" href="classBoard.html" title="This class serves as an HAL (Hardware Abstraction Layer).">Board</a> specific hardware configuration is located in the class <a class="el" href="classBoard.html" title="This class serves as an HAL (Hardware Abstraction Layer).">Board</a>, and in the board specific files in <code>src/boards</code>.</p>
+<p>However, <a class="el" href="classIrWidgetAggregating.html" title="This class implements the IrWidget.">IrWidgetAggregating</a> is currently supported on the boards Uno/Nano (<a class="el" href="classATmega328P.html">ATmega328P</a>), Leonardo/Micro (<a class="el" href="classATmega32U4.html">ATmega32U4</a>), and Mega2560 (<a class="el" href="classATmega2560.html">ATmega2560</a>).</p>
 <p>Several of the sending and receiving classes take a GPIO pin as argument to the constructor. However, the sending pin of <code><a class="el" href="classIrSenderPwm.html" title="Sending function using timer PWM.">IrSenderPwm</a></code> and the capture pin of <code><a class="el" href="classIrWidgetAggregating.html" title="This class implements the IrWidget.">IrWidgetAggregating</a></code> are not configurable, but (due to hardware limitations) have to be taken from the following table: </p><pre class="fragment">                                       Sender Pin      Capture Pin
 Uno/Nano (ATmega328P)                       3             8
 Leonardo/Micro (ATmega32U4)                 9             4
@@ -120,7 +117,7 @@ ESP32                                       5           n/a
 </pre><p>In some cases, this can be relatively easily changed in the code. A later version of the library may support more elaborate configuration.</p>
 <p>The pin used by the the receivers (not to be confused with capture pins) can in general be selected freely, as long as it does not conflict with other requirements.</p>
 <h3>ESP8266</h3>
-<p>TODO.</p>
+<p>The ESP8266 is not a board very well suited for sending and receiving IR signals, since it lacks important features, as documented in <a href="https://github.com/bengtmartensson/Infrared4Arduino/issues/5#issuecomment-589957060">this issue</a>. Only the generic IR sender <a class="el" href="classIrSenderPwmSoftDelay.html" title="Sending function using timer PWM.">IrSenderPwmSoftDelay</a> and <a class="el" href="classIrSenderPwmSpinWait.html" title="This sender class generates the modulation in software, using spin wait.">IrSenderPwmSpinWait</a> as well as the generic IR receiver <a class="el" href="classIrReceiverPoll.html" title="An implementation of IrReceiver using polling of the input pin.">IrReceiverPoll</a> are available. For IR, please select another board if at all possible!</p>
 <h2>Timeouts</h2>
 <p>All the receiving classes adhere to the following conventions: When initialized, it waits up to the time <code>beginningTimeout</code> for the first on-period. If not received within that period, it returns with a timeout. Otherwise, is starts collecting data. It will collect data until one of the following occurs:</p><ul>
 <li>A silence of length <code>endingTimeout</code> has been detected. This is the normal ending. The detected last gap is returned with the data.</li>
@@ -139,7 +136,7 @@ ESP32                                       5           n/a
 <h2>Sending non-modulated signals.</h2>
 <p>RF signals (433 MHz and other carrier frequencies) do not use the IR typical modulation. Also there are a few IR protocols (like <a href="http://www.hifi-remote.com/forums/viewtopic.php?t=14186&amp;start=40">Revox, Barco, Archer</a>) not using modulation. These signals can be sent by the class <code><a class="el" href="classIrSenderNonMod.html" title="IrSender implementation without modulation, selectively with inverted output.">IrSenderNonMod</a></code>, after connecting suitable hardware capable of sending non-modulated (IR- <em>or</em> RF-) signals to the GPIO pin given as argument to the constructor.</p>
 <h2>Hash codes</h2>
-<p>This library does not, as opposed to some of its competitors, implement hash codes. I do not consider this a very useful feature: If the received signals conforms to a known protocol, use the parameters (instead of a hash code). If it is not known, you need some form of meta-protocol in order to construct a hash code. It is very hard to define the decision criteria. I have yet to see a sensible use case for receiving signals as hash codes, i.e. where a hash-code based solution has advantages over other solutions.</p>
+<p>Hash-based decoding is implemented in the class <a class="el" href="classHashDecoder.html" title="A decoder class using FNV-1 hashes of length 32.">HashDecoder</a>. For an example of use, see the example of LearningHashDecoder.</p>
 <h2>Event driven reception</h2>
 <p>IRLib and IRremoteESP8266 implements interrupt driven reception, but currently not this libary. It is <a href="https://github.com/bengtmartensson/Infrared4Arduino/issues/22">planned</a>.</p>
 <h1>Blinking during receive.</h1>
@@ -169,7 +166,7 @@ ESP32                                       5           n/a
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jan 6 2021 20:39:14 for Infrared4Arduino by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
+Generated on Thu Feb 11 2021 10:34:33 for Infrared4Arduino by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
 </small></address>
 </body>
 </html>

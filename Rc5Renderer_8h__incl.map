@@ -1,7 +1,8 @@
 <map id="src/Rc5Renderer.h" name="src/Rc5Renderer.h">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,136,32"/>
-<area shape="rect" id="node2" href="$IrSignal_8h.html" title=" " alt="" coords="32,80,109,107"/>
-<area shape="rect" id="node3" href="$InfraredTypes_8h.html" title="This file defines some general data types that are used in the library." alt="" coords="15,229,127,256"/>
-<area shape="rect" id="node5" href="$IrSequence_8h.html" title=" " alt="" coords="65,155,164,181"/>
-<area shape="rect" id="node4" title=" " alt="" coords="32,304,109,331"/>
+<area shape="rect" id="node1" title=" " alt="" coords="40,5,171,32"/>
+<area shape="rect" id="node2" href="$IrSignal_8h.html" title=" " alt="" coords="67,80,144,107"/>
+<area shape="rect" id="node3" href="$InfraredTypes_8h.html" title="This file defines some general data types that are used in the library." alt="" coords="5,229,117,256"/>
+<area shape="rect" id="node5" href="$IrSequence_8h.html" title=" " alt="" coords="56,155,155,181"/>
+<area shape="rect" id="node6" href="$version_8h.html" title=" " alt="" coords="179,155,253,181"/>
+<area shape="rect" id="node4" title=" " alt="" coords="23,304,100,331"/>
 </map>

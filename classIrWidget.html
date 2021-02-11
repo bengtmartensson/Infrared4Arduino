@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Infrared4Arduino
-   &#160;<span id="projectnumber">1.1.1</span>
+   &#160;<span id="projectnumber">1.2.0</span>
    </div>
   </td>
  </tr>
@@ -84,7 +84,7 @@ $(function() {
 Inheritance diagram for IrWidget:</div>
 <div class="dyncontent">
 <div class="center"><img src="classIrWidget__inherit__graph.png" border="0" usemap="#aIrWidget_inherit__map" alt="Inheritance graph"/></div>
-<map name="IrWidget_inherit__map" id="aIrWidget_inherit__map">
+<map name="IrWidget_inherit__map" id="IrWidget_inherit__map">
 <area shape="rect" title="Base class for classes based upon ICP pins capture." alt="" coords="40,80,111,107"/>
 <area shape="rect" href="classIrWidgetAggregating.html" title="This class implements the IrWidget." alt="" coords="5,155,145,181"/>
 <area shape="rect" href="classIrReader.html" title="Abstract base class for all IR readers, capturing or receiving." alt="" coords="40,5,111,32"/>
@@ -94,7 +94,7 @@ Inheritance diagram for IrWidget:</div>
 Collaboration diagram for IrWidget:</div>
 <div class="dyncontent">
 <div class="center"><img src="classIrWidget__coll__graph.png" border="0" usemap="#aIrWidget_coll__map" alt="Collaboration graph"/></div>
-<map name="IrWidget_coll__map" id="aIrWidget_coll__map">
+<map name="IrWidget_coll__map" id="IrWidget_coll__map">
 <area shape="rect" title="Base class for classes based upon ICP pins capture." alt="" coords="5,80,76,107"/>
 <area shape="rect" href="classIrReader.html" title="Abstract base class for all IR readers, capturing or receiving." alt="" coords="5,5,76,32"/>
 </map>
@@ -136,6 +136,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a03cc6f1b99d8aafce2e5a44375b57145 inherit pub_methods_classIrReader"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrReader.html#a03cc6f1b99d8aafce2e5a44375b57145">disable</a> ()</td></tr>
 <tr class="memdesc:a03cc6f1b99d8aafce2e5a44375b57145 inherit pub_methods_classIrReader"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop reception of IR data.  <a href="classIrReader.html#a03cc6f1b99d8aafce2e5a44375b57145">More...</a><br /></td></tr>
 <tr class="separator:a03cc6f1b99d8aafce2e5a44375b57145 inherit pub_methods_classIrReader"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7edeec5bfea084d6a3fe9673a5f461dc inherit pub_methods_classIrReader"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrReader.html#a7edeec5bfea084d6a3fe9673a5f461dc">operator bool</a> () const</td></tr>
+<tr class="memdesc:a7edeec5bfea084d6a3fe9673a5f461dc inherit pub_methods_classIrReader"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as <a class="el" href="classIrReader.html#a0d5310fbb90701b54b00542fbd60356a" title="Returns true if there is collected data.">isReady()</a>  <a href="classIrReader.html#a7edeec5bfea084d6a3fe9673a5f461dc">More...</a><br /></td></tr>
+<tr class="separator:a7edeec5bfea084d6a3fe9673a5f461dc inherit pub_methods_classIrReader"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc437af677c211cf7961d5f5e810ef21 inherit pub_methods_classIrReader"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classIrSequence.html">IrSequence</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrReader.html#abc437af677c211cf7961d5f5e810ef21">toIrSequence</a> () const</td></tr>
 <tr class="memdesc:abc437af677c211cf7961d5f5e810ef21 inherit pub_methods_classIrReader"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates an <a class="el" href="classIrSequence.html" title="This class consists of a vector of durations.">IrSequence</a> from the <a class="el" href="classIrReader.html" title="Abstract base class for all IR readers, capturing or receiving.">IrReader</a>.  <a href="classIrReader.html#abc437af677c211cf7961d5f5e810ef21">More...</a><br /></td></tr>
 <tr class="separator:abc437af677c211cf7961d5f5e810ef21 inherit pub_methods_classIrReader"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -156,18 +159,18 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
-<tr class="memitem:a62eadb2cee8e29408cea9f5b3c91e36e"><td class="memItemLeft" align="right" valign="top">static const int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrWidget.html#a62eadb2cee8e29408cea9f5b3c91e36e">defaultMarkExcess</a> = 0</td></tr>
-<tr class="separator:a62eadb2cee8e29408cea9f5b3c91e36e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d01530870632c70b8f849898c5a6fb6"><td class="memItemLeft" align="right" valign="top">static constexpr int16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrWidget.html#a0d01530870632c70b8f849898c5a6fb6">defaultMarkExcess</a> = 0</td></tr>
+<tr class="separator:a0d01530870632c70b8f849898c5a6fb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5c8198e8ffc290c8cc9b020f0362fc89"><td class="memItemLeft" align="right" valign="top">static const bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrWidget.html#a5c8198e8ffc290c8cc9b020f0362fc89">invertingSensor</a> = true</td></tr>
 <tr class="memdesc:a5c8198e8ffc290c8cc9b020f0362fc89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set true means if sensor signal is inverted (low = signal on) (false has not been tested, and is not supported).  <a href="classIrWidget.html#a5c8198e8ffc290c8cc9b020f0362fc89">More...</a><br /></td></tr>
 <tr class="separator:a5c8198e8ffc290c8cc9b020f0362fc89"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_static_attribs_classIrReader"><td colspan="2" onclick="javascript:toggleInherit('pub_static_attribs_classIrReader')"><img src="closed.png" alt="-"/>&#160;Static Public Attributes inherited from <a class="el" href="classIrReader.html">IrReader</a></td></tr>
-<tr class="memitem:a201bae13abde0dc6d651bed6996a0971 inherit pub_static_attribs_classIrReader"><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="InfraredTypes_8h.html#ace35cfd2245c700198afb856211d7bcd">milliseconds_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrReader.html#a201bae13abde0dc6d651bed6996a0971">defaultBeginningTimeout</a> = 2000U</td></tr>
-<tr class="separator:a201bae13abde0dc6d651bed6996a0971 inherit pub_static_attribs_classIrReader"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abc38b9273f11c962ee7091bb14a7c53d inherit pub_static_attribs_classIrReader"><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="InfraredTypes_8h.html#ace35cfd2245c700198afb856211d7bcd">milliseconds_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrReader.html#abc38b9273f11c962ee7091bb14a7c53d">defaultEndingTimeout</a> = 30U</td></tr>
-<tr class="separator:abc38b9273f11c962ee7091bb14a7c53d inherit pub_static_attribs_classIrReader"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d436bfbd3cbca9ab834f0a6398c377d inherit pub_static_attribs_classIrReader"><td class="memItemLeft" align="right" valign="top">static const size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrReader.html#a1d436bfbd3cbca9ab834f0a6398c377d">defaultCaptureLength</a> = 100U</td></tr>
-<tr class="separator:a1d436bfbd3cbca9ab834f0a6398c377d inherit pub_static_attribs_classIrReader"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab048b0b98a743fb15efd19261b9a9dde inherit pub_static_attribs_classIrReader"><td class="memItemLeft" align="right" valign="top">static constexpr <a class="el" href="InfraredTypes_8h.html#ace35cfd2245c700198afb856211d7bcd">milliseconds_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrReader.html#ab048b0b98a743fb15efd19261b9a9dde">defaultBeginningTimeout</a> = 2000U</td></tr>
+<tr class="separator:ab048b0b98a743fb15efd19261b9a9dde inherit pub_static_attribs_classIrReader"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa347d7724edfacca143a1d5b2e99b7cc inherit pub_static_attribs_classIrReader"><td class="memItemLeft" align="right" valign="top">static constexpr <a class="el" href="InfraredTypes_8h.html#ace35cfd2245c700198afb856211d7bcd">milliseconds_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrReader.html#aa347d7724edfacca143a1d5b2e99b7cc">defaultEndingTimeout</a> = 30U</td></tr>
+<tr class="separator:aa347d7724edfacca143a1d5b2e99b7cc inherit pub_static_attribs_classIrReader"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4810d1c2d4151e306446889bbaed955d inherit pub_static_attribs_classIrReader"><td class="memItemLeft" align="right" valign="top">static constexpr size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrReader.html#a4810d1c2d4151e306446889bbaed955d">defaultCaptureLength</a> = 100U</td></tr>
+<tr class="separator:a4810d1c2d4151e306446889bbaed955d inherit pub_static_attribs_classIrReader"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-types"></a>
 Protected Types</h2></td></tr>
@@ -176,7 +179,7 @@ Protected Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a399814d6fa81bdb4bbb0a5991a9e2b3a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrWidget.html#a399814d6fa81bdb4bbb0a5991a9e2b3a">IrWidget</a> (size_t captureLength=<a class="el" href="classIrReader.html#a1d436bfbd3cbca9ab834f0a6398c377d">defaultCaptureLength</a>, bool pullup=false, int16_t <a class="el" href="classIrReader.html#a5ed55a23db0dd9ae2f6ccfe107802e54">markExcess</a>=<a class="el" href="classIrWidget.html#a62eadb2cee8e29408cea9f5b3c91e36e">defaultMarkExcess</a>, <a class="el" href="InfraredTypes_8h.html#ace35cfd2245c700198afb856211d7bcd">milliseconds_t</a> <a class="el" href="classIrReader.html#a6e59cf708a5d470e928b09ed19bd9744">beginningTimeout</a>=<a class="el" href="classIrReader.html#a201bae13abde0dc6d651bed6996a0971">defaultBeginningTimeout</a>, <a class="el" href="InfraredTypes_8h.html#ace35cfd2245c700198afb856211d7bcd">milliseconds_t</a> <a class="el" href="classIrWidget.html#ae391c1ef6f89a4bdaa88ad86e695705a">endingTimeout</a>=<a class="el" href="classIrReader.html#abc38b9273f11c962ee7091bb14a7c53d">defaultEndingTimeout</a>)</td></tr>
+<tr class="memitem:a399814d6fa81bdb4bbb0a5991a9e2b3a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrWidget.html#a399814d6fa81bdb4bbb0a5991a9e2b3a">IrWidget</a> (size_t captureLength=<a class="el" href="classIrReader.html#a4810d1c2d4151e306446889bbaed955d">defaultCaptureLength</a>, bool pullup=false, int16_t <a class="el" href="classIrReader.html#a5ed55a23db0dd9ae2f6ccfe107802e54">markExcess</a>=<a class="el" href="classIrWidget.html#a0d01530870632c70b8f849898c5a6fb6">defaultMarkExcess</a>, <a class="el" href="InfraredTypes_8h.html#ace35cfd2245c700198afb856211d7bcd">milliseconds_t</a> <a class="el" href="classIrReader.html#a6e59cf708a5d470e928b09ed19bd9744">beginningTimeout</a>=<a class="el" href="classIrReader.html#ab048b0b98a743fb15efd19261b9a9dde">defaultBeginningTimeout</a>, <a class="el" href="InfraredTypes_8h.html#ace35cfd2245c700198afb856211d7bcd">milliseconds_t</a> <a class="el" href="classIrWidget.html#ae391c1ef6f89a4bdaa88ad86e695705a">endingTimeout</a>=<a class="el" href="classIrReader.html#aa347d7724edfacca143a1d5b2e99b7cc">defaultEndingTimeout</a>)</td></tr>
 <tr class="separator:a399814d6fa81bdb4bbb0a5991a9e2b3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aacd912c2cb3b959886a52fb0280a54a8"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrWidget.html#aacd912c2cb3b959886a52fb0280a54a8">~IrWidget</a> ()</td></tr>
 <tr class="separator:aacd912c2cb3b959886a52fb0280a54a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -229,10 +232,10 @@ Protected Attributes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-attribs"></a>
 Static Protected Attributes</h2></td></tr>
-<tr class="memitem:a081b8f6220cbfccc0bc67f463e5078e3"><td class="memItemLeft" align="right" valign="top">static const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrWidget.html#a081b8f6220cbfccc0bc67f463e5078e3">RANGE_EXTENSION_BITS</a> = 4</td></tr>
-<tr class="separator:a081b8f6220cbfccc0bc67f463e5078e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a194bd38203da4a26da25e24f0adfdfbc"><td class="memItemLeft" align="right" valign="top">static const uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrWidget.html#a194bd38203da4a26da25e24f0adfdfbc">sampleSize</a> = 2</td></tr>
-<tr class="separator:a194bd38203da4a26da25e24f0adfdfbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9559347546a5553a42ed99cd776f1c17"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrWidget.html#a9559347546a5553a42ed99cd776f1c17">RANGE_EXTENSION_BITS</a> = 4</td></tr>
+<tr class="separator:a9559347546a5553a42ed99cd776f1c17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3fab0fb695b1b397200dd7fef5655b25"><td class="memItemLeft" align="right" valign="top">static constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrWidget.html#a3fab0fb695b1b397200dd7fef5655b25">sampleSize</a> = 2</td></tr>
+<tr class="separator:a3fab0fb695b1b397200dd7fef5655b25"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Base class for classes based upon ICP pins capture. </p>
@@ -278,7 +281,7 @@ Static Protected Attributes</h2></td></tr>
           <td class="memname">IrWidget::IrWidget </td>
           <td>(</td>
           <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>captureLength</em> = <code><a class="el" href="classIrReader.html#a1d436bfbd3cbca9ab834f0a6398c377d">defaultCaptureLength</a></code>, </td>
+          <td class="paramname"><em>captureLength</em> = <code><a class="el" href="classIrReader.html#a4810d1c2d4151e306446889bbaed955d">defaultCaptureLength</a></code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -290,19 +293,19 @@ Static Protected Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int16_t&#160;</td>
-          <td class="paramname"><em>markExcess</em> = <code><a class="el" href="classIrWidget.html#a62eadb2cee8e29408cea9f5b3c91e36e">defaultMarkExcess</a></code>, </td>
+          <td class="paramname"><em>markExcess</em> = <code><a class="el" href="classIrWidget.html#a0d01530870632c70b8f849898c5a6fb6">defaultMarkExcess</a></code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="InfraredTypes_8h.html#ace35cfd2245c700198afb856211d7bcd">milliseconds_t</a>&#160;</td>
-          <td class="paramname"><em>beginningTimeout</em> = <code><a class="el" href="classIrReader.html#a201bae13abde0dc6d651bed6996a0971">defaultBeginningTimeout</a></code>, </td>
+          <td class="paramname"><em>beginningTimeout</em> = <code><a class="el" href="classIrReader.html#ab048b0b98a743fb15efd19261b9a9dde">defaultBeginningTimeout</a></code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="InfraredTypes_8h.html#ace35cfd2245c700198afb856211d7bcd">milliseconds_t</a>&#160;</td>
-          <td class="paramname"><em>endingTimeout</em> = <code><a class="el" href="classIrReader.html#abc38b9273f11c962ee7091bb14a7c53d">defaultEndingTimeout</a></code>&#160;</td>
+          <td class="paramname"><em>endingTimeout</em> = <code><a class="el" href="classIrReader.html#aa347d7724edfacca143a1d5b2e99b7cc">defaultEndingTimeout</a></code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -825,8 +828,8 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a62eadb2cee8e29408cea9f5b3c91e36e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a62eadb2cee8e29408cea9f5b3c91e36e">&#9670;&nbsp;</a></span>defaultMarkExcess</h2>
+<a id="a0d01530870632c70b8f849898c5a6fb6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d01530870632c70b8f849898c5a6fb6">&#9670;&nbsp;</a></span>defaultMarkExcess</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -835,12 +838,12 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const int16_t IrWidget::defaultMarkExcess = 0</td>
+          <td class="memname">constexpr int16_t IrWidget::defaultMarkExcess = 0</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -923,8 +926,8 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a081b8f6220cbfccc0bc67f463e5078e3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a081b8f6220cbfccc0bc67f463e5078e3">&#9670;&nbsp;</a></span>RANGE_EXTENSION_BITS</h2>
+<a id="a9559347546a5553a42ed99cd776f1c17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9559347546a5553a42ed99cd776f1c17">&#9670;&nbsp;</a></span>RANGE_EXTENSION_BITS</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -933,12 +936,12 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const uint8_t IrWidget::RANGE_EXTENSION_BITS = 4</td>
+          <td class="memname">constexpr uint8_t IrWidget::RANGE_EXTENSION_BITS = 4</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -947,8 +950,8 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a194bd38203da4a26da25e24f0adfdfbc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a194bd38203da4a26da25e24f0adfdfbc">&#9670;&nbsp;</a></span>sampleSize</h2>
+<a id="a3fab0fb695b1b397200dd7fef5655b25"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3fab0fb695b1b397200dd7fef5655b25">&#9670;&nbsp;</a></span>sampleSize</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -957,12 +960,12 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const uint8_t IrWidget::sampleSize = 2</td>
+          <td class="memname">constexpr uint8_t IrWidget::sampleSize = 2</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -977,7 +980,7 @@ Static Protected Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jan 6 2021 20:39:14 for Infrared4Arduino by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
+Generated on Thu Feb 11 2021 10:34:33 for Infrared4Arduino by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
 </small></address>
 </body>
 </html>

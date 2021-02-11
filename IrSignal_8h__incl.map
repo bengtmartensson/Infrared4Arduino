@@ -1,6 +1,7 @@
 <map id="src/IrSignal.h" name="src/IrSignal.h">
-<area shape="rect" id="node1" title=" " alt="" coords="12,5,111,32"/>
+<area shape="rect" id="node1" title=" " alt="" coords="56,5,155,32"/>
 <area shape="rect" id="node2" href="$InfraredTypes_8h.html" title="This file defines some general data types that are used in the library." alt="" coords="5,155,117,181"/>
 <area shape="rect" id="node4" href="$IrSequence_8h.html" title=" " alt="" coords="56,80,155,107"/>
+<area shape="rect" id="node5" href="$version_8h.html" title=" " alt="" coords="179,80,253,107"/>
 <area shape="rect" id="node3" title=" " alt="" coords="23,229,100,256"/>
 </map>

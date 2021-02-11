@@ -2,12 +2,13 @@
 <area shape="rect" id="node1" title=" " alt="" coords="97,5,273,32"/>
 <area shape="rect" id="node2" title=" " alt="" coords="68,603,145,629"/>
 <area shape="rect" id="node3" href="$Board_8h.html" title=" " alt="" coords="303,304,369,331"/>
-<area shape="rect" id="node9" href="$IrSenderPwmHard_8h.html" title=" " alt="" coords="115,80,255,107"/>
+<area shape="rect" id="node10" href="$IrSenderPwmHard_8h.html" title=" " alt="" coords="115,80,255,107"/>
 <area shape="rect" id="node4" href="$IrSignal_8h.html" title=" " alt="" coords="195,379,272,405"/>
-<area shape="rect" id="node7" href="$PinModeStatus_8h.html" title=" " alt="" coords="296,379,419,405"/>
-<area shape="rect" id="node8" href="$NoBoard_8h.html" title=" " alt="" coords="443,379,570,405"/>
-<area shape="rect" id="node5" href="$InfraredTypes_8h.html" title="This file defines some general data types that are used in the library." alt="" coords="195,528,307,555"/>
-<area shape="rect" id="node6" href="$IrSequence_8h.html" title=" " alt="" coords="257,453,356,480"/>
-<area shape="rect" id="node10" href="$IrSenderPwm_8h.html" title=" " alt="" coords="129,155,241,181"/>
-<area shape="rect" id="node11" href="$IrSender_8h.html" title=" " alt="" coords="144,229,227,256"/>
+<area shape="rect" id="node8" href="$PinModeStatus_8h.html" title=" " alt="" coords="296,379,419,405"/>
+<area shape="rect" id="node9" href="$NoBoard_8h.html" title=" " alt="" coords="443,379,570,405"/>
+<area shape="rect" id="node5" href="$InfraredTypes_8h.html" title="This file defines some general data types that are used in the library." alt="" coords="287,528,399,555"/>
+<area shape="rect" id="node6" href="$IrSequence_8h.html" title=" " alt="" coords="293,453,392,480"/>
+<area shape="rect" id="node7" href="$version_8h.html" title=" " alt="" coords="195,453,269,480"/>
+<area shape="rect" id="node11" href="$IrSenderPwm_8h.html" title=" " alt="" coords="129,155,241,181"/>
+<area shape="rect" id="node12" href="$IrSender_8h.html" title=" " alt="" coords="144,229,227,256"/>
 </map>

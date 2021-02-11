@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Infrared4Arduino
-   &#160;<span id="projectnumber">1.1.1</span>
+   &#160;<span id="projectnumber">1.2.0</span>
    </div>
   </td>
  </tr>
@@ -78,7 +78,7 @@ $(function() {
 Inheritance diagram for IrSenderSimulator:</div>
 <div class="dyncontent">
 <div class="center"><img src="classIrSenderSimulator__inherit__graph.png" border="0" usemap="#aIrSenderSimulator_inherit__map" alt="Inheritance graph"/></div>
-<map name="IrSenderSimulator_inherit__map" id="aIrSenderSimulator_inherit__map">
+<map name="IrSenderSimulator_inherit__map" id="IrSenderSimulator_inherit__map">
 <area shape="rect" title="Simulates sending in the sense that it prints the IrSequences on the Stream given as argument." alt="" coords="5,80,132,107"/>
 <area shape="rect" href="classIrSender.html" title="Abstract base class for all sending classes." alt="" coords="33,5,104,32"/>
 </map>
@@ -87,7 +87,7 @@ Inheritance diagram for IrSenderSimulator:</div>
 Collaboration diagram for IrSenderSimulator:</div>
 <div class="dyncontent">
 <div class="center"><img src="classIrSenderSimulator__coll__graph.png" border="0" usemap="#aIrSenderSimulator_coll__map" alt="Collaboration graph"/></div>
-<map name="IrSenderSimulator_coll__map" id="aIrSenderSimulator_coll__map">
+<map name="IrSenderSimulator_coll__map" id="IrSenderSimulator_coll__map">
 <area shape="rect" title="Simulates sending in the sense that it prints the IrSequences on the Stream given as argument." alt="" coords="5,80,132,107"/>
 <area shape="rect" href="classIrSender.html" title="Abstract base class for all sending classes." alt="" coords="33,5,104,32"/>
 </map>
@@ -101,7 +101,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a7cf1301b14486c269ad751302ea8ae0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2a017d9d85c05b20a2fcf603984b24cc"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrSenderSimulator.html#a2a017d9d85c05b20a2fcf603984b24cc">~IrSenderSimulator</a> ()</td></tr>
 <tr class="separator:a2a017d9d85c05b20a2fcf603984b24cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a75ebe0fc49c9801a36ff790f12ad83eb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrSenderSimulator.html#a75ebe0fc49c9801a36ff790f12ad83eb">send</a> (const <a class="el" href="classIrSequence.html">IrSequence</a> &amp;irSequence, <a class="el" href="InfraredTypes_8h.html#ab35ca91fa7f5b34afafe58828ccf58db">frequency_t</a> frequency=<a class="el" href="classIrSignal.html#a03aeed233443abe289f0910df1998841">IrSignal::defaultFrequency</a>, <a class="el" href="InfraredTypes_8h.html#a4b290cd91cfd9ca0826a166e03fb993d">dutycycle_t</a> dutyCycle=<a class="el" href="classBoard.html#ac142427d3fa45ff5e95832da2ef36803">Board::defaultDutyCycle</a>)</td></tr>
+<tr class="memitem:a75ebe0fc49c9801a36ff790f12ad83eb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrSenderSimulator.html#a75ebe0fc49c9801a36ff790f12ad83eb">send</a> (const <a class="el" href="classIrSequence.html">IrSequence</a> &amp;irSequence, <a class="el" href="InfraredTypes_8h.html#ab35ca91fa7f5b34afafe58828ccf58db">frequency_t</a> frequency=<a class="el" href="classIrSignal.html#aad50e8c5b10cfaabbd2c59b3b9bae5c0">IrSignal::defaultFrequency</a>, <a class="el" href="InfraredTypes_8h.html#a4b290cd91cfd9ca0826a166e03fb993d">dutycycle_t</a> dutyCycle=<a class="el" href="classBoard.html#ac142427d3fa45ff5e95832da2ef36803">Board::defaultDutyCycle</a>)</td></tr>
 <tr class="memdesc:a75ebe0fc49c9801a36ff790f12ad83eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends an <a class="el" href="classIrSequence.html" title="This class consists of a vector of durations.">IrSequence</a> with the prescribed frequency.  <a href="classIrSenderSimulator.html#a75ebe0fc49c9801a36ff790f12ad83eb">More...</a><br /></td></tr>
 <tr class="separator:a75ebe0fc49c9801a36ff790f12ad83eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a043077325741fdf5bb4924a9d5ac01d7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrSenderSimulator.html#a043077325741fdf5bb4924a9d5ac01d7">enable</a> (<a class="el" href="InfraredTypes_8h.html#ab35ca91fa7f5b34afafe58828ccf58db">frequency_t</a>, <a class="el" href="InfraredTypes_8h.html#a4b290cd91cfd9ca0826a166e03fb993d">dutycycle_t</a> d __attribute__((unused))=<a class="el" href="classBoard.html#ac142427d3fa45ff5e95832da2ef36803">Board::defaultDutyCycle</a>)</td></tr>
@@ -287,7 +287,7 @@ Additional Inherited Members</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="InfraredTypes_8h.html#ab35ca91fa7f5b34afafe58828ccf58db">frequency_t</a>&#160;</td>
-          <td class="paramname"><em>frequency</em> = <code><a class="el" href="classIrSignal.html#a03aeed233443abe289f0910df1998841">IrSignal::defaultFrequency</a></code>, </td>
+          <td class="paramname"><em>frequency</em> = <code><a class="el" href="classIrSignal.html#aad50e8c5b10cfaabbd2c59b3b9bae5c0">IrSignal::defaultFrequency</a></code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -313,6 +313,7 @@ Additional Inherited Members</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">irSequence</td><td></td></tr>
     <tr><td class="paramname">frequency</td><td>frequency in Hz </td></tr>
+    <tr><td class="paramname">dutyCycle</td><td></td></tr>
   </table>
   </dd>
 </dl>
@@ -390,7 +391,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jan 6 2021 20:39:14 for Infrared4Arduino by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
+Generated on Thu Feb 11 2021 10:34:33 for Infrared4Arduino by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
 </small></address>
 </body>
 </html>

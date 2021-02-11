@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Infrared4Arduino
-   &#160;<span id="projectnumber">1.1.1</span>
+   &#160;<span id="projectnumber">1.2.0</span>
    </div>
   </td>
  </tr>
@@ -80,7 +80,7 @@ $(function() {
 Inheritance diagram for IrReceiver:</div>
 <div class="dyncontent">
 <div class="center"><img src="classIrReceiver__inherit__graph.png" border="0" usemap="#aIrReceiver_inherit__map" alt="Inheritance graph"/></div>
-<map name="IrReceiver_inherit__map" id="aIrReceiver_inherit__map">
+<map name="IrReceiver_inherit__map" id="IrReceiver_inherit__map">
 <area shape="rect" title="Abstract base class for demodulating IR receivers." alt="" coords="86,80,166,107"/>
 <area shape="rect" href="classIrReceiverPoll.html" title="An implementation of IrReceiver using polling of the input pin." alt="" coords="5,155,108,181"/>
 <area shape="rect" href="classIrReceiverSampler.html" title="This receiving class samples the input pin every 50 microseconds using a timer interrupt." alt="" coords="133,155,261,181"/>
@@ -91,7 +91,7 @@ Inheritance diagram for IrReceiver:</div>
 Collaboration diagram for IrReceiver:</div>
 <div class="dyncontent">
 <div class="center"><img src="classIrReceiver__coll__graph.png" border="0" usemap="#aIrReceiver_coll__map" alt="Collaboration graph"/></div>
-<map name="IrReceiver_coll__map" id="aIrReceiver_coll__map">
+<map name="IrReceiver_coll__map" id="IrReceiver_coll__map">
 <area shape="rect" title="Abstract base class for demodulating IR receivers." alt="" coords="5,80,85,107"/>
 <area shape="rect" href="classIrReader.html" title="Abstract base class for all IR readers, capturing or receiving." alt="" coords="10,5,81,32"/>
 </map>
@@ -107,7 +107,7 @@ Public Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aceb3228d8af94cb49dc73cc5afdea95a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrReceiver.html#aceb3228d8af94cb49dc73cc5afdea95a">IrReceiver</a> (size_t bufSize, <a class="el" href="InfraredTypes_8h.html#aede467d93ddeb5fdeff6023236aa4ad6">pin_t</a> pin, bool pullup=false, <a class="el" href="InfraredTypes_8h.html#a5a4323547cf58895464e841b9b424384">microseconds_t</a> <a class="el" href="classIrReader.html#a5ed55a23db0dd9ae2f6ccfe107802e54">markExcess</a>=<a class="el" href="classIrReceiver.html#a533ebfd1985e9d697ec966ed6cbc2ddf">defaultMarkExcess</a>)</td></tr>
+<tr class="memitem:aceb3228d8af94cb49dc73cc5afdea95a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrReceiver.html#aceb3228d8af94cb49dc73cc5afdea95a">IrReceiver</a> (size_t bufSize, <a class="el" href="InfraredTypes_8h.html#aede467d93ddeb5fdeff6023236aa4ad6">pin_t</a> pin, bool pullup=false, <a class="el" href="InfraredTypes_8h.html#a5a4323547cf58895464e841b9b424384">microseconds_t</a> <a class="el" href="classIrReader.html#a5ed55a23db0dd9ae2f6ccfe107802e54">markExcess</a>=<a class="el" href="classIrReceiver.html#a798592aa3b0df963895b60881afa7d2f">defaultMarkExcess</a>)</td></tr>
 <tr class="memdesc:aceb3228d8af94cb49dc73cc5afdea95a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="classIrReceiver.html#aceb3228d8af94cb49dc73cc5afdea95a">More...</a><br /></td></tr>
 <tr class="separator:aceb3228d8af94cb49dc73cc5afdea95a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac536014f68efeca1b7c2883f04d5967c"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrReceiver.html#ac536014f68efeca1b7c2883f04d5967c">~IrReceiver</a> ()</td></tr>
@@ -132,6 +132,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0d5310fbb90701b54b00542fbd60356a inherit pub_methods_classIrReader"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrReader.html#a0d5310fbb90701b54b00542fbd60356a">isReady</a> () const =0</td></tr>
 <tr class="memdesc:a0d5310fbb90701b54b00542fbd60356a inherit pub_methods_classIrReader"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if there is collected data.  <a href="classIrReader.html#a0d5310fbb90701b54b00542fbd60356a">More...</a><br /></td></tr>
 <tr class="separator:a0d5310fbb90701b54b00542fbd60356a inherit pub_methods_classIrReader"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7edeec5bfea084d6a3fe9673a5f461dc inherit pub_methods_classIrReader"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrReader.html#a7edeec5bfea084d6a3fe9673a5f461dc">operator bool</a> () const</td></tr>
+<tr class="memdesc:a7edeec5bfea084d6a3fe9673a5f461dc inherit pub_methods_classIrReader"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as <a class="el" href="classIrReader.html#a0d5310fbb90701b54b00542fbd60356a" title="Returns true if there is collected data.">isReady()</a>  <a href="classIrReader.html#a7edeec5bfea084d6a3fe9673a5f461dc">More...</a><br /></td></tr>
+<tr class="separator:a7edeec5bfea084d6a3fe9673a5f461dc inherit pub_methods_classIrReader"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a231b93b53da4e0d10f9683d3b2696846 inherit pub_methods_classIrReader"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrReader.html#a231b93b53da4e0d10f9683d3b2696846">getDataLength</a> () const =0</td></tr>
 <tr class="memdesc:a231b93b53da4e0d10f9683d3b2696846 inherit pub_methods_classIrReader"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of collected durations.  <a href="classIrReader.html#a231b93b53da4e0d10f9683d3b2696846">More...</a><br /></td></tr>
 <tr class="separator:a231b93b53da4e0d10f9683d3b2696846 inherit pub_methods_classIrReader"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -165,20 +168,20 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
-<tr class="memitem:a0193e518d3254f388a844786018e881a"><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="InfraredTypes_8h.html#aede467d93ddeb5fdeff6023236aa4ad6">pin_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrReceiver.html#a0193e518d3254f388a844786018e881a">defaultPin</a> = 5</td></tr>
-<tr class="separator:a0193e518d3254f388a844786018e881a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a533ebfd1985e9d697ec966ed6cbc2ddf"><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="InfraredTypes_8h.html#a5a4323547cf58895464e841b9b424384">microseconds_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrReceiver.html#a533ebfd1985e9d697ec966ed6cbc2ddf">defaultMarkExcess</a> = 50U</td></tr>
-<tr class="separator:a533ebfd1985e9d697ec966ed6cbc2ddf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a92dab6417cf1cb825300716631b64c7e"><td class="memItemLeft" align="right" valign="top">static const bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrReceiver.html#a92dab6417cf1cb825300716631b64c7e">invertingSensor</a> = true</td></tr>
-<tr class="memdesc:a92dab6417cf1cb825300716631b64c7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Are we using inverting sensor, like most TSOPs?  <a href="classIrReceiver.html#a92dab6417cf1cb825300716631b64c7e">More...</a><br /></td></tr>
-<tr class="separator:a92dab6417cf1cb825300716631b64c7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb8c13da823c22a91ae2ef6852729c9d"><td class="memItemLeft" align="right" valign="top">static constexpr <a class="el" href="InfraredTypes_8h.html#aede467d93ddeb5fdeff6023236aa4ad6">pin_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrReceiver.html#acb8c13da823c22a91ae2ef6852729c9d">defaultPin</a> = 5</td></tr>
+<tr class="separator:acb8c13da823c22a91ae2ef6852729c9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a798592aa3b0df963895b60881afa7d2f"><td class="memItemLeft" align="right" valign="top">static constexpr <a class="el" href="InfraredTypes_8h.html#a5a4323547cf58895464e841b9b424384">microseconds_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrReceiver.html#a798592aa3b0df963895b60881afa7d2f">defaultMarkExcess</a> = 50U</td></tr>
+<tr class="separator:a798592aa3b0df963895b60881afa7d2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28d1ab4a3729e61c043114a515001ebf"><td class="memItemLeft" align="right" valign="top">static constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrReceiver.html#a28d1ab4a3729e61c043114a515001ebf">invertingSensor</a> = true</td></tr>
+<tr class="memdesc:a28d1ab4a3729e61c043114a515001ebf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Are we using inverting sensor, like most TSOPs?  <a href="classIrReceiver.html#a28d1ab4a3729e61c043114a515001ebf">More...</a><br /></td></tr>
+<tr class="separator:a28d1ab4a3729e61c043114a515001ebf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_static_attribs_classIrReader"><td colspan="2" onclick="javascript:toggleInherit('pub_static_attribs_classIrReader')"><img src="closed.png" alt="-"/>&#160;Static Public Attributes inherited from <a class="el" href="classIrReader.html">IrReader</a></td></tr>
-<tr class="memitem:a201bae13abde0dc6d651bed6996a0971 inherit pub_static_attribs_classIrReader"><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="InfraredTypes_8h.html#ace35cfd2245c700198afb856211d7bcd">milliseconds_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrReader.html#a201bae13abde0dc6d651bed6996a0971">defaultBeginningTimeout</a> = 2000U</td></tr>
-<tr class="separator:a201bae13abde0dc6d651bed6996a0971 inherit pub_static_attribs_classIrReader"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abc38b9273f11c962ee7091bb14a7c53d inherit pub_static_attribs_classIrReader"><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="InfraredTypes_8h.html#ace35cfd2245c700198afb856211d7bcd">milliseconds_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrReader.html#abc38b9273f11c962ee7091bb14a7c53d">defaultEndingTimeout</a> = 30U</td></tr>
-<tr class="separator:abc38b9273f11c962ee7091bb14a7c53d inherit pub_static_attribs_classIrReader"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d436bfbd3cbca9ab834f0a6398c377d inherit pub_static_attribs_classIrReader"><td class="memItemLeft" align="right" valign="top">static const size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrReader.html#a1d436bfbd3cbca9ab834f0a6398c377d">defaultCaptureLength</a> = 100U</td></tr>
-<tr class="separator:a1d436bfbd3cbca9ab834f0a6398c377d inherit pub_static_attribs_classIrReader"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab048b0b98a743fb15efd19261b9a9dde inherit pub_static_attribs_classIrReader"><td class="memItemLeft" align="right" valign="top">static constexpr <a class="el" href="InfraredTypes_8h.html#ace35cfd2245c700198afb856211d7bcd">milliseconds_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrReader.html#ab048b0b98a743fb15efd19261b9a9dde">defaultBeginningTimeout</a> = 2000U</td></tr>
+<tr class="separator:ab048b0b98a743fb15efd19261b9a9dde inherit pub_static_attribs_classIrReader"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa347d7724edfacca143a1d5b2e99b7cc inherit pub_static_attribs_classIrReader"><td class="memItemLeft" align="right" valign="top">static constexpr <a class="el" href="InfraredTypes_8h.html#ace35cfd2245c700198afb856211d7bcd">milliseconds_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrReader.html#aa347d7724edfacca143a1d5b2e99b7cc">defaultEndingTimeout</a> = 30U</td></tr>
+<tr class="separator:aa347d7724edfacca143a1d5b2e99b7cc inherit pub_static_attribs_classIrReader"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4810d1c2d4151e306446889bbaed955d inherit pub_static_attribs_classIrReader"><td class="memItemLeft" align="right" valign="top">static constexpr size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrReader.html#a4810d1c2d4151e306446889bbaed955d">defaultCaptureLength</a> = 100U</td></tr>
+<tr class="separator:a4810d1c2d4151e306446889bbaed955d inherit pub_static_attribs_classIrReader"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -265,7 +268,7 @@ Additional Inherited Members</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="InfraredTypes_8h.html#a5a4323547cf58895464e841b9b424384">microseconds_t</a>&#160;</td>
-          <td class="paramname"><em>markExcess</em> = <code><a class="el" href="classIrReceiver.html#a533ebfd1985e9d697ec966ed6cbc2ddf">defaultMarkExcess</a></code>&#160;</td>
+          <td class="paramname"><em>markExcess</em> = <code><a class="el" href="classIrReceiver.html#a798592aa3b0df963895b60881afa7d2f">defaultMarkExcess</a></code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -409,8 +412,8 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a533ebfd1985e9d697ec966ed6cbc2ddf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a533ebfd1985e9d697ec966ed6cbc2ddf">&#9670;&nbsp;</a></span>defaultMarkExcess</h2>
+<a id="a798592aa3b0df963895b60881afa7d2f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a798592aa3b0df963895b60881afa7d2f">&#9670;&nbsp;</a></span>defaultMarkExcess</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -419,12 +422,12 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="InfraredTypes_8h.html#a5a4323547cf58895464e841b9b424384">microseconds_t</a> IrReceiver::defaultMarkExcess = 50U</td>
+          <td class="memname">constexpr <a class="el" href="InfraredTypes_8h.html#a5a4323547cf58895464e841b9b424384">microseconds_t</a> IrReceiver::defaultMarkExcess = 50U</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -433,8 +436,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a0193e518d3254f388a844786018e881a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0193e518d3254f388a844786018e881a">&#9670;&nbsp;</a></span>defaultPin</h2>
+<a id="acb8c13da823c22a91ae2ef6852729c9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb8c13da823c22a91ae2ef6852729c9d">&#9670;&nbsp;</a></span>defaultPin</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -443,12 +446,12 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="InfraredTypes_8h.html#aede467d93ddeb5fdeff6023236aa4ad6">pin_t</a> IrReceiver::defaultPin = 5</td>
+          <td class="memname">constexpr <a class="el" href="InfraredTypes_8h.html#aede467d93ddeb5fdeff6023236aa4ad6">pin_t</a> IrReceiver::defaultPin = 5</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -457,8 +460,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a92dab6417cf1cb825300716631b64c7e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a92dab6417cf1cb825300716631b64c7e">&#9670;&nbsp;</a></span>invertingSensor</h2>
+<a id="a28d1ab4a3729e61c043114a515001ebf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28d1ab4a3729e61c043114a515001ebf">&#9670;&nbsp;</a></span>invertingSensor</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -467,12 +470,12 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const bool IrReceiver::invertingSensor = true</td>
+          <td class="memname">constexpr bool IrReceiver::invertingSensor = true</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -490,7 +493,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jan 6 2021 20:39:14 for Infrared4Arduino by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
+Generated on Thu Feb 11 2021 10:34:33 for Infrared4Arduino by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
 </small></address>
 </body>
 </html>

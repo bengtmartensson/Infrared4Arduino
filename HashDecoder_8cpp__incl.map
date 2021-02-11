@@ -1,10 +1,11 @@
 <map id="src/HashDecoder.cpp" name="src/HashDecoder.cpp">
-<area shape="rect" id="node1" title=" " alt="" coords="108,5,257,32"/>
-<area shape="rect" id="node2" href="$HashDecoder_8h.html" title="This file defines a hash based &quot;decoder class&quot;." alt="" coords="126,80,239,107"/>
-<area shape="rect" id="node3" href="$IrDecoder_8h.html" title=" " alt="" coords="237,229,328,256"/>
-<area shape="rect" id="node6" href="$IrReader_8h.html" title=" " alt="" coords="20,155,103,181"/>
-<area shape="rect" id="node8" href="$IrSignal_8h.html" title=" " alt="" coords="144,155,221,181"/>
-<area shape="rect" id="node4" href="$InfraredTypes_8h.html" title="This file defines some general data types that are used in the library." alt="" coords="57,304,169,331"/>
-<area shape="rect" id="node5" title=" " alt="" coords="5,379,83,405"/>
-<area shape="rect" id="node7" href="$IrSequence_8h.html" title=" " alt="" coords="64,229,163,256"/>
+<area shape="rect" id="node1" title=" " alt="" coords="133,5,283,32"/>
+<area shape="rect" id="node2" href="$HashDecoder_8h.html" title="This file defines a hash based &quot;decoder class&quot;." alt="" coords="151,80,265,107"/>
+<area shape="rect" id="node3" href="$IrDecoder_8h.html" title=" " alt="" coords="5,229,96,256"/>
+<area shape="rect" id="node6" href="$IrReader_8h.html" title=" " alt="" coords="320,155,403,181"/>
+<area shape="rect" id="node8" href="$IrSignal_8h.html" title=" " alt="" coords="169,155,247,181"/>
+<area shape="rect" id="node4" href="$InfraredTypes_8h.html" title="This file defines some general data types that are used in the library." alt="" coords="263,304,375,331"/>
+<area shape="rect" id="node5" title=" " alt="" coords="348,379,425,405"/>
+<area shape="rect" id="node7" href="$IrSequence_8h.html" title=" " alt="" coords="269,229,368,256"/>
+<area shape="rect" id="node9" href="$version_8h.html" title=" " alt="" coords="171,229,245,256"/>
 </map>

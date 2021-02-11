@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Infrared4Arduino
-   &#160;<span id="projectnumber">1.1.1</span>
+   &#160;<span id="projectnumber">1.2.0</span>
    </div>
   </td>
  </tr>
@@ -79,7 +79,7 @@ $(function() {
 Inheritance diagram for HashDecoder:</div>
 <div class="dyncontent">
 <div class="center"><img src="classHashDecoder__inherit__graph.png" border="0" usemap="#aHashDecoder_inherit__map" alt="Inheritance graph"/></div>
-<map name="HashDecoder_inherit__map" id="aHashDecoder_inherit__map">
+<map name="HashDecoder_inherit__map" id="HashDecoder_inherit__map">
 <area shape="rect" title="A decoder class using FNV&#45;1 hashes of length 32." alt="" coords="5,80,108,107"/>
 <area shape="rect" href="classIrDecoder.html" title="Abstract base class for all decoder classes." alt="" coords="17,5,96,32"/>
 </map>
@@ -88,7 +88,7 @@ Inheritance diagram for HashDecoder:</div>
 Collaboration diagram for HashDecoder:</div>
 <div class="dyncontent">
 <div class="center"><img src="classHashDecoder__coll__graph.png" border="0" usemap="#aHashDecoder_coll__map" alt="Collaboration graph"/></div>
-<map name="HashDecoder_coll__map" id="aHashDecoder_coll__map">
+<map name="HashDecoder_coll__map" id="HashDecoder_coll__map">
 <area shape="rect" title="A decoder class using FNV&#45;1 hashes of length 32." alt="" coords="5,80,108,107"/>
 <area shape="rect" href="classIrDecoder.html" title="Abstract base class for all decoder classes." alt="" coords="17,5,96,32"/>
 </map>
@@ -96,6 +96,8 @@ Collaboration diagram for HashDecoder:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a1e2c3566ad9ed047760d5c09ada4c132"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHashDecoder.html#a1e2c3566ad9ed047760d5c09ada4c132">~HashDecoder</a> ()</td></tr>
+<tr class="separator:a1e2c3566ad9ed047760d5c09ada4c132"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a62c4a8ee9782e266bb93b44d56dde009"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHashDecoder.html#a62c4a8ee9782e266bb93b44d56dde009">HashDecoder</a> (const <a class="el" href="classIrReader.html">IrReader</a> &amp;irReader)</td></tr>
 <tr class="memdesc:a62c4a8ee9782e266bb93b44d56dde009"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classHashDecoder.html" title="A decoder class using FNV-1 hashes of length 32.">HashDecoder</a> from an <a class="el" href="classIrReader.html" title="Abstract base class for all IR readers, capturing or receiving.">IrReader</a>, containing data.  <a href="classHashDecoder.html#a62c4a8ee9782e266bb93b44d56dde009">More...</a><br /></td></tr>
 <tr class="separator:a62c4a8ee9782e266bb93b44d56dde009"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -118,6 +120,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0afca7f90358419b4bb17b339bc36e57 inherit pub_methods_classIrDecoder"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrDecoder.html#a0afca7f90358419b4bb17b339bc36e57">isValid</a> () const</td></tr>
 <tr class="memdesc:a0afca7f90358419b4bb17b339bc36e57 inherit pub_methods_classIrDecoder"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the decode was successful.  <a href="classIrDecoder.html#a0afca7f90358419b4bb17b339bc36e57">More...</a><br /></td></tr>
 <tr class="separator:a0afca7f90358419b4bb17b339bc36e57 inherit pub_methods_classIrDecoder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa046c6a5e9d10d36a105fb3b58ccf79b inherit pub_methods_classIrDecoder"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrDecoder.html#aa046c6a5e9d10d36a105fb3b58ccf79b">operator bool</a> () const</td></tr>
+<tr class="memdesc:aa046c6a5e9d10d36a105fb3b58ccf79b inherit pub_methods_classIrDecoder"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as <a class="el" href="classIrDecoder.html#a0afca7f90358419b4bb17b339bc36e57" title="Returns true if the decode was successful.">isValid()</a>.  <a href="classIrDecoder.html#aa046c6a5e9d10d36a105fb3b58ccf79b">More...</a><br /></td></tr>
+<tr class="separator:aa046c6a5e9d10d36a105fb3b58ccf79b inherit pub_methods_classIrDecoder"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d2f495021a39a74dadb32bc6d9a0eb9 inherit pub_methods_classIrDecoder"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrDecoder.html#a8d2f495021a39a74dadb32bc6d9a0eb9">printDecode</a> (Stream &amp;stream) const</td></tr>
 <tr class="memdesc:a8d2f495021a39a74dadb32bc6d9a0eb9 inherit pub_methods_classIrDecoder"><td class="mdescLeft">&#160;</td><td class="mdescRight">If valid, prints the decode to the stream.  <a href="classIrDecoder.html#a8d2f495021a39a74dadb32bc6d9a0eb9">More...</a><br /></td></tr>
 <tr class="separator:a8d2f495021a39a74dadb32bc6d9a0eb9 inherit pub_methods_classIrDecoder"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -142,8 +147,8 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memdesc:a88773ef1d068ca41b5ac506b3386b37d inherit pro_static_methods_classIrDecoder"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tests if the argument is large enough to be considered an ending of a decodable signal.  <a href="classIrDecoder.html#a88773ef1d068ca41b5ac506b3386b37d">More...</a><br /></td></tr>
 <tr class="separator:a88773ef1d068ca41b5ac506b3386b37d inherit pro_static_methods_classIrDecoder"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_static_attribs_classIrDecoder"><td colspan="2" onclick="javascript:toggleInherit('pro_static_attribs_classIrDecoder')"><img src="closed.png" alt="-"/>&#160;Static Protected Attributes inherited from <a class="el" href="classIrDecoder.html">IrDecoder</a></td></tr>
-<tr class="memitem:a2ce6b49c00f18e00e7c7d82bc3c42a0a inherit pro_static_attribs_classIrDecoder"><td class="memItemLeft" align="right" valign="top">static const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrDecoder.html#a2ce6b49c00f18e00e7c7d82bc3c42a0a">invalid</a> = -1</td></tr>
-<tr class="separator:a2ce6b49c00f18e00e7c7d82bc3c42a0a inherit pro_static_attribs_classIrDecoder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff03542d18e3a97dda6474ce4b7b2206 inherit pro_static_attribs_classIrDecoder"><td class="memItemLeft" align="right" valign="top">constexpr static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrDecoder.html#aff03542d18e3a97dda6474ce4b7b2206">invalid</a> = -1</td></tr>
+<tr class="separator:aff03542d18e3a97dda6474ce4b7b2206 inherit pro_static_attribs_classIrDecoder"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A decoder class using <a href="https://en.wikipedia.org/wiki/Fowler%E2%80%93Noll%E2%80%93Vo_hash_function">FNV-1</a> hashes of length 32. </p>
@@ -151,6 +156,33 @@ Additional Inherited Members</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="HashDecoder_8h_source.html#l00019">19</a> of file <a class="el" href="HashDecoder_8h_source.html">HashDecoder.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a1e2c3566ad9ed047760d5c09ada4c132"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e2c3566ad9ed047760d5c09ada4c132">&#9670;&nbsp;</a></span>~HashDecoder()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual HashDecoder::~HashDecoder </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="HashDecoder_8h_source.html#l00057">57</a> of file <a class="el" href="HashDecoder_8h_source.html">HashDecoder.h</a>.</p>
+
+</div>
+</div>
 <a id="a62c4a8ee9782e266bb93b44d56dde009"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a62c4a8ee9782e266bb93b44d56dde009">&#9670;&nbsp;</a></span>HashDecoder() <span class="overload">[1/3]</span></h2>
 
@@ -183,7 +215,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="HashDecoder_8h_source.html#l00050">50</a> of file <a class="el" href="HashDecoder_8h_source.html">HashDecoder.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="HashDecoder_8h_source.html#l00063">63</a> of file <a class="el" href="HashDecoder_8h_source.html">HashDecoder.h</a>.</p>
 
 </div>
 </div>
@@ -219,7 +251,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="HashDecoder_8h_source.html#l00059">59</a> of file <a class="el" href="HashDecoder_8h_source.html">HashDecoder.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="HashDecoder_8h_source.html#l00072">72</a> of file <a class="el" href="HashDecoder_8h_source.html">HashDecoder.h</a>.</p>
 
 </div>
 </div>
@@ -247,7 +279,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="HashDecoder_8h_source.html#l00064">64</a> of file <a class="el" href="HashDecoder_8h_source.html">HashDecoder.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="HashDecoder_8h_source.html#l00077">77</a> of file <a class="el" href="HashDecoder_8h_source.html">HashDecoder.h</a>.</p>
 
 </div>
 </div>
@@ -276,7 +308,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="HashDecoder_8cpp_source.html#l00049">49</a> of file <a class="el" href="HashDecoder_8cpp_source.html">HashDecoder.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="HashDecoder_8cpp_source.html#l00045">45</a> of file <a class="el" href="HashDecoder_8cpp_source.html">HashDecoder.cpp</a>.</p>
 
 </div>
 </div>
@@ -304,7 +336,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="HashDecoder_8cpp_source.html#l00044">44</a> of file <a class="el" href="HashDecoder_8cpp_source.html">HashDecoder.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="HashDecoder_8cpp_source.html#l00040">40</a> of file <a class="el" href="HashDecoder_8cpp_source.html">HashDecoder.cpp</a>.</p>
 
 </div>
 </div>
@@ -336,7 +368,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classIrDecoder.html#ae10d0ff818b261eafb243eda6d7b78d4">IrDecoder</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="HashDecoder_8h_source.html#l00089">89</a> of file <a class="el" href="HashDecoder_8h_source.html">HashDecoder.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="HashDecoder_8h_source.html#l00102">102</a> of file <a class="el" href="HashDecoder_8h_source.html">HashDecoder.h</a>.</p>
 
 </div>
 </div>
@@ -366,7 +398,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Returns the hash value. </p>
 <dl class="section return"><dt>Returns</dt><dd>uint32_t </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="HashDecoder_8h_source.html#l00073">73</a> of file <a class="el" href="HashDecoder_8h_source.html">HashDecoder.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="HashDecoder_8h_source.html#l00086">86</a> of file <a class="el" href="HashDecoder_8h_source.html">HashDecoder.h</a>.</p>
 
 </div>
 </div>
@@ -414,7 +446,7 @@ Additional Inherited Members</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>success of operation </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="HashDecoder_8cpp_source.html#l00014">14</a> of file <a class="el" href="HashDecoder_8cpp_source.html">HashDecoder.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="HashDecoder_8cpp_source.html#l00010">10</a> of file <a class="el" href="HashDecoder_8cpp_source.html">HashDecoder.cpp</a>.</p>
 
 </div>
 </div>
@@ -425,7 +457,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jan 6 2021 20:39:14 for Infrared4Arduino by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
+Generated on Thu Feb 11 2021 10:34:33 for Infrared4Arduino by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
 </small></address>
 </body>
 </html>

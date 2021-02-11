@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Infrared4Arduino
-   &#160;<span id="projectnumber">1.1.1</span>
+   &#160;<span id="projectnumber">1.2.0</span>
    </div>
   </td>
  </tr>
@@ -108,7 +108,7 @@ $(function() {
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;}</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keywordtype">void</span> Sam::timerEnableIntr() {</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    REG_GCLK_CLKCTRL = (uint16_t) (GCLK_CLKCTRL_CLKEN | GCLK_CLKCTRL_GEN_GCLK0 | GCLK_CLKCTRL_ID_TCC2_TC3);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    REG_GCLK_CLKCTRL = <span class="keyword">static_cast&lt;</span>uint16_t<span class="keyword">&gt;</span>(GCLK_CLKCTRL_CLKEN | GCLK_CLKCTRL_GEN_GCLK0 | GCLK_CLKCTRL_ID_TCC2_TC3);</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordflow">while</span> (GCLK-&gt;STATUS.bit.SYNCBUSY == 1); <span class="comment">// wait for sync</span></div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    TcCount16* TC = (TcCount16*) TC3;</div>
@@ -422,14 +422,14 @@ $(function() {
 <div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;<span class="preprocessor">#endif // defined(ARDUINO_ARCH_SAM) || defined(ARDUINO_ARCH_SAMD)</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclassBoard_html_a5eb6e023cae63ce2829fcd8e6d2809fd"><div class="ttname"><a href="classBoard.html#a5eb6e023cae63ce2829fcd8e6d2809fd">Board::microsPerTick</a></div><div class="ttdeci">static const unsigned long microsPerTick</div><div class="ttdef"><b>Definition:</b> <a href="Board_8h_source.html#l00057">Board.h:57</a></div></div>
-<div class="ttc" id="aInfraredTypes_8h_html_a4b290cd91cfd9ca0826a166e03fb993d"><div class="ttname"><a href="InfraredTypes_8h.html#a4b290cd91cfd9ca0826a166e03fb993d">dutycycle_t</a></div><div class="ttdeci">int8_t dutycycle_t</div><div class="ttdoc">Type for duty cycle in percent.</div><div class="ttdef"><b>Definition:</b> <a href="InfraredTypes_8h_source.html#l00037">InfraredTypes.h:37</a></div></div>
+<div class="ttc" id="aInfraredTypes_8h_html_a4b290cd91cfd9ca0826a166e03fb993d"><div class="ttname"><a href="InfraredTypes_8h.html#a4b290cd91cfd9ca0826a166e03fb993d">dutycycle_t</a></div><div class="ttdeci">int8_t dutycycle_t</div><div class="ttdoc">Type for duty cycle in percent.</div><div class="ttdef"><b>Definition:</b> <a href="InfraredTypes_8h_source.html#l00036">InfraredTypes.h:36</a></div></div>
 <div class="ttc" id="aEsp32_8h_html_af5541072748bea1895b1a36784a42661"><div class="ttname"><a href="Esp32_8h.html#af5541072748bea1895b1a36784a42661">ISR</a></div><div class="ttdeci">#define ISR(f)</div><div class="ttdef"><b>Definition:</b> <a href="Esp32_8h_source.html#l00048">Esp32.h:48</a></div></div>
-<div class="ttc" id="aInfraredTypes_8h_html_aede467d93ddeb5fdeff6023236aa4ad6"><div class="ttname"><a href="InfraredTypes_8h.html#aede467d93ddeb5fdeff6023236aa4ad6">pin_t</a></div><div class="ttdeci">uint8_t pin_t</div><div class="ttdoc">Type for GPIO pin, compatible with Arduino libs.</div><div class="ttdef"><b>Definition:</b> <a href="InfraredTypes_8h_source.html#l00042">InfraredTypes.h:42</a></div></div>
+<div class="ttc" id="aInfraredTypes_8h_html_aede467d93ddeb5fdeff6023236aa4ad6"><div class="ttname"><a href="InfraredTypes_8h.html#aede467d93ddeb5fdeff6023236aa4ad6">pin_t</a></div><div class="ttdeci">uint8_t pin_t</div><div class="ttdoc">Type for GPIO pin, compatible with Arduino libs.</div><div class="ttdef"><b>Definition:</b> <a href="InfraredTypes_8h_source.html#l00041">InfraredTypes.h:41</a></div></div>
 <div class="ttc" id="aBoard_8h_html"><div class="ttname"><a href="Board_8h.html">Board.h</a></div></div>
-<div class="ttc" id="aInfraredTypes_8h_html_ab35ca91fa7f5b34afafe58828ccf58db"><div class="ttname"><a href="InfraredTypes_8h.html#ab35ca91fa7f5b34afafe58828ccf58db">frequency_t</a></div><div class="ttdeci">uint32_t frequency_t</div><div class="ttdoc">Type for modulation frequency in Hz.</div><div class="ttdef"><b>Definition:</b> <a href="InfraredTypes_8h_source.html#l00032">InfraredTypes.h:32</a></div></div>
+<div class="ttc" id="aInfraredTypes_8h_html_ab35ca91fa7f5b34afafe58828ccf58db"><div class="ttname"><a href="InfraredTypes_8h.html#ab35ca91fa7f5b34afafe58828ccf58db">frequency_t</a></div><div class="ttdeci">uint32_t frequency_t</div><div class="ttdoc">Type for modulation frequency in Hz.</div><div class="ttdef"><b>Definition:</b> <a href="InfraredTypes_8h_source.html#l00031">InfraredTypes.h:31</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jan 6 2021 20:39:14 for Infrared4Arduino by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
+Generated on Thu Feb 11 2021 10:34:33 for Infrared4Arduino by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
 </small></address>
 </body>
 </html>

@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Infrared4Arduino
-   &#160;<span id="projectnumber">1.1.1</span>
+   &#160;<span id="projectnumber">1.2.0</span>
    </div>
   </td>
  </tr>
@@ -97,13 +97,21 @@ $(function() {
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <a class="code" href="classMultiDecoder.html#ae7431efdbec58c96cb0a72a50d7a874c">MultiDecoder</a>(<span class="keyword">const</span> <a class="code" href="classIrReader.html">IrReader</a> &amp;irReader);</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="classMultiDecoder.html#a564ba17f3eb6697f71f18ec0adff7d68">   38</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classMultiDecoder.html#a564ba17f3eb6697f71f18ec0adff7d68">~MultiDecoder</a>() {</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    }</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="classMultiDecoder.html#ab029ab15418c39847eacdaf2bde6df7f">   41</a></span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="classMultiDecoder.html#ab029ab15418c39847eacdaf2bde6df7f">getDecode</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="keywordflow">return</span> decode;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    }</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;};</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#ifndef DOXYGEN</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <a class="code" href="classMultiDecoder.html#ae7431efdbec58c96cb0a72a50d7a874c">MultiDecoder</a>() = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <a class="code" href="classMultiDecoder.html#ae7431efdbec58c96cb0a72a50d7a874c">MultiDecoder</a>(<span class="keyword">const</span> <a class="code" href="classMultiDecoder.html">MultiDecoder</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <a class="code" href="classMultiDecoder.html#ae7431efdbec58c96cb0a72a50d7a874c">MultiDecoder</a>(<a class="code" href="classMultiDecoder.html">MultiDecoder</a>&amp;&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="classMultiDecoder.html">MultiDecoder</a>&amp; operator=(<span class="keyword">const</span> <a class="code" href="classMultiDecoder.html">MultiDecoder</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <a class="code" href="classMultiDecoder.html">MultiDecoder</a>&amp; operator=(<a class="code" href="classMultiDecoder.html">MultiDecoder</a>&amp;&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#endif // ! DOXYGEN</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="classMultiDecoder.html#a564ba17f3eb6697f71f18ec0adff7d68">   46</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classMultiDecoder.html#a564ba17f3eb6697f71f18ec0adff7d68">~MultiDecoder</a>() {</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    }</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="classMultiDecoder.html#ab029ab15418c39847eacdaf2bde6df7f">   49</a></span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="classMultiDecoder.html#ab029ab15418c39847eacdaf2bde6df7f">getDecode</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keywordflow">return</span> decode;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    }</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;};</div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclassMultiDecoder_html_a6b119d114e11f2fd74a74f0c8524a2a6ab74e72ecae7337f5746f71e1bdb560dd"><div class="ttname"><a href="classMultiDecoder.html#a6b119d114e11f2fd74a74f0c8524a2a6ab74e72ecae7337f5746f71e1bdb560dd">MultiDecoder::timeout</a></div><div class="ttdeci">@ timeout</div><div class="ttdoc">beginTimeout reached</div><div class="ttdef"><b>Definition:</b> <a href="MultiDecoder_8h_source.html#l00015">MultiDecoder.h:15</a></div></div>
 <div class="ttc" id="aclassIrReader_html"><div class="ttname"><a href="classIrReader.html">IrReader</a></div><div class="ttdoc">Abstract base class for all IR readers, capturing or receiving.</div><div class="ttdef"><b>Definition:</b> <a href="IrReader_8h_source.html#l00030">IrReader.h:30</a></div></div>
@@ -112,10 +120,10 @@ $(function() {
 <div class="ttc" id="aclassMultiDecoder_html_a6b119d114e11f2fd74a74f0c8524a2a6a9b3f98c05c29d29bea1d9b898e01dc6f"><div class="ttname"><a href="classMultiDecoder.html#a6b119d114e11f2fd74a74f0c8524a2a6a9b3f98c05c29d29bea1d9b898e01dc6f">MultiDecoder::noise</a></div><div class="ttdeci">@ noise</div><div class="ttdoc">nothing sensible found</div><div class="ttdef"><b>Definition:</b> <a href="MultiDecoder_8h_source.html#l00016">MultiDecoder.h:16</a></div></div>
 <div class="ttc" id="aclassMultiDecoder_html_a6b119d114e11f2fd74a74f0c8524a2a6aad36ae0f6707fa68d2f4deeb25e15620"><div class="ttname"><a href="classMultiDecoder.html#a6b119d114e11f2fd74a74f0c8524a2a6aad36ae0f6707fa68d2f4deeb25e15620">MultiDecoder::nec_ditto</a></div><div class="ttdeci">@ nec_ditto</div><div class="ttdoc">NEC1 repeat.</div><div class="ttdef"><b>Definition:</b> <a href="MultiDecoder_8h_source.html#l00019">MultiDecoder.h:19</a></div></div>
 <div class="ttc" id="aclassMultiDecoder_html"><div class="ttname"><a href="classMultiDecoder.html">MultiDecoder</a></div><div class="ttdoc">A preliminary multi protocol decoder.</div><div class="ttdef"><b>Definition:</b> <a href="MultiDecoder_8h_source.html#l00009">MultiDecoder.h:9</a></div></div>
-<div class="ttc" id="aclassMultiDecoder_html_ab029ab15418c39847eacdaf2bde6df7f"><div class="ttname"><a href="classMultiDecoder.html#ab029ab15418c39847eacdaf2bde6df7f">MultiDecoder::getDecode</a></div><div class="ttdeci">const char * getDecode() const</div><div class="ttdoc">Returns a textual description the decode for human consumption.</div><div class="ttdef"><b>Definition:</b> <a href="MultiDecoder_8h_source.html#l00041">MultiDecoder.h:41</a></div></div>
+<div class="ttc" id="aclassMultiDecoder_html_ab029ab15418c39847eacdaf2bde6df7f"><div class="ttname"><a href="classMultiDecoder.html#ab029ab15418c39847eacdaf2bde6df7f">MultiDecoder::getDecode</a></div><div class="ttdeci">const char * getDecode() const</div><div class="ttdoc">Returns a textual description the decode for human consumption.</div><div class="ttdef"><b>Definition:</b> <a href="MultiDecoder_8h_source.html#l00049">MultiDecoder.h:49</a></div></div>
 <div class="ttc" id="aIrReader_8h_html"><div class="ttname"><a href="IrReader_8h.html">IrReader.h</a></div></div>
 <div class="ttc" id="aclassMultiDecoder_html_a6b119d114e11f2fd74a74f0c8524a2a6ae30453f3c2a3bb68c6189a91c10972a1"><div class="ttname"><a href="classMultiDecoder.html#a6b119d114e11f2fd74a74f0c8524a2a6ae30453f3c2a3bb68c6189a91c10972a1">MultiDecoder::rc5</a></div><div class="ttdeci">@ rc5</div><div class="ttdoc">RC5 signal (= repeat sequence)</div><div class="ttdef"><b>Definition:</b> <a href="MultiDecoder_8h_source.html#l00021">MultiDecoder.h:20</a></div></div>
-<div class="ttc" id="aclassMultiDecoder_html_a564ba17f3eb6697f71f18ec0adff7d68"><div class="ttname"><a href="classMultiDecoder.html#a564ba17f3eb6697f71f18ec0adff7d68">MultiDecoder::~MultiDecoder</a></div><div class="ttdeci">virtual ~MultiDecoder()</div><div class="ttdef"><b>Definition:</b> <a href="MultiDecoder_8h_source.html#l00038">MultiDecoder.h:38</a></div></div>
+<div class="ttc" id="aclassMultiDecoder_html_a564ba17f3eb6697f71f18ec0adff7d68"><div class="ttname"><a href="classMultiDecoder.html#a564ba17f3eb6697f71f18ec0adff7d68">MultiDecoder::~MultiDecoder</a></div><div class="ttdeci">virtual ~MultiDecoder()</div><div class="ttdef"><b>Definition:</b> <a href="MultiDecoder_8h_source.html#l00046">MultiDecoder.h:46</a></div></div>
 <div class="ttc" id="aclassMultiDecoder_html_ae7431efdbec58c96cb0a72a50d7a874c"><div class="ttname"><a href="classMultiDecoder.html#ae7431efdbec58c96cb0a72a50d7a874c">MultiDecoder::MultiDecoder</a></div><div class="ttdeci">MultiDecoder(const IrReader &amp;irReader)</div><div class="ttdoc">Constructs a MultiDecoder from an IrReader, containing data.</div><div class="ttdef"><b>Definition:</b> <a href="MultiDecoder_8cpp_source.html#l00006">MultiDecoder.cpp:6</a></div></div>
 <div class="ttc" id="aclassIrDecoder_html"><div class="ttname"><a href="classIrDecoder.html">IrDecoder</a></div><div class="ttdoc">Abstract base class for all decoder classes.</div><div class="ttdef"><b>Definition:</b> <a href="IrDecoder_8h_source.html#l00008">IrDecoder.h:8</a></div></div>
 <div class="ttc" id="aclassMultiDecoder_html_a6b119d114e11f2fd74a74f0c8524a2a6a3ff4574eae7a36953c54470e731934a9"><div class="ttname"><a href="classMultiDecoder.html#a6b119d114e11f2fd74a74f0c8524a2a6a3ff4574eae7a36953c54470e731934a9">MultiDecoder::nec</a></div><div class="ttdeci">@ nec</div><div class="ttdoc">NEC1 intro.</div><div class="ttdef"><b>Definition:</b> <a href="MultiDecoder_8h_source.html#l00018">MultiDecoder.h:18</a></div></div>
@@ -123,7 +131,7 @@ $(function() {
 <div class="ttc" id="aclassMultiDecoder_html_a6b119d114e11f2fd74a74f0c8524a2a6a77c581118f867cd52b8abcf4b6dc15ce"><div class="ttname"><a href="classMultiDecoder.html#a6b119d114e11f2fd74a74f0c8524a2a6a77c581118f867cd52b8abcf4b6dc15ce">MultiDecoder::undecoded</a></div><div class="ttdeci">@ undecoded</div><div class="ttdoc">decoding failed</div><div class="ttdef"><b>Definition:</b> <a href="MultiDecoder_8h_source.html#l00017">MultiDecoder.h:17</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jan 6 2021 20:39:14 for Infrared4Arduino by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
+Generated on Thu Feb 11 2021 10:34:33 for Infrared4Arduino by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
 </small></address>
 </body>
 </html>

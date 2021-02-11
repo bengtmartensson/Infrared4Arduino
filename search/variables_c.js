@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['timeouted_593',['timeouted',['../classIrReader.html#aeafc4ae8ffe780bc0d8543d8c86db50d',1,'IrReader']]],
-  ['timer_594',['timer',['../classIrReceiverSampler.html#aab3e0935c01b4d4ee8ff55a510aa3458',1,'IrReceiverSampler']]]
+  ['version_606',['version',['../classIrSignal.html#a40f1f0581acccf80f7aa8e06a72b0c2a',1,'IrSignal']]]
 ];

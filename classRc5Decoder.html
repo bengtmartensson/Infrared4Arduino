@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Infrared4Arduino
-   &#160;<span id="projectnumber">1.1.1</span>
+   &#160;<span id="projectnumber">1.2.0</span>
    </div>
   </td>
  </tr>
@@ -65,7 +65,6 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
-<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="classRc5Decoder-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Rc5Decoder Class Reference</div>  </div>
@@ -80,7 +79,7 @@ $(function() {
 Inheritance diagram for Rc5Decoder:</div>
 <div class="dyncontent">
 <div class="center"><img src="classRc5Decoder__inherit__graph.png" border="0" usemap="#aRc5Decoder_inherit__map" alt="Inheritance graph"/></div>
-<map name="Rc5Decoder_inherit__map" id="aRc5Decoder_inherit__map">
+<map name="Rc5Decoder_inherit__map" id="Rc5Decoder_inherit__map">
 <area shape="rect" title="A decoder class for RC5 signals." alt="" coords="5,80,100,107"/>
 <area shape="rect" href="classIrDecoder.html" title="Abstract base class for all decoder classes." alt="" coords="13,5,92,32"/>
 </map>
@@ -89,7 +88,7 @@ Inheritance diagram for Rc5Decoder:</div>
 Collaboration diagram for Rc5Decoder:</div>
 <div class="dyncontent">
 <div class="center"><img src="classRc5Decoder__coll__graph.png" border="0" usemap="#aRc5Decoder_coll__map" alt="Collaboration graph"/></div>
-<map name="Rc5Decoder_coll__map" id="aRc5Decoder_coll__map">
+<map name="Rc5Decoder_coll__map" id="Rc5Decoder_coll__map">
 <area shape="rect" title="A decoder class for RC5 signals." alt="" coords="5,80,100,107"/>
 <area shape="rect" href="classIrDecoder.html" title="Abstract base class for all decoder classes." alt="" coords="13,5,92,32"/>
 </map>
@@ -122,6 +121,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0afca7f90358419b4bb17b339bc36e57 inherit pub_methods_classIrDecoder"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrDecoder.html#a0afca7f90358419b4bb17b339bc36e57">isValid</a> () const</td></tr>
 <tr class="memdesc:a0afca7f90358419b4bb17b339bc36e57 inherit pub_methods_classIrDecoder"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the decode was successful.  <a href="classIrDecoder.html#a0afca7f90358419b4bb17b339bc36e57">More...</a><br /></td></tr>
 <tr class="separator:a0afca7f90358419b4bb17b339bc36e57 inherit pub_methods_classIrDecoder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa046c6a5e9d10d36a105fb3b58ccf79b inherit pub_methods_classIrDecoder"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrDecoder.html#aa046c6a5e9d10d36a105fb3b58ccf79b">operator bool</a> () const</td></tr>
+<tr class="memdesc:aa046c6a5e9d10d36a105fb3b58ccf79b inherit pub_methods_classIrDecoder"><td class="mdescLeft">&#160;</td><td class="mdescRight">Same as <a class="el" href="classIrDecoder.html#a0afca7f90358419b4bb17b339bc36e57" title="Returns true if the decode was successful.">isValid()</a>.  <a href="classIrDecoder.html#aa046c6a5e9d10d36a105fb3b58ccf79b">More...</a><br /></td></tr>
+<tr class="separator:aa046c6a5e9d10d36a105fb3b58ccf79b inherit pub_methods_classIrDecoder"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d2f495021a39a74dadb32bc6d9a0eb9 inherit pub_methods_classIrDecoder"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrDecoder.html#a8d2f495021a39a74dadb32bc6d9a0eb9">printDecode</a> (Stream &amp;stream) const</td></tr>
 <tr class="memdesc:a8d2f495021a39a74dadb32bc6d9a0eb9 inherit pub_methods_classIrDecoder"><td class="mdescLeft">&#160;</td><td class="mdescRight">If valid, prints the decode to the stream.  <a href="classIrDecoder.html#a8d2f495021a39a74dadb32bc6d9a0eb9">More...</a><br /></td></tr>
 <tr class="separator:a8d2f495021a39a74dadb32bc6d9a0eb9 inherit pub_methods_classIrDecoder"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -131,11 +133,6 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a1ba9c0ad97d7bbec861baca097071515"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRc5Decoder.html#a1ba9c0ad97d7bbec861baca097071515">tryDecode</a> (const <a class="el" href="classIrReader.html">IrReader</a> &amp;irReader, Stream &amp;stream)</td></tr>
 <tr class="memdesc:a1ba9c0ad97d7bbec861baca097071515"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience function; constructs an <a class="el" href="classRc5Decoder.html" title="A decoder class for RC5 signals.">Rc5Decoder</a> and calls its printDecode.  <a href="classRc5Decoder.html#a1ba9c0ad97d7bbec861baca097071515">More...</a><br /></td></tr>
 <tr class="separator:a1ba9c0ad97d7bbec861baca097071515"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
-Static Public Attributes</h2></td></tr>
-<tr class="memitem:a8b09fb0bf010678d5a37022ea2035540"><td class="memItemLeft" align="right" valign="top">static const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRc5Decoder.html#a8b09fb0bf010678d5a37022ea2035540">format</a> = &quot;RC5 %d %d %d&quot;</td></tr>
-<tr class="separator:a8b09fb0bf010678d5a37022ea2035540"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -147,8 +144,8 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memdesc:a88773ef1d068ca41b5ac506b3386b37d inherit pro_static_methods_classIrDecoder"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tests if the argument is large enough to be considered an ending of a decodable signal.  <a href="classIrDecoder.html#a88773ef1d068ca41b5ac506b3386b37d">More...</a><br /></td></tr>
 <tr class="separator:a88773ef1d068ca41b5ac506b3386b37d inherit pro_static_methods_classIrDecoder"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_static_attribs_classIrDecoder"><td colspan="2" onclick="javascript:toggleInherit('pro_static_attribs_classIrDecoder')"><img src="closed.png" alt="-"/>&#160;Static Protected Attributes inherited from <a class="el" href="classIrDecoder.html">IrDecoder</a></td></tr>
-<tr class="memitem:a2ce6b49c00f18e00e7c7d82bc3c42a0a inherit pro_static_attribs_classIrDecoder"><td class="memItemLeft" align="right" valign="top">static const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrDecoder.html#a2ce6b49c00f18e00e7c7d82bc3c42a0a">invalid</a> = -1</td></tr>
-<tr class="separator:a2ce6b49c00f18e00e7c7d82bc3c42a0a inherit pro_static_attribs_classIrDecoder"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff03542d18e3a97dda6474ce4b7b2206 inherit pro_static_attribs_classIrDecoder"><td class="memItemLeft" align="right" valign="top">constexpr static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrDecoder.html#aff03542d18e3a97dda6474ce4b7b2206">invalid</a> = -1</td></tr>
+<tr class="separator:aff03542d18e3a97dda6474ce4b7b2206 inherit pro_static_attribs_classIrDecoder"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A decoder class for RC5 signals. </p>
@@ -179,7 +176,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="Rc5Decoder_8cpp_source.html#l00029">29</a> of file <a class="el" href="Rc5Decoder_8cpp_source.html">Rc5Decoder.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Rc5Decoder_8cpp_source.html#l00027">27</a> of file <a class="el" href="Rc5Decoder_8cpp_source.html">Rc5Decoder.cpp</a>.</p>
 
 </div>
 </div>
@@ -206,7 +203,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Rc5Decoder_8h_source.html#l00019">19</a> of file <a class="el" href="Rc5Decoder_8h_source.html">Rc5Decoder.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Rc5Decoder_8h_source.html#l00018">18</a> of file <a class="el" href="Rc5Decoder_8h_source.html">Rc5Decoder.h</a>.</p>
 
 </div>
 </div>
@@ -237,7 +234,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Returns the D parameter, or -1 if invalid. </p>
 <dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Rc5Decoder_8h_source.html#l00034">34</a> of file <a class="el" href="Rc5Decoder_8h_source.html">Rc5Decoder.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Rc5Decoder_8h_source.html#l00033">33</a> of file <a class="el" href="Rc5Decoder_8h_source.html">Rc5Decoder.h</a>.</p>
 
 </div>
 </div>
@@ -269,7 +266,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classIrDecoder.html#ae10d0ff818b261eafb243eda6d7b78d4">IrDecoder</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="Rc5Decoder_8cpp_source.html#l00057">57</a> of file <a class="el" href="Rc5Decoder_8cpp_source.html">Rc5Decoder.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Rc5Decoder_8cpp_source.html#l00055">55</a> of file <a class="el" href="Rc5Decoder_8cpp_source.html">Rc5Decoder.cpp</a>.</p>
 
 </div>
 </div>
@@ -299,7 +296,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Returns the F parameter, or -1 if invalid. </p>
 <dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Rc5Decoder_8h_source.html#l00026">26</a> of file <a class="el" href="Rc5Decoder_8h_source.html">Rc5Decoder.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Rc5Decoder_8h_source.html#l00025">25</a> of file <a class="el" href="Rc5Decoder_8h_source.html">Rc5Decoder.h</a>.</p>
 
 </div>
 </div>
@@ -329,7 +326,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Returns the T parameter, or -1 if invalid. </p>
 <dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Rc5Decoder_8h_source.html#l00042">42</a> of file <a class="el" href="Rc5Decoder_8h_source.html">Rc5Decoder.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Rc5Decoder_8h_source.html#l00041">41</a> of file <a class="el" href="Rc5Decoder_8h_source.html">Rc5Decoder.h</a>.</p>
 
 </div>
 </div>
@@ -377,32 +374,7 @@ Additional Inherited Members</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>success of operation </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Rc5Decoder_8cpp_source.html#l00024">24</a> of file <a class="el" href="Rc5Decoder_8cpp_source.html">Rc5Decoder.cpp</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a id="a8b09fb0bf010678d5a37022ea2035540"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8b09fb0bf010678d5a37022ea2035540">&#9670;&nbsp;</a></span>format</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const char * Rc5Decoder::format = &quot;RC5 %d %d %d&quot;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="Rc5Decoder_8h_source.html#l00011">11</a> of file <a class="el" href="Rc5Decoder_8h_source.html">Rc5Decoder.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Rc5Decoder_8cpp_source.html#l00022">22</a> of file <a class="el" href="Rc5Decoder_8cpp_source.html">Rc5Decoder.cpp</a>.</p>
 
 </div>
 </div>
@@ -413,7 +385,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jan 6 2021 20:39:14 for Infrared4Arduino by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
+Generated on Thu Feb 11 2021 10:34:33 for Infrared4Arduino by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
 </small></address>
 </body>
 </html>

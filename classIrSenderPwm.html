@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Infrared4Arduino
-   &#160;<span id="projectnumber">1.1.1</span>
+   &#160;<span id="projectnumber">1.2.0</span>
    </div>
   </td>
  </tr>
@@ -79,7 +79,7 @@ $(function() {
 Inheritance diagram for IrSenderPwm:</div>
 <div class="dyncontent">
 <div class="center"><img src="classIrSenderPwm__inherit__graph.png" border="0" usemap="#aIrSenderPwm_inherit__map" alt="Inheritance graph"/></div>
-<map name="IrSenderPwm_inherit__map" id="aIrSenderPwm_inherit__map">
+<map name="IrSenderPwm_inherit__map" id="IrSenderPwm_inherit__map">
 <area shape="rect" title="Sending function using timer PWM." alt="" coords="95,80,197,107"/>
 <area shape="rect" href="classIrSenderPwmHard.html" title="Sending function using timer PWM." alt="" coords="5,155,135,181"/>
 <area shape="rect" href="classIrSenderPwmSoft.html" title="Sending function using timer PWM." alt="" coords="159,155,285,181"/>
@@ -92,7 +92,7 @@ Inheritance diagram for IrSenderPwm:</div>
 Collaboration diagram for IrSenderPwm:</div>
 <div class="dyncontent">
 <div class="center"><img src="classIrSenderPwm__coll__graph.png" border="0" usemap="#aIrSenderPwm_coll__map" alt="Collaboration graph"/></div>
-<map name="IrSenderPwm_coll__map" id="aIrSenderPwm_coll__map">
+<map name="IrSenderPwm_coll__map" id="IrSenderPwm_coll__map">
 <area shape="rect" title="Sending function using timer PWM." alt="" coords="5,80,107,107"/>
 <area shape="rect" href="classIrSender.html" title="Abstract base class for all sending classes." alt="" coords="21,5,91,32"/>
 </map>
@@ -103,7 +103,7 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a5d4559ebaeb2106cd6db9eb76e98e334"><td class="memItemLeft" align="right" valign="top">static unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrSenderPwm.html#a5d4559ebaeb2106cd6db9eb76e98e334">getDutyCycle</a> ()</td></tr>
 <tr class="separator:a5d4559ebaeb2106cd6db9eb76e98e334"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5372cebc758d2a2dce3d8eeb2655ab2b"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classIrSenderPwm.html">IrSenderPwm</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrSenderPwm.html#a5372cebc758d2a2dce3d8eeb2655ab2b">getInstance</a> (bool create=false, <a class="el" href="InfraredTypes_8h.html#aede467d93ddeb5fdeff6023236aa4ad6">pin_t</a> outputPin=Board::getInstance() -&gt;defaultPwmPin())</td></tr>
-<tr class="memdesc:a5372cebc758d2a2dce3d8eeb2655ab2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a pointer to the instance, or NULL if not initialized.  <a href="classIrSenderPwm.html#a5372cebc758d2a2dce3d8eeb2655ab2b">More...</a><br /></td></tr>
+<tr class="memdesc:a5372cebc758d2a2dce3d8eeb2655ab2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a pointer to the instance, or nullptr if not initialized.  <a href="classIrSenderPwm.html#a5372cebc758d2a2dce3d8eeb2655ab2b">More...</a><br /></td></tr>
 <tr class="separator:a5372cebc758d2a2dce3d8eeb2655ab2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a624fc7923999d04739439a0514bd1eab"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classIrSenderPwm.html">IrSenderPwm</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrSenderPwm.html#a624fc7923999d04739439a0514bd1eab">newInstance</a> (<a class="el" href="InfraredTypes_8h.html#aede467d93ddeb5fdeff6023236aa4ad6">pin_t</a> outputPin)</td></tr>
 <tr class="memdesc:a624fc7923999d04739439a0514bd1eab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new instance (if not existing) and returns it.  <a href="classIrSenderPwm.html#a624fc7923999d04739439a0514bd1eab">More...</a><br /></td></tr>
@@ -138,7 +138,7 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:a6f6fab6d5d57cf5ac3028fc1d59eae06 inherit pub_methods_classIrSender"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab8d8c02fb29d39985a8bec6c210d6aaf inherit pub_methods_classIrSender"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrSender.html#ab8d8c02fb29d39985a8bec6c210d6aaf">~IrSender</a> ()</td></tr>
 <tr class="separator:ab8d8c02fb29d39985a8bec6c210d6aaf inherit pub_methods_classIrSender"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a723fdbbd8ae77c0ac5a75d07d44ff0dd inherit pub_methods_classIrSender"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrSender.html#a723fdbbd8ae77c0ac5a75d07d44ff0dd">send</a> (const <a class="el" href="classIrSequence.html">IrSequence</a> &amp;irSequence, <a class="el" href="InfraredTypes_8h.html#ab35ca91fa7f5b34afafe58828ccf58db">frequency_t</a> frequency=<a class="el" href="classIrSignal.html#a03aeed233443abe289f0910df1998841">IrSignal::defaultFrequency</a>, <a class="el" href="InfraredTypes_8h.html#a4b290cd91cfd9ca0826a166e03fb993d">dutycycle_t</a> dutyCycle=<a class="el" href="classBoard.html#ac142427d3fa45ff5e95832da2ef36803">Board::defaultDutyCycle</a>)</td></tr>
+<tr class="memitem:a723fdbbd8ae77c0ac5a75d07d44ff0dd inherit pub_methods_classIrSender"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrSender.html#a723fdbbd8ae77c0ac5a75d07d44ff0dd">send</a> (const <a class="el" href="classIrSequence.html">IrSequence</a> &amp;irSequence, <a class="el" href="InfraredTypes_8h.html#ab35ca91fa7f5b34afafe58828ccf58db">frequency_t</a> frequency=<a class="el" href="classIrSignal.html#aad50e8c5b10cfaabbd2c59b3b9bae5c0">IrSignal::defaultFrequency</a>, <a class="el" href="InfraredTypes_8h.html#a4b290cd91cfd9ca0826a166e03fb993d">dutycycle_t</a> dutyCycle=<a class="el" href="classBoard.html#ac142427d3fa45ff5e95832da2ef36803">Board::defaultDutyCycle</a>)</td></tr>
 <tr class="memdesc:a723fdbbd8ae77c0ac5a75d07d44ff0dd inherit pub_methods_classIrSender"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends an <a class="el" href="classIrSequence.html" title="This class consists of a vector of durations.">IrSequence</a> with the prescribed frequency.  <a href="classIrSender.html#a723fdbbd8ae77c0ac5a75d07d44ff0dd">More...</a><br /></td></tr>
 <tr class="separator:a723fdbbd8ae77c0ac5a75d07d44ff0dd inherit pub_methods_classIrSender"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad172264fa246b306832e75a162679eac inherit pub_methods_classIrSender"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIrSender.html#ad172264fa246b306832e75a162679eac">sendIrSignal</a> (const <a class="el" href="classIrSignal.html">IrSignal</a> &amp;irSignal, unsigned int noSends=1)</td></tr>
@@ -304,7 +304,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Returns a pointer to the instance, or NULL if not initialized. </p>
+<p>Returns a pointer to the instance, or nullptr if not initialized. </p>
 <p>If argument true, in the latter case creates a new instance and returns it. </p>
 
 <p class="definition">Definition at line <a class="el" href="IrSenderPwm_8cpp_source.html#l00043">43</a> of file <a class="el" href="IrSenderPwm_8cpp_source.html">IrSenderPwm.cpp</a>.</p>
@@ -336,7 +336,7 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Creates a new instance (if not existing) and returns it. </p>
-<p>Returns NULL if an instance already exists. </p>
+<p>Returns nullptr if an instance already exists. </p>
 
 <p class="definition">Definition at line <a class="el" href="IrSenderPwm_8cpp_source.html#l00031">31</a> of file <a class="el" href="IrSenderPwm_8cpp_source.html">IrSenderPwm.cpp</a>.</p>
 
@@ -349,7 +349,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Jan 6 2021 20:39:14 for Infrared4Arduino by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
+Generated on Thu Feb 11 2021 10:34:33 for Infrared4Arduino by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.8.20
 </small></address>
 </body>
 </html>

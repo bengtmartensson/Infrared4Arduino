@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['parse_497',['parse',['../classPronto.html#a8fe7116de9a7fae3950f6c59da905519',1,'Pronto::parse(const uint16_t *data, size_t size)'],['../classPronto.html#a3de0ddd8fefbcf13730f9f795ae25f24',1,'Pronto::parse(const char *str)'],['../classPronto.html#aaf4bfd57eaecc03bdca73cf66ef33262',1,'Pronto::parse(const __FlashStringHelper *str)']]],
-  ['parse_5fpf_498',['parse_PF',['../classPronto.html#a3738afc54f26a70f852c65b52745f9b9',1,'Pronto::parse_PF(const uint_farptr_t ptr)'],['../classPronto.html#a94cd29ecaf21ebfc3013cfef4ae03b32',1,'Pronto::parse_PF(const char *ptr)']]],
-  ['printdecode_499',['printDecode',['../classIrDecoder.html#a8d2f495021a39a74dadb32bc6d9a0eb9',1,'IrDecoder']]]
+  ['operator_20bool_503',['operator bool',['../classIrDecoder.html#aa046c6a5e9d10d36a105fb3b58ccf79b',1,'IrDecoder::operator bool()'],['../classIrReader.html#a7edeec5bfea084d6a3fe9673a5f461dc',1,'IrReader::operator bool()'],['../classIrSequence.html#aa8896890d56c6eac56ba2f83210a4102',1,'IrSequence::operator bool()'],['../classIrSignal.html#a193240f4c3de4ac351e62899bf9497a3',1,'IrSignal::operator bool()']]],
+  ['operator_3d_504',['operator=',['../classIrSequence.html#af1c41edb58913a1af27fc6c885d2901d',1,'IrSequence::operator=(const IrSequence &amp;rhs)'],['../classIrSequence.html#a8a039e621131af3c0274b43018df1898',1,'IrSequence::operator=(IrSequence &amp;&amp;rhs)'],['../classIrSignal.html#ac4fb5a628c8e76be76ba9dbe552281ab',1,'IrSignal::operator=(const IrSignal &amp;rhs)=default'],['../classIrSignal.html#a8b414a02690aef7de6f950486ad70d79',1,'IrSignal::operator=(IrSignal &amp;&amp;rhs)=default']]],
+  ['operator_5b_5d_505',['operator[]',['../classIrSequence.html#a42dbd2cd03d24ab762e8324fababc8f8',1,'IrSequence']]]
 ];

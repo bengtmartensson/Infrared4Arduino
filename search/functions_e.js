@@ -1,16 +1,20 @@
 var searchData=
 [
-  ['teensy3x_521',['Teensy3x',['../classTeensy3x.html#a930779d6ab178d4c93393b3f7d56b6b4',1,'Teensy3x']]],
-  ['timerconfighz_522',['timerConfigHz',['../classBoard.html#a49997b901297edc6f54c9ea17c749691',1,'Board::timerConfigHz()'],['../classATmega328P.html#a2e0d018a9b6f25f0e21646d82af85733',1,'ATmega328P::timerConfigHz()']]],
-  ['timerconfignormal_523',['timerConfigNormal',['../classBoard.html#ab744e2151e24d807dcb8fd6a6297152b',1,'Board::timerConfigNormal()'],['../classATmega328P.html#a8fe6539050866195558e55ec49ea5507',1,'ATmega328P::timerConfigNormal()']]],
-  ['timerdisableintr_524',['timerDisableIntr',['../classBoard.html#a67553ac6518539fc30ec5e844a4aff2b',1,'Board::timerDisableIntr()'],['../classATmega328P.html#aaba7ee622d7b32893f52692675fb9869',1,'ATmega328P::timerDisableIntr()']]],
-  ['timerdisablepwm_525',['timerDisablePwm',['../classBoard.html#a48845c3692a846f9edaac318aefb5d4e',1,'Board::timerDisablePwm()'],['../classATmega328P.html#a40562a370b0ab99c84852adcb5896a2b',1,'ATmega328P::timerDisablePwm()']]],
-  ['timerenableintr_526',['timerEnableIntr',['../classBoard.html#a13915d28b65a67c4d28630293b04598a',1,'Board::timerEnableIntr()'],['../classATmega328P.html#a745683512e5ed911d6025840e300ffcc',1,'ATmega328P::timerEnableIntr()']]],
-  ['timerenablepwm_527',['timerEnablePwm',['../classBoard.html#a90ed30d8f53f8fe698050b2c86c0f5ad',1,'Board::timerEnablePwm()'],['../classATmega328P.html#ad1354dd5910227707aa57ce9d5ceed79',1,'ATmega328P::timerEnablePwm()']]],
-  ['timerreset_528',['timerReset',['../classBoard.html#ae8bf560b46003c783fe2b6cbc8cd2b16',1,'Board']]],
-  ['timervaluetonanoseconds_529',['timerValueToNanoSeconds',['../classIrWidget.html#a8b09fff5460ce629ebd40f363d2450fd',1,'IrWidget']]],
-  ['timesince_530',['timeSince',['../IrReceiverPoll_8cpp.html#a835436c679a41d525f0be6272d708a20',1,'IrReceiverPoll.cpp']]],
-  ['toirsequence_531',['toIrSequence',['../classIrReader.html#abc437af677c211cf7961d5f5e810ef21',1,'IrReader']]],
-  ['toprontohex_532',['toProntoHex',['../classPronto.html#a62982b433225779c638a74a9b80b5929',1,'Pronto::toProntoHex(const IrSignal &amp;irSignal)'],['../classPronto.html#a3bdcd6557c935fd5ed6310a2b5f9d30a',1,'Pronto::toProntoHex(const IrSequence &amp;introSequence, const IrSequence &amp;repeatSequence=IrSequence::emptyInstance, frequency_t frequency=IrSignal::defaultFrequency)'],['../classPronto.html#a2c2542292a46afa462e0e59ff386b0df',1,'Pronto::toProntoHex(const microseconds_t *introData, size_t introLength, frequency_t frequency=IrSignal::defaultFrequency)'],['../classPronto.html#a31eb1ec5e71f37621f7ef95feeb9eb0a',1,'Pronto::toProntoHex(const microseconds_t *introData, size_t introLength, const microseconds_t *repeatData=NULL, size_t repeatLength=0, frequency_t frequency=IrSignal::defaultFrequency)']]],
-  ['trydecode_533',['tryDecode',['../classHashDecoder.html#a6e7d7e468075db56fa48646f43d7ab6c',1,'HashDecoder::tryDecode()'],['../classNec1Decoder.html#a23aba73fc1229950ca7ea5e1581673fd',1,'Nec1Decoder::tryDecode()'],['../classRc5Decoder.html#a1ba9c0ad97d7bbec861baca097071515',1,'Rc5Decoder::tryDecode()']]]
+  ['sam_514',['Sam',['../classSam.html#afd6d665491358bb9879e9b91071d935c',1,'Sam']]],
+  ['send_515',['send',['../classIrSender.html#a723fdbbd8ae77c0ac5a75d07d44ff0dd',1,'IrSender::send()'],['../classIrSenderSimulator.html#a75ebe0fc49c9801a36ff790f12ad83eb',1,'IrSenderSimulator::send()']]],
+  ['sendirsignal_516',['sendIrSignal',['../classIrSender.html#ad172264fa246b306832e75a162679eac',1,'IrSender']]],
+  ['sendmark_517',['sendMark',['../classIrSender.html#a47cf5fa888aadc0920e9adb18a089c30',1,'IrSender::sendMark()'],['../classIrSenderPwmSoft.html#a72419641591c0a594d40b3ccda57da01',1,'IrSenderPwmSoft::sendMark()'],['../classIrSenderSimulator.html#a51adcc0bc74061c78a8458db0809624c',1,'IrSenderSimulator::sendMark()']]],
+  ['sendnonmodulated_518',['sendNonModulated',['../classIrSenderNonMod.html#a35c455619a4d361b6fea8578c1971c2e',1,'IrSenderNonMod']]],
+  ['sendpwmmark_519',['sendPwmMark',['../classBoard.html#a1fb283a928c2d31f88c57586e5b5dbb3',1,'Board']]],
+  ['sendspace_520',['sendSpace',['../classIrSender.html#ac5929c42fc0dc41ad9bc8034ec5a93e1',1,'IrSender::sendSpace()'],['../classIrSenderSimulator.html#a83ca1302c603d17d11eebd8a88cc3686',1,'IrSenderSimulator::sendSpace()']]],
+  ['sendwhile_521',['sendWhile',['../classIrSender.html#afb3e86bd8f7f16e9fc84d4c7f72993c9',1,'IrSender']]],
+  ['setbeginningtimeout_522',['setBeginningTimeout',['../classIrReader.html#a16c564724d31eaa90f72de3e803e0316',1,'IrReader::setBeginningTimeout()'],['../classIrReceiverPoll.html#a9d8d2b2c7e991dea2f4d05dbca91e692',1,'IrReceiverPoll::setBeginningTimeout()'],['../classIrReceiverSampler.html#aa43f4a04f51e3d65fc2f2d9f4d4d3b58',1,'IrReceiverSampler::setBeginningTimeout()']]],
+  ['setendingtimeout_523',['setEndingTimeout',['../classIrReader.html#add2963a17c26882c38a015e84ec44e9c',1,'IrReader::setEndingTimeout()'],['../classIrReceiverPoll.html#afb37da8323c5c11cd0d1d4606772d335',1,'IrReceiverPoll::setEndingTimeout()'],['../classIrReceiverSampler.html#aed65891a886946964c2e31cb3eab6293',1,'IrReceiverSampler::setEndingTimeout()'],['../classIrWidget.html#a6fd29fbdb2188444cc75e142045c85d5',1,'IrWidget::setEndingTimeout()']]],
+  ['setmarkexcess_524',['setMarkExcess',['../classIrReader.html#adc84220ea337fc219bb3ccfd094f5b50',1,'IrReader']]],
+  ['setpinmode_525',['setPinMode',['../classBoard.html#a775e6a2983b8be2a0095d1103c141af7',1,'Board']]],
+  ['setupdebugpin_526',['setupDebugPin',['../classBoard.html#a42b5532f87259199a24b4b8374aa623b',1,'Board']]],
+  ['setvalid_527',['setValid',['../classIrDecoder.html#a1a6b109d835184dde64382371bc5bca9',1,'IrDecoder']]],
+  ['size_528',['size',['../classIrSequence.html#ae1bd387004fbb809421ae1db2789c777',1,'IrSequence']]],
+  ['sleepmicros_529',['sleepMicros',['../classIrSenderPwmSoft.html#a3a11fd254e70f8e98a08c213ddbbf11c',1,'IrSenderPwmSoft']]],
+  ['sleepuntilmicros_530',['sleepUntilMicros',['../classIrSenderPwmSoft.html#a492fbb72328dbc622b92923345e25c03',1,'IrSenderPwmSoft']]]
 ];

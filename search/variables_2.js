@@ -1,12 +1,12 @@
 var searchData=
 [
-  ['datalength_561',['dataLength',['../classIrReceiverSampler.html#aa8e2ffed68023049f4c5352d9d30c8d8',1,'IrReceiverSampler']]],
-  ['defaultbeginningtimeout_562',['defaultBeginningTimeout',['../classIrReader.html#a201bae13abde0dc6d651bed6996a0971',1,'IrReader']]],
-  ['defaultcapturelength_563',['defaultCaptureLength',['../classIrReader.html#a1d436bfbd3cbca9ab834f0a6398c377d',1,'IrReader']]],
-  ['defaultdutycycle_564',['defaultDutyCycle',['../classBoard.html#ac142427d3fa45ff5e95832da2ef36803',1,'Board']]],
-  ['defaultendingtimeout_565',['defaultEndingTimeout',['../classIrReader.html#abc38b9273f11c962ee7091bb14a7c53d',1,'IrReader']]],
-  ['defaultfrequency_566',['defaultFrequency',['../classIrSignal.html#a03aeed233443abe289f0910df1998841',1,'IrSignal']]],
-  ['defaultmarkexcess_567',['defaultMarkExcess',['../classIrReceiver.html#a533ebfd1985e9d697ec966ed6cbc2ddf',1,'IrReceiver::defaultMarkExcess()'],['../classIrWidget.html#a62eadb2cee8e29408cea9f5b3c91e36e',1,'IrWidget::defaultMarkExcess()']]],
-  ['defaultpin_568',['defaultPin',['../classIrReceiver.html#a0193e518d3254f388a844786018e881a',1,'IrReceiver']]],
-  ['durationdata_569',['durationData',['../classIrReceiverSampler.html#a629e21bff9c5bcd527db4beefa035ffc',1,'IrReceiverSampler']]]
+  ['datalength_572',['dataLength',['../classIrReceiverSampler.html#aa8e2ffed68023049f4c5352d9d30c8d8',1,'IrReceiverSampler']]],
+  ['defaultbeginningtimeout_573',['defaultBeginningTimeout',['../classIrReader.html#ab048b0b98a743fb15efd19261b9a9dde',1,'IrReader']]],
+  ['defaultcapturelength_574',['defaultCaptureLength',['../classIrReader.html#a4810d1c2d4151e306446889bbaed955d',1,'IrReader']]],
+  ['defaultdutycycle_575',['defaultDutyCycle',['../classBoard.html#ac142427d3fa45ff5e95832da2ef36803',1,'Board::defaultDutyCycle()'],['../classIrSignal.html#abcfb51828caef1766654da4130644ffe',1,'IrSignal::defaultDutyCycle()']]],
+  ['defaultendingtimeout_576',['defaultEndingTimeout',['../classIrReader.html#aa347d7724edfacca143a1d5b2e99b7cc',1,'IrReader']]],
+  ['defaultfrequency_577',['defaultFrequency',['../classIrSignal.html#aad50e8c5b10cfaabbd2c59b3b9bae5c0',1,'IrSignal']]],
+  ['defaultmarkexcess_578',['defaultMarkExcess',['../classIrReceiver.html#a798592aa3b0df963895b60881afa7d2f',1,'IrReceiver::defaultMarkExcess()'],['../classIrWidget.html#a0d01530870632c70b8f849898c5a6fb6',1,'IrWidget::defaultMarkExcess()']]],
+  ['defaultpin_579',['defaultPin',['../classIrReceiver.html#acb8c13da823c22a91ae2ef6852729c9d',1,'IrReceiver']]],
+  ['durationdata_580',['durationData',['../classIrReceiverSampler.html#a629e21bff9c5bcd527db4beefa035ffc',1,'IrReceiverSampler']]]
 ];

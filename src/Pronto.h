@@ -18,10 +18,12 @@
 #include "Board.h"
 
 class Pronto {
-private:
-    static constexpr unsigned int bitsInHexadecimal         = 4U;
+public:
     static constexpr unsigned int digitsInProntoNumber      = 4U;
     static constexpr unsigned int numbersInPreamble         = 4U;
+
+private:
+    static constexpr unsigned int bitsInHexadecimal         = 4U;
     static constexpr unsigned int hexMask                   = 0xFU;
     static constexpr uint16_t learnedToken                  = 0x0000U;
     static constexpr uint16_t learnedNonModulatedToken      = 0x0100U;

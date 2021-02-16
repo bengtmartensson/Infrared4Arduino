@@ -9,15 +9,15 @@
 #include <IrReceiverPoll.h>
 
 #ifdef ESP32
-#define RECEIVE_PIN 4U
+static constexpr pin_t RECEIVE_PIN = 4U;
 #elif ESP8266
-#define RECEIVE_PIN 2U
+static constexpr pin_t RECEIVE_PIN = 2U;
 #else
-#define RECEIVE_PIN 5U
+static constexpr pin_t RECEIVE_PIN = 5U;
 #endif
 
-#define BUFFERSIZE 200U
-#define BAUD 115200
+static constexpr size_t BUFFERSIZE = 200UL;
+static constexpr uint32_t BAUD = 115200UL;
 
 IrReceiver *receiver;
 

@@ -3,7 +3,7 @@
 
 #include <IrSenderNonMod.h>
 
-#define NON_MOD_PIN 9U
+static constexpr pin_t NON_MOD_PIN = 9U;
 
 static const microseconds_t data[] = {
     9041,4507,573,573,573,573,573,1694,573,1694,573,573,573,573,573,573,573,

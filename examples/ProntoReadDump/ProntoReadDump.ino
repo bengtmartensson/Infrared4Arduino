@@ -7,9 +7,9 @@
 #include <IrReceiverSampler.h>
 #include <Pronto.h>
 
-#define RECEIVE_PIN 5U
-#define BUFFERSIZE 200U
-#define BAUD 115200
+static constexpr pin_t RECEIVE_PIN = 5U;
+static constexpr size_t BUFFERSIZE = 200U;
+static constexpr uint32_t BAUD = 115200UL;
 
 IrReceiver *receiver;
 

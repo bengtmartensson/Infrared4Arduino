@@ -5,28 +5,28 @@
 #include <IrSenderPwm.h>
 
 #ifdef ESP32
-#define RECEIVE_PIN 4U
+static constexpr pin_t RECEIVE_PIN = 4U;
 #elif defined(ESP8266)
-#define RECEIVE_PIN 2U
+static constexpr pin_t RECEIVE_PIN = 2U;
 #elif defined(ARDUINO_AVR_MICRO)
-#define RECEIVE_PIN    10
+static constexpr pin_t RECEIVE_PIN = 10U;
 #elif defined (ARDUINO_TEENSY32) // Teenex 3.1-3.2
-#define RECEIVE_PIN    7U
+static constexpr pin_t RECEIVE_PIN = 7U;
 #else
-#define RECEIVE_PIN 5U
+static constexpr pin_t RECEIVE_PIN = 5U;
 #endif
 
-#define BUFFERSIZE 200U
-#define BAUD 115200
+static constexpr size_t BUFFERSIZE = 200U;
+static constexpr uint32_t BAUD = 115200UL;
 
 #ifdef ARDUINO_AVR_NANO
-#define IRRECEIVER_1_GND 6U
-#define IRRECEIVER_1_VCC 7U
+static constexpr pin_t IRRECEIVER_1_GND = 6U;
+static constexpr pin_t IRRECEIVER_1_VCC = 7U;
 #endif
 
 #ifdef ARDUINO_AVR_MICRO
-#define IRRECEIVER_1_GND    16U
-#define IRRECEIVER_1_VCC    14U
+static constexpr pin_t IRRECEIVER_1_GND = 16U;
+static constexpr pin_t IRRECEIVER_1_VCC = 14U;
 #endif
 
 static constexpr frequency_t necFrequency = 38400U;

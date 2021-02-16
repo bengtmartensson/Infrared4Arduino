@@ -5,23 +5,23 @@
 #include <IrReceiverSampler.h>
 
 #ifdef ESP32
-#define RECEIVE_PIN 4U
+static constexpr pin_t RECEIVE_PIN = 4U;
 #elif defined(ARDUINO_AVR_MICRO)
-#define RECEIVE_PIN    10
+static constexpr pin_t RECEIVE_PIN = 10U;
 #else
-#define RECEIVE_PIN 5U
+static constexpr pin_t RECEIVE_PIN = 5U;
 #endif
 
-#define BUFFERSIZE 200U
-#define BAUD 115200UL
+static constexpr size_t BUFFERSIZE = 200U;
+static constexpr uint32_t BAUD = 115200UL;
 
 #ifdef ARDUINO_AVR_NANO
-#define IRRECEIVER_1_GND 6U
-#define IRRECEIVER_1_VCC 7U
+static constexpr pin_t IRRECEIVER_1_GND = 6U;
+static constexpr pin_t IRRECEIVER_1_VCC = 7U;
 #endif
 #ifdef ARDUINO_AVR_MICRO
-#define IRRECEIVER_1_GND    16
-#define IRRECEIVER_1_VCC    14
+static constexpr pin_t IRRECEIVER_1_GND = 16U;
+static constexpr pin_t IRRECEIVER_1_VCC = 14U;
 #endif
 
 static IrReceiver *receiver;

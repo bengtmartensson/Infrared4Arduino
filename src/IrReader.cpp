@@ -26,7 +26,6 @@ void IrReader::dump(Stream &stream) const {
         stream.print((i & 1U) ? '-' : '+');
         stream.print(getDuration(i), DEC);
     }
-    stream.println();
 }
 
 IrSequence *IrReader::toIrSequence() const {

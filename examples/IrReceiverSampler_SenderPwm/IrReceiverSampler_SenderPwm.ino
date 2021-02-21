@@ -84,6 +84,8 @@ void loop() {
     receiver->receive(); // combines enable, loop, disable
     if (receiver->isEmpty()) {
         Serial.println("timeout");
-    } else
+    } else {
         receiver->dump(Serial);
+        Serial.println();
+    }
 }

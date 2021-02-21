@@ -39,6 +39,8 @@ void loop() {
     reader->receive();
     if (reader->isEmpty())
         Serial.println(F("timeout"));
-    else
+    else {
         reader->dump(Serial);
+        Serial.println();
+    }
 }

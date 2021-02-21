@@ -18,6 +18,8 @@ void loop() {
     capturer->capture();
     if (capturer->isEmpty())
         Serial.println(F("timeout"));
-    else
+    else {
         capturer->dump(Serial);
+        Serial.println();
+    }
 }

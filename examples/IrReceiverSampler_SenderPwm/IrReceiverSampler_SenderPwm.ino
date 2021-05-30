@@ -10,7 +10,7 @@ static constexpr pin_t RECEIVE_PIN = 4U;
 static constexpr pin_t RECEIVE_PIN = 2U;
 #elif defined(ARDUINO_AVR_MICRO)
 static constexpr pin_t RECEIVE_PIN = 10U;
-#elif defined (ARDUINO_TEENSY32) // Teenex 3.1-3.2
+#elif defined (ARDUINO_TEENSY30) || defined (ARDUINO_TEENSY32) // Teenex 3.0-3.2
 static constexpr pin_t RECEIVE_PIN = 7U;
 #else
 static constexpr pin_t RECEIVE_PIN = 5U;

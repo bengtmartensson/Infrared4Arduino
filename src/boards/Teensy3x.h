@@ -58,7 +58,7 @@ public:
     };
 
     // not tested yet
-    reset() {
+    void reset() {
         // https://forum.pjrc.com/threads/52512-External-RESET-button-Teensy-3-2?p=180363&viewfull=1#post180363
         SCB_AIRCR = 0x05FA0004;
     }

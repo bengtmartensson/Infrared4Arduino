@@ -238,7 +238,7 @@ private:
 #include "boards/Due.h"
 
 //#elif defined(__MK20DX128__) || defined(__MK20DX256__) || defined(__MK64FX512__) || defined(__MK66FX1M0__)
-#elif defined(ARDUINO_TEENSY32)
+#elif defined(ARDUINO_TEENSY30) || defined(ARDUINO_TEENSY32)
 // Teensy 3.0 / Teensy 3.1 / 3.2
 
 #include "boards/Teensy3x.h"

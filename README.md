@@ -108,9 +108,10 @@ It is believed that (unsigned) int is the fastest type for doing arithmetics,
 containing 16 bits or more.
 
 ## IrSequences and IrSignals
-An `IrSequence` is a vector of durations, i.e. sequence of interleaving gaps and spaces. It does not
-contain the modulation frequence. As opposed to IRremote and IRLib, our sequences always start with
-a space and end with a gap. It is claimed to be a more relevant representation than the one of IRremote and IRLib.
+An `IrSequence` is a vector of durations, i.e. sequence of interleaving on-periods (sometimes called _marks_ or _flashes_)
+and off-periods (sometimes called _spaces_ or _gaps_).
+It does not contain the modulation frequence. As opposed to IRremote and IRLib, our sequences always start with
+a on-period and end with an off-period. It is claimed to be a more relevant representation than the one of IRremote and IRLib.
 
 An `IrSignal` consists of a modulation frequency and three `IrSequence`s: intro-, repeat-, and ending sequence. All of these, but not all, can be
 empty. If repeat is empty, intro has to be non-empty and ending empty. The intro sequence is always sent first,

@@ -40,6 +40,9 @@ this program. If not, see http://www.gnu.org/licenses/.
 #endif
 
 #ifdef CHANGE
+#if CHANGE == 0x03
+#define _ESP_PIN_STATUS_STYLE
+#endif
 #undef CHANGE
 #endif
 
@@ -51,6 +54,19 @@ this program. If not, see http://www.gnu.org/licenses/.
 #undef RISING
 #endif
 
+#ifdef _ESP_PIN_STATUS_STYLE
+#undef _ESP_PIN_STATUS_STYLE
+// https://github.com/espressif/arduino-esp32/blob/master/cores/esp32/esp32-hal-gpio.h
+// https://github.com/esp8266/Arduino/blob/master/cores/esp8266/Arduino.h
+typedef enum {
+    LOW = 0,
+    HIGH = 1,
+    CHANGE = 3,
+    FALLING = 2,
+    RISING = 1,
+} PinStatus;
+
+#else
 typedef enum {
     LOW = 0,
     HIGH = 1,
@@ -58,12 +74,16 @@ typedef enum {
     FALLING = 3,
     RISING = 4,
 } PinStatus;
+#endif
 
 #ifdef INPUT
 #undef INPUT
 #endif
 
 #ifdef OUTPUT
+#if OUTPUT == 0x02
+#define _ESP32_PIN_STYLE
+#endif
 #undef OUTPUT
 #endif
 
@@ -75,11 +95,22 @@ typedef enum {
 #undef INPUT_PULLDOWN
 #endif
 
+#ifdef _ESP32_PIN_STYLE
+#undef _ESP32_PIN_STYLE
+// https://github.com/espressif/arduino-esp32/blob/master/cores/esp32/esp32-hal-gpio.h
+typedef enum {
+    INPUT = 0x01,
+    OUTPUT = 0x02,
+    INPUT_PULLUP = 0x05,
+    INPUT_PULLDOWN = 0x09,
+} PinMode;
+#else
 typedef enum {
     INPUT = 0x0,
     OUTPUT = 0x1,
     INPUT_PULLUP = 0x2,
     INPUT_PULLDOWN = 0x3,
 } PinMode;
+#endif
 
 #endif

@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2020 Bengt Martensson.
+Copyright (C) 2020, 2021 Bengt Martensson.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -16,40 +16,20 @@ this program. If not, see http://www.gnu.org/licenses/.
  */
 
 /**
- * This file defines the enums PinStatus and PinMode unless already known.
+ * @file PinModeStatus.h
+ * @brief This file make sure that the types PinMode and PinStatus,
+ * as well as the values HIGH and LOW are availabled.
  * To test this, we use the defined-ness of LOW.
+ *
+ * Some, but not all, architectures defines PinStatus and PinMode in a file like
+ * ~/.arduino15/packages/arduino/hardware/.../cores/arduino/api/Common.h
+ *
+ * See also https://github.com/arduino/ArduinoCore-API/issues/25
  */
 
 #pragma once
 
-// Some, but not all, architectures defines PinStatus and PinMode in a file like
-// ~/.arduino15/packages/arduino/hardware/*/*/cores/arduino/api/Common.h
-// I make the guess that if and only if LOW is defined as macro,
-// the definition should be made.
-
-// See also https://github.com/arduino/ArduinoCore-API/issues/25
-
-#if defined(LOW) || ! defined(ARDUINO)
-
-#ifdef LOW
-#undef LOW
-#endif
-
-#ifdef HIGH
-#undef HIGH
-#endif
-
-#ifdef CHANGE
-#undef CHANGE
-#endif
-
-#ifdef FALLING
-#undef FALLING
-#endif
-
-#ifdef RISING
-#undef RISING
-#endif
+#if ! defined(ARDUINO)
 
 typedef enum {
     LOW = 0,
@@ -59,27 +39,24 @@ typedef enum {
     RISING = 4,
 } PinStatus;
 
-#ifdef INPUT
-#undef INPUT
-#endif
-
-#ifdef OUTPUT
-#undef OUTPUT
-#endif
-
-#ifdef INPUT_PULLUP
-#undef INPUT_PULLUP
-#endif
-
-#ifdef INPUT_PULLDOWN
-#undef INPUT_PULLDOWN
-#endif
-
 typedef enum {
     INPUT = 0x0,
     OUTPUT = 0x1,
     INPUT_PULLUP = 0x2,
     INPUT_PULLDOWN = 0x3,
 } PinMode;
+
+#elif defined(LOW) || defined(DOXYGEN)// ARDUINO
+
+/** Values of a digital pin. */
+typedef int PinStatus;
+
+/** Different operating modes of a GPIO pin. */
+typedef int PinMode;
+
+#else
+
+// Is Arduino, but LOW is not defined.
+// We assume that PinStatus and PinMode are defined as enums.
 
 #endif

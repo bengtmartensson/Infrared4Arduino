@@ -1,4 +1,6 @@
 // This sketch combines sending and receiving.
+// It is useful for testing by developers.
+// It is NOT intended as a pedagogical example of usage of the library.
 
 #include <Arduino.h>
 #include <IrReceiverSampler.h>

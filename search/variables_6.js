@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['markexcess_594',['markExcess',['../classIrReader.html#a5ed55a23db0dd9ae2f6ccfe107802e54',1,'IrReader']]],
-  ['microseconds_5ft_5fmax_595',['MICROSECONDS_T_MAX',['../InfraredTypes_8h.html#a02e5a587d9560b431c944b1f71cdb898',1,'InfraredTypes.h']]],
-  ['microspertick_596',['microsPerTick',['../classBoard.html#a5eb6e023cae63ce2829fcd8e6d2809fd',1,'Board']]],
-  ['milliseconds_5ft_5fmax_597',['MILLISECONDS_T_MAX',['../InfraredTypes_8h.html#a9c4ded4e8fb71ca647cf1774f213e952',1,'InfraredTypes.h']]]
+  ['markexcess_596',['markExcess',['../classIrReader.html#a5ed55a23db0dd9ae2f6ccfe107802e54',1,'IrReader']]],
+  ['microseconds_5ft_5fmax_597',['MICROSECONDS_T_MAX',['../InfraredTypes_8h.html#a02e5a587d9560b431c944b1f71cdb898',1,'InfraredTypes.h']]],
+  ['microspertick_598',['microsPerTick',['../classBoard.html#a5eb6e023cae63ce2829fcd8e6d2809fd',1,'Board']]],
+  ['milliseconds_5ft_5fmax_599',['MILLISECONDS_T_MAX',['../InfraredTypes_8h.html#a9c4ded4e8fb71ca647cf1774f213e952',1,'InfraredTypes.h']]]
 ];

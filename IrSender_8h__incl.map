@@ -6,6 +6,6 @@
 <area shape="rect" id="node4" href="$InfraredTypes_8h.html" title="This file defines some general data types that are used in the library." alt="" coords="43,304,155,331"/>
 <area shape="rect" id="node5" href="$IrSequence_8h.html" title=" " alt="" coords="93,229,192,256"/>
 <area shape="rect" id="node6" href="$version_8h.html" title=" " alt="" coords="216,229,291,256"/>
-<area shape="rect" id="node8" href="$PinModeStatus_8h.html" title=" " alt="" coords="175,155,297,181"/>
+<area shape="rect" id="node8" href="$PinModeStatus_8h.html" title="This file make sure that the types PinMode and PinStatus, as well as the values HIGH and LOW are avai..." alt="" coords="175,155,297,181"/>
 <area shape="rect" id="node9" href="$NoBoard_8h.html" title=" " alt="" coords="322,155,449,181"/>
 </map>

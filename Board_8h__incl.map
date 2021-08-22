@@ -1,7 +1,7 @@
 <map id="src/Board.h" name="src/Board.h">
 <area shape="rect" id="node1" title=" " alt="" coords="259,5,349,32"/>
 <area shape="rect" id="node2" href="$IrSignal_8h.html" title=" " alt="" coords="67,80,144,107"/>
-<area shape="rect" id="node7" href="$PinModeStatus_8h.html" title=" " alt="" coords="168,80,291,107"/>
+<area shape="rect" id="node7" href="$PinModeStatus_8h.html" title="This file make sure that the types PinMode and PinStatus, as well as the values HIGH and LOW are avai..." alt="" coords="168,80,291,107"/>
 <area shape="rect" id="node8" href="$NoBoard_8h.html" title=" " alt="" coords="315,80,442,107"/>
 <area shape="rect" id="node3" href="$InfraredTypes_8h.html" title="This file defines some general data types that are used in the library." alt="" coords="5,229,117,256"/>
 <area shape="rect" id="node5" href="$IrSequence_8h.html" title=" " alt="" coords="56,155,155,181"/>

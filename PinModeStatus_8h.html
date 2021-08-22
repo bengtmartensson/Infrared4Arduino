@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Infrared4Arduino
-   &#160;<span id="projectnumber">1.2.1</span>
+   &#160;<span id="projectnumber">1.2.2</span>
    </div>
   </td>
  </tr>
@@ -66,16 +66,21 @@ $(function() {
 </div>
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#typedef-members">Typedefs</a>  </div>
   <div class="headertitle">
 <div class="title">PinModeStatus.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>This file make sure that the types PinMode and PinStatus, as well as the values HIGH and LOW are availabled.  
+<a href="#details">More...</a></p>
 <div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="PinModeStatus_8h__dep__incl.png" border="0" usemap="#asrc_2PinModeStatus_8hdep" alt=""/></div>
 <map name="asrc_2PinModeStatus_8hdep" id="asrc_2PinModeStatus_8hdep">
-<area shape="rect" title=" " alt="" coords="1403,5,1547,32"/>
+<area shape="rect" title="This file make sure that the types PinMode and PinStatus, as well as the values HIGH and LOW are avai..." alt="" coords="1403,5,1547,32"/>
 <area shape="rect" href="Board_8h.html" title=" " alt="" coords="1430,80,1519,107"/>
 <area shape="rect" href="Board_8cpp.html" title=" " alt="" coords="237,155,339,181"/>
 <area shape="rect" href="IrReceiver_8h.html" title=" " alt="" coords="363,155,477,181"/>
@@ -113,10 +118,64 @@ This graph shows which files directly or indirectly include this file:</div>
 </div>
 </div>
 <p><a href="PinModeStatus_8h_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a8d4375625b1fd82deee891bb6dcaed8a"><td class="memItemLeft" align="right" valign="top">typedef int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="PinModeStatus_8h.html#a8d4375625b1fd82deee891bb6dcaed8a">PinStatus</a></td></tr>
+<tr class="memdesc:a8d4375625b1fd82deee891bb6dcaed8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Values of a digital pin.  <a href="PinModeStatus_8h.html#a8d4375625b1fd82deee891bb6dcaed8a">More...</a><br /></td></tr>
+<tr class="separator:a8d4375625b1fd82deee891bb6dcaed8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a060be87cd99d9dd3e13a18ab8f9a6e"><td class="memItemLeft" align="right" valign="top">typedef int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="PinModeStatus_8h.html#a6a060be87cd99d9dd3e13a18ab8f9a6e">PinMode</a></td></tr>
+<tr class="memdesc:a6a060be87cd99d9dd3e13a18ab8f9a6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Different operating modes of a GPIO pin.  <a href="PinModeStatus_8h.html#a6a060be87cd99d9dd3e13a18ab8f9a6e">More...</a><br /></td></tr>
+<tr class="separator:a6a060be87cd99d9dd3e13a18ab8f9a6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This file make sure that the types PinMode and PinStatus, as well as the values HIGH and LOW are availabled. </p>
+<p>To test this, we use the defined-ness of LOW.</p>
+<p>Some, but not all, architectures defines PinStatus and PinMode in a file like ~/.arduino15/packages/arduino/hardware/.../cores/arduino/api/Common.h</p>
+<p>See also <a href="https://github.com/arduino/ArduinoCore-API/issues/25">https://github.com/arduino/ArduinoCore-API/issues/25</a> </p>
+
+<p class="definition">Definition in file <a class="el" href="PinModeStatus_8h_source.html">PinModeStatus.h</a>.</p>
+</div><h2 class="groupheader">Typedef Documentation</h2>
+<a id="a6a060be87cd99d9dd3e13a18ab8f9a6e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a060be87cd99d9dd3e13a18ab8f9a6e">&#9670;&nbsp;</a></span>PinMode</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef int <a class="el" href="PinModeStatus_8h.html#a6a060be87cd99d9dd3e13a18ab8f9a6e">PinMode</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Different operating modes of a GPIO pin. </p>
+
+<p class="definition">Definition at line <a class="el" href="PinModeStatus_8h_source.html#l00055">55</a> of file <a class="el" href="PinModeStatus_8h_source.html">PinModeStatus.h</a>.</p>
+
+</div>
+</div>
+<a id="a8d4375625b1fd82deee891bb6dcaed8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d4375625b1fd82deee891bb6dcaed8a">&#9670;&nbsp;</a></span>PinStatus</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef int <a class="el" href="PinModeStatus_8h.html#a8d4375625b1fd82deee891bb6dcaed8a">PinStatus</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Values of a digital pin. </p>
+
+<p class="definition">Definition at line <a class="el" href="PinModeStatus_8h_source.html#l00052">52</a> of file <a class="el" href="PinModeStatus_8h_source.html">PinModeStatus.h</a>.</p>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun May 30 2021 10:57:09 for Infrared4Arduino by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sun Aug 22 2021 17:58:06 for Infrared4Arduino by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

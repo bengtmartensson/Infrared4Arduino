@@ -22,7 +22,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Infrared4Arduino
-   &#160;<span id="projectnumber">1.2.1</span>
+   &#160;<span id="projectnumber">1.2.2</span>
    </div>
   </td>
  </tr>
@@ -96,7 +96,7 @@ $(function() {
 <p>Implementation dependent types like <code>int</code> are used if and <em>only if</em> it is OK for the compiler to select any implementation allowed by the C++ language.</p>
 <p><code>unsigned int</code> is used for quantities that can "impossibly" be larger than 65535. It is believed that (unsigned) int is the fastest type for doing arithmetics, containing 16 bits or more.</p>
 <h2>IrSequences and IrSignals</h2>
-<p>An <code><a class="el" href="classIrSequence.html" title="This class consists of a vector of durations.">IrSequence</a></code> is a vector of durations, i.e. sequence of interleaving gaps and spaces. It does not contain the modulation frequence. As opposed to IRremote and IRLib, our sequences always start with a space and end with a gap. It is claimed to be a more relevant representation than the one of IRremote and IRLib.</p>
+<p>An <code><a class="el" href="classIrSequence.html" title="This class consists of a vector of durations.">IrSequence</a></code> is a vector of durations, i.e. sequence of interleaving on-periods (sometimes called <em>marks</em> or <em>flashes</em>) and off-periods (sometimes called <em>spaces</em> or <em>gaps</em>). It does not contain the modulation frequence. As opposed to IRremote and IRLib, our sequences always start with a on-period and end with an off-period. It is claimed to be a more relevant representation than the one of IRremote and IRLib.</p>
 <p>An <code><a class="el" href="classIrSignal.html" title="This class models an IR signal with intro-, repeat-, and ending sequences.">IrSignal</a></code> consists of a modulation frequency and three <code><a class="el" href="classIrSequence.html" title="This class consists of a vector of durations.">IrSequence</a></code>s: intro-, repeat-, and ending sequence. All of these, but not all, can be empty. If repeat is empty, intro has to be non-empty and ending empty. The intro sequence is always sent first, then comes a zero or more repeat sequences, and finally the ending sequence. To send a signal <em>n</em> &gt; 0 times shall mean the following: If the intro is non-empty, send intro, <em>n</em> - 1 repeats, and then the ending. If the intro is empty, send <em>n</em> repeats, and then then ending.</p>
 <h2>Signal data in flash memory.</h2>
 <p>The examples <code>oppo_cooked</code> and <code>oppo_raw</code> consist of <a href="https://github.com/bengtmartensson/harctoolboxbundle">IrScrutinizer</a> exports of the infrared command set of the Oppo Bluray players, in parametrized and raw form respectively. The latter stores the raw signals in the flash area, "`PROGMEM`", (i.e. not taking up any (permanent) RAM storage) for which the API support is required. This is unfortunately not available with all architectures.</p>
@@ -166,7 +166,7 @@ ESP32                                       5           n/a
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun May 30 2021 10:57:09 for Infrared4Arduino by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sun Aug 22 2021 17:58:06 for Infrared4Arduino by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

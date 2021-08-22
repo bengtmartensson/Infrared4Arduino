@@ -7,11 +7,13 @@ var searchData=
   ['periodtime_217',['periodTime',['../classIrSenderPwmSoft.html#a1d8184c9cb0ae27376a340c4b3cb3be2',1,'IrSenderPwmSoft']]],
   ['pin_5ft_218',['pin_t',['../InfraredTypes_8h.html#aede467d93ddeb5fdeff6023236aa4ad6',1,'InfraredTypes.h']]],
   ['pin_5ft_5fmax_219',['PIN_T_MAX',['../InfraredTypes_8h.html#a7fc64a7b641c92eb209ce5b0f5a30276',1,'InfraredTypes.h']]],
-  ['pinmodestatus_2eh_220',['PinModeStatus.h',['../PinModeStatus_8h.html',1,'']]],
-  ['printdecode_221',['printDecode',['../classIrDecoder.html#a8d2f495021a39a74dadb32bc6d9a0eb9',1,'IrDecoder']]],
-  ['pronto_222',['Pronto',['../classPronto.html',1,'']]],
-  ['pronto_2ecpp_223',['Pronto.cpp',['../Pronto_8cpp.html',1,'']]],
-  ['pronto_2eh_224',['Pronto.h',['../Pronto_8h.html',1,'']]],
-  ['pulse_5fcorrection_225',['PULSE_CORRECTION',['../classIrSenderPwmSoft.html#ab08b243497533b110f8f36915e5fd629',1,'IrSenderPwmSoft']]],
-  ['pwm_5fpin_226',['PWM_PIN',['../ATmega328P_8h.html#af5a48adc9d939102a42f2829b7a1b8ac',1,'PWM_PIN():&#160;ATmega328P.h'],['../Esp32_8h.html#af5a48adc9d939102a42f2829b7a1b8ac',1,'PWM_PIN():&#160;Esp32.h'],['../NoBoard_8h.html#af5a48adc9d939102a42f2829b7a1b8ac',1,'PWM_PIN():&#160;NoBoard.h'],['../Sam_8h.html#af5a48adc9d939102a42f2829b7a1b8ac',1,'PWM_PIN():&#160;Sam.h'],['../Teensy3x_8h.html#af5a48adc9d939102a42f2829b7a1b8ac',1,'PWM_PIN():&#160;Teensy3x.h']]]
+  ['pinmode_220',['PinMode',['../PinModeStatus_8h.html#a6a060be87cd99d9dd3e13a18ab8f9a6e',1,'PinModeStatus.h']]],
+  ['pinmodestatus_2eh_221',['PinModeStatus.h',['../PinModeStatus_8h.html',1,'']]],
+  ['pinstatus_222',['PinStatus',['../PinModeStatus_8h.html#a8d4375625b1fd82deee891bb6dcaed8a',1,'PinModeStatus.h']]],
+  ['printdecode_223',['printDecode',['../classIrDecoder.html#a8d2f495021a39a74dadb32bc6d9a0eb9',1,'IrDecoder']]],
+  ['pronto_224',['Pronto',['../classPronto.html',1,'']]],
+  ['pronto_2ecpp_225',['Pronto.cpp',['../Pronto_8cpp.html',1,'']]],
+  ['pronto_2eh_226',['Pronto.h',['../Pronto_8h.html',1,'']]],
+  ['pulse_5fcorrection_227',['PULSE_CORRECTION',['../classIrSenderPwmSoft.html#ab08b243497533b110f8f36915e5fd629',1,'IrSenderPwmSoft']]],
+  ['pwm_5fpin_228',['PWM_PIN',['../ATmega328P_8h.html#af5a48adc9d939102a42f2829b7a1b8ac',1,'PWM_PIN():&#160;ATmega328P.h'],['../Esp32_8h.html#af5a48adc9d939102a42f2829b7a1b8ac',1,'PWM_PIN():&#160;Esp32.h'],['../NoBoard_8h.html#af5a48adc9d939102a42f2829b7a1b8ac',1,'PWM_PIN():&#160;NoBoard.h'],['../Sam_8h.html#af5a48adc9d939102a42f2829b7a1b8ac',1,'PWM_PIN():&#160;Sam.h'],['../Teensy3x_8h.html#af5a48adc9d939102a42f2829b7a1b8ac',1,'PWM_PIN():&#160;Teensy3x.h']]]
 ];

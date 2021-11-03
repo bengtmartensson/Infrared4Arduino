@@ -17,7 +17,7 @@ this program. If not, see http://www.gnu.org/licenses/.
 
 #include "IrSenderNonMod.h"
 
-IrSenderNonMod::IrSenderNonMod(pin_t pin, bool _invert) : IrSender(pin),invert(_invert) {
+IrSenderNonMod::IrSenderNonMod(pin_t pin, bool _invert) : IrSender(pin, _invert) {
 }
 
 void IrSenderNonMod::sendNonModulated(const IrSequence& irSequence, unsigned int times) {
@@ -26,17 +26,11 @@ void IrSenderNonMod::sendNonModulated(const IrSequence& irSequence, unsigned int
 }
 
 void IrSenderNonMod::sendSpace(microseconds_t time) {
-    if (invert)
-        writeHigh();
-    else
-        writeLow();
+    writeLow();
     Board::delayMicroseconds(time);
 }
 
 void IrSenderNonMod::sendMark(microseconds_t time) {
-    if (invert)
-        writeLow();
-    else
-        writeHigh();
+    writeHigh();
     Board::delayMicroseconds(time);
 }

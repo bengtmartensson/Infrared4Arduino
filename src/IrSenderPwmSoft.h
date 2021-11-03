@@ -27,7 +27,7 @@ this program. If not, see http://www.gnu.org/licenses/.
  */
 class IrSenderPwmSoft : public IrSenderPwm {
 protected:
-    IrSenderPwmSoft(pin_t outputPin); // no default!
+    IrSenderPwmSoft(pin_t outputPin, bool invert = false); // no default!
     virtual ~IrSenderPwmSoft() {}
     void enable(frequency_t hz, dutycycle_t dutyCycle = Board::defaultDutyCycle);
     void sendMark(microseconds_t time);

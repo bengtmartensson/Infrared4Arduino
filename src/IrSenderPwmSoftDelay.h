@@ -27,7 +27,7 @@ this program. If not, see http://www.gnu.org/licenses/.
  */
 class IrSenderPwmSoftDelay : public IrSenderPwmSoft {
 public:
-    IrSenderPwmSoftDelay(pin_t outpitPin); // default is not meaningful!!
+    IrSenderPwmSoftDelay(pin_t outputPin, bool invert = false); // default is not meaningful!!
 
     virtual ~IrSenderPwmSoftDelay() {
     }

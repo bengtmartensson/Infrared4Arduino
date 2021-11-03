@@ -18,7 +18,7 @@ this program. If not, see http://www.gnu.org/licenses/.
 #include <Arduino.h>
 #include "IrSenderPwmSoft.h"
 
-IrSenderPwmSoft::IrSenderPwmSoft(pin_t outputPin) : IrSenderPwm(outputPin) {
+IrSenderPwmSoft::IrSenderPwmSoft(pin_t outputPin, bool _invert) : IrSenderPwm(outputPin, _invert) {
 }
 
 //void IrSenderPwmSoft::sendSpace(milliseconds_t time) {

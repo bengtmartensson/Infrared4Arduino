@@ -34,11 +34,23 @@ public:
     }
 
 protected:
-    // TODO: Rewrite for efficiency
-    inline void writeHigh() { Board::getInstance()->writeHigh(sendPin); };
-    inline void writeLow()  { Board::getInstance()->writeLow(sendPin); };
+    const bool invert; // TODO: const
 
-    IrSender(pin_t pin);
+    // TODO: Rewrite for efficiency
+    constexpr inline void writeHigh() {
+        if(invert)
+            Board::getInstance()->writeLow(sendPin);
+        else
+            Board::getInstance()->writeHigh(sendPin);
+    };
+    constexpr inline void writeLow() {
+        if (invert)
+            Board::getInstance()->writeHigh(sendPin);
+        else
+            Board::getInstance()->writeLow(sendPin);
+    };
+
+    IrSender(pin_t pin, bool invert = false);
 
     // TODO: something sensible...
     /*virtual*/ static void barfForInvalidPin(pin_t sendPin __attribute__((unused))) {};

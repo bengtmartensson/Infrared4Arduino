@@ -19,7 +19,7 @@ this program. If not, see http://www.gnu.org/licenses/.
 
 #include "IrSenderPwmSoftDelay.h"
 
-IrSenderPwmSoftDelay::IrSenderPwmSoftDelay(pin_t outputPin) : IrSenderPwmSoft(outputPin) {
+IrSenderPwmSoftDelay::IrSenderPwmSoftDelay(pin_t outputPin, bool _invert) : IrSenderPwmSoft(outputPin, _invert) {
 }
 
 void inline IrSenderPwmSoftDelay::sleepMicros(microseconds_t us) {

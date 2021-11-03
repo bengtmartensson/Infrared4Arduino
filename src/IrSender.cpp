@@ -18,9 +18,10 @@ this program. If not, see http://www.gnu.org/licenses/.
 #include "IrSender.h"
 #include "IrSignal.h"
 
-IrSender::IrSender(pin_t pin) : sendPin(pin) {
+IrSender::IrSender(pin_t pin, bool _invert) : sendPin(pin), invert(_invert) {
     Board::getInstance()->setPinMode(pin, OUTPUT);
-    Board::getInstance()->writeLow(pin);
+    //invert = true;
+    mute();
 }
 
 IrSender::~IrSender() {
@@ -28,10 +29,17 @@ IrSender::~IrSender() {
 }
 
 void IrSender::sendIrSignal(const IrSignal& irSignal, unsigned int noSends) {
+  if (invert) {
+    if (Board::getInstance()->readDigital(13))
+      Board::getInstance()->writeLow(13);
+    else
+      Board::getInstance()->writeHigh(13);
+  }
     send(irSignal.getIntro(), irSignal.getFrequency());
     for (unsigned int i = 0; i < irSignal.noRepetitions(noSends); i++)
         send(irSignal.getRepeat(), irSignal.getFrequency());
     send(irSignal.getEnding(), irSignal.getFrequency());
+    mute();
 }
 
 void IrSender::sendWhile(const IrSignal& irSignal, bool(*trigger)()) {

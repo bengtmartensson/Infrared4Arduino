@@ -25,24 +25,24 @@ this program. If not, see http://www.gnu.org/licenses/.
 
 IrSenderPwm *IrSenderPwm::instance = nullptr;
 
-IrSenderPwm::IrSenderPwm(pin_t outputPin) : IrSender(outputPin) {
+IrSenderPwm::IrSenderPwm(pin_t outputPin, bool _invert) : IrSender(outputPin, _invert) {
 }
 
-IrSenderPwm *IrSenderPwm::newInstance(pin_t outputPin) {
+IrSenderPwm *IrSenderPwm::newInstance(pin_t outputPin, bool invert) {
     if (instance != nullptr)
         return nullptr;
     instance =
 #ifdef HAS_HARDWARE_PWM
-            IrSenderPwmHard::newInstance(outputPin);
+            IrSenderPwmHard::newInstance(outputPin, invert);
 #else
-            new IrSenderPwmSoftDelay(outputPin);
+            new IrSenderPwmSoftDelay(outputPin, invert);
 #endif
     return instance;
 }
 
-IrSenderPwm *IrSenderPwm::getInstance(bool create, pin_t outputPin) {
+IrSenderPwm *IrSenderPwm::getInstance(bool create, pin_t outputPin, bool invert) {
     if (instance == nullptr && create)
-        instance = newInstance(outputPin);
+        instance = newInstance(outputPin, invert);
     return instance;
 }
 

@@ -18,7 +18,7 @@ this program. If not, see http://www.gnu.org/licenses/.
 #include <Arduino.h>
 #include "IrSenderPwmSpinWait.h"
 
-IrSenderPwmSpinWait::IrSenderPwmSpinWait(pin_t sendPin) : IrSenderPwmSoft(sendPin) {
+IrSenderPwmSpinWait::IrSenderPwmSpinWait(pin_t sendPin, bool invert) : IrSenderPwmSoft(sendPin, invert) {
 }
 
 void inline IrSenderPwmSpinWait::sleepMicros(microseconds_t us) {

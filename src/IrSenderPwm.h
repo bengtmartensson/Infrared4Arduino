@@ -32,7 +32,7 @@ private:
     static IrSenderPwm *instance;
 
 protected:
-    IrSenderPwm(pin_t sendPin);
+    IrSenderPwm(pin_t sendPin, bool invert = false);
     virtual ~IrSenderPwm() {}
 
 public:
@@ -42,13 +42,14 @@ public:
      * Returns a pointer to the instance, or nullptr if not initialized.
      * If argument true, in the latter case creates a new instance and returns it.
      */
-    static IrSenderPwm *getInstance(bool create = false, pin_t outputPin = Board::getInstance()->defaultPwmPin());
+    static IrSenderPwm *getInstance(bool create = false, pin_t outputPin = Board::getInstance()->defaultPwmPin(), bool invert = false);
+
 
     /**
      *  Creates a new instance (if not existing) and returns it.
      *  Returns nullptr if an instance already exists.
      */
-    static IrSenderPwm *newInstance(pin_t outputPin);
+    static IrSenderPwm *newInstance(pin_t outputPin, bool invert = false);
 
     static void deleteInstance();
 };

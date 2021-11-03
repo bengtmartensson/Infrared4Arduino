@@ -29,7 +29,7 @@ this program. If not, see http://www.gnu.org/licenses/.
  */
 class IrSenderPwmSpinWait : public IrSenderPwmSoft {
 public:
-    IrSenderPwmSpinWait(pin_t sendPin);
+    IrSenderPwmSpinWait(pin_t sendPin, bool invert = false);
 
     virtual ~IrSenderPwmSpinWait() {
     };

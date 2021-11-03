@@ -32,7 +32,7 @@ this program. If not, see http://www.gnu.org/licenses/.
  */
 class IrSenderPwmHard : public IrSenderPwm {
 public:
-    IrSenderPwmHard(pin_t outputPin = Board::getInstance()->defaultPwmPin());
+    IrSenderPwmHard(pin_t outputPin = Board::getInstance()->defaultPwmPin(), bool invert = false);
     virtual ~IrSenderPwmHard();
 
 private:
@@ -49,13 +49,13 @@ public:
      * Returns a pointer to the instance, or nullptr if not initialized.
      * If argument true, in the latter case creates a new instance and returns it.
      */
-    static IrSenderPwmHard *getInstance(bool create = false, pin_t ouputPin = Board::getInstance()->defaultPwmPin());
+    static IrSenderPwmHard *getInstance(bool create = false, pin_t outputPin = Board::getInstance()->defaultPwmPin(), bool invert = false);
 
     /**
      *  Creates a new instance (if not existing) and returns it.
      *  Returns nullptr if an instance already exists.
      */
-    static IrSenderPwmHard *newInstance(pin_t ouputPin = Board::getInstance()->defaultPwmPin());
+    static IrSenderPwmHard *newInstance(pin_t outputPin = Board::getInstance()->defaultPwmPin(), bool invert = false);
 
     static void deleteInstance() {
         delete instance;

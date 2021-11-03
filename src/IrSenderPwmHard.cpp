@@ -23,32 +23,33 @@ this program. If not, see http://www.gnu.org/licenses/.
 
 IrSenderPwmHard *IrSenderPwmHard::instance = nullptr;
 
-IrSenderPwmHard::IrSenderPwmHard(pin_t outputPin __attribute__((unused))) : IrSenderPwm(PWM_PIN) {
+IrSenderPwmHard::IrSenderPwmHard(pin_t outputPin __attribute__((unused)), bool _invert) : IrSenderPwm(PWM_PIN, _invert) {
 }
 
 IrSenderPwmHard::~IrSenderPwmHard() {
     disable();
 }
 
-IrSenderPwmHard *IrSenderPwmHard::newInstance(pin_t outputPin) {
+IrSenderPwmHard *IrSenderPwmHard::newInstance(pin_t outputPin, bool invert) {
     if (instance != nullptr)
         return nullptr;
-    instance = new IrSenderPwmHard(outputPin);
+    instance = new IrSenderPwmHard(outputPin, invert);
     return instance;
 }
 
-IrSenderPwmHard *IrSenderPwmHard::getInstance(bool create, pin_t outputPin) {
+IrSenderPwmHard *IrSenderPwmHard::getInstance(bool create, pin_t outputPin, bool invert) {
     if (instance == nullptr && create)
-        instance = new IrSenderPwmHard(outputPin);
+        instance = new IrSenderPwmHard(outputPin, invert);
     return instance;
 }
 
 void IrSenderPwmHard::enable(frequency_t frequency, dutycycle_t dutyCycle) {
-    Board::getInstance()->enablePwm(getPin(), frequency, dutyCycle);
+    Board::getInstance()->enablePwm(getPin(), frequency, invert ? 100 - dutyCycle : dutyCycle);
 }
 
 void IrSenderPwmHard::disable() {
     Board::getInstance()->disablePwm();
+    mute();
 }
 
 void inline IrSenderPwmHard::sendMark(milliseconds_t time) {

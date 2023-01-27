@@ -310,6 +310,9 @@ static void sendRaw(const microseconds_t intro_P[], size_t lengthIntro, const mi
     IrSequence* ending = new IrSequence();
     IrSignal irSignal(*intro, *repeat, *ending, frequency);
     irsend->sendIrSignal(irSignal, times);
+    delete intro;
+    delete repeat;
+    delete ending;
 }
 
 void setup() {

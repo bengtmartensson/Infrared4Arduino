@@ -305,14 +305,6 @@ const microseconds_t repeat_resolution[] PROGMEM = { 9024U, 2256U, 564U, 65535U 
 
 static void sendRaw(const microseconds_t intro_P[], size_t lengthIntro, const microseconds_t repeat_P[],
              size_t lengthRepeat, frequency_t frequency, unsigned times) {
-/*
-    microseconds_t intro[lengthIntro];
-    microseconds_t repeat[lengthRepeat];
-    memcpy_PF(intro, (uint_farptr_t) intro_P, sizeof(microseconds_t) * lengthIntro);
-    memcpy_PF(repeat, (uint_farptr_t) repeat_P, sizeof(microseconds_t) * lengthRepeat);
-
-    IrSignal irSignal(intro, lengthIntro, repeat, lengthRepeat, NULL, 0U, frequency);
-*/
     IrSequence* intro = IrSequence::readFlash(intro_P, lengthIntro);
     IrSequence* repeat = IrSequence::readFlash(repeat_P, lengthRepeat);
     IrSequence* ending = new IrSequence();

@@ -1,4 +1,4 @@
 <map id="HashDecoder" name="HashDecoder">
-<area shape="rect" id="node1" title="A decoder class using FNV&#45;1 hashes of length 32." alt="" coords="5,80,108,107"/>
-<area shape="rect" id="node2" href="$classIrDecoder.html" title="Abstract base class for all decoder classes." alt="" coords="17,5,96,32"/>
+<area shape="rect" id="node1" title="A decoder class using FNV&#45;1 hashes of length 32." alt="" coords="5,79,115,104"/>
+<area shape="rect" id="node2" href="$classIrDecoder.html" title="Abstract base class for all decoder classes." alt="" coords="17,5,103,31"/>
 </map>

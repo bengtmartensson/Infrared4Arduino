@@ -1,5 +1,5 @@
 <map id="IrSenderPwmSoft" name="IrSenderPwmSoft">
-<area shape="rect" id="node1" title="Sending function using timer PWM." alt="" coords="5,155,131,181"/>
-<area shape="rect" id="node2" href="$classIrSenderPwm.html" title="Sending function using timer PWM." alt="" coords="17,80,119,107"/>
-<area shape="rect" id="node3" href="$classIrSender.html" title="Abstract base class for all sending classes." alt="" coords="33,5,103,32"/>
+<area shape="rect" id="node1" title="Sending function using timer PWM." alt="" coords="5,152,139,177"/>
+<area shape="rect" id="node2" href="$classIrSenderPwm.html" title="Sending function using timer PWM." alt="" coords="18,79,126,104"/>
+<area shape="rect" id="node3" href="$classIrSender.html" title="Abstract base class for all sending classes." alt="" coords="34,5,110,31"/>
 </map>

@@ -1,7 +1,7 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classIrDecoder.html" title="Abstract base class for all decoder classes." alt="" coords="5,81,84,108"/>
-<area shape="rect" id="node2" href="$classHashDecoder.html" title="A decoder class using FNV&#45;1 hashes of length 32." alt="" coords="132,5,235,32"/>
-<area shape="rect" id="node3" href="$classMultiDecoder.html" title="A preliminary multi protocol decoder." alt="" coords="134,56,233,83"/>
-<area shape="rect" id="node4" href="$classNec1Decoder.html" title="A decoder class for NEC1 signals." alt="" coords="132,107,235,133"/>
-<area shape="rect" id="node5" href="$classRc5Decoder.html" title="A decoder class for RC5 signals." alt="" coords="136,157,231,184"/>
+<area shape="rect" id="node1" href="$classIrDecoder.html" title="Abstract base class for all decoder classes." alt="" coords="5,80,91,105"/>
+<area shape="rect" id="node2" href="$classHashDecoder.html" title="A decoder class using FNV&#45;1 hashes of length 32." alt="" coords="139,5,248,31"/>
+<area shape="rect" id="node3" href="$classMultiDecoder.html" title="A preliminary multi protocol decoder." alt="" coords="139,55,248,80"/>
+<area shape="rect" id="node4" href="$classNec1Decoder.html" title="A decoder class for NEC1 signals." alt="" coords="139,104,248,129"/>
+<area shape="rect" id="node5" href="$classRc5Decoder.html" title="A decoder class for RC5 signals." alt="" coords="143,153,243,179"/>
 </map>

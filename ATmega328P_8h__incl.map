@@ -1,4 +1,4 @@
 <map id="src/boards/ATmega328P.h" name="src/boards/ATmega328P.h">
-<area shape="rect" id="node1" title="Hardware dependent definitions for boards based on the ATMega 328P." alt="" coords="5,5,180,32"/>
-<area shape="rect" id="node2" href="$avr_8h.html" title=" " alt="" coords="67,80,118,107"/>
+<area shape="rect" id="node1" title="Hardware dependent definitions for boards based on the ATMega 328P." alt="" coords="5,5,193,31"/>
+<area shape="rect" id="node2" href="$avr_8h.html" title=" " alt="" coords="72,79,127,104"/>
 </map>

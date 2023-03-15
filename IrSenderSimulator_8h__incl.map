@@ -1,12 +1,12 @@
 <map id="src/IrSenderSimulator.h" name="src/IrSenderSimulator.h">
-<area shape="rect" id="node1" title=" " alt="" coords="33,5,191,32"/>
-<area shape="rect" id="node2" href="$IrSender_8h.html" title=" " alt="" coords="71,80,153,107"/>
-<area shape="rect" id="node3" title=" " alt="" coords="13,453,91,480"/>
-<area shape="rect" id="node4" href="$IrSignal_8h.html" title=" " alt="" coords="73,229,151,256"/>
-<area shape="rect" id="node8" href="$Board_8h.html" title=" " alt="" coords="203,155,269,181"/>
-<area shape="rect" id="node5" href="$InfraredTypes_8h.html" title="This file defines some general data types that are used in the library." alt="" coords="43,379,155,405"/>
-<area shape="rect" id="node6" href="$IrSequence_8h.html" title=" " alt="" coords="93,304,192,331"/>
-<area shape="rect" id="node7" href="$version_8h.html" title=" " alt="" coords="216,304,291,331"/>
-<area shape="rect" id="node9" href="$PinModeStatus_8h.html" title="This file make sure that the types PinMode and PinStatus, as well as the values HIGH and LOW are avai..." alt="" coords="175,229,297,256"/>
-<area shape="rect" id="node10" href="$NoBoard_8h.html" title=" " alt="" coords="322,229,449,256"/>
+<area shape="rect" id="node1" title=" " alt="" coords="28,5,201,31"/>
+<area shape="rect" id="node2" href="$IrSender_8h.html" title=" " alt="" coords="71,79,158,104"/>
+<area shape="rect" id="node3" title=" " alt="" coords="13,445,97,471"/>
+<area shape="rect" id="node4" href="$IrSignal_8h.html" title=" " alt="" coords="73,225,156,251"/>
+<area shape="rect" id="node8" href="$Board_8h.html" title=" " alt="" coords="209,152,281,177"/>
+<area shape="rect" id="node5" href="$InfraredTypes_8h.html" title="This file defines some general data types that are used in the library." alt="" coords="43,372,165,397"/>
+<area shape="rect" id="node6" href="$IrSequence_8h.html" title=" " alt="" coords="93,299,200,324"/>
+<area shape="rect" id="node7" href="$version_8h.html" title=" " alt="" coords="224,299,307,324"/>
+<area shape="rect" id="node9" href="$PinModeStatus_8h.html" title="This file make sure that the types PinMode and PinStatus, as well as the values HIGH and LOW are avai..." alt="" coords="180,225,311,251"/>
+<area shape="rect" id="node10" href="$NoBoard_8h.html" title=" " alt="" coords="335,225,473,251"/>
 </map>

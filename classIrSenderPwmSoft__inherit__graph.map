@@ -1,7 +1,7 @@
 <map id="IrSenderPwmSoft" name="IrSenderPwmSoft">
-<area shape="rect" id="node1" title="Sending function using timer PWM." alt="" coords="111,155,237,181"/>
-<area shape="rect" id="node4" href="$classIrSenderPwmSoftDelay.html" title="Sending function using timer PWM." alt="" coords="5,229,164,256"/>
-<area shape="rect" id="node5" href="$classIrSenderPwmSpinWait.html" title="This sender class generates the modulation in software, using spin wait." alt="" coords="188,229,341,256"/>
-<area shape="rect" id="node2" href="$classIrSenderPwm.html" title="Sending function using timer PWM." alt="" coords="123,80,225,107"/>
-<area shape="rect" id="node3" href="$classIrSender.html" title="Abstract base class for all sending classes." alt="" coords="139,5,209,32"/>
+<area shape="rect" id="node1" title="Sending function using timer PWM." alt="" coords="120,152,253,177"/>
+<area shape="rect" id="node4" href="$classIrSenderPwmSoftDelay.html" title="Sending function using timer PWM." alt="" coords="5,225,176,251"/>
+<area shape="rect" id="node5" href="$classIrSenderPwmSpinWait.html" title="This sender class generates the modulation in software, using spin wait." alt="" coords="200,225,365,251"/>
+<area shape="rect" id="node2" href="$classIrSenderPwm.html" title="Sending function using timer PWM." alt="" coords="133,79,241,104"/>
+<area shape="rect" id="node3" href="$classIrSender.html" title="Abstract base class for all sending classes." alt="" coords="149,5,225,31"/>
 </map>

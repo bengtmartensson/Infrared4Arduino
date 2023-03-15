@@ -1,5 +1,5 @@
 <map id="IrReceiverPoll" name="IrReceiverPoll">
-<area shape="rect" id="node1" title="An implementation of IrReceiver using polling of the input pin." alt="" coords="5,155,108,181"/>
-<area shape="rect" id="node2" href="$classIrReceiver.html" title="Abstract base class for demodulating IR receivers." alt="" coords="17,80,97,107"/>
-<area shape="rect" id="node3" href="$classIrReader.html" title="Abstract base class for all IR readers, capturing or receiving." alt="" coords="21,5,92,32"/>
+<area shape="rect" id="node1" title="An implementation of IrReceiver using polling of the input pin." alt="" coords="5,152,117,177"/>
+<area shape="rect" id="node2" href="$classIrReceiver.html" title="Abstract base class for demodulating IR receivers." alt="" coords="17,79,105,104"/>
+<area shape="rect" id="node3" href="$classIrReader.html" title="Abstract base class for all IR readers, capturing or receiving." alt="" coords="23,5,100,31"/>
 </map>

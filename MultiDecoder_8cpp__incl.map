@@ -1,12 +1,12 @@
 <map id="src/MultiDecoder.cpp" name="src/MultiDecoder.cpp">
-<area shape="rect" id="node1" title=" " alt="" coords="190,5,337,32"/>
-<area shape="rect" id="node2" href="$MultiDecoder_8h.html" title=" " alt="" coords="5,80,116,107"/>
-<area shape="rect" id="node8" href="$Nec1Decoder_8h.html" title=" " alt="" coords="140,80,253,107"/>
-<area shape="rect" id="node9" href="$Rc5Decoder_8h.html" title=" " alt="" coords="278,80,385,107"/>
-<area shape="rect" id="node10" title=" " alt="" coords="409,80,475,107"/>
-<area shape="rect" id="node3" href="$IrReader_8h.html" title=" " alt="" coords="97,155,179,181"/>
-<area shape="rect" id="node7" href="$IrDecoder_8h.html" title=" " alt="" coords="210,155,301,181"/>
-<area shape="rect" id="node4" title=" " alt="" coords="46,379,123,405"/>
-<area shape="rect" id="node5" href="$InfraredTypes_8h.html" title="This file defines some general data types that are used in the library." alt="" coords="115,304,227,331"/>
-<area shape="rect" id="node6" href="$IrSequence_8h.html" title=" " alt="" coords="75,229,174,256"/>
+<area shape="rect" id="node1" title=" " alt="" coords="199,5,358,31"/>
+<area shape="rect" id="node2" href="$MultiDecoder_8h.html" title=" " alt="" coords="5,79,125,104"/>
+<area shape="rect" id="node8" href="$Nec1Decoder_8h.html" title=" " alt="" coords="149,79,269,104"/>
+<area shape="rect" id="node9" href="$Rc5Decoder_8h.html" title=" " alt="" coords="294,79,405,104"/>
+<area shape="rect" id="node10" title=" " alt="" coords="429,79,499,104"/>
+<area shape="rect" id="node3" href="$IrReader_8h.html" title=" " alt="" coords="104,152,192,177"/>
+<area shape="rect" id="node7" href="$IrDecoder_8h.html" title=" " alt="" coords="223,152,319,177"/>
+<area shape="rect" id="node4" title=" " alt="" coords="53,372,137,397"/>
+<area shape="rect" id="node5" href="$InfraredTypes_8h.html" title="This file defines some general data types that are used in the library." alt="" coords="124,299,247,324"/>
+<area shape="rect" id="node6" href="$IrSequence_8h.html" title=" " alt="" coords="83,225,189,251"/>
 </map>

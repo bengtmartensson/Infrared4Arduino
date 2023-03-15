@@ -1,11 +1,11 @@
 <map id="src/Pronto.h" name="src/Pronto.h">
-<area shape="rect" id="node1" title=" " alt="" coords="71,5,164,32"/>
-<area shape="rect" id="node2" href="$InfraredTypes_8h.html" title="This file defines some general data types that are used in the library." alt="" coords="5,304,117,331"/>
-<area shape="rect" id="node4" href="$IrSignal_8h.html" title=" " alt="" coords="79,155,156,181"/>
-<area shape="rect" id="node7" href="$Board_8h.html" title=" " alt="" coords="208,80,275,107"/>
-<area shape="rect" id="node3" title=" " alt="" coords="23,379,100,405"/>
-<area shape="rect" id="node5" href="$IrSequence_8h.html" title=" " alt="" coords="99,229,197,256"/>
-<area shape="rect" id="node6" href="$version_8h.html" title=" " alt="" coords="221,229,296,256"/>
-<area shape="rect" id="node8" href="$PinModeStatus_8h.html" title="This file make sure that the types PinMode and PinStatus, as well as the values HIGH and LOW are avai..." alt="" coords="180,155,303,181"/>
-<area shape="rect" id="node9" href="$NoBoard_8h.html" title=" " alt="" coords="327,155,454,181"/>
+<area shape="rect" id="node1" title=" " alt="" coords="76,5,175,31"/>
+<area shape="rect" id="node2" href="$InfraredTypes_8h.html" title="This file defines some general data types that are used in the library." alt="" coords="5,299,128,324"/>
+<area shape="rect" id="node4" href="$IrSignal_8h.html" title=" " alt="" coords="84,152,167,177"/>
+<area shape="rect" id="node7" href="$Board_8h.html" title=" " alt="" coords="220,79,292,104"/>
+<area shape="rect" id="node3" title=" " alt="" coords="25,372,109,397"/>
+<area shape="rect" id="node5" href="$IrSequence_8h.html" title=" " alt="" coords="104,225,211,251"/>
+<area shape="rect" id="node6" href="$version_8h.html" title=" " alt="" coords="235,225,317,251"/>
+<area shape="rect" id="node8" href="$PinModeStatus_8h.html" title="This file make sure that the types PinMode and PinStatus, as well as the values HIGH and LOW are avai..." alt="" coords="191,152,321,177"/>
+<area shape="rect" id="node9" href="$NoBoard_8h.html" title=" " alt="" coords="345,152,484,177"/>
 </map>

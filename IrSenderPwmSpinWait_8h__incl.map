@@ -1,14 +1,14 @@
 <map id="src/IrSenderPwmSpinWait.h" name="src/IrSenderPwmSpinWait.h">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,191,32"/>
-<area shape="rect" id="node2" title=" " alt="" coords="109,603,186,629"/>
-<area shape="rect" id="node3" href="$IrSenderPwmSoft_8h.html" title=" " alt="" coords="84,80,219,107"/>
-<area shape="rect" id="node4" href="$IrSenderPwm_8h.html" title=" " alt="" coords="151,155,263,181"/>
-<area shape="rect" id="node5" href="$IrSender_8h.html" title=" " alt="" coords="191,229,274,256"/>
-<area shape="rect" id="node10" href="$Board_8h.html" title=" " alt="" coords="331,304,398,331"/>
-<area shape="rect" id="node6" href="$IrSignal_8h.html" title=" " alt="" coords="235,379,313,405"/>
-<area shape="rect" id="node7" href="$InfraredTypes_8h.html" title="This file defines some general data types that are used in the library." alt="" coords="235,528,347,555"/>
-<area shape="rect" id="node8" href="$IrSequence_8h.html" title=" " alt="" coords="286,453,385,480"/>
-<area shape="rect" id="node9" href="$version_8h.html" title=" " alt="" coords="409,453,483,480"/>
-<area shape="rect" id="node11" href="$PinModeStatus_8h.html" title="This file make sure that the types PinMode and PinStatus, as well as the values HIGH and LOW are avai..." alt="" coords="337,379,459,405"/>
-<area shape="rect" id="node12" href="$NoBoard_8h.html" title=" " alt="" coords="484,379,611,405"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,5,205,31"/>
+<area shape="rect" id="node2" title=" " alt="" coords="110,592,194,617"/>
+<area shape="rect" id="node3" href="$IrSenderPwmSoft_8h.html" title=" " alt="" coords="89,79,234,104"/>
+<area shape="rect" id="node4" href="$IrSenderPwm_8h.html" title=" " alt="" coords="156,152,276,177"/>
+<area shape="rect" id="node5" href="$IrSender_8h.html" title=" " alt="" coords="195,225,282,251"/>
+<area shape="rect" id="node10" href="$Board_8h.html" title=" " alt="" coords="340,299,412,324"/>
+<area shape="rect" id="node6" href="$IrSignal_8h.html" title=" " alt="" coords="240,372,323,397"/>
+<area shape="rect" id="node7" href="$InfraredTypes_8h.html" title="This file defines some general data types that are used in the library." alt="" coords="240,519,363,544"/>
+<area shape="rect" id="node8" href="$IrSequence_8h.html" title=" " alt="" coords="291,445,397,471"/>
+<area shape="rect" id="node9" href="$version_8h.html" title=" " alt="" coords="421,445,504,471"/>
+<area shape="rect" id="node11" href="$PinModeStatus_8h.html" title="This file make sure that the types PinMode and PinStatus, as well as the values HIGH and LOW are avai..." alt="" coords="347,372,477,397"/>
+<area shape="rect" id="node12" href="$NoBoard_8h.html" title=" " alt="" coords="501,372,640,397"/>
 </map>

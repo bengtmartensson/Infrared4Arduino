@@ -1,5 +1,5 @@
 <map id="IrReceiverSampler" name="IrReceiverSampler">
-<area shape="rect" id="node1" title="This receiving class samples the input pin every 50 microseconds using a timer interrupt." alt="" coords="5,155,133,181"/>
-<area shape="rect" id="node2" href="$classIrReceiver.html" title="Abstract base class for demodulating IR receivers." alt="" coords="29,80,109,107"/>
-<area shape="rect" id="node3" href="$classIrReader.html" title="Abstract base class for all IR readers, capturing or receiving." alt="" coords="34,5,105,32"/>
+<area shape="rect" id="node1" title="This receiving class samples the input pin every 50 microseconds using a timer interrupt." alt="" coords="5,152,148,177"/>
+<area shape="rect" id="node2" href="$classIrReceiver.html" title="Abstract base class for demodulating IR receivers." alt="" coords="33,79,121,104"/>
+<area shape="rect" id="node3" href="$classIrReader.html" title="Abstract base class for all IR readers, capturing or receiving." alt="" coords="38,5,115,31"/>
 </map>

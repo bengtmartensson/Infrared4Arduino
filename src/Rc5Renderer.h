@@ -15,6 +15,7 @@ private:
 public:
     /**
      * Generates an RC5 signal from the RC5 parameters.
+     * Must be deleted explicitly by the user to avoid memory leaks.
      * @param D RC5 parameter, "device"
      * @param F RC5 parameter, "function"
      * @param T RC5 parameter, "toggle"
@@ -25,6 +26,7 @@ public:
     /**
      * Generates an RC5 signal from the RC5 parametes.
      * This version uses an internal toggle of the class to compute T.
+     * Must be deleted explicitly by the user to avoid memory leaks.
      * @param D RC5 parameter, "device"
      * @param F RC5 parameter, "function"
      * @return IrSignal

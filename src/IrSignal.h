@@ -79,7 +79,6 @@ public:
      * @param ending
      * @param frequency
      * @param dutyCycle
-     * @return
      */
     IrSignal(const IrSequence& intro, const IrSequence& repeat, const IrSequence& ending,
             frequency_t frequency = defaultFrequency, dutycycle_t dutyCycle = defaultDutyCycle);
@@ -92,7 +91,6 @@ public:
      * @param ending
      * @param frequency
      * @param dutyCycle
-     * @return
      */
     IrSignal(IrSequence&& intro, IrSequence&& repeat, IrSequence&& ending,
             frequency_t frequency = defaultFrequency, dutycycle_t dutyCycle = defaultDutyCycle);
@@ -104,7 +102,6 @@ public:
      * @param repeat
      * @param frequency
      * @param dutyCycle
-     * @return
      */
     IrSignal(const IrSequence& intro, const IrSequence& repeat,
             frequency_t frequency = defaultFrequency, dutycycle_t dutyCycle = defaultDutyCycle);
@@ -115,7 +112,6 @@ public:
      * @param repeat
      * @param frequency
      * @param dutyCycle
-     * @return
      */
     IrSignal(IrSequence&& intro, IrSequence&& repeat,
             frequency_t frequency = defaultFrequency, dutycycle_t dutyCycle = defaultDutyCycle);

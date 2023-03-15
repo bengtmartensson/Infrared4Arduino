@@ -122,31 +122,26 @@ protected:
 
     /**
      * Turn off periodic interrupts.
-     * @return
      */
     virtual void timerDisableIntr() = 0;
 
     /**
      * Configure hardware PWM, but do not enable it.
-     * @return
      */
     virtual void timerConfigHz(frequency_t hz, dutycycle_t dutyCycle = defaultDutyCycle) = 0;
 
     /**
      * Disables the PWM configuration.
-     * @return
      */
     virtual void timerConfigNormal() = 0;
 
     /**
      * Start PWM output.
-     * @return
      */
     virtual void timerEnablePwm() = 0;
 
     /**
      * Turn off PWM output.
-     * @return
      */
     virtual void timerDisablePwm() = 0;
 

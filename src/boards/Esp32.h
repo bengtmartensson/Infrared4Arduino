@@ -35,11 +35,10 @@ this program. If not, see http://www.gnu.org/licenses/.
 
 #define STRCPY_PF_CAST(x) (x)
 
-#ifndef LED_BUILTIN
-#define LED_BUILTIN 2
-#endif
+//#ifndef LED_BUILTIN
+//#define LED_BUILTIN 2
+//#endif
 
-#define LEDCHANNEL 0
 #define TIMER_SIZE 8
 
 #ifdef ISR
@@ -49,7 +48,7 @@ this program. If not, see http://www.gnu.org/licenses/.
 
 void IRTimer(); // defined in IrReceiverSampler.cpp, masqueraded as ISR(TIMER_INTR_NAME)
 
-#define PWM_PIN 5
+#define PWM_PIN G13
 
 class Esp32 : public Board {
 public:
@@ -64,37 +63,35 @@ private:
 
     void timerEnableIntr() {
         // Interrupt Service Routine - Fires every 50uS
-        // ESP32 has a proper API to setup timers, no weird chip macros needed
-        // simply call the readable API versions :)
-        // 3 timers, choose #1, 80 divider nanosecond precision, 1 to count up
-        Esp32::timer = timerBegin(1, 80, 1);
-        timerAttachInterrupt(Esp32::timer, IRTimer, true);
+        // ESP32 has a different timer API now.
+        // Ask for a frequency, and it gives you a timer if one is available and capable.
+        timer = timerBegin(1000000);
+        timerAttachInterrupt(timer, IRTimer);
         // every 50 microseconds, autoreload = true
-        timerAlarmWrite(Esp32::timer, microsPerTick, true);
-        timerAlarmEnable(Esp32::timer);
+        timerAlarm(timer, microsPerTick, true, 0);
     };
 
     void timerDisableIntr() {
-        if (Esp32::timer != nullptr) {
-            timerEnd(Esp32::timer);
-            timerDetachInterrupt(Esp32::timer);
+        if (timer != nullptr) {
+            timerDetachInterrupt(timer);
+            timerEnd(timer);
         }
     };
 
     void timerEnablePwm() {
-        ledcWrite(LEDCHANNEL, onValue);
+        ledcWrite(PWM_PIN, onValue);
     };
 
     void timerDisablePwm() {
-        ledcWrite(LEDCHANNEL, 0);
+        ledcWrite(PWM_PIN, 0);
     };
 
     void timerConfigHz(frequency_t frequency, dutycycle_t dutyCycle) {
         onValue = static_cast<uint8_t>(256U * dutyCycle / 100U);
-        ledcSetup(LEDCHANNEL, frequency, TIMER_SIZE);
-        ledcAttachPin(PWM_PIN, LEDCHANNEL);
+        ledcAttach(PWM_PIN, frequency, TIMER_SIZE);
     };
 
     void timerConfigNormal() {
+        ledcDetach(PWM_PIN);
     }
 };
